@@ -1,0 +1,36 @@
+{
+    "CentrosHospitalarios":[
+        {
+            "idCentro":2312321,
+            "nombre":"Maria Auxiliadora de los Corazones Grandes de Jebus",
+            "provincia": "Chaco",
+            "ciudad" : "Barranqueras",
+            "direccion" : "9 de Julio 4567",
+            "tipo": "Hospital" 
+        }
+    ],
+    "Envios":[{
+        "idCentro":3432,
+        "camillas" :13,
+        "jabonLitros" : 45,
+        "alcoholLitros" : 32,
+        "barbijos" : 123,
+        "jeringas" :45,
+        "cofias" : 32
+        }
+    ],
+    "Pacientes":[{
+        "dni":12345654,
+        "apellido" : "Gomez",
+        "nombre" : "Pepe",
+        "fechaNac" : "1935-12-08",
+        "estado" : "enfermo",
+        "ultimaActualizacion":"2020-12-03"
+    }],
+    "InformacionCOVID":{
+        "totalEnfermos":1232,
+        "totalFallecidos": 1294,
+        "totalRecuperados":3432
+    }
+
+}
