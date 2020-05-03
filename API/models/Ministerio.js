@@ -100,4 +100,4 @@ const Ministerio = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.Model('Ministerio',Ministerio);
+module.exports = mongoose.model('Ministerio',Ministerio);

@@ -31,4 +31,4 @@ const Peticion = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.Model('Peticion',Peticion);
+module.exports = mongoose.model('Peticion',Peticion);
