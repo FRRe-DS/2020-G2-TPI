@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Menu from "./componentes/Menu"
 import TablaCentros from "./componentes/TablaCentros";
 import Centros from "./componentes/Centros";
-
 // importar informacion a cerca de los centros hospitalarios
 import centros from "./ejemplos/centrosHospitalarios.json";
 
@@ -15,10 +14,12 @@ class App extends Component {
 
   render() {
     return (
-      <Fragment>
-        <Router>
+      <Router>
+        <Header />
+        <Switch>
           <Route
-            exact path="/"
+            exact
+            path="/"
             render={() => {
               return (
               <Fragment>
@@ -30,8 +31,8 @@ class App extends Component {
             }}
           />
           <Route path="/otra-url" component={Centros} />
-        </Router>
-      </Fragment>
+        </Switch>
+      </Router>
     );
   }
 }
