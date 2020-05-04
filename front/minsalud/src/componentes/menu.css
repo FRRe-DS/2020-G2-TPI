@@ -1,0 +1,25 @@
+.Menu{
+    background-color: #41B1C2;
+    position: relative;
+    left: 0;
+    border: solid black 2px;
+    width:15em;
+    padding-top:1em;
+    color:#ffffff
+    
+}
+
+.Menu ul{
+    list-style-type: disc;
+}
+
+
+.Menu li{
+    border: solid black 0.5px;  
+    padding-top:1em;
+}
+
+.Menu li:hover{
+    cursor: pointer;
+    background-color: #0e6f7e;
+}

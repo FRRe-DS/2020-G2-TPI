@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-import "./App.css";
+import "./index.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
+import Menu from "./componentes/Menu"
 import TablaCentros from "./componentes/TablaCentros";
 import Centros from "./componentes/Centros";
 
@@ -20,7 +20,13 @@ class App extends Component {
           <Route
             exact path="/"
             render={() => {
-              return <TablaCentros centros={this.state.centros} />;
+              return (
+              <Fragment>
+              <Menu/>
+              <TablaCentros centros={this.state.centros} />
+              
+              </Fragment>
+            )
             }}
           />
           <Route path="/otra-url" component={Centros} />
