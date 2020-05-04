@@ -5,10 +5,10 @@ import Centro from './Centro';
 
 class TablaCentros extends Component{
     render(){
-        return <Table striped bordered hover>
+        return <Table striped bordered hover className="tabla-centros table table-dark">
         <thead>
           <tr>
-            <th>#</th>
+            <th>Id</th>
             <th>Nombre</th>
             <th>Ciudad</th>
             <th>Tipo</th>

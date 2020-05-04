@@ -1,0 +1,9 @@
+.header{
+    background-color:#41B1C2;
+    color: white;
+}
+
+.tabla-centros, th, td, tr {
+    border: 1px solid black;
+    text-align: center;
+}
