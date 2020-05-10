@@ -7,3 +7,8 @@
     border: 1px solid black;
     text-align: center;
 }
+
+.form-login{
+    margin-left: 20em;
+    margin-right: 20em;
+}
