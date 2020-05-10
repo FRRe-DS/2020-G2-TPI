@@ -3,7 +3,7 @@ import './menu.css';
 
 class Menu extends React.Component {
     render() {
-    return (
+        return (
     <div className="Menu">
         <b>Menu</b>
         <ul>

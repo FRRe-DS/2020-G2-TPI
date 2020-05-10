@@ -8,11 +8,13 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Container from "react-bootstrap/Container";
 
+
 class Header extends Component {
   render() {
     return (
       <Container fluid className="header">
         <Navbar expand="lg" >
+          
           <Navbar.Brand href="#home">Ministerio de Salud</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

@@ -10,16 +10,21 @@
 }
 
 .Menu ul{
-    list-style-type: disc;
+    list-style-type: none;
+    
 }
 
 
 .Menu li{
-    border: solid black 0.5px;  
     padding-top:1em;
+    
+    
 }
 
 .Menu li:hover{
     cursor: pointer;
     background-color: #0e6f7e;
+    padding:1em;
+    transition:ease 1s;
+    
 }

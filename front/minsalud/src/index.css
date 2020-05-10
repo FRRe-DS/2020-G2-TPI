@@ -1,9 +1,29 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
 .header{
     background-color:#41B1C2;
     color: white;
 }
 
+
+.app-container{
+    margin-top:3em;
+    width:98%;
+    border: 2px solid black;
+    position: fixed;
+}
 .tabla-centros, th, td, tr {
     border: 1px solid black;
     text-align: center;
+}
+
+.tabla-centros {
+    width:60em;
+    position: absolute;
+    right:0;
+    left:20em;
+    bottom:0;
+    border:10em solid blue;
 }
