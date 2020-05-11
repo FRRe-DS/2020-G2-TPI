@@ -9,10 +9,11 @@
 
 
 .app-container{
+    display:grid;
     margin-top:3em;
     width:98%;
-    border: 2px solid black;
-    position: fixed;
+    grid-template-columns: repeat(4,1fr);
+    position:fixed;
 }
 .tabla-centros, th, td, tr {
     border: 1px solid black;
@@ -20,12 +21,7 @@
 }
 
 .tabla-centros {
-    width:60em;
-    position: absolute;
-    right:0;
-    left:20em;
-    bottom:0;
-    border:10em solid blue;
+    grid-column: 2/5;
 }
 
 

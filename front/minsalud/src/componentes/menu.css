@@ -1,24 +1,24 @@
 .Menu{
     background-color: #41B1C2;
     position: relative;
-    left: 0;
-    border: solid black 2px;
-    width:15em;
+    grid-column: 1/2;
+    border: solid black 1px;
     padding-top:1em;
-    color:#ffffff
+    color:#ffffff;
+    margin-right:1em;
     
 }
 
 .Menu ul{
     list-style-type: none;
+    width:100%;
     
 }
 
 
 .Menu li{
-    padding-top:1em;
-    
-    
+    padding-top:1em;  
+    width:100%;
 }
 
 .Menu li:hover{
