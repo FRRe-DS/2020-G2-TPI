@@ -24,15 +24,19 @@ class App extends Component {
             path="/"
             render={() => {
               return (
-              <div className="app-container">
-                <Menu />
-                <TablaCentros centros={this.state.centros} />
-              
-              </div>
-            )
+                <div className="app-container">
+                  <Menu />
+                  <TablaCentros centros={this.state.centros} />
+                </div>
+              );
             }}
           />
-          
+          <Route 
+          path="/login"
+          render={() => {
+            return <Login/>
+          }}
+          />
         </Switch>
       </Router>
     );
