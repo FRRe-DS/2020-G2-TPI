@@ -24,6 +24,7 @@ class App extends Component {
             path="/"
             render={() => {
               return (
+<<<<<<< HEAD
               <div className="app-container">
                 
                 <Menu />
@@ -31,9 +32,21 @@ class App extends Component {
                 
               </div>
             )
+=======
+                <div className="app-container">
+                  <Menu />
+                  <TablaCentros centros={this.state.centros} />
+                </div>
+              );
+>>>>>>> e55157b78d36d1f4934fb67b1f074567e601d858
             }}
           />
-          
+          <Route 
+          path="/login"
+          render={() => {
+            return <Login/>
+          }}
+          />
         </Switch>
       </Router>
     );
