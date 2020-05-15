@@ -25,9 +25,10 @@ class App extends Component {
             render={() => {
               return (
               <div className="app-container">
+                
                 <Menu />
                 <TablaCentros centros={this.state.centros} />
-              
+                
               </div>
             )
             }}
