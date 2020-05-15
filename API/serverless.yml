@@ -1,0 +1,46 @@
+service: serverless-aws-nodejs
+provider:
+  name: aws #Define the cloud provider to use
+  runtime: nodejs12.x 
+  stage: dev
+  region: sa-east-1
+functions:
+  app:
+    handler: index.server
+    events: #Define the events that trigger the lambda
+      - http: #Define an HTTP endpoint that respond to the / route
+          path: / 
+          method: ANY #Define the HTTP methods to be used (GET/POST)
+          cors: true
+      - http: #Define an HTTP endpoin that respond to any routes
+          path: /{proxy+}
+          method: ANY
+          cors: true
+      - http:
+          path: /pruebas
+          method: POST
+          cors: true
+      - http:
+          path: /peticiones
+          method: POST
+          cors: true
+      - http:
+          path: /peticiones
+          method: GET
+          cors: true
+      - http:
+          path: /login
+          method: POST
+          cors: true
+      - http:
+          path: /register
+          method: POST
+          cors: true
+      - http:
+          path: /CentrosHospitalarios
+          method: POST
+          cors: true
+      - http:
+          path: /CentrosHospitalarios
+          method: GET
+          cors: true

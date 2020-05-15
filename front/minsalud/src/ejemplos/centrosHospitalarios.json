@@ -1,0 +1,27 @@
+[
+    {
+        "idCentro":0,
+        "nombre":"Centro 0",
+        "provincia": "Chaco",
+        "ciudad" : "Barranqueras",
+        "direccion" : "9 de Julio 100",
+        "tipo": "Hospital" 
+    },
+    {
+        "idCentro":1,
+        "nombre":"Centro 1",
+        "provincia": "Chaco",
+        "ciudad" : "Resistencia",
+        "direccion" : "9 de Julio 101",
+        "tipo": "Laboratorio" 
+    },
+    {
+        "idCentro":2,
+        "nombre":"Centro 2",
+        "provincia": "Chaco",
+        "ciudad" : "Villa Angela",
+        "direccion" : "9 de Julio 102",
+        "tipo": "Centro Barrial" 
+    }
+
+]

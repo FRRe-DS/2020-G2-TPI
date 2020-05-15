@@ -1,0 +1,31 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header{
+    background-color:#41B1C2;
+    color: white;
+}
+
+
+.app-container{
+    display:grid;
+    margin-top:3em;
+    width:98%;
+    grid-template-columns: repeat(4,1fr);
+    position:fixed;
+}
+.tabla-centros, th, td, tr {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.tabla-centros {
+    grid-column: 2/5;
+}
+
+
+.form-login{
+    margin-left: 20em;
+    margin-right: 20em;
+}

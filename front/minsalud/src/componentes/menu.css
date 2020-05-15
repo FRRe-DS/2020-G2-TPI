@@ -1,0 +1,30 @@
+.Menu{
+    background-color: #41B1C2;
+    position: relative;
+    grid-column: 1/2;
+    border: solid black 1px;
+    padding-top:1em;
+    color:#ffffff;
+    margin-right:1em;
+    
+}
+
+.Menu ul{
+    list-style-type: none;
+    width:100%;
+    
+}
+
+
+.Menu li{
+    padding-top:1em;  
+    width:100%;
+}
+
+.Menu li:hover{
+    cursor: pointer;
+    background-color: #0e6f7e;
+    padding:1em;
+    transition:ease 1s;
+    
+}
