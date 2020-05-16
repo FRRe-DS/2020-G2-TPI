@@ -80,6 +80,17 @@ class Login extends Component {
 		const hash = sha256(hpass)
 		const url = 'https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/login';
 		console.log(hash);
+		const requestOptions = {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ 
+				user: `${user}`,
+				phash: `${hpass}`
+			})
+		};
+		fetch(url, requestOptions)
+			.then(response => response.json())
+			.then(data => console.log(data));
 
 
 	}
@@ -115,7 +126,7 @@ class Login extends Component {
 							onChange={this.handleUserInput}
 						/>
 					</div>
-					<Button type="submit" className="btn btn-primary" disabled={!this.state.formValid} onClick={(e) => this.envioUsuario(user,hpass, e)}>
+					<Button type="submit" className="btn btn-primary" disabled={!this.state.formValid} onClick={(e) => this.envioUsuario(this.state.user,this.state.password, e)}>
 						Enviar
 					</Button>
 				</Form>
