@@ -3,6 +3,9 @@ const User = require('../models/User');
 
 exports.logUser = async(req,res,next) =>{
     const log = new User(req.body);
+    res.statusCode = 200;
+    res.setHeader('content-type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
     try {
         console.log(req.body.user);
