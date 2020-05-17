@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FormErrors } from "./FormErrors";
 import './css/login.css';
-
+import {sha256} from 'js-sha256';
 import {
 	Button,
 	FormGroup,
@@ -16,6 +16,7 @@ class Login extends Component {
 		super(props);
 		this.state = {
 			user: "",
+			password: "",
 			formErrors: { user: "", password: "" },
 			userValid: false,
 			passwordValid: false,
@@ -29,6 +30,7 @@ class Login extends Component {
 		const value = e.target.value;
 		this.setState({ [name]: value }, () => {
 			this.validateField(name, value);
+			
 		});
 	};
 
@@ -71,6 +73,27 @@ class Login extends Component {
 	errorClass(error) {
 		return error.length === 0 ? "" : "has-error";
 	}
+
+	//Envio de la peticion a la API de usuarios
+	envioUsuario(user, hpass, e){
+		e.preventDefault()
+		const hash = sha256(hpass)
+		const url = 'https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/login';
+		console.log(hash);
+		const requestOptions = {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ 
+				user: `${user}`,
+				phash: `${hpass}`
+			})
+		};
+		fetch(url, requestOptions)
+			.then(response => response.json())
+			.then(data => console.log(data));
+
+
+	}
 	
 	render() {
 		return (
@@ -103,7 +126,7 @@ class Login extends Component {
 							onChange={this.handleUserInput}
 						/>
 					</div>
-					<Button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>
+					<Button type="submit" className="btn btn-primary" disabled={!this.state.formValid} onClick={(e) => this.envioUsuario(this.state.user,this.state.password, e)}>
 						Enviar
 					</Button>
 				</Form>
