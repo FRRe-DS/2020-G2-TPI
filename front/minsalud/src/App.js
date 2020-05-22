@@ -5,7 +5,7 @@ import Header from "./componentes/Header";
 import Menu from "./componentes/Menu";
 import TablaCentros from "./componentes/TablaCentros";
 import Login from "./componentes/Login";
-
+import CargaHospitales from './componentes/CargaHospitales'
 // importar informacion a cerca de los centros hospitalarios
 import centros from "./ejemplos/centrosHospitalarios.json";
 
@@ -35,6 +35,12 @@ class App extends Component {
           path="/login"
           render={() => {
             return <Login/>
+          }}
+          />
+          <Route 
+          path="/cargaHospitales"
+          render={() => {
+            return <CargaHospitales/>
           }}
           />
         </Switch>
