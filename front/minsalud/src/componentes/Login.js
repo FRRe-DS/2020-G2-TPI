@@ -79,19 +79,24 @@ class Login extends Component {
 		e.preventDefault()
 		const hash = sha256(hpass)
 		const url = 'https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/login';
-		console.log(hash);
+		let respuesta;
 		const requestOptions = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ 
 				user: `${user}`,
-				phash: `${hpass}`
+				phash: `${hash}`
 			})
 		};
 		fetch(url, requestOptions)
 			.then(response => response.json())
-			.then(data => console.log(data));
-
+			.then(data =>{
+				if (data.mensaje==='Login exitoso'){
+					console.log(data) //TODO:posterior tratamiento e impresion de DIVs
+				}else{
+				console.log('El usuario o la contrasenia es incorrecta')
+				}
+			});
 
 	}
 	
