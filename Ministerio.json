@@ -19,14 +19,6 @@
         "cofias" : 32
         }
     ],
-    "Pacientes":[{
-        "dni":12345654,
-        "apellido" : "Gomez",
-        "nombre" : "Pepe",
-        "fechaNac" : "1935-12-08",
-        "estado" : "enfermo",
-        "ultimaActualizacion":"2020-12-03"
-    }],
     "InformacionCOVID":{
         "totalEnfermos":1232,
         "totalFallecidos": 1294,
