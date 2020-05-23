@@ -33,32 +33,6 @@ const Ministerio = new mongoose.Schema({
             required:true
         }
     },
-    Pacientes:{
-        dni:{
-            type:Number,
-            required:true,
-        },
-        apellido:{
-            type:String,
-            required:true
-        },
-        nombre:{
-            type:String,
-            required:true
-        },
-        fechaNac:{
-            type:Date,
-            required:true
-        },
-        estado:{
-            type:String,
-            required:true
-        },
-        ultimaActualizacion:{
-            type:Date,
-            required:true
-        }
-    },
     InformacionCOVID:{
         totalEnfermos:{
             type:Number,
