@@ -1,3 +1,4 @@
+.serverless/serverless-aws-nodejs.zip
 API/node_modules
 Dockerfile
 API/.serverless/serverless-aws-nodejs.zip

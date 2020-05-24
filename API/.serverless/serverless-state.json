@@ -160,7 +160,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-aws-nodejs/dev/1590252671278-2020-05-23T16:51:11.278Z/serverless-aws-nodejs.zip"
+                "S3Key": "serverless/serverless-aws-nodejs/dev/1590362663578-2020-05-24T23:24:23.578Z/serverless-aws-nodejs.zip"
               },
               "FunctionName": "serverless-aws-nodejs-dev-app",
               "Handler": "index.server",
@@ -179,14 +179,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AppLambdaVersionITnm7RYyMvCnLVSsy0NUqEpXIYdFgANEVQhabpny9lA": {
+          "AppLambdaVersionXPtlIt5hHcR4sdxmjeOSst63m4qxKF2qLXcgJYFiT4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "Riw/EaePF9bXF92xGemrRSPXntN82hyyXMxBg9zaKog="
+              "CodeSha256": "w5usClj91dYEHloXDZlGfhs0xUqCRoPfLOSk/6bVmEc="
             }
           },
           "ApiGatewayRestApi": {
@@ -999,7 +999,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1590252573056": {
+          "ApiGatewayDeployment1590362563549": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1073,7 +1073,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionITnm7RYyMvCnLVSsy0NUqEpXIYdFgANEVQhabpny9lA"
+              "Ref": "AppLambdaVersionXPtlIt5hHcR4sdxmjeOSst63m4qxKF2qLXcgJYFiT4"
             }
           },
           "ServiceEndpoint": {
@@ -1416,7 +1416,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionITnm7RYyMvCnLVSsy0NUqEpXIYdFgANEVQhabpny9lA"
+        "versionLogicalId": "AppLambdaVersionXPtlIt5hHcR4sdxmjeOSst63m4qxKF2qLXcgJYFiT4"
       }
     },
     "serviceFilename": "serverless.yml",
@@ -1425,7 +1425,7 @@
     "artifact": "/home/ale/Documents/Universidad/DACS/2020-G2-TPI/API/.serverless/serverless-aws-nodejs.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1590252671278-2020-05-23T16:51:11.278Z",
+    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1590362663578-2020-05-24T23:24:23.578Z",
     "artifact": "serverless-aws-nodejs.zip"
   }
 }
