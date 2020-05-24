@@ -6,7 +6,7 @@ provider:
   region: sa-east-1
 functions:
   app:
-    handler: index.server
+    handler: index.server 
     events: #Define the events that trigger the lambda
       - http: #Define an HTTP endpoint that respond to the / route
           path: / 
