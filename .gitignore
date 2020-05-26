@@ -5,3 +5,4 @@ Dockerfile
 API/.serverless/serverless-aws-nodejs.zip
 front/minsalud/node_modules
 front/node_modules
+/API/secrets.js

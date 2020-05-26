@@ -1,5 +1,5 @@
-//const {MONGO_PASSWORD} = require('./secrets.js');
+const {MONGO_PASSWORD} = require('./secrets.js');
 
 module.exports = {
-    MONGOURI: "mongodb+srv://admin:LosFachas@alecluster-3uwzx.mongodb.net/test?retryWrites=true&w=majority"
+    MONGOURI: "mongodb+srv://prueba:"+MONGO_PASSWORD+"@cluster1dacs-ddbbz.mongodb.net/test?retryWrites=true&w=majority"
 }
