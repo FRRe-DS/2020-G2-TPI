@@ -5,42 +5,52 @@ import Header from "./componentes/Header";
 import Menu from "./componentes/Menu";
 import TablaCentros from "./componentes/TablaCentros";
 import Login from "./componentes/Login";
-
+import CargaHospitales from './componentes/CargaHospitales'
 // importar informacion a cerca de los centros hospitalarios
 import centros from "./ejemplos/centrosHospitalarios.json";
 
-class App extends Component {
-  state = {
-    centros: centros,
-  };
+import LineGraph from "./componentes/Grafico"
 
-  render() {
-    return (
-      <Router>
-        <Header />
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => {
-              return (
-                <div className="app-container">
-                  <Menu />
-                  <TablaCentros centros={this.state.centros} />
-                </div>
-              );
-            }}
-          />
-          <Route 
-          path="/login"
-          render={() => {
-            return <Login/>
-          }}
-          />
-        </Switch>
-      </Router>
-    );
-  }
+
+class App extends Component {
+	state = {
+		centros: centros,
+	};
+
+	render() {
+		return (
+			<Router>
+				<Header />
+				<Switch>
+					<Route
+						exact
+						path="/"
+						render={() => {
+							return (
+								<div className="app-container">
+									<Menu />
+									<TablaCentros centros={this.state.centros} />
+									<LineGraph/>
+								</div>
+							);
+						}}
+					/>
+					<Route 
+					path="/login"
+					render={() => {
+						return <Login/>
+					}}
+					/>
+					<Route 
+					path="/cargaHospitales"
+					render={() => {
+						return <CargaHospitales/>
+					}}
+					/>
+				</Switch>
+			</Router>
+		);
+	}
 }
 
 export default App;
