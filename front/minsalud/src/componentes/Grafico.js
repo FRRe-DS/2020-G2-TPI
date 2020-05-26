@@ -16,19 +16,29 @@ export default class LineGraph extends Component {
                     {
                         label: "Enfermos",
                         data: [100,150,160,170,200],
+                        borderColor: "#4F9CCF",
+                        fill: false
                     },
                     {
                         label: "Curados",
                         data: [50,69,74,170,200],
+                        borderColor: "#99D6FE",
+                        fill: false
                     },
                     {
                         label: "Muertos",
                         data: [100,500,740,800],
+                        borderColor: "#1B4F72",
+                        fill: false
                     },
                 ]
             },
             options: {
                 //Agregar opciones de estilos y ejes
+                tooltips:{
+                    backgroundColor: '#1B4F72'
+                },
+                
             }
         });
     }

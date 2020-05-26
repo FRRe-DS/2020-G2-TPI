@@ -13,44 +13,44 @@ import LineGraph from "./componentes/Grafico"
 
 
 class App extends Component {
-  state = {
-    centros: centros,
-  };
+	state = {
+		centros: centros,
+	};
 
-  render() {
-    return (
-      <Router>
-        <Header />
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => {
-              return (
-                <div className="app-container">
-                  <Menu />
-                  <LineGraph/>
-                  <TablaCentros centros={this.state.centros} />
-                </div>
-              );
-            }}
-          />
-          <Route 
-          path="/login"
-          render={() => {
-            return <Login/>
-          }}
-          />
-          <Route 
-          path="/cargaHospitales"
-          render={() => {
-            return <CargaHospitales/>
-          }}
-          />
-        </Switch>
-      </Router>
-    );
-  }
+	render() {
+		return (
+			<Router>
+				<Header />
+				<Switch>
+					<Route
+						exact
+						path="/"
+						render={() => {
+							return (
+								<div className="app-container">
+									<Menu />
+									<TablaCentros centros={this.state.centros} />
+									<LineGraph/>
+								</div>
+							);
+						}}
+					/>
+					<Route 
+					path="/login"
+					render={() => {
+						return <Login/>
+					}}
+					/>
+					<Route 
+					path="/cargaHospitales"
+					render={() => {
+						return <CargaHospitales/>
+					}}
+					/>
+				</Switch>
+			</Router>
+		);
+	}
 }
 
 export default App;
