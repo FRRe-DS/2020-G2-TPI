@@ -9,6 +9,9 @@ import CargaHospitales from './componentes/CargaHospitales'
 // importar informacion a cerca de los centros hospitalarios
 import centros from "./ejemplos/centrosHospitalarios.json";
 
+import LineGraph from "./componentes/Grafico"
+
+
 class App extends Component {
   state = {
     centros: centros,
@@ -26,6 +29,7 @@ class App extends Component {
               return (
                 <div className="app-container">
                   <Menu />
+                  <LineGraph/>
                   <TablaCentros centros={this.state.centros} />
                 </div>
               );

@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 class CargaHospitales extends Component {
     render() { 
         return (  
+
 <Form>
   <Form.Group>
     <Form.Label>Nombre</Form.Label>
