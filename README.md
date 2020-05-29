@@ -39,7 +39,8 @@ npm start
 Para lanzar el servidor de React, esto abrira en el navegador predeterminado el frontEnd del proyecto
 
 ### Links de deploy
-* [Front en react](http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/login)
+* [Front en react 1](http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/login)
+* [Front en react 2](http://fronthealthministry.s3-website-sa-east-1.amazonaws.com)
 
 * Endpoints: 
 
