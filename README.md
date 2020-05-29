@@ -1,17 +1,16 @@
-# TPI 
-Trabajo práctico Integrador - Grupo 2 - 2020
+#  Trabajo práctico Integrador - Grupo 2 - 2020
 
 ![](http://chaco.gov.ar/uploads/layout/0745de7c4262729ea422b99c6489bf5c.svg)
 
 
-##Getting Started
+## Getting Started
 Instrucciones para poder correr cualquiera de las 2 partes del proyecto
 
-###Pre-requisitos
+### Pre-requisitos
 Lo unico que se necesita para ejecutar el proyecto es tener instalado Node.
 
 
-###Ejecucion
+### Ejecucion
 Para poder ejecutar el proyecto primero debemos clonarlo. Una vez que lo tengamos clonado, nos situamos en la carpeta
 correspondiente a lo que queramos ejecutar siendo:
 * API para el backend
@@ -21,7 +20,7 @@ correspondiente a lo que queramos ejecutar siendo:
 Cuando estemos en la carpeta API 
 
 
-###FrontEnd
+### FrontEnd
 Cuando estemos en la carpeta FrontEnd ingresamos a la carpeta minsalud. Una vez alli ejecutamos
 ```
 npm install
@@ -33,18 +32,18 @@ npm start
 ```
 Para lanzar el servidor de React, esto abrira en el navegador predeterminado el frontEnd del proyecto
 
-###Links de deploy
+### Links de deploy
 * [Front en react](http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/login)
 
 * Endpoints: 
 
-* [POST PRUEBAS](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/pruebas)
-* [POST PETICIONES](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/peticiones) 
-* [GET PETICIONES](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/peticiones) 
-* [POST PARA LOGGEO](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/login) 
-* [POST PARA REGISTRO](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/register) 
-* [POST CENTROS HOSPITALARIOS](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/CentrosHospitalarios) 
-* [GET CENTROS HOSPITALARIOS](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/CentrosHospitalarios)
+  * [POST PRUEBAS](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/pruebas)
+  * [POST PETICIONES](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/peticiones) 
+  * [GET PETICIONES](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/peticiones) 
+  * [POST PARA LOGGEO](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/login) 
+  * [POST PARA REGISTRO](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/register) 
+  * [POST CENTROS HOSPITALARIOS](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/CentrosHospitalarios) 
+  * [GET CENTROS HOSPITALARIOS](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/CentrosHospitalarios)
 
 ###Autores
 * **Cuzziol Boccioni Facundo**
