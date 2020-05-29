@@ -17,8 +17,14 @@ correspondiente a lo que queramos ejecutar siendo:
 * front para el frontend del proyecto
 
 ### Backend
-Cuando estemos en la carpeta API 
-
+Cuando estemos en la carpeta API, instalamos las librerías requeridas con el siguiente comando
+```
+npm install
+```
+Para correr el backend(por defecto en puerto 5000), luego de haber instalado las dependencias, ingresamos
+```
+npm start
+```
 
 ### FrontEnd
 Cuando estemos en la carpeta FrontEnd ingresamos a la carpeta minsalud. Una vez alli ejecutamos
