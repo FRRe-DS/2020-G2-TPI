@@ -3,30 +3,47 @@ const mongoose = require('mongoose');
 const Peticion = new mongoose.Schema({
 
     Peticion:{
-        camillas:{
+        idCentro: {
             type:Number,
             required:true
+        },
+        camillas:{
+            type:Number,
+            required:false
         },
         jabonLitros:{
             type:Number,
-            required:true
+            required:false
         },
         alcoholLitros:{
             type:Number,
-            required:true
+            required:false
         },
         barbijos:{
             type:Number,
-            required:true
+            required:false
         },
         jeringas:{
             type:Number,
-            required:true
+            required:false
         },
         cofias:{
             type:Number,
-            required:true
-        }
+            required:false
+        },
+        medicos:[
+            {
+                cantidad: {
+                    type:Number,
+                    required:false
+                },
+                especialidad: {
+                    type:String,
+                    required:false
+                },
+                required:false
+            }
+        ]
     }
 
 });
