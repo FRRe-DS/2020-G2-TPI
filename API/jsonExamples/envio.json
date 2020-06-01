@@ -1,0 +1,20 @@
+{
+    "Envio":{
+        "idCentro":1234,
+        "camillas":32,
+        "jabonLitros": 43,
+        "barbijos": 123,
+        "jeringas":12,
+        "cofias":124,
+        "medicos":[
+            {
+                "cantidad":2,
+                "especialidad":"virologo"
+            },
+            {
+                "cantidad":1,
+                "especialidad":"otorrinolaringologo"
+            }
+        ]
+    }
+}
