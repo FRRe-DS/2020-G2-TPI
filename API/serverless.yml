@@ -44,3 +44,11 @@ functions:
           path: /CentrosHospitalarios
           method: GET
           cors: true
+      - http:
+          path: /envios
+          method: GET
+          cors: true
+      - http:
+          path: /envios
+          method: POST
+          cors: true
