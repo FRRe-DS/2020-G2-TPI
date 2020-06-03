@@ -17,14 +17,15 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Header />
+        
         <Switch>
           <Route
             exact
-            path="/"
+            path="/centrosmedicos"
             render={() => {
               return (
                 <div className="app-container">
+                  <Header />
                   <Menu />
                   <TablaCentros centros={this.state.centros} />
                 </div>
@@ -32,10 +33,10 @@ class App extends Component {
             }}
           />
           <Route 
-          path="/login"
-          render={() => {
-            return <Login/>
-          }}
+          exact path="/"
+          
+          component={Login}
+          
           />
         </Switch>
       </Router>

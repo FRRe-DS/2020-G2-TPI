@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import { FormErrors } from "./FormErrors";
 import './css/login.css';
 import {sha256} from 'js-sha256';
+import { Redirect, useHistory } from "react-router-dom";
 import {
 	Button,
 	FormGroup,
@@ -21,6 +22,8 @@ class Login extends Component {
 			userValid: false,
 			passwordValid: false,
 			formValid: false,
+			ingreso: false
+
 		};
 	}
 
@@ -92,22 +95,28 @@ class Login extends Component {
 			.then(response => response.json())
 			.then(data =>{
 				if (data.mensaje==='Login exitoso'){
-					console.log(data) //TODO:posterior tratamiento e impresion de DIVs
+					
+					this.state.ingreso=true
+					console.log(this.state.ingreso)
+					this.props.history.push('centrosmedicos') //Esta es una forma fea pero no encontre otra
+					
 				}else{
 				console.log('El usuario o la contrasenia es incorrecta')
+				return (<div>
+					Mal ahi bro
+				</div> )
 				}
 			});
 
 	}
-	
+
+
 	render() {
 		return (
 			<Container className="form-login">
 				<Form className="demoForm">
 					<h2>Inicio de Sesión</h2>
-					<div className="panel panel-default">
-						<FormErrors formErrors={this.state.formErrors} />
-					</div>
+
 					<div className={`form-group ${this.errorClass(this.state.formErrors.user)}`}>
 						<label htmlFor="user">Usuario</label>
 						<input
@@ -131,9 +140,17 @@ class Login extends Component {
 							onChange={this.handleUserInput}
 						/>
 					</div>
-					<Button type="submit" className="btn btn-primary" disabled={!this.state.formValid} onClick={(e) => this.envioUsuario(this.state.user,this.state.password, e)}>
+					<Button 
+					type="submit" className="btn btn-primary" 
+					disabled={!this.state.formValid} onClick={(e) => this.envioUsuario(this.state.user,this.state.password, e) } >
 						Enviar
+
+						
 					</Button>
+					<div className="panel panel-default">
+						<FormErrors formErrors={this.state.formErrors} ingreso={this.state.ingreso} />
+					</div>
+					
 				</Form>
 			</Container>
 		);

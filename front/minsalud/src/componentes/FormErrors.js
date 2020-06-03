@@ -1,6 +1,6 @@
 import React from "react";
 
-export const FormErrors = ({ formErrors }) => {
+export const FormErrors = ({ formErrors, ingreso }) => {
 
   return (
     <div className="formErrors">
@@ -8,7 +8,7 @@ export const FormErrors = ({ formErrors }) => {
         if (formErrors[fieldName].length > 0) {
           return (
             <p key={i}>
-              {fieldName} {formErrors[fieldName]}
+              {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} {formErrors[fieldName]}
             </p>
           );
         } else {
