@@ -1,4 +1,6 @@
 import React from "react";
+import Alert from 'react-bootstrap/Alert'
+
 
 export const FormErrors = ({ formErrors, ingreso }) => {
 
@@ -7,9 +9,12 @@ export const FormErrors = ({ formErrors, ingreso }) => {
       {Object.keys(formErrors).map((fieldName, i) => {
         if (formErrors[fieldName].length > 0) {
           return (
-            <p key={i}>
+            <>
+            <br/>
+            <Alert key={i} variant='danger' className="w-50">
               {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} {formErrors[fieldName]}
-            </p>
+              </Alert>
+              </>
           );
         } else {
           return "";

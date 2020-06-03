@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        
+        <Header />
         <Switch>
           <Route
             exact
@@ -25,7 +25,7 @@ class App extends Component {
             render={() => {
               return (
                 <div className="app-container">
-                  <Header />
+                  
                   <Menu />
                   <TablaCentros centros={this.state.centros} />
                 </div>
