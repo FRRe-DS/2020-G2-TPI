@@ -25,7 +25,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.9.11",
-    "serverless": "^1.70.0",
+    "serverless": "^1.72.0",
     "serverless-http": "^2.3.2",
     "swagger-ui-express": "^4.1.4"
   }

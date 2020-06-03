@@ -87,8 +87,7 @@
               "Fn::Join": [
                 "-",
                 [
-                  "serverless-aws-nodejs",
-                  "dev",
+                  "serverless-aws-nodejs-dev",
                   "lambda"
                 ]
               ]
@@ -128,8 +127,7 @@
           "Fn::Join": [
             "-",
             [
-              "serverless-aws-nodejs",
-              "dev",
+              "serverless-aws-nodejs-dev",
               {
                 "Ref": "AWS::Region"
               },
@@ -146,7 +144,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-aws-nodejs/dev/1589745672027-2020-05-17T20:01:12.027Z/serverless-aws-nodejs.zip"
+          "S3Key": "serverless/serverless-aws-nodejs/dev/1591154872653-2020-06-03T03:27:52.653Z/serverless-aws-nodejs.zip"
         },
         "FunctionName": "serverless-aws-nodejs-dev-app",
         "Handler": "index.server",
@@ -165,14 +163,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AppLambdaVersion5UfAAyD4f3MqefAWuyQeZggpKy0xe92YB1i5UApB1sY": {
+    "AppLambdaVersionNzp8VHLn5MsKMa1NKmhg7iSelKFUjfHqkZDhGyXq06w": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "wEf/qPqMb/NRCVAubP+NtKGTCA7+qt3oXAJWlftbZiU="
+        "CodeSha256": "XzFeFTC5dplb/QJ4WgB45pqXe53p6eR3PWyQ6Sat8H0="
       }
     },
     "ApiGatewayRestApi": {
@@ -309,7 +307,7 @@
                 "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
               },
               "ResponseTemplates": {
-                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
               }
             }
           ]
@@ -357,7 +355,7 @@
                 "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,DELETE,GET,HEAD,PATCH,POST,PUT'"
               },
               "ResponseTemplates": {
-                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
               }
             }
           ]
@@ -402,7 +400,7 @@
                 "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
               },
               "ResponseTemplates": {
-                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
               }
             }
           ]
@@ -447,7 +445,7 @@
                 "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,POST'"
               },
               "ResponseTemplates": {
-                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
               }
             }
           ]
@@ -492,7 +490,7 @@
                 "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
               },
               "ResponseTemplates": {
-                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
               }
             }
           ]
@@ -537,7 +535,7 @@
                 "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
               },
               "ResponseTemplates": {
-                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
               }
             }
           ]
@@ -582,7 +580,7 @@
                 "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,POST'"
               },
               "ResponseTemplates": {
-                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
               }
             }
           ]
@@ -985,7 +983,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1589745649891": {
+    "ApiGatewayDeployment1591154849512": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1059,7 +1057,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersion5UfAAyD4f3MqefAWuyQeZggpKy0xe92YB1i5UApB1sY"
+        "Ref": "AppLambdaVersionNzp8VHLn5MsKMa1NKmhg7iSelKFUjfHqkZDhGyXq06w"
       }
     },
     "ServiceEndpoint": {
