@@ -3,7 +3,7 @@ import Alert from 'react-bootstrap/Alert'
 
 
 export const FormErrors = ({ formErrors, ingreso }) => {
-
+  console.log(ingreso)
   return (
     <div className="formErrors">
       {Object.keys(formErrors).map((fieldName, i) => {
@@ -11,12 +11,13 @@ export const FormErrors = ({ formErrors, ingreso }) => {
           return (
             <>
             <br/>
-            <Alert key={i} variant='danger' className="w-50">
-              {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} {formErrors[fieldName]}
+            <Alert key={i} variant='warning' className="w-50">
+              {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} {formErrors[fieldName]}, por favor corrija esto
+              
               </Alert>
               </>
           );
-        } else {
+        }  else {
           return "";
         }
       })}

@@ -22,7 +22,7 @@ class Login extends Component {
 			userValid: false,
 			passwordValid: false,
 			formValid: false,
-			ingreso: false
+			ingreso: ""
 
 		};
 	}
@@ -101,10 +101,8 @@ class Login extends Component {
 					this.props.history.push('centrosmedicos') //Esta es una forma fea pero no encontre otra
 					
 				}else{
+				this.state.ingreso=true
 				console.log('El usuario o la contrasenia es incorrecta')
-				return (<div>
-					Mal ahi bro
-				</div> )
 				}
 			});
 
