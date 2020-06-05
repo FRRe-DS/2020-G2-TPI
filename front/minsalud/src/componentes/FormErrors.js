@@ -2,8 +2,8 @@ import React from "react";
 import Alert from 'react-bootstrap/Alert'
 
 
-export const FormErrors = ({ formErrors, ingreso }) => {
-  console.log(ingreso)
+export const FormErrors = ({ formErrors }) => {
+  
   return (
     <div className="formErrors">
       {Object.keys(formErrors).map((fieldName, i) => {
@@ -15,12 +15,16 @@ export const FormErrors = ({ formErrors, ingreso }) => {
               {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} {formErrors[fieldName]}, por favor corrija esto
               
               </Alert>
+
               </>
           );
         }  else {
           return "";
         }
       })}
+
+
+
     </div>
   );
 };

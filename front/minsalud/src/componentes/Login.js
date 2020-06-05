@@ -2,7 +2,7 @@ import React, { Component} from "react";
 import { FormErrors } from "./FormErrors";
 import './css/login.css';
 import {sha256} from 'js-sha256';
-import { Redirect, useHistory } from "react-router-dom";
+import ReactDOM from 'react-dom'
 import {
 	Button,
 	FormGroup,
@@ -11,6 +11,7 @@ import {
 	Container,
 	Form,
 } from "react-bootstrap";
+import Alert from 'react-bootstrap/Alert'
 
 class Login extends Component {
 	constructor(props) {
@@ -22,7 +23,7 @@ class Login extends Component {
 			userValid: false,
 			passwordValid: false,
 			formValid: false,
-			ingreso: ""
+			ingreso: false
 
 		};
 	}
@@ -96,13 +97,18 @@ class Login extends Component {
 			.then(data =>{
 				if (data.mensaje==='Login exitoso'){
 					
-					this.state.ingreso=true
-					console.log(this.state.ingreso)
+					this.setState({ingreso:true})
+					
 					this.props.history.push('centrosmedicos') //Esta es una forma fea pero no encontre otra
 					
 				}else{
-				this.state.ingreso=true
-				console.log('El usuario o la contrasenia es incorrecta')
+				let alarma = <Alert variant='danger' className="w-50">Error: usuario o contraseña incorrecto</Alert>
+				ReactDOM.render(alarma, document.getElementById('error-ingreso'))
+
+				setTimeout(()=>{
+					ReactDOM.render(<div></div>, document.getElementById('error-ingreso'))	
+				},2500)
+
 				}
 			});
 
@@ -146,8 +152,14 @@ class Login extends Component {
 						
 					</Button>
 					<div className="panel panel-default">
-						<FormErrors formErrors={this.state.formErrors} ingreso={this.state.ingreso} />
+						<FormErrors formErrors={this.state.formErrors} />
 					</div>
+					<br/>
+					<div id='error-ingreso'>
+
+					</div>
+					
+					
 					
 				</Form>
 			</Container>
