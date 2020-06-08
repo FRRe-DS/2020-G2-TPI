@@ -159,8 +159,7 @@
         "Timeout": 6
       },
       "DependsOn": [
-        "AppLogGroup",
-        "IamRoleLambdaExecution"
+        "AppLogGroup"
       ]
     },
     "AppLambdaVersionNzp8VHLn5MsKMa1NKmhg7iSelKFUjfHqkZDhGyXq06w": {
@@ -270,6 +269,21 @@
           ]
         },
         "PathPart": "CentrosHospitalarios",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEnvios": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "envios",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -593,6 +607,51 @@
         }
       }
     },
+    "ApiGatewayMethodEnviosOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEnvios"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
     "ApiGatewayMethodAny": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -765,8 +824,18 @@
             ]
           }
         },
-        "MethodResponses": []
-      }
+        "MethodResponses": [
+          {
+            "StatusCode": "200"
+          }
+        ],
+        "RequestModels": {
+          "application/json": "peticion"
+        }
+      },
+      "DependsOn": [
+        "peticionModel"
+      ]
     },
     "ApiGatewayMethodPeticionesGet": {
       "Type": "AWS::ApiGateway::Method",
@@ -999,6 +1068,7 @@
         "ApiGatewayMethodLoginOptions",
         "ApiGatewayMethodRegisterOptions",
         "ApiGatewayMethodCentroshospitalariosOptions",
+        "ApiGatewayMethodEnviosOptions",
         "ApiGatewayMethodAny",
         "ApiGatewayMethodProxyVarAny",
         "ApiGatewayMethodPruebasPost",
@@ -1007,7 +1077,9 @@
         "ApiGatewayMethodLoginPost",
         "ApiGatewayMethodRegisterPost",
         "ApiGatewayMethodCentroshospitalariosPost",
-        "ApiGatewayMethodCentroshospitalariosGet"
+        "ApiGatewayMethodCentroshospitalariosGet",
+        "ApiGatewayMethodEnviosGet",
+        "ApiGatewayMethodEnviosPost"
       ]
     },
     "AppLambdaPermissionApiGateway": {
@@ -1046,6 +1118,32 @@
           ]
         }
       }
+    },
+    "peticionModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ContentType": "application/json",
+        "Name": "peticion",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "Peticion": {
+              "type": "object",
+              "required": [
+                "idCentro"
+              ],
+              "properties": {
+                "idCentro": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "Outputs": {
@@ -1081,6 +1179,12 @@
             "/dev"
           ]
         ]
+      }
+    },
+    "AwsDocApiId": {
+      "Description": "API ID",
+      "Value": {
+        "Ref": "ApiGatewayRestApi"
       }
     }
   }

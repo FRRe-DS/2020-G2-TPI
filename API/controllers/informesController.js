@@ -5,6 +5,9 @@ exports.registrarInforme = async (req,res,next) => {
     try {
         console.log(req.body);
         await nuevoInforme.save(); 
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.json({mensaje:"El informe se guardo en la base"});
     } catch (error) {
         console.log(error);
@@ -15,6 +18,9 @@ exports.registrarInforme = async (req,res,next) => {
 exports.getInforme = async(req,res,next) =>{
     try {
         const Informes = await InformeHospitalMinisterio.find({}); 
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.json({Informes})
     } catch (error) {
         console.log(error);

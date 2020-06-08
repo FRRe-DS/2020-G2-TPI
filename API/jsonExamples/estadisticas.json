@@ -1,0 +1,583 @@
+{
+ "data_ciudades":[ 
+    {
+    "ciudad": "Avia Terai",
+    "poblacion": 6203,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+    {"ciudad": "Barranqueras",
+    "poblacion": 54698,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+ },
+ {
+    "ciudad": "Barrio de los Pescadores",
+    "poblacion": 795,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ }, 
+ {
+    "ciudad": "Basail",
+    "poblacion": 1929,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ }, 
+ {
+    "ciudad": "Campo Largo",
+    "poblacion": 9069,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ }, 
+ {
+    "ciudad": "Capitán Solari",
+    "poblacion": 1888,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ }, 
+ {
+    "ciudad": "Charadai",
+    "poblacion": 1519,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ }, 
+ {
+    "ciudad": "Charata",
+    "poblacion": 26497,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ }, 
+ {
+    "ciudad": "Chorotis",
+    "poblacion": 941,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Ciervo Petiso",
+    "poblacion": 786,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Colonia Aborigen",
+    "poblacion": 1272,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Colonia Baranda",
+    "poblacion": 336,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Colonia Benítez",
+    "poblacion": 2212,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Colonia Elisa",
+    "poblacion": 3471,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Colonia Popular",
+    "poblacion": 191,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Colonias Unidas",
+    "poblacion": 3282,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Concepción del Bermejo",
+    "poblacion": 5309,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Coronel Du Graty",
+    "poblacion": 7509,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Corzuela",
+    "poblacion": 10335,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Cote Lai",
+    "poblacion": 1323,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "El Espinillo",
+    "poblacion": 1261,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "El Sauzal",
+    "poblacion": 715,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "El Sauzalito",
+    "poblacion": 3374,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Enrique Urién",
+    "poblacion": 515,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Estación General Obligado",
+    "poblacion": 31,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Fontana",
+    "poblacion": 32027,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Fortín Las Chuñas",
+    "poblacion": 302,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Fortín Lavalle",
+    "poblacion": 687,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Fuerte Esperanza",
+    "poblacion":  1376,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Gancedo",
+    "poblacion":  4284,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "General Capdevila",
+    "poblacion":  405,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "General José de San Martín",
+    "poblacion":  28124,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "General Pinedo",
+    "poblacion":  13042,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "General Vedia",
+    "poblacion":  1751,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Haumonía",
+    "poblacion":  77,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Hermoso Campo",
+    "poblacion":  5011,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Horquilla",
+    "poblacion":  122,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Ingeniero Barbet ",
+    "poblacion":  277,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Ingeniero Barbet ",
+    "poblacion":  277,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Isla del Cerrito",
+    "poblacion":  1758,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Juan José Castelli",
+    "poblacion":  27201,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "La Clotilde",
+    "poblacion":  3382,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "La Escondida",
+    "poblacion":  3261,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Las Breñas",
+    "poblacion":  22953,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Margarita Belén",
+    "poblacion":  5701,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Pampa del Infierno",
+    "poblacion":  9063,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Presidencia Roque Sáenz Peña",
+    "poblacion":  89882,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Puerto Tirol",
+    "poblacion":  8819,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Puerto Vilelas",
+    "poblacion":  8278,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Quitilipi",
+    "poblacion":  24517,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Resistencia",
+    "poblacion":  290723,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ },
+ {
+    "ciudad": "Villa Ángela",
+    "poblacion":  41403,
+    "cantidades":{
+        "sospecha":0,
+        "enfermos":0,
+        "recuperados":0,
+        "muertos":0
+    }
+
+ }
+
+],
+
+"totales":{
+    "poblacionTotal":0,
+    "sospecha":0,
+    "enfermos":0,
+    "recuperados":0,
+    "muertos":0
+}
+}

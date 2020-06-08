@@ -1,0 +1,10 @@
+ANY - https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/
+  ANY - https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/{proxy+}
+  POST - https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/pruebas
+  POST - https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/peticiones
+  GET - https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/peticiones
+  POST - https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/login
+  POST - https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/register
+  POST - https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/CentrosHospitalarios
+  GET - https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/CentrosHospitalarios
+

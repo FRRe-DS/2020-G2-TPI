@@ -1,5 +1,11 @@
+/API/.serverless/serverless-aws-nodejs.zip
+.serverless/serverless-aws-nodejs.zip
 API/node_modules
 
 API/.serverless/serverless-aws-nodejs.zip
 front/minsalud/node_modules
 front/node_modules
+/API/secrets.js
+API/.serverless/cloudformation-template-update-stack.json
+API/.serverless/serverless-aws-nodejs.zip
+API/.serverless/serverless-state.json
