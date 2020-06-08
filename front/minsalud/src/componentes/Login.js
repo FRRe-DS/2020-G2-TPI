@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FormErrors } from "./FormErrors";
 import './css/login.css';
-
+import 'js-sha256';
 import {
 	Button,
 	FormGroup,
