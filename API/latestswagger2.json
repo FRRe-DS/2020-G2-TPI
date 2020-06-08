@@ -1,7 +1,7 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "version" : "2020-06-07T14:41:43Z",
+    "version" : "2020-06-08T14:12:25Z",
     "title" : "dev-serverless-aws-nodejs"
   },
   "host" : "6iubewzdng.execute-api.sa-east-1.amazonaws.com",
@@ -489,6 +489,17 @@
     }
   },
   "definitions" : {
+    "doctor" : {
+      "type" : "object",
+      "properties" : {
+        "cantidad" : {
+          "type" : "number"
+        },
+        "especialidad" : {
+          "type" : "string"
+        }
+      }
+    },
     "Empty" : { },
     "peticion" : {
       "type" : "object",
@@ -497,6 +508,30 @@
           "type" : "object",
           "properties" : {
             "idCentro" : {
+              "type" : "number"
+            },
+            "alcoholLitros" : {
+              "type" : "number"
+            },
+            "camillas" : {
+              "type" : "number"
+            },
+            "jeringas" : {
+              "type" : "number"
+            },
+            "medicos" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/doctor"
+              }
+            },
+            "barbijos" : {
+              "type" : "number"
+            },
+            "cofias" : {
+              "type" : "number"
+            },
+            "jabonLitros" : {
               "type" : "number"
             }
           },
