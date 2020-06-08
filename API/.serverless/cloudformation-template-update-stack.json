@@ -146,7 +146,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-aws-nodejs/dev/1590516901519-2020-05-26T18:15:01.519Z/serverless-aws-nodejs.zip"
+          "S3Key": "serverless/serverless-aws-nodejs/dev/1591568439873-2020-06-07T22:20:39.873Z/serverless-aws-nodejs.zip"
         },
         "FunctionName": "serverless-aws-nodejs-dev-app",
         "Handler": "index.server",
@@ -161,18 +161,17 @@
         "Timeout": 6
       },
       "DependsOn": [
-        "AppLogGroup",
-        "IamRoleLambdaExecution"
+        "AppLogGroup"
       ]
     },
-    "AppLambdaVersionVO9XKJRsj7qOwrZIVDXNy4wvtwq81F0TGn9mjwp5E": {
+    "AppLambdaVersionH2FOqDlLXQ0mEkZiyv2rriZSEFSiHd8FfbZKDyFx2P8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AppLambdaFunction"
         },
-        "CodeSha256": "qYTrhM5L2ZiVPKGpACcz54nTAt9+WZQn/3bAZvvJyXY="
+        "CodeSha256": "49DkZNiamzF/8OAqFI/4PJbQISwSHcUn1sZHg20jDB8="
       }
     },
     "ApiGatewayRestApi": {
@@ -272,6 +271,21 @@
           ]
         },
         "PathPart": "CentrosHospitalarios",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceEnvios": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "envios",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -595,6 +609,51 @@
         }
       }
     },
+    "ApiGatewayMethodEnviosOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEnvios"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
     "ApiGatewayMethodAny": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -767,8 +826,18 @@
             ]
           }
         },
-        "MethodResponses": []
-      }
+        "MethodResponses": [
+          {
+            "StatusCode": "200"
+          }
+        ],
+        "RequestModels": {
+          "application/json": "peticion"
+        }
+      },
+      "DependsOn": [
+        "peticionModel"
+      ]
     },
     "ApiGatewayMethodPeticionesGet": {
       "Type": "AWS::ApiGateway::Method",
@@ -985,7 +1054,93 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1590516806422": {
+    "ApiGatewayMethodEnviosGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEnvios"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "AppLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayMethodEnviosPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceEnvios"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "AppLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayDeployment1591568419336": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1001,6 +1156,7 @@
         "ApiGatewayMethodLoginOptions",
         "ApiGatewayMethodRegisterOptions",
         "ApiGatewayMethodCentroshospitalariosOptions",
+        "ApiGatewayMethodEnviosOptions",
         "ApiGatewayMethodAny",
         "ApiGatewayMethodProxyVarAny",
         "ApiGatewayMethodPruebasPost",
@@ -1009,7 +1165,9 @@
         "ApiGatewayMethodLoginPost",
         "ApiGatewayMethodRegisterPost",
         "ApiGatewayMethodCentroshospitalariosPost",
-        "ApiGatewayMethodCentroshospitalariosGet"
+        "ApiGatewayMethodCentroshospitalariosGet",
+        "ApiGatewayMethodEnviosGet",
+        "ApiGatewayMethodEnviosPost"
       ]
     },
     "AppLambdaPermissionApiGateway": {
@@ -1048,6 +1206,32 @@
           ]
         }
       }
+    },
+    "peticionModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ContentType": "application/json",
+        "Name": "peticion",
+        "Schema": {
+          "type": "object",
+          "properties": {
+            "Peticion": {
+              "type": "object",
+              "required": [
+                "idCentro"
+              ],
+              "properties": {
+                "idCentro": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "Outputs": {
@@ -1059,7 +1243,7 @@
     "AppLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AppLambdaVersionVO9XKJRsj7qOwrZIVDXNy4wvtwq81F0TGn9mjwp5E"
+        "Ref": "AppLambdaVersionH2FOqDlLXQ0mEkZiyv2rriZSEFSiHd8FfbZKDyFx2P8"
       }
     },
     "ServiceEndpoint": {
@@ -1083,6 +1267,12 @@
             "/dev"
           ]
         ]
+      }
+    },
+    "AwsDocApiId": {
+      "Description": "API ID",
+      "Value": {
+        "Ref": "ApiGatewayRestApi"
       }
     }
   }

@@ -9,6 +9,9 @@ exports.nuevaPeticion = async (req,res,next) =>{
 
     try {
         await peticion.save();
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.json({mensaje:"La peticion se argego correctamente"});
     } catch (error) {
         console.log(error);
@@ -22,6 +25,9 @@ exports.nuevaPeticion = async (req,res,next) =>{
 exports.obtenerPeticiones = async(req,res,next) =>{
     try {
         const peticiones = await Peticion.find({});
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.json(peticiones);
     } catch (error) {
         console.log(error);

@@ -7,6 +7,9 @@ exports.nuevoEnvio = async(req,res,next) =>{
 
     try{
         await envio.save();
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.json({mensaje:"El envio se agrego correctamente"});
     }
     catch(error)
@@ -22,6 +25,9 @@ exports.nuevoEnvio = async(req,res,next) =>{
 exports.obtenerEnvios = async(req,res,next)=>{
     try{
         const envios = await Envio.find({});
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.json(envios);
     }catch(error)
     {

@@ -5,6 +5,7 @@ const loginController = require('../controllers/loginController')
 const informesController = require('../controllers/informesController');
 const centrosHospitalariosController = require('../controllers/centrosHospitalariosController');
 const envioController = require('../controllers/envioController');
+const apiController = require('../controllers/apiController');
 
 router.get('/',(req,res)=>{
     console.log("Hola,probando");
@@ -20,6 +21,9 @@ router.get('/envios',
 router.post('/envios', 
     envioController.nuevoEnvio)
 
+//Api Documentation
+
+router.get('/apiDoc',apiController.enviar)
 
 router.post('/pruebas',(req,res)=>{
     console.log(req.body);
