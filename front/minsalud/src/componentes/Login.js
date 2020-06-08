@@ -1,12 +1,8 @@
 import React, { Component} from "react";
 import { FormErrors } from "./FormErrors";
 import './css/login.css';
-<<<<<<< HEAD
-import 'js-sha256';
-=======
 import {sha256} from 'js-sha256';
 import ReactDOM from 'react-dom'
->>>>>>> origin/updateFront
 import {
 	Button,
 	FormGroup,
