@@ -78,6 +78,16 @@ custom:
                 description: "Path used to see peticiones and add more"
         models:
             -
+                name: doctor
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties: 
+                        cantidad:
+                            type: number
+                        especialidad: 
+                            type: string
+            -
                 name: peticion
                 contentType: "application/json"
                 schema:
@@ -90,6 +100,24 @@ custom:
                             properties:
                                 idCentro:
                                     type: number
+                                camillas: 
+                                    type: number
+                                jabonLitros:
+                                    type: number
+                                alcoholLitros: 
+                                    type: number
+                                barbijos:
+                                    type: number
+                                jeringas:
+                                    type: number
+                                cofias:
+                                    type: number
+                                medicos:
+                                    type: array
+                                    items:
+                                        $ref: "{{model:doctor}}"
+
+                                
                             
 
 
