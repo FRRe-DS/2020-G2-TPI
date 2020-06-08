@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.9.11",
-    "serverless": "^1.70.0",
+    "serverless": "^1.72.0",
     "serverless-aws-documentation": "^1.1.0",
     "serverless-http": "^2.3.2",
     "swagger-ui": "^3.26.0",
