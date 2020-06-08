@@ -1,0 +1,21 @@
+{
+    "idCentro":3432342,
+    "ReporteHospitalario" : {
+        "cantidadMuertos" : 45,
+        "pacientesCurados" :13,
+        "pacientesEnfermos" :32,
+        "testRealizados" : {
+            "positivos" : 32,
+            "negativos" : 23
+        }
+    },
+    "Recursos":{
+        "camillasDisponibles":123,
+        "camillasOcupadas": 456,
+        "jabonLitros" : 45,
+        "alcoholLitros" : 32,
+        "barbijos" : 123,
+        "jeringas" :45,
+        "cofias" : 32
+    }  
+}

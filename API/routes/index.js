@@ -4,11 +4,26 @@ const peticionController = require('../controllers/peticionControllers');
 const loginController = require('../controllers/loginController')
 const informesController = require('../controllers/informesController');
 const centrosHospitalariosController = require('../controllers/centrosHospitalariosController');
+const envioController = require('../controllers/envioController');
+const apiController = require('../controllers/apiController');
+
 router.get('/',(req,res)=>{
     console.log("Hola,probando");
     res.json({message:"mensaje escrito en consola"});
 });
 
+
+//Envios 
+router.get('/envios',
+    envioController.obtenerEnvios
+    );
+
+router.post('/envios', 
+    envioController.nuevoEnvio)
+
+//Api Documentation
+
+router.get('/apiDoc',apiController.enviar)
 
 router.post('/pruebas',(req,res)=>{
     console.log(req.body);

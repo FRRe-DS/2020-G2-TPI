@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@trendmicro/react-sidenav": "^0.5.0",
     "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
     "js-sha256": "^0.9.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
@@ -24,6 +25,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy":"http://server:8000",
   "browserslist": {
     "production": [
       ">0.2%",

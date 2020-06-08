@@ -20,10 +20,30 @@ functions:
           path: /pruebas
           method: POST
           cors: true
+          documentation:
+            summary: "Testing purposes, returns the body of the method"
+            requestBody:
+                description: "Any json file will work"
       - http:
           path: /peticiones
           method: POST
           cors: true
+          documentation:
+            summary: "Adds a new peticion to the list of existing peticiones"
+            requestBody:
+                description: "It asks for resources and has the hospital id"
+            pathParams:
+                -
+                    name: x-api-key
+                    required: true
+                    description: "API Key identifier"
+                requestModels:
+                "application/json": "peticion"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "La peticion se agrego correctamente"
       - http:
           path: /peticiones
           method: GET
@@ -44,3 +64,68 @@ functions:
           path: /CentrosHospitalarios
           method: GET
           cors: true
+      - http:
+          path: /envios
+          method: GET
+          cors: true
+      - http:
+          path: /envios
+          method: POST
+          cors: true
+custom:
+    documentation:
+        version: '1'
+        summary: 'API FAKE del Ministerio de Salud del Chaco'
+        description: 'API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.'
+        resources: 
+            -
+                path: "peticiones"
+                description: "Path used to see peticiones and add more"
+        models:
+            -
+                name: doctor
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties: 
+                        cantidad:
+                            type: number
+                        especialidad: 
+                            type: string
+            -
+                name: peticion
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        Peticion:
+                            type: object
+                            required:
+                            - "idCentro"    
+                            properties:
+                                idCentro:
+                                    type: number
+                                camillas: 
+                                    type: number
+                                jabonLitros:
+                                    type: number
+                                alcoholLitros: 
+                                    type: number
+                                barbijos:
+                                    type: number
+                                jeringas:
+                                    type: number
+                                cofias:
+                                    type: number
+                                medicos:
+                                    type: array
+                                    items:
+                                        $ref: "{{model:doctor}}"
+
+                                
+                            
+
+
+
+plugins:
+  - serverless-aws-documentation 

@@ -1,0 +1,25 @@
+{
+    "Peticion":{
+    	"idCentro": 10,
+        "camillas" :13,
+        "jabonLitros" : 41,
+        "alcoholLitros" : 23,
+        "barbijos" : 15,
+        "jeringas" :32,
+        "cofias" : 12,
+        "medicos": [
+        	{
+        		"cantidad": 2,
+        		"especialidad": "cirujano"
+        	},
+        	{
+        		"cantidad": 3,
+        		"especialidad": "otorrinonaringologo"
+        	},
+        	{
+        		"cantidad": 4,
+        		"especialidad": "enfermero"
+        	}   	
+        	]
+    }
+}
