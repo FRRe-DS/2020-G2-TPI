@@ -29,28 +29,6 @@ const InformeHospitalAMinisterio = new mongoose.Schema({
             }
         }
     },
-    Pacientes:{
-        dni:{
-            type:Number,
-            required:true
-        },
-        apellido:{
-            type:String,
-            required:true,
-        },
-        nombre:{
-            type:String,
-            required:true,
-        },
-        fechaNac:{
-            type:Date,
-            required:true
-        },
-        estado:{
-            type:String,
-            required:true
-        }
-    },
     Recursos:{
         camillasDisponibles:{
             type:Number,

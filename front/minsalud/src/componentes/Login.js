@@ -1,7 +1,12 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import { FormErrors } from "./FormErrors";
 import './css/login.css';
+<<<<<<< HEAD
 import 'js-sha256';
+=======
+import {sha256} from 'js-sha256';
+import ReactDOM from 'react-dom'
+>>>>>>> origin/updateFront
 import {
 	Button,
 	FormGroup,
@@ -10,16 +15,20 @@ import {
 	Container,
 	Form,
 } from "react-bootstrap";
+import Alert from 'react-bootstrap/Alert'
 
 class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			user: "",
+			password: "",
 			formErrors: { user: "", password: "" },
 			userValid: false,
 			passwordValid: false,
 			formValid: false,
+			ingreso: false
+
 		};
 	}
 
@@ -29,6 +38,7 @@ class Login extends Component {
 		const value = e.target.value;
 		this.setState({ [name]: value }, () => {
 			this.validateField(name, value);
+			
 		});
 	};
 
@@ -71,15 +81,50 @@ class Login extends Component {
 	errorClass(error) {
 		return error.length === 0 ? "" : "has-error";
 	}
-	
+
+	//Envio de la peticion a la API de usuarios
+	envioUsuario(user, hpass, e){
+		e.preventDefault()
+		const hash = sha256(hpass)
+		const url = 'https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/login';
+		let respuesta;
+		const requestOptions = {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ 
+				user: `${user}`,
+				phash: `${hash}`
+			})
+		};
+		fetch(url, requestOptions)
+			.then(response => response.json())
+			.then(data =>{
+				if (data.mensaje==='Login exitoso'){
+					
+					this.setState({ingreso:true})
+					
+					this.props.history.push('centrosmedicos') //Esta es una forma fea pero no encontre otra
+					
+				}else{
+				let alarma = <Alert variant='danger' className="w-50">Error: usuario o contraseña incorrecto</Alert>
+				ReactDOM.render(alarma, document.getElementById('error-ingreso'))
+
+				setTimeout(()=>{
+					ReactDOM.render(<div></div>, document.getElementById('error-ingreso'))	
+				},2500)
+
+				}
+			});
+
+	}
+
+
 	render() {
 		return (
 			<Container className="form-login">
 				<Form className="demoForm">
 					<h2>Inicio de Sesión</h2>
-					<div className="panel panel-default">
-						<FormErrors formErrors={this.state.formErrors} />
-					</div>
+
 					<div className={`form-group ${this.errorClass(this.state.formErrors.user)}`}>
 						<label htmlFor="user">Usuario</label>
 						<input
@@ -103,9 +148,23 @@ class Login extends Component {
 							onChange={this.handleUserInput}
 						/>
 					</div>
-					<Button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>
+					<Button 
+					type="submit" className="btn btn-primary" 
+					disabled={!this.state.formValid} onClick={(e) => this.envioUsuario(this.state.user,this.state.password, e) } >
 						Enviar
+
+						
 					</Button>
+					<div className="panel panel-default">
+						<FormErrors formErrors={this.state.formErrors} />
+					</div>
+					<br/>
+					<div id='error-ingreso'>
+
+					</div>
+					
+					
+					
 				</Form>
 			</Container>
 		);

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const peticionController = require('../controllers/peticionControllers');
 const loginController = require('../controllers/loginController')
+const informesController = require('../controllers/informesController');
 const centrosHospitalariosController = require('../controllers/centrosHospitalariosController');
 router.get('/',(req,res)=>{
     console.log("Hola,probando");
@@ -37,6 +38,14 @@ centrosHospitalariosController.registerCentro
 )
 router.get('/CentrosHospitalarios',
 centrosHospitalariosController.getCentros
+)
+
+router.post('/Informes',
+informesController.registrarInforme
+)
+
+router.get('/Informes',
+informesController.getInforme
 )
 
 

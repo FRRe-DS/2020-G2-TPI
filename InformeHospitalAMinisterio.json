@@ -9,13 +9,6 @@
             "negativos" : 23
         }
     },
-    "Pacientes":[{
-        "dni":12345654,
-        "apellido" : "Gomez",
-        "nombre" : "Pepe",
-        "fechaNac" : "1935-12-08",
-        "estado" : "enfermo"
-    }],
     "Recursos":{
         "camillasDisponibles":123,
         "camillasOcupadas": 456,

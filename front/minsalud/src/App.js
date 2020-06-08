@@ -21,31 +21,22 @@ class App extends Component {
         <Switch>
           <Route
             exact
-            path="/"
+            path="/centrosmedicos"
             render={() => {
               return (
-<<<<<<< HEAD
-              <div className="app-container">
-                
-                <Menu />
-                <TablaCentros centros={this.state.centros} />
-                
-              </div>
-            )
-=======
                 <div className="app-container">
+                  
                   <Menu />
                   <TablaCentros centros={this.state.centros} />
                 </div>
               );
->>>>>>> e55157b78d36d1f4934fb67b1f074567e601d858
             }}
           />
           <Route 
-          path="/login"
-          render={() => {
-            return <Login/>
-          }}
+          exact path="/"
+          
+          component={Login}
+          
           />
         </Switch>
       </Router>
