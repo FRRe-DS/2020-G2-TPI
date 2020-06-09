@@ -7,6 +7,10 @@ const Envio = new mongoose.Schema(
                type:Number,
                required:true
            },
+           idPeticion: {
+                type:Number,
+                required:false
+           },
            camillas:{
                type:Number,
                required:false
