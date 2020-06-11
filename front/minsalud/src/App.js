@@ -17,6 +17,36 @@ class App extends Component {
 		centros: centros,
 	};
 
+<<<<<<< HEAD
+  render() {
+    return (
+      <Router>
+        <Header />
+        <Switch>
+          <Route
+            exact
+            path="/centrosmedicos"
+            render={() => {
+              return (
+                <div className="app-container">
+                  
+                  <Menu />
+                  <TablaCentros centros={this.state.centros} />
+                </div>
+              );
+            }}
+          />
+          <Route 
+          exact path="/"
+          
+          component={Login}
+          
+          />
+        </Switch>
+      </Router>
+    );
+  }
+=======
 	render() {
 		return (
 			<Router>
@@ -51,6 +81,7 @@ class App extends Component {
 			</Router>
 		);
 	}
+>>>>>>> e7c18105dd78d7bc4c57f77963a07169c434da33
 }
 
 export default App;

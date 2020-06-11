@@ -93,6 +93,37 @@ custom:
                         especialidad: 
                             type: string
             -
+                name: envio
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        Envio:
+                            type: object
+                            properties:
+                                idCentro:
+                                    type: number
+                                    required: true
+                                idPeticion:
+                                    type: number
+                                    required: false
+                                camillas: 
+                                    type: number
+                                jabonLitros:
+                                    type: number
+                                alcoholLitros: 
+                                    type: number
+                                barbijos:
+                                    type: number
+                                jeringas:
+                                    type: number
+                                cofias:
+                                    type: number
+                                medicos:
+                                    type: array
+                                    items:
+                                        $ref: "{{model:doctor}}"
+            -
                 name: peticion
                 contentType: "application/json"
                 schema:
@@ -120,8 +151,7 @@ custom:
                                 medicos:
                                     type: array
                                     items:
-                                        $ref: "{{model:doctor}}"
-
+                                        $ref: "{{model:doctor}}" 
                                 
                             
 

@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import { FormErrors } from "./FormErrors";
 import './css/login.css';
 import {sha256} from 'js-sha256';
+import ReactDOM from 'react-dom'
 import {
 	Button,
 	FormGroup,
@@ -10,6 +11,7 @@ import {
 	Container,
 	Form,
 } from "react-bootstrap";
+import Alert from 'react-bootstrap/Alert'
 
 class Login extends Component {
 	constructor(props) {
@@ -21,6 +23,8 @@ class Login extends Component {
 			userValid: false,
 			passwordValid: false,
 			formValid: false,
+			ingreso: false
+
 		};
 	}
 
@@ -92,22 +96,31 @@ class Login extends Component {
 			.then(response => response.json())
 			.then(data =>{
 				if (data.mensaje==='Login exitoso'){
-					console.log(data) //TODO:posterior tratamiento e impresion de DIVs
+					
+					this.setState({ingreso:true})
+					
+					this.props.history.push('centrosmedicos') //Esta es una forma fea pero no encontre otra
+					
 				}else{
-				console.log('El usuario o la contrasenia es incorrecta')
+				let alarma = <Alert variant='danger' className="w-50">Error: usuario o contraseña incorrecto</Alert>
+				ReactDOM.render(alarma, document.getElementById('error-ingreso'))
+
+				setTimeout(()=>{
+					ReactDOM.render(<div></div>, document.getElementById('error-ingreso'))	
+				},2500)
+
 				}
 			});
 
 	}
-	
+
+
 	render() {
 		return (
 			<Container className="form-login">
 				<Form className="demoForm">
 					<h2>Inicio de Sesión</h2>
-					<div className="panel panel-default">
-						<FormErrors formErrors={this.state.formErrors} />
-					</div>
+
 					<div className={`form-group ${this.errorClass(this.state.formErrors.user)}`}>
 						<label htmlFor="user">Usuario</label>
 						<input
@@ -131,9 +144,23 @@ class Login extends Component {
 							onChange={this.handleUserInput}
 						/>
 					</div>
-					<Button type="submit" className="btn btn-primary" disabled={!this.state.formValid} onClick={(e) => this.envioUsuario(this.state.user,this.state.password, e)}>
+					<Button 
+					type="submit" className="btn btn-primary" 
+					disabled={!this.state.formValid} onClick={(e) => this.envioUsuario(this.state.user,this.state.password, e) } >
 						Enviar
+
+						
 					</Button>
+					<div className="panel panel-default">
+						<FormErrors formErrors={this.state.formErrors} />
+					</div>
+					<br/>
+					<div id='error-ingreso'>
+
+					</div>
+					
+					
+					
 				</Form>
 			</Container>
 		);
