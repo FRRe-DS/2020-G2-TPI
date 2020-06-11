@@ -1,4 +1,4 @@
-.Menu{
+.menu{
     background-color: #41B1C2;
     position: relative;
     grid-column: 1/2;
@@ -9,19 +9,29 @@
     
 }
 
-.Menu ul{
+.menu-item{
     list-style-type: none;
     width:100%;
+    color:white;
     
 }
 
 
-.Menu li{
-    padding-top:1em;  
-    width:100%;
+#nav-dropdown{
+    color:white;
 }
 
-.Menu li:hover{
+.menu-item:hover{
+    color:white;
+    cursor: pointer;
+    background-color: #0e6f7e;
+    padding:1em;
+    transition:ease 1s;
+    
+}
+
+.menu-item-drop:hover{
+    
     cursor: pointer;
     background-color: #0e6f7e;
     padding:1em;

@@ -14,14 +14,12 @@ class Header extends Component {
       <Container fluid className="header">
         <Navbar expand="lg" >
           
-          <Navbar.Brand href="#home">
-          <img src={Logo} width="200" height="50"/>
+          <Navbar.Brand href="/centrosmedicos">
+          <img src={Logo} width="200" height="50" alt="logo-ministerio" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/otra-url">esto no va</Nav.Link>
             </Nav>
             <Form inline>
               <FormControl

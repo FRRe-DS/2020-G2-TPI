@@ -1,36 +1,24 @@
 import React, { Fragment } from "react";
+import Nav from 'react-bootstrap/Nav'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import './css/menu.css';
+const Menu = () => {
+    return ( 
+    <div className="menu">
+    <Nav defaultActiveKey="/peticiones" className="flex-column">
+    <div>Menu</div>
+    <Nav.Link href="/centrosmedicos" className="menu-item">Centros Hospitalarios</Nav.Link>
+    <Nav.Link href="/recursos" className="menu-item">Recursos disponibles</Nav.Link>
+    <Nav.Link href="/historial" className="menu-item">Historial de envios</Nav.Link>
+    <NavDropdown title="Peticiones" id="nav-dropdown" >
+        <NavDropdown.Item className="menu-item-drop" href="/peticiones">Notificaciones</NavDropdown.Item>
+        <NavDropdown.Item className="menu-item-drop" href="/gestion-envios">Gestion</NavDropdown.Item>
+    </NavDropdown>
+    
 
-class Menu extends React.Component {
-    render() {
-        return (
-    <div className="Menu">
-        <b>Menu</b>
-        <ul>
-            <li>
-            Centros Hospitalarios
-            </li>
-            <li>
-            Recursos Disponibles
-            </li>
-            <li>
-            Peticiones
-            <ul>
-                <li>Notificaciones</li>
-                <li>Gestion</li>
-            </ul>
-            </li>
-            <li>Historial de Envios</li>
-
-        
-
-        </ul>
-
-
-
-    </div>  
-    );
-  }
+  </Nav> 
+  </div>
+  );
 }
  
 export default Menu;
