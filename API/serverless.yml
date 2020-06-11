@@ -37,7 +37,7 @@ functions:
                     name: x-api-key
                     required: true
                     description: "API Key identifier"
-                requestModels:
+            requestModels:
                 "application/json": "peticion"
             methodResponses:
                 -
