@@ -7,7 +7,9 @@ exports.nuevoEnvio = async(req,res,next) =>{
     const envio = new Envio(req.body);
 
     const envioActual = req.body.Envio
-
+    //Esto debe ir primero para evitar conflictos CORS
+    res.setHeader('content-type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     try{
         // envio tiene id peticion? 
         if(envioActual.hasOwnProperty("idPeticion")){
@@ -19,7 +21,6 @@ exports.nuevoEnvio = async(req,res,next) =>{
             // si la encontramos, update 
             if(peticionActual){
                 // actualizar la peticion 
-
                 // cambio de estado de peticion? 
 
             } else{
@@ -29,15 +30,15 @@ exports.nuevoEnvio = async(req,res,next) =>{
         } else {
             console.log('EN LA PETICIÓN NO EXISTE EN EL ENVIO')
             // guardar envio
+            // guardar envio
+            await envio.save();
+            res.statusCode = 200;
+            
+            res.json({mensaje:"El envio se agrego correctamente"});
         }
         
 
-        // guardar envio
-        await envio.save();
-        res.statusCode = 200;
-        res.setHeader('content-type', 'application/json');
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.json({mensaje:"El envio se agrego correctamente"});
+        
     }
     catch(error)
     {
