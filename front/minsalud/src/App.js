@@ -8,7 +8,7 @@ import Login from "./componentes/Login";
 
 import CardPeticion from './componentes/CardPeticion';
 import TablaRecursos from './componentes/TablaRecursos';
-
+import Peticion from './componentes/Peticion'
 // importar informacion a cerca de los centros hospitalarios
 import centros from "./ejemplos/centrosHospitalarios.json";
 
@@ -16,7 +16,8 @@ import centros from "./ejemplos/centrosHospitalarios.json";
 
 class App extends Component {
 	state = {
-		centros: centros,
+    centros: centros,
+    url:"https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/"
 	};
 
   render() {
@@ -32,7 +33,7 @@ class App extends Component {
                 <div className="app-container">
                   
                   <Menu />
-                  <TablaCentros centros={this.state.centros} />
+                  <TablaCentros url={this.state.url} />
                 </div>
               );
             }}
@@ -76,8 +77,36 @@ class App extends Component {
 		  }}
           
           />
-
-
+ <Route 
+          exact path="/peticion/:id"
+          
+          render={() => {
+			return (
+			  <div className="app-container">
+				
+				<Menu/>
+        <Peticion/>
+        
+			  </div>
+			);
+		  }}
+          
+          />
+ <Route 
+          exact path="/gestion/:id"
+          
+          render={() => {
+			return (
+			  <div className="app-container">
+				
+				<Menu/>
+        <h2>ACA HAY QUE COLOCAR EL ENVIO DE UN ENVIO</h2>
+        
+			  </div>
+			);
+		  }}
+          
+          />
         </Switch>
       </Router>
     );

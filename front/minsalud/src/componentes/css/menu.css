@@ -1,13 +1,13 @@
 .menu{
     background-color: #41B1C2;
-    position: fixed;
+    position: absolute;
     grid-column: 1/2;
     border: solid black 1px;
     padding-top:1em;
     color:#ffffff;
     margin-right:1em;
     height:17em;
-    width: 23%;
+    width: 95%;
     border-radius: 0.1em;
     
 }
