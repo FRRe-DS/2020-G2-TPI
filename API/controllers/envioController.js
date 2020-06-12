@@ -39,9 +39,19 @@ exports.nuevoEnvio = async(req,res,next) =>{
                         }
                     }
                     //actualizacion de medicos
-                    for(var i in peti.Peticion.medicos)
+                    for(var i in envioActual.medicos)
                     {
-                        console.log(peti.Peticion.medicos[i]);
+                        
+                        for(var j in peti.Peticion.medicos)
+                        {
+                            if (envioActual.medicos[i].especialidad===peti.Peticion.medicos[j].especialidad)
+                            {
+                                console.log(envioActual.medicos[i].especialidad);
+                                console.log(peti.Peticion.medicos[j].especialidad);
+                                peti.Peticion.medicos[j].cantidad-=envioActual.medicos[i].cantidad;
+                            
+                            }
+                        }
                     }
                     console.log('LA PETICIÓN DESPUES DE REALIZAR EL ENVIO:')
                     console.log(peti.Peticion)
