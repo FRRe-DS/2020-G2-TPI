@@ -21,6 +21,7 @@ exports.nuevoEnvio = async(req,res,next) =>{
             Peticion.findById(envioActual.idPeticion, (error, peti) => {
 
                 if(peti){
+                    
                     console.log('EXISTE LA PETICION!')
                     console.log('LA PETICIÓN ANTES DE REALIZAR EL ENVIO:')
                     //console.log(peti.Peticion)
@@ -33,6 +34,12 @@ exports.nuevoEnvio = async(req,res,next) =>{
                             if(recursos.includes(key) && envioActual[key] != undefined){
                                 //console.log('Se han enviado: '+ envioActual[key] + 'del recurso:' + key)
                                 peti.Peticion[key] -= envioActual[key]
+                                //evitar que los recursos sean negativos en la peticion
+                                if(peti.Peticion[key] <= 0)
+                                {
+                                    peti.Peticion[key]=0;
+                                }
+                                    
                                 //console.log('Falta enviar: ' + peti.Peticion[key] + 'del recurso ' + key)
                             }
                                  
@@ -49,10 +56,14 @@ exports.nuevoEnvio = async(req,res,next) =>{
                                 console.log(envioActual.medicos[i].especialidad);
                                 console.log(peti.Peticion.medicos[j].especialidad);
                                 peti.Peticion.medicos[j].cantidad-=envioActual.medicos[i].cantidad;
-                            
+                                if(peti.Peticion.medicos[j].cantidad <= 0)
+                                {
+                                    peti.Peticion.medicos[j]=0;
+                                }
                             }
                         }
                     }
+                    peti.Peticion.respondidaCompletamente = peticionCompletada;
                     console.log('LA PETICIÓN DESPUES DE REALIZAR EL ENVIO:')
                     console.log(peti.Peticion)
 
