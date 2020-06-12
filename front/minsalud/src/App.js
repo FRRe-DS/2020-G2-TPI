@@ -5,8 +5,9 @@ import Header from "./componentes/Header";
 import Menu from "./componentes/Menu";
 import TablaCentros from "./componentes/TablaCentros";
 import Login from "./componentes/Login";
-import CargaHospitales from './componentes/CargaHospitales'
-import TablaPeticiones from './componentes/TablaPeticiones'
+
+import CardPeticion from './componentes/CardPeticion';
+import TablaRecursos from './componentes/TablaRecursos';
 
 // importar informacion a cerca de los centros hospitalarios
 import centros from "./ejemplos/centrosHospitalarios.json";
@@ -51,12 +52,32 @@ class App extends Component {
 			  <div className="app-container">
 				
 				<Menu/>
-				<TablaPeticiones/>
+				<CardPeticion/>
+        <CardPeticion/>
+        <CardPeticion/>
 			  </div>
 			);
 		  }}
           
           />
+
+      <Route 
+          exact path="/recursos"
+          
+          render={() => {
+			return (
+			  <div className="app-container">
+				
+				<Menu/>
+        <TablaRecursos/>
+        
+			  </div>
+			);
+		  }}
+          
+          />
+
+
         </Switch>
       </Router>
     );

@@ -2,10 +2,7 @@
     {
         "idCentro":0,
         "nombre":"Centro 0",
-        "provincia": "Chaco",
-        "ciudad" : "Barranqueras",
-        "direccion" : "9 de Julio 100",
-        "tipo": "Hospital" 
+        "recurso":""
     },
     {
         "idCentro":1,

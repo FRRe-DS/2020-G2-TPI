@@ -14,7 +14,7 @@ class Header extends Component {
       <Container fluid className="header">
         <Navbar expand="lg" >
           
-          <Navbar.Brand href="/centrosmedicos">
+          <Navbar.Brand href="/centrosmedicos" className="container-foto-head">
           <img src={Logo} width="200" height="50" alt="logo-ministerio" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

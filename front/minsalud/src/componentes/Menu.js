@@ -6,14 +6,13 @@ const Menu = () => {
     return ( 
     <div className="menu">
     <Nav defaultActiveKey="/peticiones" className="flex-column">
-    <div>Menu</div>
+    <div><b>Menu</b></div>
     <Nav.Link href="/centrosmedicos" className="menu-item">Centros Hospitalarios</Nav.Link>
     <Nav.Link href="/recursos" className="menu-item">Recursos disponibles</Nav.Link>
+    <Nav.Link href="/peticiones" className="menu-item">Historial de peticiones</Nav.Link>
+    <Nav.Link href="/gestion" className="menu-item">Gestion peticiones</Nav.Link>
     <Nav.Link href="/historial" className="menu-item">Historial de envios</Nav.Link>
-    <NavDropdown title="Peticiones" id="nav-dropdown" >
-        <NavDropdown.Item className="menu-item-drop" href="/peticiones">Notificaciones</NavDropdown.Item>
-        <NavDropdown.Item className="menu-item-drop" href="/gestion-envios">Gestion</NavDropdown.Item>
-    </NavDropdown>
+    
     
 
   </Nav> 
