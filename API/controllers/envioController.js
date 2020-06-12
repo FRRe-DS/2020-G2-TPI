@@ -23,7 +23,7 @@ exports.nuevoEnvio = async(req,res,next) =>{
                 if(peti){
                     console.log('EXISTE LA PETICION!')
                     console.log('LA PETICIÓN ANTES DE REALIZAR EL ENVIO:')
-                    console.log(peti.Peticion)
+                    //console.log(peti.Peticion)
 
                     // ACTUALIZAR LA PETICION
                     // actualizar valores
@@ -31,14 +31,18 @@ exports.nuevoEnvio = async(req,res,next) =>{
                         if(peti.Peticion.hasOwnProperty(key)){
 
                             if(recursos.includes(key) && envioActual[key] != undefined){
-                                console.log('Se han enviado: '+ envioActual[key] + 'del recurso:' + key)
+                                //console.log('Se han enviado: '+ envioActual[key] + 'del recurso:' + key)
                                 peti.Peticion[key] -= envioActual[key]
-                                console.log('Falta enviar: ' + peti.Peticion[key] + 'del recurso ' + key)
+                                //console.log('Falta enviar: ' + peti.Peticion[key] + 'del recurso ' + key)
                             }
                                  
                         }
                     }
-
+                    //actualizacion de medicos
+                    for(var i in peti.Peticion.medicos)
+                    {
+                        console.log(peti.Peticion.medicos[i]);
+                    }
                     console.log('LA PETICIÓN DESPUES DE REALIZAR EL ENVIO:')
                     console.log(peti.Peticion)
 
