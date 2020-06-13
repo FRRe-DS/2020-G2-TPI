@@ -43,7 +43,11 @@ const Peticion = new mongoose.Schema({
                 },
                 required:false
             }
-        ]
+        ],
+        respondidaCompletamente: {
+            type:Boolean,
+            required:false
+        }
     }
 
 });
