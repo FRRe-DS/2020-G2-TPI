@@ -5,19 +5,21 @@ import Header from "./componentes/Header";
 import Menu from "./componentes/Menu";
 import TablaCentros from "./componentes/TablaCentros";
 import Login from "./componentes/Login";
-import CargaHospitales from './componentes/CargaHospitales'
+
+import CardPeticion from './componentes/CardPeticion';
+import TablaRecursos from './componentes/TablaRecursos';
+import Peticion from './componentes/Peticion'
 // importar informacion a cerca de los centros hospitalarios
 import centros from "./ejemplos/centrosHospitalarios.json";
 
-import LineGraph from "./componentes/Grafico"
 
 
 class App extends Component {
 	state = {
-		centros: centros,
+    centros: centros,
+    url:"https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/"
 	};
 
-<<<<<<< HEAD
   render() {
     return (
       <Router>
@@ -31,7 +33,7 @@ class App extends Component {
                 <div className="app-container">
                   
                   <Menu />
-                  <TablaCentros centros={this.state.centros} />
+                  <TablaCentros url={this.state.url} />
                 </div>
               );
             }}
@@ -42,46 +44,73 @@ class App extends Component {
           component={Login}
           
           />
+
+		  <Route 
+          exact path="/peticiones"
+          
+          render={() => {
+			return (
+			  <div className="app-container">
+				
+				<Menu/>
+				<CardPeticion/>
+        <CardPeticion/>
+        <CardPeticion/>
+			  </div>
+			);
+		  }}
+          
+          />
+
+      <Route 
+          exact path="/recursos"
+          
+          render={() => {
+			return (
+			  <div className="app-container">
+				
+				<Menu/>
+        <TablaRecursos/>
+        
+			  </div>
+			);
+		  }}
+          
+          />
+ <Route 
+          exact path="/peticion/:id"
+          
+          render={() => {
+			return (
+			  <div className="app-container">
+				
+				<Menu/>
+        <Peticion/>
+        
+			  </div>
+			);
+		  }}
+          
+          />
+ <Route 
+          exact path="/gestion/:id"
+          
+          render={() => {
+			return (
+			  <div className="app-container">
+				
+				<Menu/>
+        <h2>ACA HAY QUE COLOCAR EL ENVIO DE UN ENVIO</h2>
+        
+			  </div>
+			);
+		  }}
+          
+          />
         </Switch>
       </Router>
     );
   }
-=======
-	render() {
-		return (
-			<Router>
-				<Header />
-				<Switch>
-					<Route
-						exact
-						path="/"
-						render={() => {
-							return (
-								<div className="app-container">
-									<Menu />
-									<TablaCentros centros={this.state.centros} />
-									<LineGraph/>
-								</div>
-							);
-						}}
-					/>
-					<Route 
-					path="/login"
-					render={() => {
-						return <Login/>
-					}}
-					/>
-					<Route 
-					path="/cargaHospitales"
-					render={() => {
-						return <CargaHospitales/>
-					}}
-					/>
-				</Switch>
-			</Router>
-		);
-	}
->>>>>>> e7c18105dd78d7bc4c57f77963a07169c434da33
 }
 
 export default App;

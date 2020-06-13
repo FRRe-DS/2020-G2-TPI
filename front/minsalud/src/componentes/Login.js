@@ -5,9 +5,6 @@ import {sha256} from 'js-sha256';
 import ReactDOM from 'react-dom'
 import {
 	Button,
-	FormGroup,
-	FormControl,
-	FormLabel,
 	Container,
 	Form,
 } from "react-bootstrap";
@@ -83,7 +80,7 @@ class Login extends Component {
 		e.preventDefault()
 		const hash = sha256(hpass)
 		const url = 'https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/login';
-		let respuesta;
+		
 		const requestOptions = {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
