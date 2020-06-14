@@ -6,7 +6,7 @@ import Menu from "./componentes/Menu";
 import TablaCentros from "./componentes/TablaCentros";
 import Login from "./componentes/Login";
 
-import CardPeticion from './componentes/CardPeticion';
+import Peticiones from './componentes/Peticiones';
 import TablaRecursos from './componentes/TablaRecursos';
 import Peticion from './componentes/Peticion'
 // importar informacion a cerca de los centros hospitalarios
@@ -17,7 +17,7 @@ import centros from "./ejemplos/centrosHospitalarios.json";
 class App extends Component {
 	state = {
     centros: centros,
-    url:"https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/"
+    url:"http://localhost:5000/"
 	};
 
   render() {
@@ -53,9 +53,7 @@ class App extends Component {
 			  <div className="app-container">
 				
 				<Menu/>
-				<CardPeticion/>
-        <CardPeticion/>
-        <CardPeticion/>
+        <Peticiones url={this.state.url} />
 			  </div>
 			);
 		  }}
