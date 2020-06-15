@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import CardPeticion from './CardPeticion';
 import { Card } from 'react-bootstrap';
 
@@ -29,11 +29,13 @@ class Peticiones extends Component{
           } 
         
     render() {
-        console.log(this.state.peticiones)
+        
           return(
-
-            <CardPeticion />
-
+            <Fragment>
+            {
+              this.state.peticiones.map( peticion => <CardPeticion peticion={peticion}  />)
+          }
+          </Fragment>
           );
         
         

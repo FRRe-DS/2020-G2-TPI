@@ -5,12 +5,11 @@ import Alert from 'react-bootstrap/Alert'
 import './css/tarjeta.css'
 class CardPeticion extends Component {
     render() {
-    let idCentro, nombre, recurso, cantidad; 
-  
+    const peticion = this.props.peticion.Peticion
       return (
           <div className="tarjeta">
         <Card >
-        <Card.Header as="h5">Centro Hospitalario</Card.Header>
+        <Card.Header as="h5">Centro num: {peticion.idCentro}</Card.Header>
         <Card.Body>
             <Card.Title>Ciudad</Card.Title>
             <Card.Text>
