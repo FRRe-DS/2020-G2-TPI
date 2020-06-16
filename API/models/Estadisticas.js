@@ -34,7 +34,7 @@ const Estadisticas = new mongoose.Schema({
 				}
 			],
 			totales:{
-				"poblacion":{
+				"poblacionTotal":{
 					type:Number,
 					required:true
 				},
