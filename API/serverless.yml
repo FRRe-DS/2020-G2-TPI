@@ -162,8 +162,9 @@ custom:
                                     items:
                                         $ref: "{{model:doctor}}"
                                 respondidaCompletamente:
-                                    type:Boolean
-                                     
+                                    type: boolean
+                                rechazada: 
+                                    type: boolean                                     
                                 
                             
 
