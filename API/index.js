@@ -8,6 +8,8 @@ require('./models/Ministerio');
 require('./models/Peticion');
 require('./models/CentrosHospitalarios');
 require('./models/InformeHospitalAMinisterio');
+require('./models/Recursos');
+require('./models/Medicos');
 
 app.use(express.json());
 app.use(require('./routes/index'));

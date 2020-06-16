@@ -37,7 +37,7 @@ functions:
                     name: x-api-key
                     required: true
                     description: "API Key identifier"
-                requestModels:
+            requestModels:
                 "application/json": "peticion"
             methodResponses:
                 -
@@ -48,6 +48,15 @@ functions:
           path: /peticiones
           method: GET
           cors: true
+          documentation:
+            summary: "Gets a list of all the existing peticiones"
+            requestBody:
+                description: "Empty request body"
+            pathParams:
+                -
+                    name: x-api-key
+                    required: true
+                    description: "API Key identifier"
       - http:
           path: /login
           method: POST
@@ -151,7 +160,10 @@ custom:
                                 medicos:
                                     type: array
                                     items:
-                                        $ref: "{{model:doctor}}" 
+                                        $ref: "{{model:doctor}}"
+                                respondidaCompletamente:
+                                    type:Boolean
+                                     
                                 
                             
 
