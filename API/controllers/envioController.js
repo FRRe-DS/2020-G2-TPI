@@ -1,10 +1,11 @@
 const Envio = require('../models/Envios');
 const Peticion = require('../models/Peticion');
+const Validacion = require('../validacion/envioValidator');
 
 //crear un nuevo Envio
 exports.nuevoEnvio = async(req,res,next) =>{
     const envio = new Envio(req.body);
-
+    
     const envioActual = req.body.Envio
     //Esto debe ir primero para evitar conflictos CORS
     res.setHeader('content-type', 'application/json');
@@ -12,8 +13,9 @@ exports.nuevoEnvio = async(req,res,next) =>{
     try{
         // envio tiene id peticion? 
         if(envioActual.hasOwnProperty("idPeticion")){
-            console.log('LA PETICIÓN EXISTE EN EL ENVIO')
-
+            //console.log('LA PETICIÓN EXISTE EN EL ENVIO')
+            
+            
             // FALTA TRATAR MEDICOS!!!!!!
             const recursos = ["camillas","alcoholLitros","jabonLitros","barbijos","jeringas","cofias"]
             
@@ -21,8 +23,9 @@ exports.nuevoEnvio = async(req,res,next) =>{
             Peticion.findById(envioActual.idPeticion, (error, peti) => {
 
                 if(peti){
-                    console.log('EXISTE LA PETICION!')
-                    console.log('LA PETICIÓN ANTES DE REALIZAR EL ENVIO:')
+                    
+                    //console.log('EXISTE LA PETICION!')
+                    //console.log('LA PETICIÓN ANTES DE REALIZAR EL ENVIO:')
                     //console.log(peti.Peticion)
 
                     // ACTUALIZAR LA PETICION
@@ -33,6 +36,12 @@ exports.nuevoEnvio = async(req,res,next) =>{
                             if(recursos.includes(key) && envioActual[key] != undefined){
                                 //console.log('Se han enviado: '+ envioActual[key] + 'del recurso:' + key)
                                 peti.Peticion[key] -= envioActual[key]
+                                //evitar que los recursos sean negativos en la peticion
+                                if(peti.Peticion[key] <= 0)
+                                {
+                                    peti.Peticion[key]=0;
+                                }
+                                    
                                 //console.log('Falta enviar: ' + peti.Peticion[key] + 'del recurso ' + key)
                             }
                                  
@@ -49,13 +58,17 @@ exports.nuevoEnvio = async(req,res,next) =>{
                                 console.log(envioActual.medicos[i].especialidad);
                                 console.log(peti.Peticion.medicos[j].especialidad);
                                 peti.Peticion.medicos[j].cantidad-=envioActual.medicos[i].cantidad;
-                            
+                                if(peti.Peticion.medicos[j].cantidad <= 0)
+                                {
+                                    peti.Peticion.medicos[j].cantidad=0;
+                                }
                             }
                         }
                     }
-                    console.log('LA PETICIÓN DESPUES DE REALIZAR EL ENVIO:')
-                    console.log(peti.Peticion)
-
+                    //peti.Peticion.respondidaCompletamente = peticionCompletada;
+                    //console.log('LA PETICIÓN DESPUES DE REALIZAR EL ENVIO:')
+                    //console.log(peti.Peticion)
+                    peti.Peticion.respondidaCompletamente = Validacion.isPeticionEmpty(peti.Peticion);
                     // actualizar en base de datos
                    Peticion.findByIdAndUpdate(envioActual.idPeticion, {"Peticion": peti.Peticion}, {useFindAndModify: false} ,(err, result) => {
                        if(err){
