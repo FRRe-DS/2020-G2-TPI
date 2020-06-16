@@ -47,6 +47,10 @@ const Peticion = new mongoose.Schema({
         respondidaCompletamente: {
             type:Boolean,
             required:false
+        },
+        rechazada: {
+            type:Boolean,
+            required:false
         }
     }
 
