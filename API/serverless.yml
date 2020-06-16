@@ -44,6 +44,10 @@ functions:
                     statusCode: "200"
                     responseBody:
                             description: "La peticion se agrego correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando no se utiliza una clave API-Key o cuando se supera la quota diaria"
       - http:
           path: /peticiones
           method: GET
@@ -61,6 +65,12 @@ functions:
           path: /login
           method: POST
           cors: true
+          documentation:
+            summary: "Permite logearse a los administradores"
+            requestBody:
+                description: "Contiene un usuario y el hash de una contrasenia"
+            requestModels: 
+                "application/json" : "login"
       - http:
           path: /register
           method: POST
@@ -83,7 +93,7 @@ functions:
           cors: true
 custom:
     documentation:
-        version: '1'
+        version: '1.2'
         summary: 'API FAKE del Ministerio de Salud del Chaco'
         description: 'API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.'
         resources: 
@@ -91,6 +101,16 @@ custom:
                 path: "peticiones"
                 description: "Path used to see peticiones and add more"
         models:
+            -
+                name: login
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        user:
+                            type: string
+                        phash:
+                            type: string    
             -
                 name: doctor
                 contentType: "application/json"
@@ -112,10 +132,8 @@ custom:
                             properties:
                                 idCentro:
                                     type: number
-                                    required: true
                                 idPeticion:
                                     type: number
-                                    required: false
                                 camillas: 
                                     type: number
                                 jabonLitros:
@@ -162,12 +180,57 @@ custom:
                                     items:
                                         $ref: "{{model:doctor}}"
                                 respondidaCompletamente:
-                                    type:Boolean
+                                    type: boolean
+            -
+                name: ciudad
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        ciudad:
+                            type: string
+                        poblacion: 
+                            type: number
+                        cantidades:
+                            type: object
+                            properties:
+                                sospecha:
+                                    type: number
+                                enfermos:
+                                    type: number
+                                recuperados:
+                                    type: number
+                                muertos:
+                                    type: number
+            -
+                name: estadisticas
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties: 
+                        data_ciudades: 
+                            type: array
+                            items:
+                                $ref: "{{model:ciudad}}"
+                        totales:
+                            type: object
+                            properties:
+                                poblacionTotal:
+                                    type: number
+                                sospecha:
+                                    type: number
+                                enfermos: 
+                                    type: number
+                                recuperados:
+                                    type: number
+                                muertos:
+                                    type: number
+
                                      
                                 
                             
 
 
-
+ 
 plugins:
   - serverless-aws-documentation 

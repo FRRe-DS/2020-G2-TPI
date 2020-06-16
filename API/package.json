@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "moment": "^2.26.0",
     "mongoose": "^5.9.11",
     "serverless": "^1.72.0",
     "serverless-aws-documentation": "^1.1.0",
