@@ -7,6 +7,7 @@ exports.nuevaPeticion = async (req,res,next) =>{
     
     // campo agregado para saber cuando esta completamente respondida
     req.body.Peticion.respondidaCompletamente = false;
+    req.body.Peticion.rechazada = false;
 
     const peticion = new Peticion(req.body);
 
@@ -33,6 +34,32 @@ exports.obtenerPeticiones = async(req,res,next) =>{
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.json(peticiones);
     } catch (error) {
+        console.log(error);
+        next();
+    }
+}
+
+exports.rechazarPeticion = async(req,res,next) =>{
+    try{
+        const peticion = await Peticion.findById(req.body.idPeticion);
+        console.log(peticion);
+        peticion.Peticion.rechazada=true;
+        console.log("PETICION ACTUALIZADA");
+        console.log(peticion);
+
+        //actualizo la peticion
+        Peticion.findByIdAndUpdate(req.body.idPeticion, {"Peticion": peticion.Peticion}, {useFindAndModify: false} ,(err, result) => {
+            if(err){
+                res.send(err)
+            } else{
+                res.json({mensaje:"Peticion rechazada"});
+            }
+        })
+
+
+
+
+    }catch(error){
         console.log(error);
         next();
     }

@@ -80,4 +80,8 @@ router.get('/Medicos',
 medicosController.getMedicos
 )
 
+router.get('/rechazarPeticion',
+peticionController.rechazarPeticion
+)
+
 module.exports = router;
