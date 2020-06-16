@@ -1,0 +1,26 @@
+#container-peticion{
+    grid-column: 2/5;
+    display: block;
+    border: 0.5px solid black;
+    position: relative;
+    border-radius: 1em;
+
+}
+#container-peticion h3{
+    text-align: center;
+}
+div li{
+    list-style-type: none;
+    margin-top: 1em;
+    font-size: large;
+
+    
+
+}
+.botones-peticion{
+    position: relative;
+    margin-left:60%;
+}
+.boton{
+    margin-left:5px
+}

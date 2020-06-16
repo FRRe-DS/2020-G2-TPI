@@ -82,8 +82,8 @@ class App extends Component {
 			return (
 			  <div className="app-container">
 				
-				<Menu/>
-        <Peticion/>
+				<Menu />
+        <Peticion url={this.state.url}/>
         
 			  </div>
 			);
