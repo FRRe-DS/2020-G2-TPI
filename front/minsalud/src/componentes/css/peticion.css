@@ -1,7 +1,7 @@
 #container-peticion{
     grid-column: 2/5;
     display: block;
-    border: 0.5px solid black;
+    border: 0.1em solid black;
     position: relative;
     border-radius: 1em;
     width:90%;
@@ -20,8 +20,12 @@ div li{
 }
 .botones-peticion{
     position: relative;
-    margin-left:60%;
+    margin-top:3em;
+    text-align: center;
+    width: 100%;
 }
 .boton{
-    margin-left:5px
+    
+    margin-left:1em;
+    margin-right:1em;
 }

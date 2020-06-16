@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import './css/peticion.css'
 import Button from 'react-bootstrap/Button'
+import BotonModal from './Modal'
 class Peticion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-  peticiones: []
+  peticiones: [],
+  idPeticion:''
 }
 }
 
@@ -16,7 +18,7 @@ fetch(url, {
   method: "GET"
  
 }).then(resp=>resp.json())
-.then(data => this.setState({peticiones: data[0].Peticion}))
+.then(data => this.setState({peticiones: data[1].Peticion, idPeticion: data[0]._id.substr(-4)}))
 .catch(error => console.log(error))
 }
 //ESTO ES TRAERME UNA PETICION PORQUE TODAVIA NO TENGO ID DE PETICIONES
@@ -32,7 +34,7 @@ fetch(url, {
     console.log(this.state.peticiones)
       return (
         <div id="container-peticion">
-          <h3>Peticion numero: </h3>
+          <h3>Peticion: {this.state.idPeticion}</h3>
             <ul>
 
             {
@@ -44,8 +46,10 @@ fetch(url, {
             </ul>
             <div className="botones-peticion">
             <Button className='boton' variant="secondary" size="lg" href="/peticiones">Volver</Button >
+            <BotonModal className='boton' boton="Rechazar Peticion" head="Rechazo de peticion"/>
             <Button className='boton' variant="primary" size="lg" href="/hola">Responder peticion</Button >
-            </div>    
+            </div> 
+               
         </div>
       );
     }
