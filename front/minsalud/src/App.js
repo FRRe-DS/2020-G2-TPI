@@ -68,7 +68,7 @@ class App extends Component {
 			  <div className="app-container">
 				
 				<Menu/>
-        <TablaRecursos/>
+        <TablaRecursos url={this.state.url}/>
         
 			  </div>
 			);
