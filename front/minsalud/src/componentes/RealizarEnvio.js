@@ -47,8 +47,9 @@ class RealizarEnvio extends Component {
         <div className="envio-container">
             <h2>Generacion de un envio</h2>
             <Form>
+                {/* COMO PLACEHOLDER ESTARIA BUENO TRAER LOS DATOS DEL ENVIO*/}
             <Form.Group>
-                    <Form.Label column="lg">Centro Hospitario</Form.Label>
+                    <Form.Label column="lg" placeholder="{this.props.envio.nombre}">Centro Hospitario</Form.Label>
                     {        
                     <Form.Group>  
                     <Form.Control as="select">
