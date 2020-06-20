@@ -75,10 +75,40 @@ functions:
           path: /register
           method: POST
           cors: true
+          documentation:
+            summary: "Adds a new admin to the list of existing admins"
+            requestBody:
+                description: "It asks for a new admin and hash"
+            requestModels:
+                "application/json": "login"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "El usuario se agrego correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /CentrosHospitalarios
           method: POST
           cors: true
+          documentation:
+            summary: "Adds a Centro Hospitalario to the list of existing Centros Hospitalarios"
+            requestBody:
+                description: "It asks for a new Centro Hospitalario"
+            requestModels:
+                "application/json": "centrosHospitalarios"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "El Centro Hospitalario se agrego correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /CentrosHospitalarios
           method: GET
@@ -91,6 +121,47 @@ functions:
           path: /envios
           method: POST
           cors: true
+      - http:
+          path: /apiDoc
+          method: GET
+          cors: true
+      - http:
+          path: /Informes
+          method: GET
+          cors: true
+      - http:
+          path: /Informes
+          method: POST
+          cors: true
+      - http:
+          path: /Recursos
+          method: GET
+          cors: true
+      - http:
+          path: /Recursos
+          method: POST
+          cors: true
+      - http:
+          path: /Medicos
+          method: GET
+          cors: true
+      - http:
+          path: /Medicos
+          method: POST
+          cors: true
+      - http:
+          path: /rechazarPeticion
+          method: GET
+          cors: true
+          documentation:
+            summary: "Gets a peticion of all the existing by id"
+            requestBody:
+                description: "Empty request body"
+            pathParams:
+                -
+                    name: idPeticion
+                    required: true
+                    description: "ID of peticion"
 custom:
     documentation:
         version: '1.2'
@@ -111,6 +182,22 @@ custom:
                             type: string
                         phash:
                             type: string    
+            -
+                name: centrosHospitalarios
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        idCentro:
+                            type: number
+                        nombre:
+                            type: string  
+                        ciudad:
+                            type: string 
+                        direccion:
+                            type: string 
+                        tipo:
+                            type: string 
             -
                 name: doctor
                 contentType: "application/json"
