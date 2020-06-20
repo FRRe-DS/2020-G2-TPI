@@ -91,7 +91,7 @@ functions:
                     responseBody:
                         descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
-          path: /CentrosHospitalarios
+          path: /centrosHospitalarios
           method: POST
           cors: true
           documentation:
@@ -110,45 +110,87 @@ functions:
                     responseBody:
                         descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
-          path: /CentrosHospitalarios
+          path: /centrosHospitalarios
           method: GET
           cors: true
+          documentation:
+            summary: "Gets a list of all the existing Centros Hospitalarios"
+            requestBody:
+                description: "Empty request body"
       - http:
           path: /envios
           method: GET
           cors: true
+          documentation:
+            summary: "Gets a list of all the existing Envios"
+            requestBody:
+                description: "Empty request body"
       - http:
           path: /envios
           method: POST
           cors: true
+          documentation:
+            summary: "Adds a Envio to the list of existing Envios"
+            requestBody:
+                description: "It asks for a new Envio"
+            requestModels:
+                "application/json": "envio"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "El Envio se agrego correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
-          path: /apiDoc
+          path: /informes
           method: GET
           cors: true
       - http:
-          path: /Informes
-          method: GET
-          cors: true
-      - http:
-          path: /Informes
+          path: /informes
           method: POST
           cors: true
       - http:
-          path: /Recursos
+          path: /recursos
           method: GET
           cors: true
+          documentation:
+            summary: "Gets a list of all the existing Recursos"
+            requestBody:
+                description: "Empty request body"
       - http:
-          path: /Recursos
+          path: /recursos
           method: POST
           cors: true
       - http:
-          path: /Medicos
+          path: /medicos
           method: GET
           cors: true
+          documentation:
+            summary: "Gets a list of all the existing Medicos"
+            requestBody:
+                description: "Empty request body"
       - http:
-          path: /Medicos
+          path: /medicos
           method: POST
           cors: true
+          documentation:
+            summary: "Adds a Envio to the list of existing Medicos"
+            requestBody:
+                description: "It asks for a new Medico"
+            requestModels:
+                "application/json": "medico"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "El Medico se agrego correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /rechazarPeticion
           method: GET
@@ -164,7 +206,7 @@ functions:
                     description: "ID of peticion"
 custom:
     documentation:
-        version: '1.2'
+        version: '1.6'
         summary: 'API FAKE del Ministerio de Salud del Chaco'
         description: 'API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.'
         resources: 
@@ -199,7 +241,7 @@ custom:
                         tipo:
                             type: string 
             -
-                name: doctor
+                name: medico
                 contentType: "application/json"
                 schema:
                     type: object
@@ -208,6 +250,25 @@ custom:
                             type: number
                         especialidad: 
                             type: string
+            -
+                name: recurso
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties: 
+                        camillasDisponible:
+                            type: number
+                        jabonLitrosDisponible:
+                            type: number
+                        alcoholLitrosDisponible:
+                            type: number
+                        barbijosDisponible:
+                            type: number
+                        jeringasDisponible:
+                            type: number
+                        cofiasDisponible:
+                            type: number
+                        
             -
                 name: envio
                 contentType: "application/json"
@@ -236,7 +297,7 @@ custom:
                                 medicos:
                                     type: array
                                     items:
-                                        $ref: "{{model:doctor}}"
+                                        $ref: "{{model:medico}}"
             -
                 name: peticion
                 contentType: "application/json"
@@ -265,7 +326,7 @@ custom:
                                 medicos:
                                     type: array
                                     items:
-                                        $ref: "{{model:doctor}}"
+                                        $ref: "{{model:medico}}"
                                 respondidaCompletamente:
                                     type: boolean
                                 rechazada: 

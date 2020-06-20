@@ -23,8 +23,7 @@ router.post('/envios',
     envioController.nuevoEnvio)
 
 //Api Documentation
-
-router.get('/apiDoc',apiController.enviar)
+// router.get('/apiDoc',apiController.enviar)
 
 router.post('/pruebas',(req,res)=>{
     console.log(req.body);
@@ -49,34 +48,34 @@ loginController.registerUser
 )
 
 
-router.post('/CentrosHospitalarios',
+router.post('/centrosHospitalarios',
 centrosHospitalariosController.registerCentro
 )
-router.get('/CentrosHospitalarios',
+router.get('/centrosHospitalarios',
 centrosHospitalariosController.getCentros
 )
 
-router.post('/Informes',
+router.post('/informes',
 informesController.registrarInforme
 )
 
-router.get('/Informes',
+router.get('/informes',
 informesController.getInforme
 )
 
-router.post('/Recursos',
+router.post('/recursos',
 recursosController.registrarRecursos
 )
 
-router.get('/Recursos',
+router.get('/recursos',
 recursosController.getRecursos
 )
 
-router.post('/Medicos',
+router.post('/medicos',
 medicosController.registrarMedicos
 )
 
-router.get('/Medicos',
+router.get('/medicos',
 medicosController.getMedicos
 )
 
