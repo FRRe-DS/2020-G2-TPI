@@ -10,13 +10,13 @@ import Peticiones from './componentes/Peticiones';
 import TablaRecursos from './componentes/TablaRecursos';
 import Peticion from './componentes/Peticion'
 // importar informacion a cerca de los centros hospitalarios
-import centros from "./ejemplos/centrosHospitalarios.json";
+import RealizarEnvio from './componentes/RealizarEnvio'
 
 
 
 class App extends Component {
 	state = {
-    centros: centros,
+    
     url:"http://localhost:5000/"
 	};
 
@@ -25,6 +25,8 @@ class App extends Component {
       <Router>
         <Header />
         <Switch>
+         
+         {/* Ruta de la tabla de centros medicos */}
           <Route
             exact
             path="/centrosmedicos"
@@ -38,6 +40,7 @@ class App extends Component {
               );
             }}
           />
+          {/* Ruta Login */}
           <Route 
           exact path="/"
           
@@ -45,6 +48,7 @@ class App extends Component {
           
           />
 
+          {/* Ruta para ver todas las peticiones */}
 		  <Route 
           exact path="/peticiones"
           
@@ -59,7 +63,7 @@ class App extends Component {
 		  }}
           
           />
-
+  {/* Ruta para ver la tabla de recursos disponibles*/}  
       <Route 
           exact path="/recursos"
           
@@ -75,6 +79,8 @@ class App extends Component {
 		  }}
           
           />
+
+          {/* Ruta de una paticion en particular, el envio de id se hace desde /peticiones */}
  <Route 
           exact path="/peticion/:id"
           
@@ -90,15 +96,17 @@ class App extends Component {
 		  }}
           
           />
+          
+          {/* Ruta para generar un envio con una id en particular */}
  <Route 
-          exact path="/gestion/:id"
+          exact path="/envio/:id"
           
           render={() => {
 			return (
 			  <div className="app-container">
 				
 				<Menu/>
-        <h2>ACA HAY QUE COLOCAR EL ENVIO DE UN ENVIO</h2>
+        <RealizarEnvio url={this.state.url}/>
         
 			  </div>
 			);

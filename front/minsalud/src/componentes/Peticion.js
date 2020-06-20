@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './css/peticion.css'
 import Button from 'react-bootstrap/Button'
 import BotonModal from './Modal'
+import RealizarEnvio from './RealizarEnvio'
 class Peticion extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +40,13 @@ fetch(url, {
 
             {
               //Parseo para escribir atributos y valores sin estructura definida
-                Object.keys(this.state.peticiones).map((peti)=><li>{`${peti}: ${this.state.peticiones[peti]}`}</li>)
+                Object.keys(this.state.peticiones).map((peti)=><li>{
+                  
+                  `${peti}: ${this.state.peticiones[peti]}`
+                
+                  
+                  
+                  }</li>)
             }
             
 
@@ -47,7 +54,7 @@ fetch(url, {
             <div className="botones-peticion">
             <Button className='boton' variant="secondary" size="lg" href="/peticiones">Volver</Button >
             <BotonModal className='boton' boton="Rechazar Peticion" head="Rechazo de peticion"/>
-            <Button className='boton' variant="primary" size="lg" href="/hola">Responder peticion</Button >
+            <Button className='boton' variant="primary" size="lg" href="/envio/:id">Responder peticion</Button >
             </div> 
                
         </div>

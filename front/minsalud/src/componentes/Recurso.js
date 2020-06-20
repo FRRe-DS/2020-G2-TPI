@@ -7,7 +7,7 @@ class Recurso extends Component {
       recursos: props.recurso,
       cantidad:props.cantidad
     }}
-    //pasar de camel case a frase normal
+    //pasar de camelCase a Frase Normal los recursos
     traduccionGramatical(frase){
         return frase.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())
     }
