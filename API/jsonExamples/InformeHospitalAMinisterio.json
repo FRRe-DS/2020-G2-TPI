@@ -8,7 +8,7 @@
         "cantidadCurados" :13,
         "cantidadEnfermos" :32
     },
-    "testRealizados" : {
+    "pruebasRealizados" : {
             "realizadas": 50,
             "sinResultado": 2,
             "positivas" : 10,
