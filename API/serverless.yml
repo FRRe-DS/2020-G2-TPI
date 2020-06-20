@@ -76,11 +76,11 @@ functions:
           method: POST
           cors: true
       - http:
-          path: /CentrosHospitalarios
+          path: /centrosHospitalarios
           method: POST
           cors: true
       - http:
-          path: /CentrosHospitalarios
+          path: /centrosHospitalarios
           method: GET
           cors: true
       - http:
@@ -91,9 +91,44 @@ functions:
           path: /envios
           method: POST
           cors: true
+      - http:
+          path: /informes
+          method: GET
+          cors: true
+          documentation:
+            summary: "Shows all the informes saved in our database"
+          methodResponses:
+            -
+                statusCode : "200"
+                responseBody:
+                    description: "Every informe saved"
+            -
+                statusCode: "403"
+                responseBody:
+                    descripcion: "Cuando se supera la cuota diaria"
+
+        -http:
+            path: /informes
+            method: POST
+            cors: true
+            documentation:
+                summary: "Adds a new informe to our database"
+            requestBody:
+                description: "It has basic hospital info, number of cases, deaths,tests, and resources of the hospital"
+            requestModels:
+                "application/json" : "informe"
+            methodResponses:
+                -
+                    statusCode : "200"
+                    responseBody:
+                        description: "Informe guardado correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Cuando se supera la cuota diaria"
 custom:
     documentation:
-        version: '1.2'
+        version: '1.5'
         summary: 'API FAKE del Ministerio de Salud del Chaco'
         description: 'API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.'
         resources: 
@@ -227,12 +262,64 @@ custom:
                                     type: number
                                 muertos:
                                     type: number
-
-                                     
+            -
+                name: informe
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        cuitHospital:
+                            type: number
+                        nombreHospital:
+                            type: string
+                        idCiudad:
+                            type: number
+                        nombreCiudad:
+                            type: string
+                        resumenCasos:
+                            type: object
+                            properties:
+                                cantidadMuertos:
+                                    type: number
+                                cantidadCurados:
+                                    type: number
+                                cantidadEnfermos:
+                                    type: number
+                        pruebasRealizadas:
+                            type: object
+                            properties:
+                                realizadas:
+                                    type: number
+                                sinResultado:
+                                    type: number
+                                positivas:
+                                    type: number
+                                negativas:
+                                    type: number
+                        Recursos:
+                            type: object
+                            properties:
+                                camillasDisponibles:
+                                    type: number
+                                camillasOcupadas:
+                                    type: number
+                                jabonLitros:
+                                    type: number
+                                alcoholLitros:
+                                    type: number
+                                barbijos:
+                                    type: number
+                                jeringas:
+                                    type: number
+                                cofias:
+                                    type: number
+                                medicos:
+                                    type: array
+                                    items:
+                                        $ref: "{{model:doctor}}"
                                 
-                            
 
 
- 
+
 plugins:
   - serverless-aws-documentation 

@@ -49,34 +49,34 @@ loginController.registerUser
 )
 
 
-router.post('/CentrosHospitalarios',
+router.post('/centrosHospitalarios',
 centrosHospitalariosController.registerCentro
 )
-router.get('/CentrosHospitalarios',
+router.get('/centrosHospitalarios',
 centrosHospitalariosController.getCentros
 )
 
-router.post('/Informes',
+router.post('/informes',
 informesController.registrarInforme
 )
 
-router.get('/Informes',
+router.get('/informes',
 informesController.getInforme
 )
 
-router.post('/Recursos',
+router.post('/recursos',
 recursosController.registrarRecursos
 )
 
-router.get('/Recursos',
+router.get('/recursos',
 recursosController.getRecursos
 )
 
-router.post('/Medicos',
+router.post('/medicos',
 medicosController.registrarMedicos
 )
 
-router.get('/Medicos',
+router.get('/medicos',
 medicosController.getMedicos
 )
 
