@@ -1,14 +1,19 @@
 {
-    "idCentro":3432342,
-    "ReporteHospitalario" : {
+    "cuitHospital":3432342,
+    "nombreHospital": "Maria Auxiliadora",
+    "idCiudad" : "12",
+    "nombreCiudad" : " Resistencia",
+    "resumenCasos" : {
         "cantidadMuertos" : 45,
-        "pacientesCurados" :13,
-        "pacientesEnfermos" :32,
-        "testRealizados" : {
-            "positivos" : 32,
-            "negativos" : 23
-        }
+        "cantidadCurados" :13,
+        "cantidadEnfermos" :32
     },
+    "pruebasRealizados" : {
+            "realizadas": 50,
+            "sinResultado": 2,
+            "positivas" : 10,
+            "negativas" : 40
+        },
     "Recursos":{
         "camillasDisponibles":123,
         "camillasOcupadas": 456,
@@ -16,6 +21,16 @@
         "alcoholLitros" : 32,
         "barbijos" : 123,
         "jeringas" :45,
-        "cofias" : 32
+        "cofias" : 32,
+        "medicos":[
+            {
+                "cantidad": 2,
+                "especialidad": "clinico"
+            },
+            {
+                "cantidad": 3,
+                "especialidad": "cardiologo"
+            }
+        ] 
     }  
 }
