@@ -11,7 +11,7 @@ import TablaRecursos from './componentes/TablaRecursos';
 import Peticion from './componentes/Peticion'
 // importar informacion a cerca de los centros hospitalarios
 import RealizarEnvio from './componentes/RealizarEnvio'
-
+import Logo from "./componentes/img/ministerio-logo.png"
 
 
 class App extends Component {
@@ -23,19 +23,39 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Header />
+        
         <Switch>
-         
+         {/* Ruta para el home */}
+          <Route
+            exact
+            path="/home"
+            render={() => {
+              return (
+              <div>
+                <Header />
+                <div className="app-container">
+                  
+                  <Menu />
+                  <img className="imagen-home" src={Logo} alt="logo del ministerio"/>
+                </div>
+                </div>
+              );
+            }}
+          />
+
          {/* Ruta de la tabla de centros medicos */}
           <Route
             exact
             path="/centrosmedicos"
             render={() => {
               return (
+              <div>
+                <Header />
                 <div className="app-container">
                   
                   <Menu />
                   <TablaCentros url={this.state.url} />
+                </div>
                 </div>
               );
             }}
@@ -49,16 +69,20 @@ class App extends Component {
           />
 
           {/* Ruta para ver todas las peticiones */}
-		  <Route 
+      <Route 
+      
           exact path="/peticiones"
           
           render={() => {
 			return (
+        <div>
+                <Header />
 			  <div className="app-container">
 				
 				<Menu/>
         <Peticiones url={this.state.url} />
 			  </div>
+        </div>
 			);
 		  }}
           
@@ -69,12 +93,15 @@ class App extends Component {
           
           render={() => {
 			return (
+        <div>
+        <Header />
 			  <div className="app-container">
 				
 				<Menu/>
         <TablaRecursos url={this.state.url}/>
         
 			  </div>
+        </div>
 			);
 		  }}
           
@@ -86,13 +113,16 @@ class App extends Component {
           
           render={() => {
 			return (
+        <div>
+        <Header />
 			  <div className="app-container">
 				
 				<Menu />
         <Peticion url={this.state.url}/>
         
 			  </div>
-			);
+        </div>
+      );
 		  }}
           
           />
@@ -103,12 +133,15 @@ class App extends Component {
           
           render={() => {
 			return (
+        <div>
+        <Header />
 			  <div className="app-container">
 				
 				<Menu/>
         <RealizarEnvio url={this.state.url}/>
         
 			  </div>
+        </div>
 			);
 		  }}
           

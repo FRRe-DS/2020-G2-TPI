@@ -8,6 +8,7 @@ import {
 	Container,
 	Form,
 } from "react-bootstrap";
+import Logo from "./img/ministerio-logo.png"
 import Alert from 'react-bootstrap/Alert'
 
 class Login extends Component {
@@ -96,7 +97,7 @@ class Login extends Component {
 					
 					this.setState({ingreso:true})
 					
-					this.props.history.push('centrosmedicos') //Esta es una forma fea pero no encontre otra
+					this.props.history.push('home') //Esta es una forma fea pero no encontre otra
 					
 				}else{
 				let alarma = <Alert variant='danger' className="w-50">Error: usuario o contraseña incorrecto</Alert>
@@ -115,6 +116,11 @@ class Login extends Component {
 	render() {
 		return (
 			<Container className="form-login">
+				<img className="imagen-login" src={Logo} alt="Imagen del ministerio de salud" />
+				<br/>
+				<br/>
+				<h1>Sistema de gestion COVID-19</h1>
+				<br/>
 				<Form className="demoForm">
 					<h2>Inicio de Sesión</h2>
 
@@ -142,7 +148,7 @@ class Login extends Component {
 						/>
 					</div>
 					<Button 
-					type="submit" className="btn btn-primary" 
+					type="submit" className="btn btn-primary" size="md"
 					disabled={!this.state.formValid} onClick={(e) => this.envioUsuario(this.state.user,this.state.password, e) } >
 						Enviar
 

@@ -1,7 +1,23 @@
+.form-login{
+    text-align: center;
+    
+}
+.demoForm{
+    margin-left:20em;
+    margin-right: 20em;
+}
 .form-control{
-    width: 50%;
+    width: 100%;
 }
 
 h2{
     padding-top: 10px;
+}
+
+.imagen-login{
+    width:50em;
+    height: 20em;
+    border: 1px solid black;
+    border-radius: 1em;
+    padding:2em;
 }
