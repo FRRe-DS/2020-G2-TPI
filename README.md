@@ -44,13 +44,7 @@ Para lanzar el servidor de React, esto abrira en el navegador predeterminado el 
 
 * Endpoints: 
 
-  * [POST PRUEBAS](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/pruebas)
-  * [POST PETICIONES](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/peticiones) 
-  * [GET PETICIONES](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/peticiones) 
-  * [POST PARA LOGGEO](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/login) 
-  * [POST PARA REGISTRO](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/register) 
-  * [POST CENTROS HOSPITALARIOS](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/CentrosHospitalarios) 
-  * [GET CENTROS HOSPITALARIOS](https://fp7v79j8w6.execute-api.sa-east-1.amazonaws.com/dev/CentrosHospitalarios)
+* .[Documentacion Swagger](bitly.com/DocMinSalud)
 
 ### Autores
 * **Cuzziol Boccioni Facundo**
