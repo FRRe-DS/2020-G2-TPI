@@ -44,7 +44,7 @@ Para lanzar el servidor de React, esto abrira en el navegador predeterminado el 
 
 * Endpoints: 
 
-* .[Documentacion Swagger](bitly.com/DocMinSalud)
+* [Documentacion Swagger](www.bitly.com/DocMinSalud)
 
 ### Autores
 * **Cuzziol Boccioni Facundo**
