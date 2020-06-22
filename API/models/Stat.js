@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const stat = new mongoose.Schema(
+const Stat = new mongoose.Schema(
     {
     dataCiudades:[
             {
@@ -60,3 +60,5 @@ const stat = new mongoose.Schema(
         }
     }
 )
+
+module.exports = mongoose.model('Stat',Stat);

@@ -230,7 +230,22 @@ functions:
                 -
                     statusCode: "403"
                     responseBody:
-                        descripcion: "Cuando se supera la cuota diaria"
+                        description: "Cuando se supera la cuota diaria"
+        -http:
+            path: /actualizarEstadisticas
+            method: GET
+            cors: true
+            documentation:
+                summary: "Chequea si hay nuevos informes, si los hay, toma la informacion, crea una nueva estadistica parcial y suma a la total"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Actualizacion de estadisticas exitosa"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Cuando se supera la cuota diaria de request"
 custom:
     documentation:
         version: '1.8'
