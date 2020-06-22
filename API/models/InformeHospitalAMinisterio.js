@@ -89,6 +89,10 @@ const InformeHospitalAMinisterio = new mongoose.Schema({
 			}
 		}]
 
+    },
+    impactadoEnEstadisticas:{
+        type: Boolean,
+        required: false
     }
 });
 

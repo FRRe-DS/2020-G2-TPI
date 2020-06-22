@@ -5,7 +5,7 @@ exports.registrarNuevaEstadistica = async(req,res,next)=>
 {
     //Primero, obtenemos los informes
     try{
-        const informes = await Informes.find({});
+        const informes = await Informes.find({impactadoEnEstadisticas:false});
         console.log(informes);
     }
     catch(error){

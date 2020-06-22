@@ -248,7 +248,7 @@ functions:
                         description: "Cuando se supera la cuota diaria de request"
 custom:
     documentation:
-        version: '1.8'
+        version: '1.9'
         summary: 'API FAKE del Ministerio de Salud del Chaco'
         description: 'API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.'
         resources: 
@@ -472,6 +472,9 @@ custom:
                                     type: array
                                     items:
                                         $ref: "{{model:medico}}"
+                        impactadoEnEstadisticas:
+                            type: boolean
+                            required: false
                                 
 
 
