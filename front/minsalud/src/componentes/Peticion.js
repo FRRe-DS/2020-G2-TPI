@@ -23,21 +23,21 @@ fetch(url, {
 }).then(resp=>resp.json())
 .then(data => 
   { 
-    this.setState({idPeticion: data[0]._id.substr(-4)})
+    this.setState({idPeticion: data[10]._id.substr(-4)})
     //agrego un if para separar del json los medicos y la peticion en si
     
-    if(data[1].Peticion.hasOwnProperty('medicos')){
+    if(data[10].Peticion.hasOwnProperty('medicos')){
     
-    let {medicos, respondidaCompletamente, ...peticion} = data[1].Peticion
+    let {medicos, respondidaCompletamente, ...peticion} = data[10].Peticion
     this.setState({
       recursos:peticion,
-      medicos,
+      medicos:medicos,
       estado:respondidaCompletamente
       
     })
 
   } else{
-    let {respondidaCompletamente, ...peticion} = data[1].Peticion
+    let {respondidaCompletamente, ...peticion} = data[10].Peticion
   
   
     this.setState({
@@ -77,7 +77,26 @@ fetch(url, {
                   
                   
                   }</li>)
+
+
+                
             }
+            <br/>
+            <br/>
+
+            <h4>Medicos</h4>
+            
+            {
+              Object.keys(this.state.medicos).map((meds)=><li>{
+                  
+                `${this.state.medicos[meds].especialidad}s: ${this.state.medicos[meds].cantidad}`
+                
+                
+                
+                }</li>)
+            }
+
+
             
 
             </ul>

@@ -51,6 +51,7 @@ class App extends Component {
               return (
               <div>
                 <Header />
+                <h1>Centros hospitalarios</h1>
                 <div className="app-container">
                   
                   <Menu />
@@ -77,6 +78,7 @@ class App extends Component {
 			return (
         <div>
                 <Header />
+                <h1>Peticiones</h1>
 			  <div className="app-container">
 				
 				<Menu/>
@@ -95,6 +97,7 @@ class App extends Component {
 			return (
         <div>
         <Header />
+        <h1>Recursos disponibles</h1>
 			  <div className="app-container">
 				
 				<Menu/>
