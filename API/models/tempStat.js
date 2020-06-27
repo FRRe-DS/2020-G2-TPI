@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Stat = new mongoose.Schema(
+const tempStat = new mongoose.Schema(
     {
     dataCiudades:[
             {
@@ -62,4 +62,4 @@ const Stat = new mongoose.Schema(
     {timestamps:true}
 )
 
-module.exports = mongoose.model('Stat',Stat);
+module.exports = mongoose.model('tempStat',tempStat);
