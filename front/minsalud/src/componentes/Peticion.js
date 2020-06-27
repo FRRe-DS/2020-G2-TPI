@@ -7,8 +7,10 @@ class Peticion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-  peticiones: [],
-  idPeticion:''
+  recursos: [],
+  medicos: {},
+  idPeticion:'',
+  estado:{}
 }
 }
 
@@ -19,20 +21,48 @@ fetch(url, {
   method: "GET"
  
 }).then(resp=>resp.json())
-.then(data => this.setState({peticiones: data[1].Peticion, idPeticion: data[0]._id.substr(-4)}))
+.then(data => 
+  { 
+    this.setState({idPeticion: data[0]._id.substr(-4)})
+    //agrego un if para separar del json los medicos y la peticion en si
+    
+    if(data[1].Peticion.hasOwnProperty('medicos')){
+    
+    let {medicos, respondidaCompletamente, ...peticion} = data[1].Peticion
+    this.setState({
+      recursos:peticion,
+      medicos,
+      estado:respondidaCompletamente
+      
+    })
+
+  } else{
+    let {respondidaCompletamente, ...peticion} = data[1].Peticion
+  
+  
+    this.setState({
+      recursos:peticion,
+      estado:respondidaCompletamente
+      
+    })
+  }
+  
+  })
+
 .catch(error => console.log(error))
 }
 //ESTO ES TRAERME UNA PETICION PORQUE TODAVIA NO TENGO ID DE PETICIONES
 //se usa este hook para poder colocar los datos despues del renderizado
 
   componentDidMount() {
-      if(this.state.peticiones.length === 0 ){
+      if(this.state.recursos.length === 0 ){
         this.traerData()
+        
+        
       }
     }   
   render() {
     
-    console.log(this.state.peticiones)
       return (
         <div id="container-peticion">
           <h3>Peticion: {this.state.idPeticion}</h3>
@@ -40,10 +70,10 @@ fetch(url, {
 
             {
               //Parseo para escribir atributos y valores sin estructura definida
-                Object.keys(this.state.peticiones).map((peti)=><li>{
+                Object.keys(this.state.recursos).map((peti)=><li>{
                   
-                  `${peti}: ${this.state.peticiones[peti]}`
-                
+                  `${peti}: ${this.state.recursos[peti]}`
+                  
                   
                   
                   }</li>)

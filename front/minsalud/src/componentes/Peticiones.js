@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import CardPeticion from './CardPeticion';
-import { Card } from 'react-bootstrap';
+
 
 class Peticiones extends Component{
     constructor(props) {
