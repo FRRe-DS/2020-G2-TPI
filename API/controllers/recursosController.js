@@ -5,6 +5,7 @@ const Recursos = require('../models/Recursos');
 //TENEMOS QUE USAR UN METODO PARA ACTUALIZAR EL UNICO ELEMENTO DE LA COLECCION
 
 
+
 exports.registrarRecursos = async (req,res,next) =>{
     
     const recursos = new Recursos(req.body);
@@ -26,11 +27,12 @@ exports.registrarRecursos = async (req,res,next) =>{
 
 exports.getRecursos = async(req,res,next) =>{
     try {
-        const recursos = await Recursos.find({});
+        recursos = await Recursos.find({});
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.json(recursos);
+        
     } catch (error) {
         console.log(error);
         next();

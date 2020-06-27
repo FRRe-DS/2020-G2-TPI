@@ -1,9 +1,10 @@
 const Envio = require('../models/Envios');
 const Peticion = require('../models/Peticion');
 const Validacion = require('../validacion/envioValidator');
-const recursosValidator = require('../validacion/recursosValidator');
 
+const Recursos = require('../models/Recursos');
 //crear un nuevo Envio
+
 exports.nuevoEnvio = async(req,res,next) =>{
     const envio = new Envio(req.body);
     
@@ -11,8 +12,57 @@ exports.nuevoEnvio = async(req,res,next) =>{
     //Esto debe ir primero para evitar conflictos CORS
     res.setHeader('content-type', 'application/json');
     res.setHeader('Access-Control-Allow-Origin', '*');
+    let recursosValidos=true
     try{
-        if(recursosValidator.comprobarRecursos(envioActual)){
+        console.log(envioActual.idCentro);
+        recursos=await Recursos.find({});
+        console.log(recursos[0].Recursos);
+        for (const item in envioActual){
+            //console.log("Item "+item);
+            //console.log("Recurso "+recursos[0].Recursos[item]);
+            //console.log("Envio "+envioActual[item]);
+            //pregunta si la cantidad que quiero enviar de cada recurso es menor a lo que tengo disponible
+            switch (item) {
+                case "camillas":
+                    if(recursos[0].Recursos.camillasDisponible<envioActual[item]){
+                        recursosValidos=false;
+                    }
+                    break;
+                case "jabonLitros":
+                    if(recursos[0].Recursos.jabonLitrosDisponible<envioActual[item]){
+                        recursosValidos=false;
+                    }
+                    break;
+                case "barbijos":
+                    if(recursos[0].Recursos.barbijosDisponible<envioActual[item]){
+                        recursosValidos=false;
+                    }
+                    break;
+                case "jeringas":
+                    if(recursos[0].Recursos.jeringasDisponible<envioActual[item]){
+                        recursosValidos=false;
+                    }
+                    break;
+                case "cofias":
+                    if(recursos[0].Recursos.cofiasDisponible<envioActual[item]){
+                        recursosValidos=false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        // recursos Validos empieza como true, si alguno de los campos que envio no cumple, se pone el flag a false
+        
+        
+        
+        
+        
+        // FALTA CONTROLAR LOS MEDICOS ACA ARRIBA 
+
+
+
+        if(recursosValidos){
              // envio tiene id peticion? 
              if(envioActual.hasOwnProperty("idPeticion")){
                 //console.log('LA PETICIÓN EXISTE EN EL ENVIO')
