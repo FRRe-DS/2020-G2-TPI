@@ -89,8 +89,12 @@ const InformeHospitalAMinisterio = new mongoose.Schema({
 			}
 		}]
 
+    },
+    impactadoEnEstadisticas:{
+        type: Boolean,
+        required: false
     }
-});
+},{timestamps : true});
 
 
 module.exports = mongoose.model('InformeHospitalAMinisterio',InformeHospitalAMinisterio );

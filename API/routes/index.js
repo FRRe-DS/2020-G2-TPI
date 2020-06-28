@@ -7,7 +7,9 @@ const centrosHospitalariosController = require('../controllers/centrosHospitalar
 const envioController = require('../controllers/envioController');
 const apiController = require('../controllers/apiController');
 const recursosController = require('../controllers/recursosController');
-const medicosController = require('../controllers/medicosController')
+const medicosController = require('../controllers/medicosController');
+const statController = require('../controllers/statController')
+
 router.get('/',(req,res)=>{
     console.log("Hola,probando");
     res.json({message:"mensaje escrito en consola"});
@@ -82,5 +84,11 @@ medicosController.getMedicos
 router.get('/rechazarPeticion',
 peticionController.rechazarPeticion
 )
+
+router.get('/actualizarEstadisticas',statController.registrarNuevaEstadistica)
+
+router.get('/stat',statController.obtenerTodasEstadisticas)
+
+router.post('/stat',statController.agregarEstadistica)
 
 module.exports = router;
