@@ -1,7 +1,7 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "version" : "2020-06-21T01:29:50Z",
+    "version" : "2020-06-28T22:24:56Z",
     "title" : "dev-serverless-aws-nodejs"
   },
   "host" : "6iubewzdng.execute-api.sa-east-1.amazonaws.com",
@@ -57,6 +57,59 @@
           "passthroughBehavior" : "when_no_match",
           "httpMethod" : "POST",
           "type" : "aws_proxy"
+        }
+      }
+    },
+    "/actualizarEstadisticas" : {
+      "get" : {
+        "summary" : "Chequea si hay nuevos informes, si los hay, toma la informacion, crea una nueva estadistica parcial y suma a la total",
+        "responses" : { },
+        "x-amazon-apigateway-integration" : {
+          "uri" : "arn:aws:apigateway:sa-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:sa-east-1:768095478863:function:serverless-aws-nodejs-dev-app/invocations",
+          "passthroughBehavior" : "when_no_match",
+          "httpMethod" : "POST",
+          "type" : "aws_proxy"
+        }
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              },
+              "responseTemplates" : {
+                "application/json" : "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{statusCode:200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "contentHandling" : "CONVERT_TO_TEXT",
+          "type" : "mock"
         }
       }
     },
@@ -231,6 +284,16 @@
           "type" : "aws_proxy"
         }
       },
+      "post" : {
+        "summary" : "Adds a new informe to our database",
+        "responses" : { },
+        "x-amazon-apigateway-integration" : {
+          "uri" : "arn:aws:apigateway:sa-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:sa-east-1:768095478863:function:serverless-aws-nodejs-dev-app/invocations",
+          "passthroughBehavior" : "when_no_match",
+          "httpMethod" : "POST",
+          "type" : "aws_proxy"
+        }
+      },
       "options" : {
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
@@ -255,7 +318,7 @@
             "default" : {
               "statusCode" : "200",
               "responseParameters" : {
-                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET'",
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,POST,GET'",
                 "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
                 "method.response.header.Access-Control-Allow-Origin" : "'*'"
               },
@@ -438,7 +501,7 @@
         }
       },
       "post" : {
-        "summary" : "Adds a new peticion to the list of existing peticiones",
+        "summary" : "Metodo para uso de CENTROS HOSPITALARIOS. Adds a new peticion to the list of existing peticiones",
         "consumes" : [ "application/json" ],
         "parameters" : [ {
           "name" : "x-api-key",
@@ -757,6 +820,59 @@
         }
       }
     },
+    "/stat" : {
+      "get" : {
+        "summary" : "Metodo para PACIENTES. Devuelve todas las estadisticas almacenadas",
+        "responses" : { },
+        "x-amazon-apigateway-integration" : {
+          "uri" : "arn:aws:apigateway:sa-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:sa-east-1:768095478863:function:serverless-aws-nodejs-dev-app/invocations",
+          "passthroughBehavior" : "when_no_match",
+          "httpMethod" : "POST",
+          "type" : "aws_proxy"
+        }
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              },
+              "responseTemplates" : {
+                "application/json" : "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{statusCode:200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "contentHandling" : "CONVERT_TO_TEXT",
+          "type" : "mock"
+        }
+      }
+    },
     "/{proxy+}" : {
       "options" : {
         "consumes" : [ "application/json" ],
@@ -940,9 +1056,18 @@
     }
   },
   "x-amazon-apigateway-documentation" : {
-    "version" : "1.8",
-    "createdDate" : "2020-06-21T01:30:16Z",
+    "version" : "1.10",
+    "createdDate" : "2020-06-28T22:25:54Z",
     "documentationParts" : [ {
+      "location" : {
+        "type" : "METHOD",
+        "path" : "/actualizarEstadisticas",
+        "method" : "GET"
+      },
+      "properties" : {
+        "summary" : "Chequea si hay nuevos informes, si los hay, toma la informacion, crea una nueva estadistica parcial y suma a la total"
+      }
+    }, {
       "location" : {
         "type" : "METHOD",
         "path" : "/centrosHospitalarios",
@@ -990,6 +1115,15 @@
     }, {
       "location" : {
         "type" : "METHOD",
+        "path" : "/informes",
+        "method" : "POST"
+      },
+      "properties" : {
+        "summary" : "Adds a new informe to our database"
+      }
+    }, {
+      "location" : {
+        "type" : "METHOD",
         "path" : "/login",
         "method" : "POST"
       },
@@ -1030,7 +1164,7 @@
         "method" : "POST"
       },
       "properties" : {
-        "summary" : "Adds a new peticion to the list of existing peticiones"
+        "summary" : "Metodo para uso de CENTROS HOSPITALARIOS. Adds a new peticion to the list of existing peticiones"
       }
     }, {
       "location" : {
@@ -1067,6 +1201,15 @@
       },
       "properties" : {
         "summary" : "Adds a new admin to the list of existing admins"
+      }
+    }, {
+      "location" : {
+        "type" : "METHOD",
+        "path" : "/stat",
+        "method" : "GET"
+      },
+      "properties" : {
+        "summary" : "Metodo para PACIENTES. Devuelve todas las estadisticas almacenadas"
       }
     }, {
       "location" : {
@@ -1276,14 +1419,14 @@
     } ]
   },
   "x-amazon-apigateway-gateway-responses" : {
-    "DEFAULT_5XX" : {
+    "DEFAULT_4XX" : {
       "responseParameters" : {
         "gatewayresponse.header.Access-Control-Allow-Methods" : "'POST'",
         "gatewayresponse.header.Access-Control-Allow-Origin" : "'*'",
         "gatewayresponse.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
       }
     },
-    "DEFAULT_4XX" : {
+    "DEFAULT_5XX" : {
       "responseParameters" : {
         "gatewayresponse.header.Access-Control-Allow-Methods" : "'POST'",
         "gatewayresponse.header.Access-Control-Allow-Origin" : "'*'",

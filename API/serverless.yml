@@ -212,7 +212,7 @@ functions:
                 responseBody:
                     descripcion: "Cuando se supera la cuota diaria"
 
-        -http:
+      - http:
             path: /informes
             method: POST
             cors: true
@@ -231,7 +231,7 @@ functions:
                     statusCode: "403"
                     responseBody:
                         description: "Cuando se supera la cuota diaria"
-        -http:
+      - http:
             path: /actualizarEstadisticas
             method: GET
             cors: true
@@ -246,7 +246,7 @@ functions:
                     statusCode: "403"
                     responseBody:
                         description: "Cuando se supera la cuota diaria de request"
-        -http:
+      - http:
             path: /stat
             method: GET
             cors: true
@@ -494,7 +494,6 @@ custom:
                                         $ref: "{{model:medico}}"
                         impactadoEnEstadisticas:
                             type: boolean
-                            required: false
                         createdAt:
                             type: string
                         updatedAt: 
