@@ -1,6 +1,7 @@
 const Envio = require('../models/Envios');
 const Peticion = require('../models/Peticion');
 const Validacion = require('../validacion/envioValidator');
+const {actualizarRecursos} = require('../controllers/recursosController');
 
 const Recursos = require('../models/Recursos');
 //crear un nuevo Envio
@@ -64,6 +65,10 @@ exports.nuevoEnvio = async(req,res,next) =>{
 
         if(recursosValidos){
              // envio tiene id peticion? 
+
+             console.log('estoy antes del metodo');
+             actualizarRecursos(envioActual);
+
              if(envioActual.hasOwnProperty("idPeticion")){
                 //console.log('LA PETICIÓN EXISTE EN EL ENVIO')
                 
@@ -128,7 +133,9 @@ exports.nuevoEnvio = async(req,res,next) =>{
                         } else{
                             res.json({mensaje:"Envio de prueba realizado"});
                         }
+                        
                     })
+                    
                         
                         // cambio de estado de peticion? 
                     // we pera
