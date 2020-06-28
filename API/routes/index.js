@@ -87,4 +87,8 @@ peticionController.rechazarPeticion
 
 router.get('/actualizarEstadisticas',statController.registrarNuevaEstadistica)
 
+router.get('/stat',statController.obtenerTodasEstadisticas)
+
+router.post('/stat',statController.agregarEstadistica)
+
 module.exports = router;

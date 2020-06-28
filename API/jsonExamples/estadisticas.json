@@ -1,7 +1,8 @@
 {
  "data_ciudades":[ 
     {
-    "ciudad": "Avia Terai",
+    
+    "nombreCiudad": "Avia Terai",
     "poblacion": 6203,
     "cantidades":{
         "sospecha":0,
@@ -11,7 +12,7 @@
     }
 
  },
-    {"ciudad": "Barranqueras",
+    {"nombreCiudad": "Barranqueras",
     "poblacion": 54698,
     "cantidades":{
         "sospecha":0,
@@ -21,7 +22,7 @@
     }
  },
  {
-    "ciudad": "Barrio de los Pescadores",
+    "nombreCiudad": "Barrio de los Pescadores",
     "poblacion": 795,
     "cantidades":{
         "sospecha":0,
@@ -32,7 +33,7 @@
 
  }, 
  {
-    "ciudad": "Basail",
+    "nombreCiudad": "Basail",
     "poblacion": 1929,
     "cantidades":{
         "sospecha":0,
@@ -43,7 +44,7 @@
 
  }, 
  {
-    "ciudad": "Campo Largo",
+    "nombreCiudad": "Campo Largo",
     "poblacion": 9069,
     "cantidades":{
         "sospecha":0,
@@ -54,7 +55,7 @@
 
  }, 
  {
-    "ciudad": "Capitán Solari",
+    "nombreCiudad": "Capitán Solari",
     "poblacion": 1888,
     "cantidades":{
         "sospecha":0,
@@ -65,7 +66,7 @@
 
  }, 
  {
-    "ciudad": "Charadai",
+    "nombreCiudad": "Charadai",
     "poblacion": 1519,
     "cantidades":{
         "sospecha":0,
@@ -76,7 +77,7 @@
 
  }, 
  {
-    "ciudad": "Charata",
+    "nombreCiudad": "Charata",
     "poblacion": 26497,
     "cantidades":{
         "sospecha":0,
@@ -87,7 +88,7 @@
 
  }, 
  {
-    "ciudad": "Chorotis",
+    "nombreCiudad": "Chorotis",
     "poblacion": 941,
     "cantidades":{
         "sospecha":0,
@@ -98,7 +99,7 @@
 
  },
  {
-    "ciudad": "Ciervo Petiso",
+    "nombreCiudad": "Ciervo Petiso",
     "poblacion": 786,
     "cantidades":{
         "sospecha":0,
@@ -109,7 +110,7 @@
 
  },
  {
-    "ciudad": "Colonia Aborigen",
+    "nombreCiudad": "Colonia Aborigen",
     "poblacion": 1272,
     "cantidades":{
         "sospecha":0,
@@ -120,7 +121,7 @@
 
  },
  {
-    "ciudad": "Colonia Baranda",
+    "nombreCiudad": "Colonia Baranda",
     "poblacion": 336,
     "cantidades":{
         "sospecha":0,
@@ -131,7 +132,7 @@
 
  },
  {
-    "ciudad": "Colonia Benítez",
+    "nombreCiudad": "Colonia Benítez",
     "poblacion": 2212,
     "cantidades":{
         "sospecha":0,
@@ -142,7 +143,7 @@
 
  },
  {
-    "ciudad": "Colonia Elisa",
+    "nombreCiudad": "Colonia Elisa",
     "poblacion": 3471,
     "cantidades":{
         "sospecha":0,
@@ -153,7 +154,7 @@
 
  },
  {
-    "ciudad": "Colonia Popular",
+    "nombreCiudad": "Colonia Popular",
     "poblacion": 191,
     "cantidades":{
         "sospecha":0,
@@ -164,7 +165,7 @@
 
  },
  {
-    "ciudad": "Colonias Unidas",
+    "nombreCiudad": "Colonias Unidas",
     "poblacion": 3282,
     "cantidades":{
         "sospecha":0,
@@ -175,7 +176,7 @@
 
  },
  {
-    "ciudad": "Concepción del Bermejo",
+    "nombreCiudad": "Concepción del Bermejo",
     "poblacion": 5309,
     "cantidades":{
         "sospecha":0,
@@ -186,7 +187,7 @@
 
  },
  {
-    "ciudad": "Coronel Du Graty",
+    "nombreCiudad": "Coronel Du Graty",
     "poblacion": 7509,
     "cantidades":{
         "sospecha":0,
@@ -197,7 +198,7 @@
 
  },
  {
-    "ciudad": "Corzuela",
+    "nombreCiudad": "Corzuela",
     "poblacion": 10335,
     "cantidades":{
         "sospecha":0,
@@ -208,7 +209,7 @@
 
  },
  {
-    "ciudad": "Cote Lai",
+    "nombreCiudad": "Cote Lai",
     "poblacion": 1323,
     "cantidades":{
         "sospecha":0,
@@ -219,7 +220,7 @@
 
  },
  {
-    "ciudad": "El Espinillo",
+    "nombreCiudad": "El Espinillo",
     "poblacion": 1261,
     "cantidades":{
         "sospecha":0,
@@ -230,7 +231,7 @@
 
  },
  {
-    "ciudad": "El Sauzal",
+    "nombreCiudad": "El Sauzal",
     "poblacion": 715,
     "cantidades":{
         "sospecha":0,
@@ -241,7 +242,7 @@
 
  },
  {
-    "ciudad": "El Sauzalito",
+    "nombreCiudad": "El Sauzalito",
     "poblacion": 3374,
     "cantidades":{
         "sospecha":0,
@@ -252,7 +253,7 @@
 
  },
  {
-    "ciudad": "Enrique Urién",
+    "nombreCiudad": "Enrique Urién",
     "poblacion": 515,
     "cantidades":{
         "sospecha":0,
@@ -263,7 +264,7 @@
 
  },
  {
-    "ciudad": "Estación General Obligado",
+    "nombreCiudad": "Estación General Obligado",
     "poblacion": 31,
     "cantidades":{
         "sospecha":0,
@@ -274,7 +275,7 @@
 
  },
  {
-    "ciudad": "Fontana",
+    "nombreCiudad": "Fontana",
     "poblacion": 32027,
     "cantidades":{
         "sospecha":0,
@@ -285,7 +286,7 @@
 
  },
  {
-    "ciudad": "Fortín Las Chuñas",
+    "nombreCiudad": "Fortín Las Chuñas",
     "poblacion": 302,
     "cantidades":{
         "sospecha":0,
@@ -296,7 +297,7 @@
 
  },
  {
-    "ciudad": "Fortín Lavalle",
+    "nombreCiudad": "Fortín Lavalle",
     "poblacion": 687,
     "cantidades":{
         "sospecha":0,
@@ -307,7 +308,7 @@
 
  },
  {
-    "ciudad": "Fuerte Esperanza",
+    "nombreCiudad": "Fuerte Esperanza",
     "poblacion":  1376,
     "cantidades":{
         "sospecha":0,
@@ -318,7 +319,7 @@
 
  },
  {
-    "ciudad": "Gancedo",
+    "nombreCiudad": "Gancedo",
     "poblacion":  4284,
     "cantidades":{
         "sospecha":0,
@@ -329,7 +330,7 @@
 
  },
  {
-    "ciudad": "General Capdevila",
+    "nombreCiudad": "General Capdevila",
     "poblacion":  405,
     "cantidades":{
         "sospecha":0,
@@ -340,7 +341,7 @@
 
  },
  {
-    "ciudad": "General José de San Martín",
+    "nombreCiudad": "General José de San Martín",
     "poblacion":  28124,
     "cantidades":{
         "sospecha":0,
@@ -351,7 +352,7 @@
 
  },
  {
-    "ciudad": "General Pinedo",
+    "nombreCiudad": "General Pinedo",
     "poblacion":  13042,
     "cantidades":{
         "sospecha":0,
@@ -362,7 +363,7 @@
 
  },
  {
-    "ciudad": "General Vedia",
+    "nombreCiudad": "General Vedia",
     "poblacion":  1751,
     "cantidades":{
         "sospecha":0,
@@ -373,7 +374,7 @@
 
  },
  {
-    "ciudad": "Haumonía",
+    "nombreCiudad": "Haumonía",
     "poblacion":  77,
     "cantidades":{
         "sospecha":0,
@@ -384,7 +385,7 @@
 
  },
  {
-    "ciudad": "Hermoso Campo",
+    "nombreCiudad": "Hermoso Campo",
     "poblacion":  5011,
     "cantidades":{
         "sospecha":0,
@@ -395,7 +396,7 @@
 
  },
  {
-    "ciudad": "Horquilla",
+    "nombreCiudad": "Horquilla",
     "poblacion":  122,
     "cantidades":{
         "sospecha":0,
@@ -406,7 +407,7 @@
 
  },
  {
-    "ciudad": "Ingeniero Barbet ",
+    "nombreCiudad": "Ingeniero Barbet ",
     "poblacion":  277,
     "cantidades":{
         "sospecha":0,
@@ -417,7 +418,7 @@
 
  },
  {
-    "ciudad": "Ingeniero Barbet ",
+    "nombreCiudad": "Ingeniero Barbet ",
     "poblacion":  277,
     "cantidades":{
         "sospecha":0,
@@ -428,7 +429,7 @@
 
  },
  {
-    "ciudad": "Isla del Cerrito",
+    "nombreCiudad": "Isla del Cerrito",
     "poblacion":  1758,
     "cantidades":{
         "sospecha":0,
@@ -439,7 +440,7 @@
 
  },
  {
-    "ciudad": "Juan José Castelli",
+    "nombreCiudad": "Juan José Castelli",
     "poblacion":  27201,
     "cantidades":{
         "sospecha":0,
@@ -450,7 +451,7 @@
 
  },
  {
-    "ciudad": "La Clotilde",
+    "nombreCiudad": "La Clotilde",
     "poblacion":  3382,
     "cantidades":{
         "sospecha":0,
@@ -461,7 +462,7 @@
 
  },
  {
-    "ciudad": "La Escondida",
+    "nombreCiudad": "La Escondida",
     "poblacion":  3261,
     "cantidades":{
         "sospecha":0,
@@ -472,7 +473,7 @@
 
  },
  {
-    "ciudad": "Las Breñas",
+    "nombreCiudad": "Las Breñas",
     "poblacion":  22953,
     "cantidades":{
         "sospecha":0,
@@ -483,7 +484,7 @@
 
  },
  {
-    "ciudad": "Margarita Belén",
+    "nombreCiudad": "Margarita Belén",
     "poblacion":  5701,
     "cantidades":{
         "sospecha":0,
@@ -494,7 +495,7 @@
 
  },
  {
-    "ciudad": "Pampa del Infierno",
+    "nombreCiudad": "Pampa del Infierno",
     "poblacion":  9063,
     "cantidades":{
         "sospecha":0,
@@ -505,7 +506,7 @@
 
  },
  {
-    "ciudad": "Presidencia Roque Sáenz Peña",
+    "nombreCiudad": "Presidencia Roque Sáenz Peña",
     "poblacion":  89882,
     "cantidades":{
         "sospecha":0,
@@ -516,7 +517,7 @@
 
  },
  {
-    "ciudad": "Puerto Tirol",
+    "nombreCiudad": "Puerto Tirol",
     "poblacion":  8819,
     "cantidades":{
         "sospecha":0,
@@ -527,7 +528,7 @@
 
  },
  {
-    "ciudad": "Puerto Vilelas",
+    "nombreCiudad": "Puerto Vilelas",
     "poblacion":  8278,
     "cantidades":{
         "sospecha":0,
@@ -538,7 +539,7 @@
 
  },
  {
-    "ciudad": "Quitilipi",
+    "nombreCiudad": "Quitilipi",
     "poblacion":  24517,
     "cantidades":{
         "sospecha":0,
@@ -549,7 +550,7 @@
 
  },
  {
-    "ciudad": "Resistencia",
+    "nombreCiudad": "Resistencia",
     "poblacion":  290723,
     "cantidades":{
         "sospecha":0,
@@ -560,7 +561,7 @@
 
  },
  {
-    "ciudad": "Villa Ángela",
+    "nombreCiudad": "Villa Ángela",
     "poblacion":  41403,
     "cantidades":{
         "sospecha":0,

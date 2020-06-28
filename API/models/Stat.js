@@ -4,10 +4,6 @@ const Stat = new mongoose.Schema(
     {
     dataCiudades:[
             {
-                idCiudad:{
-                    type: Number,
-                    required: true
-                },
                 nombreCiudad:{
                     type: String,
                     required: true
