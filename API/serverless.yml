@@ -266,7 +266,7 @@ functions:
                         
 custom:
     documentation:
-        version: '1.9'
+        version: '1.10'
         summary: 'API FAKE del Ministerio de Salud del Chaco'
         description: 'API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.'
         resources: 
