@@ -32,6 +32,9 @@ exports.registrarNuevaEstadistica = async(req,res,next)=>
             }
         }
         console.log(ultimoInforme[0].nombreCiudad)
+        //Prueba de si se puede guardar el informe con save directamente.
+        ultimoInforme[0].impactadoEnEstadisticas = true
+        await ultimoInforme[0].save()
         await nuevaEstadistica.save();
         res.json({"mensaje":"Success"})
 
