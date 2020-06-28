@@ -13,10 +13,6 @@ const Stat = new mongoose.Schema(
                     required: true
                 },
                 cantidades:{
-                    sospecha:{
-                        type: Number,
-                        required: true
-                    },
                     enfermos:{
                         type: Number,
                         required: true
@@ -36,10 +32,6 @@ const Stat = new mongoose.Schema(
             poblacionTotal:{
                 type: Number,
                 required:true
-            },
-            sospecha:{
-                type: Number,
-                required: true
             },
             enfermos:{
                 type: Number,

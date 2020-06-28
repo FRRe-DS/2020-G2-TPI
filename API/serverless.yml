@@ -29,7 +29,7 @@ functions:
           method: POST
           cors: true
           documentation:
-            summary: "Adds a new peticion to the list of existing peticiones"
+            summary: "Metodo para uso de CENTROS HOSPITALARIOS. Adds a new peticion to the list of existing peticiones"
             requestBody:
                 description: "It asks for resources and has the hospital id"
             pathParams:
@@ -246,6 +246,24 @@ functions:
                     statusCode: "403"
                     responseBody:
                         description: "Cuando se supera la cuota diaria de request"
+        -http:
+            path: /stat
+            method: GET
+            cors: true
+            documentation:
+                summary: "Metodo para PACIENTES. Devuelve todas las estadisticas almacenadas"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Arreglo de todas las estadisticas registradas"
+                    responseModels:
+                        "application/json": "estadistica"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Cuando se supera la cuota diaria de request"
+                        
 custom:
     documentation:
         version: '1.9'
@@ -395,12 +413,12 @@ custom:
                                 muertos:
                                     type: number
             -
-                name: estadisticas
+                name: estadistica
                 contentType: "application/json"
                 schema:
                     type: object
                     properties: 
-                        data_ciudades: 
+                        dataCiudades: 
                             type: array
                             items:
                                 $ref: "{{model:ciudad}}"
@@ -409,14 +427,16 @@ custom:
                             properties:
                                 poblacionTotal:
                                     type: number
-                                sospecha:
-                                    type: number
                                 enfermos: 
                                     type: number
                                 recuperados:
                                     type: number
                                 muertos:
                                     type: number
+                        createdAt:
+                            type: string
+                        updatedAt: 
+                            type: string
             -
                 name: informe
                 contentType: "application/json"
@@ -475,6 +495,11 @@ custom:
                         impactadoEnEstadisticas:
                             type: boolean
                             required: false
+                        createdAt:
+                            type: string
+                        updatedAt: 
+                            type: string
+                        
                                 
 
 
