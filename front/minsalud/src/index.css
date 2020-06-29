@@ -6,26 +6,37 @@
     background-color:#41B1C2;
     color: white;
 }
-
-
+.header .container-foto-head{
+background-color: rgba(255, 255, 255, 0.945);
+width: 11em;
+border-radius: 0.5em;
+padding-left: 0.5em;
+padding-right: 0.5em;
+}
+h1{
+    text-align: center;
+}
 .app-container{
     display:grid;
     margin-top:3em;
     width:98%;
-    grid-template-columns: repeat(4,1fr);
-    position:fixed;
+    grid-template-columns: repeat(5,1fr);
+    position: absolute;;
 }
-.tabla-centros, th, td, tr {
+
+.tabla-centros th, td, tr {
     border: 1px solid black;
     text-align: center;
 }
 
 .tabla-centros {
-    grid-column: 2/5;
+    grid-column: 2/6;
 }
 
 
-.form-login{
-    margin-left: 20em;
-    margin-right: 20em;
+.imagen-home{
+    grid-column: 2/6;
+    width:100%;
+    height:25em;
+    opacity: 0.5;
 }

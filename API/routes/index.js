@@ -9,6 +9,8 @@ const apiController = require('../controllers/apiController');
 const recursosController = require('../controllers/recursosController');
 const medicosController = require('../controllers/medicosController');
 const estadisticasController = require('../controllers/estadisticasController');
+const statController = require('../controllers/statController')
+
 router.get('/',(req,res)=>{
     console.log("Hola,probando");
     res.json({message:"mensaje escrito en consola"});
@@ -24,8 +26,7 @@ router.post('/envios',
     envioController.nuevoEnvio)
 
 //Api Documentation
-
-router.get('/apiDoc',apiController.enviar)
+// router.get('/apiDoc',apiController.enviar)
 
 router.post('/pruebas',(req,res)=>{
     console.log(req.body);
@@ -50,43 +51,48 @@ loginController.registerUser
 )
 
 
-router.post('/CentrosHospitalarios',
+router.post('/centrosHospitalarios',
 centrosHospitalariosController.registerCentro
 )
-router.get('/CentrosHospitalarios',
+router.get('/centrosHospitalarios',
 centrosHospitalariosController.getCentros
 )
 
-router.post('/Informes',
+router.post('/informes',
 informesController.registrarInforme
 )
 
-router.get('/Informes',
+router.get('/informes',
 informesController.getInforme
 )
 
-router.post('/Recursos',
+router.post('/recursos',
 recursosController.registrarRecursos
 )
 
-router.get('/Recursos',
+router.get('/recursos',
 recursosController.getRecursos
 )
 
-router.post('/Medicos',
+router.post('/medicos',
 medicosController.registrarMedicos
 )
 
-router.get('/Medicos',
+router.get('/medicos',
 medicosController.getMedicos
 )
 
-router.post('/Estadisticas',
-estadisticasController.registrarEstadisticas
+
+
+router.get('/rechazarPeticion',
+peticionController.rechazarPeticion
 )
 
-router.get('/Estadisticas',
-estadisticasController.getEstadisticas
-)
+router.get('/actualizarEstadisticas',statController.registrarNuevaEstadistica)
+
+router.get('/stat',statController.obtenerTodasEstadisticas)
+
+router.post('/stat',statController.agregarEstadistica)
+
 
 module.exports = router;

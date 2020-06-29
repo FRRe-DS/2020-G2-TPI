@@ -29,7 +29,7 @@ functions:
           method: POST
           cors: true
           documentation:
-            summary: "Adds a new peticion to the list of existing peticiones"
+            summary: "Metodo para uso de CENTROS HOSPITALARIOS. Adds a new peticion to the list of existing peticiones"
             requestBody:
                 description: "It asks for resources and has the hospital id"
             pathParams:
@@ -37,13 +37,17 @@ functions:
                     name: x-api-key
                     required: true
                     description: "API Key identifier"
-                requestModels:
+            requestModels:
                 "application/json": "peticion"
             methodResponses:
                 -
                     statusCode: "200"
                     responseBody:
                             description: "La peticion se agrego correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando no se utiliza una clave API-Key o cuando se supera la quota diaria"
       - http:
           path: /peticiones
           method: GET
@@ -61,29 +65,208 @@ functions:
           path: /login
           method: POST
           cors: true
+          documentation:
+            summary: "Permite logearse a los administradores"
+            requestBody:
+                description: "Contiene un usuario y el hash de una contrasenia"
+            requestModels: 
+                "application/json" : "login"
       - http:
           path: /register
           method: POST
           cors: true
+          documentation:
+            summary: "Adds a new admin to the list of existing admins"
+            requestBody:
+                description: "It asks for a new admin and hash"
+            requestModels:
+                "application/json": "login"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "El usuario se agrego correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
-          path: /CentrosHospitalarios
+          path: /centrosHospitalarios
           method: POST
           cors: true
+          documentation:
+            summary: "Adds a Centro Hospitalario to the list of existing Centros Hospitalarios"
+            requestBody:
+                description: "It asks for a new Centro Hospitalario"
+            requestModels:
+                "application/json": "centrosHospitalarios"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "El Centro Hospitalario se agrego correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
-          path: /CentrosHospitalarios
+          path: /centrosHospitalarios
           method: GET
           cors: true
+          documentation:
+            summary: "Gets a list of all the existing Centros Hospitalarios"
+            requestBody:
+                description: "Empty request body"
       - http:
           path: /envios
           method: GET
           cors: true
+          documentation:
+            summary: "Gets a list of all the existing Envios"
+            requestBody:
+                description: "Empty request body"
       - http:
           path: /envios
           method: POST
           cors: true
+          documentation:
+            summary: "Adds a Envio to the list of existing Envios"
+            requestBody:
+                description: "It asks for a new Envio"
+            requestModels:
+                "application/json": "envio"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "El Envio se agrego correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
+      - http:
+          path: /recursos
+          method: GET
+          cors: true
+          documentation:
+            summary: "Gets a list of all the existing Recursos"
+            requestBody:
+                description: "Empty request body"
+      - http:
+          path: /recursos
+          method: POST
+          cors: true
+      - http:
+          path: /medicos
+          method: GET
+          cors: true
+          documentation:
+            summary: "Gets a list of all the existing Medicos"
+            requestBody:
+                description: "Empty request body"
+      - http:
+          path: /medicos
+          method: POST
+          cors: true
+          documentation:
+            summary: "Adds a Envio to the list of existing Medicos"
+            requestBody:
+                description: "It asks for a new Medico"
+            requestModels:
+                "application/json": "medico"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "El Medico se agrego correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
+      - http:
+          path: /rechazarPeticion
+          method: GET
+          cors: true
+          documentation:
+            summary: "Gets a peticion of all the existing by id"
+            requestBody:
+                description: "Empty request body"
+            pathParams:
+                -
+                    name: idPeticion
+                    required: true
+                    description: "ID of peticion"
+      - http:
+          path: /informes
+          method: GET
+          cors: true
+          documentation:
+            summary: "Shows all the informes saved in our database"
+          methodResponses:
+            -
+                statusCode : "200"
+                responseBody:
+                    description: "Every informe saved"
+            -
+                statusCode: "403"
+                responseBody:
+                    descripcion: "Cuando se supera la cuota diaria"
+
+      - http:
+            path: /informes
+            method: POST
+            cors: true
+            documentation:
+                summary: "Adds a new informe to our database"
+            requestBody:
+                description: "It has basic hospital info, number of cases, deaths,tests, and resources of the hospital"
+            requestModels:
+                "application/json" : "informe"
+            methodResponses:
+                -
+                    statusCode : "200"
+                    responseBody:
+                        description: "Informe guardado correctamente"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Cuando se supera la cuota diaria"
+      - http:
+            path: /actualizarEstadisticas
+            method: GET
+            cors: true
+            documentation:
+                summary: "Chequea si hay nuevos informes, si los hay, toma la informacion, crea una nueva estadistica parcial y suma a la total"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Actualizacion de estadisticas exitosa"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Cuando se supera la cuota diaria de request"
+      - http:
+            path: /stat
+            method: GET
+            cors: true
+            documentation:
+                summary: "Metodo para PACIENTES. Devuelve todas las estadisticas almacenadas"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Arreglo de todas las estadisticas registradas"
+                    responseModels:
+                        "application/json": "estadistica"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Cuando se supera la cuota diaria de request"
+                        
 custom:
     documentation:
-        version: '1'
+        version: '1.10'
         summary: 'API FAKE del Ministerio de Salud del Chaco'
         description: 'API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.'
         resources: 
@@ -92,7 +275,33 @@ custom:
                 description: "Path used to see peticiones and add more"
         models:
             -
-                name: doctor
+                name: login
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        user:
+                            type: string
+                        phash:
+                            type: string    
+            -
+                name: centrosHospitalarios
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        idCentro:
+                            type: number
+                        nombre:
+                            type: string  
+                        ciudad:
+                            type: string 
+                        direccion:
+                            type: string 
+                        tipo:
+                            type: string 
+            -
+                name: medico
                 contentType: "application/json"
                 schema:
                     type: object
@@ -101,6 +310,25 @@ custom:
                             type: number
                         especialidad: 
                             type: string
+            -
+                name: recurso
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties: 
+                        camillasDisponible:
+                            type: number
+                        jabonLitrosDisponible:
+                            type: number
+                        alcoholLitrosDisponible:
+                            type: number
+                        barbijosDisponible:
+                            type: number
+                        jeringasDisponible:
+                            type: number
+                        cofiasDisponible:
+                            type: number
+                        
             -
                 name: envio
                 contentType: "application/json"
@@ -112,10 +340,8 @@ custom:
                             properties:
                                 idCentro:
                                     type: number
-                                    required: true
                                 idPeticion:
                                     type: number
-                                    required: false
                                 camillas: 
                                     type: number
                                 jabonLitros:
@@ -131,7 +357,7 @@ custom:
                                 medicos:
                                     type: array
                                     items:
-                                        $ref: "{{model:doctor}}"
+                                        $ref: "{{model:medico}}"
             -
                 name: peticion
                 contentType: "application/json"
@@ -160,12 +386,127 @@ custom:
                                 medicos:
                                     type: array
                                     items:
-                                        $ref: "{{model:doctor}}"
+                                        $ref: "{{model:medico}}"
                                 respondidaCompletamente:
-                                    type:Boolean
+                                    type: boolean
+                                rechazada: 
+                                    type: boolean 
+                        createdAt:
+                            type: string
+                        updatedAt:
+                            type: string                                    
+            -
+                name: ciudad
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        ciudad:
+                            type: string
+                        poblacion: 
+                            type: number
+                        cantidades:
+                            type: object
+                            properties:
+                                sospecha:
+                                    type: number
+                                enfermos:
+                                    type: number
+                                recuperados:
+                                    type: number
+                                muertos:
+                                    type: number
+            -
+                name: estadistica
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties: 
+                        dataCiudades: 
+                            type: array
+                            items:
+                                $ref: "{{model:ciudad}}"
+                        totales:
+                            type: object
+                            properties:
+                                poblacionTotal:
+                                    type: number
+                                enfermos: 
+                                    type: number
+                                recuperados:
+                                    type: number
+                                muertos:
+                                    type: number
+                        createdAt:
+                            type: string
+                        updatedAt: 
+                            type: string
+            -
+                name: informe
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        cuitHospital:
+                            type: number
+                        nombreHospital:
+                            type: string
+                        idCiudad:
+                            type: number
+                        nombreCiudad:
+                            type: string
+                        resumenCasos:
+                            type: object
+                            properties:
+                                cantidadMuertos:
+                                    type: number
+                                cantidadCurados:
+                                    type: number
+                                cantidadEnfermos:
+                                    type: number
+                        pruebasRealizadas:
+                            type: object
+                            properties:
+                                realizadas:
+                                    type: number
+                                sinResultado:
+                                    type: number
+                                positivas:
+                                    type: number
+                                negativas:
+                                    type: number
+                        Recursos:
+                            type: object
+                            properties:
+                                camillasDisponibles:
+                                    type: number
+                                camillasOcupadas:
+                                    type: number
+                                jabonLitros:
+                                    type: number
+                                alcoholLitros:
+                                    type: number
+                                barbijos:
+                                    type: number
+                                jeringas:
+                                    type: number
+                                cofias:
+                                    type: number
+                                medicos:
+                                    type: array
+                                    items:
+                                        $ref: "{{model:medico}}"
+                        impactadoEnEstadisticas:
+                            type: boolean
+                        createdAt:
+                            type: string
+                        updatedAt: 
+                            type: string
+                        
+                                    
+                                
                                      
                                 
-                            
 
 
 

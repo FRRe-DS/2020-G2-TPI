@@ -47,9 +47,13 @@ const Peticion = new mongoose.Schema({
         respondidaCompletamente: {
             type:Boolean,
             required:false
+        },
+        rechazada: {
+            type:Boolean,
+            required:false
         }
     }
 
-});
+},{timestamps : true});
 
 module.exports = mongoose.model('Peticion',Peticion);

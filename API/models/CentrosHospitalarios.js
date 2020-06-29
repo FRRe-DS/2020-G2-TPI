@@ -10,10 +10,6 @@ const CentrosHospitalarios = new mongoose.Schema({
             type:String,
             required:true
         },
-        provincia:{
-            type:String,
-            required:true
-        },
         ciudad:{
             type:String,
             required:true

@@ -23,5 +23,53 @@
         "direccion" : "9 de Julio 102",
         "tipo": "Centro Barrial" 
     }
+    ,
+    {
+        "idCentro":2,
+        "nombre":"Centro 2",
+        "provincia": "Chaco",
+        "ciudad" : "Villa Angela",
+        "direccion" : "9 de Julio 102",
+        "tipo": "Centro Barrial" 
+    }
+
+    ,
+    {
+        "idCentro":2,
+        "nombre":"Centro 2",
+        "provincia": "Chaco",
+        "ciudad" : "Villa Angela",
+        "direccion" : "9 de Julio 102",
+        "tipo": "Centro Barrial" 
+    }
+
+    ,
+    {
+        "idCentro":2,
+        "nombre":"Centro 2",
+        "provincia": "Chaco",
+        "ciudad" : "Villa Angela",
+        "direccion" : "9 de Julio 102",
+        "tipo": "Centro Barrial" 
+    }
+    ,
+    {
+        "idCentro":2,
+        "nombre":"Centro 2",
+        "provincia": "Chaco",
+        "ciudad" : "Villa Angela",
+        "direccion" : "9 de Julio 102",
+        "tipo": "Centro Barrial" 
+    }
+
+    ,
+    {
+        "idCentro":2,
+        "nombre":"Centro 2",
+        "provincia": "Chaco",
+        "ciudad" : "Villa Angela",
+        "direccion" : "9 de Julio 102",
+        "tipo": "Centro Barrial" 
+    }
 
 ]
