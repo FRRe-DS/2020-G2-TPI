@@ -163,6 +163,10 @@ custom:
                                         $ref: "{{model:doctor}}"
                                 respondidaCompletamente:
                                     type:Boolean
+                                createdAt:
+                                    type: string
+                                updatedAt:
+                                    type: string
                                      
                                 
                             

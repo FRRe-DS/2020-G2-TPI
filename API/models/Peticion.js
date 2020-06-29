@@ -50,6 +50,6 @@ const Peticion = new mongoose.Schema({
         }
     }
 
-});
+},{timestamps : true});
 
 module.exports = mongoose.model('Peticion',Peticion);
