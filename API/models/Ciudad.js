@@ -10,6 +10,6 @@ const Ciudad = new mongoose.Schema({
                     required: true
                 }
 
-            })
+            });
 
-module.exports = mongoose.model('Ciudad',Ciudad)
+module.exports = mongoose.model('Ciudad',Ciudad);

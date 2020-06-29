@@ -8,7 +8,8 @@ const envioController = require('../controllers/envioController');
 const apiController = require('../controllers/apiController');
 const recursosController = require('../controllers/recursosController');
 const medicosController = require('../controllers/medicosController');
-const statController = require('../controllers/statController')
+const statController = require('../controllers/statController');
+const ciudadController = require('../controllers/ciudadController');
 
 router.get('/',(req,res)=>{
     console.log("Hola,probando");
@@ -90,5 +91,9 @@ router.get('/actualizarEstadisticas',statController.registrarNuevaEstadistica)
 router.get('/stat',statController.obtenerTodasEstadisticas)
 
 router.post('/stat',statController.agregarEstadistica)
+
+router.post('/ciudad',ciudadController.nuevaCiudad)
+
+router.get('/ciudad',ciudadController.getCiudad)
 
 module.exports = router;

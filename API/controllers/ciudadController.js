@@ -1,32 +1,23 @@
-const Recursos = require('../models/Recursos');
+const Ciudad = require('../models/Ciudad');
 
+exports.nuevaCiudad = async(req,res,next) =>{
+    const ciudad = new Ciudad(req.body);
 
-//SOLO AL PRINCIPIO, TOCAS DE VUELTA ESTE METODO Y ROMPES TODO
-//TENEMOS QUE USAR UN METODO PARA ACTUALIZAR EL UNICO ELEMENTO DE LA COLECCION
-
-
-exports.registrarRecursos = async (req,res,next) =>{
-    
-    const recursos = new Recursos(req.body);
-    
     try {
         await recursos.save();
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
-        res.json({mensaje:"Los recursos se agregaron correctamente"});
+        res.json({mensaje:"Las ciudades se agregaron correctamente"});
     } catch (error) {
         console.log(error);
         next();
     }
 }
 
-//cuando obtengo las Recursos
-
-
-exports.getRecursos = async(req,res,next) =>{
+exports.getCiudad = async(req,res,next) =>{
     try {
-        const recursos = await Recursos.find({});
+        const ciudad = await Ciudad.find({}).sort({nombreCiudad:1});
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
