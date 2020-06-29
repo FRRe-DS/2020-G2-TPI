@@ -6,7 +6,7 @@ import './css/tarjeta.css'
 class CardPeticion extends Component {
     render() {
     const peticion = this.props.peticion.Peticion
-    console.log( this.props.peticion.createdAt)
+    
     var fecha = this.props.peticion.createdAt.split("T")[0]
     var hora = this.props.peticion.createdAt.split("T")[1].split(".")[0] 
     let estadoPeticion = peticion.respondidaCompletamente
