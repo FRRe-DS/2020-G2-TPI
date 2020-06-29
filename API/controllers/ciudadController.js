@@ -4,7 +4,7 @@ exports.nuevaCiudad = async(req,res,next) =>{
     const ciudad = new Ciudad(req.body);
 
     try {
-        await recursos.save();
+        await ciudad.save();
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,7 +21,7 @@ exports.getCiudad = async(req,res,next) =>{
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
-        res.json(recursos);
+        res.json(ciudad);
     } catch (error) {
         console.log(error);
         next();

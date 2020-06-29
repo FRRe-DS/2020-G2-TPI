@@ -1,8 +1,5 @@
 const Medicos = require('../models/Medicos');
 
-
-
-
 exports.registrarMedicos = async (req,res,next) =>{
     
 
