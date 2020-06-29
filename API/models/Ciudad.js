@@ -8,8 +8,16 @@ const Ciudad = new mongoose.Schema({
                 nombreCiudad:{
                     type: String,
                     required: true
+                },
+                latitud:{
+                    type: Number,
+                    required: true
+                },
+                longitud:{
+                    type: Number,
+                    required: true
                 }
 
             });
 
-module.exports = mongoose.model('Ciudad',Ciudad);
+module.exports = mongoose.model('Ciudad',Ciudad)
