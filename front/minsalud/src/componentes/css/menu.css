@@ -7,8 +7,8 @@
     padding-bottom:1em;
     color:#ffffff;
     margin-right:1em;   
-    height:40vh;
-    width: 90%;
+    height:24em;
+    width: 85%;
     border-radius: 0.1em;
     display: block;
     
@@ -19,7 +19,8 @@
     width:80%;
     margin-bottom:1em;
     color:white;
-    margin-right:18em;
+    margin-right:15em;
+    padding:0.3em;
 }
 
 
@@ -27,7 +28,8 @@
     color:white;
     cursor: pointer;
     background-color: #0e6f7e;
-    padding:1em;
+    padding:0.5em;
     transition:ease 1s;
     width:100%;
+    
 }

@@ -23,7 +23,10 @@ fetch(url, {
 }).then(resp=>resp.json())
 .then(data => 
   { 
-    this.setState({idPeticion: data[0]._id.substr(-4)})
+
+    //Traigo el id desde la url para hacer un ruteo comodo 
+    let idPeticionURL = window.location.href.replace('http://localhost:3000/peticion/','')
+    this.setState({idPeticion: idPeticionURL})
     //agrego un if para separar del json los medicos y la peticion en si
     
     if(data[0].Peticion.hasOwnProperty('medicos')){
@@ -62,10 +65,10 @@ fetch(url, {
       }
     }   
   render() {
-    
+
       return (
         <div id="container-peticion">
-          <h3>Peticion: {this.state.idPeticion}</h3>
+          <h3>Peticion: {this.state.idPeticion.substr(-5)}</h3>
             <ul>
 
             {
