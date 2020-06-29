@@ -4,19 +4,22 @@
     grid-column: 1/2;
     border: solid black 1px;
     padding-top:1em;
+    padding-bottom:1em;
     color:#ffffff;
-    margin-right:1em;
-    height:17em;
-    width: 95%;
+    margin-right:1em;   
+    height:40vh;
+    width: 90%;
     border-radius: 0.1em;
+    display: block;
     
 }
 
 .menu-item{
     list-style-type: none;
-    width:100%;
+    width:80%;
+    margin-bottom:1em;
     color:white;
-    
+    margin-right:18em;
 }
 
 
@@ -26,5 +29,5 @@
     background-color: #0e6f7e;
     padding:1em;
     transition:ease 1s;
-    
+    width:100%;
 }

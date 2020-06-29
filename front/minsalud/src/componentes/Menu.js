@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
 import './css/menu.css';
+
 const Menu = () => {
     return ( 
     <div className="menu">

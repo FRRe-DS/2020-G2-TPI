@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./index.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./componentes/Header";
@@ -6,38 +6,62 @@ import Menu from "./componentes/Menu";
 import TablaCentros from "./componentes/TablaCentros";
 import Login from "./componentes/Login";
 
-import CardPeticion from './componentes/CardPeticion';
+import Peticiones from './componentes/Peticiones';
 import TablaRecursos from './componentes/TablaRecursos';
 import Peticion from './componentes/Peticion'
 // importar informacion a cerca de los centros hospitalarios
-import centros from "./ejemplos/centrosHospitalarios.json";
-
+import RealizarEnvio from './componentes/RealizarEnvio'
+import Logo from "./componentes/img/ministerio-logo.png"
 
 
 class App extends Component {
 	state = {
-    centros: centros,
-    url:"https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/"
+    
+    url:"http://localhost:5000/"
 	};
 
   render() {
     return (
       <Router>
-        <Header />
+        
         <Switch>
+         {/* Ruta para el home */}
+          <Route
+            exact
+            path="/home"
+            render={() => {
+              return (
+              <div>
+                <Header />
+                <div className="app-container">
+                  
+                  <Menu />
+                  <img className="imagen-home" src={Logo} alt="logo del ministerio"/>
+                </div>
+                </div>
+              );
+            }}
+          />
+
+         {/* Ruta de la tabla de centros medicos */}
           <Route
             exact
             path="/centrosmedicos"
             render={() => {
               return (
+              <div>
+                <Header />
+                <h1>Centros hospitalarios</h1>
                 <div className="app-container">
                   
                   <Menu />
                   <TablaCentros url={this.state.url} />
                 </div>
+                </div>
               );
             }}
           />
+          {/* Ruta Login */}
           <Route 
           exact path="/"
           
@@ -45,64 +69,82 @@ class App extends Component {
           
           />
 
-		  <Route 
+          {/* Ruta para ver todas las peticiones */}
+      <Route 
+      
           exact path="/peticiones"
           
           render={() => {
 			return (
+        <div>
+                <Header />
+                <h1>Peticiones</h1>
 			  <div className="app-container">
 				
 				<Menu/>
-				<CardPeticion/>
-        <CardPeticion/>
-        <CardPeticion/>
+        <Peticiones url={this.state.url} />
 			  </div>
+        </div>
 			);
 		  }}
           
           />
-
+  {/* Ruta para ver la tabla de recursos disponibles*/}  
       <Route 
           exact path="/recursos"
           
           render={() => {
 			return (
+        <div>
+        <Header />
+        <h1>Recursos disponibles</h1>
 			  <div className="app-container">
 				
 				<Menu/>
-        <TablaRecursos/>
+        <TablaRecursos url={this.state.url}/>
         
 			  </div>
+        </div>
 			);
 		  }}
           
           />
+
+          {/* Ruta de una paticion en particular, el envio de id se hace desde /peticiones */}
  <Route 
           exact path="/peticion/:id"
           
           render={() => {
 			return (
+        <div>
+        <Header />
 			  <div className="app-container">
 				
-				<Menu/>
-        <Peticion/>
+				<Menu />
+        <Peticion url={this.state.url}/>
         
 			  </div>
-			);
+        </div>
+      );
 		  }}
           
           />
+          
+          {/* Ruta para generar un envio con una id en particular */}
  <Route 
-          exact path="/gestion/:id"
+          exact path="/envio/:id"
           
           render={() => {
 			return (
+        <div>
+        <Header />
 			  <div className="app-container">
 				
 				<Menu/>
-        <h2>ACA HAY QUE COLOCAR EL ENVIO DE UN ENVIO</h2>
+        <RealizarEnvio url={this.state.url}/>
         
 			  </div>
+        </div>
 			);
 		  }}
           

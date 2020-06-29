@@ -390,7 +390,11 @@ custom:
                                 respondidaCompletamente:
                                     type: boolean
                                 rechazada: 
-                                    type: boolean                                     
+                                    type: boolean 
+                        createdAt:
+                            type: string
+                        updatedAt:
+                            type: string                                    
             -
                 name: ciudad
                 contentType: "application/json"
@@ -499,6 +503,9 @@ custom:
                         updatedAt: 
                             type: string
                         
+                                    
+                                
+                                     
                                 
 
 
