@@ -64,3 +64,24 @@ exports.rechazarPeticion = async(req,res,next) =>{
         next();
     }
 }
+
+exports.encontrarPeticionId= async(req,res,next) =>{
+    try{
+        console.log(req.query.idPeticion)
+        const peticion = await Peticion.findById(req.query.idPeticion);
+        console.log(typeof peticion)
+        console.log(peticion)
+        if(peticion == null)
+        {
+            res.json({"mensaje":"Peticion inexistente"})
+        }
+        else
+        {
+            res.json(peticion)
+        }
+    }catch(error)
+    {
+        console.log(error)
+        next();
+    }
+}

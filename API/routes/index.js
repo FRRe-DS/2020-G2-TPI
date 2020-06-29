@@ -85,6 +85,8 @@ router.get('/rechazarPeticion',
 peticionController.rechazarPeticion
 )
 
+router.get('/encontrarPeticion',peticionController.encontrarPeticionId)
+
 router.get('/actualizarEstadisticas',statController.registrarNuevaEstadistica)
 
 router.get('/stat',statController.obtenerTodasEstadisticas)
