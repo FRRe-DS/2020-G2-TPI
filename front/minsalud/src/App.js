@@ -17,7 +17,7 @@ import Logo from "./componentes/img/ministerio-logo.png"
 class App extends Component {
 	state = {
     
-    url:"https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/"
+    url:"http://localhost:5000/"
 	};
 
   render() {

@@ -6,7 +6,9 @@ import './css/tarjeta.css'
 class CardPeticion extends Component {
     render() {
     const peticion = this.props.peticion.Peticion
-    console.log(peticion)
+    console.log( this.props.peticion.createdAt)
+    var fecha = this.props.peticion.createdAt.split("T")[0]
+    var hora = this.props.peticion.createdAt.split("T")[1].split(".")[0] 
     let estadoPeticion = peticion.respondidaCompletamente
     let estado = 'Pendiente'
     let colorAlerta ='warning'
@@ -22,8 +24,8 @@ class CardPeticion extends Component {
             <Card.Title>Ciudad</Card.Title>
             <Card.Text>
             <ul>
-            <li>Fecha: 2/2/2020</li>
-            <li>Hora: 22:30</li>
+            <li>Fecha: {fecha}</li>
+            <li>Hora: {hora}</li>
             <br/>
             <Alert variant={colorAlerta}>
             Estado: {estado}
