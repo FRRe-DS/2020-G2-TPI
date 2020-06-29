@@ -1,23 +1,44 @@
+
+
 .form-login{
+    
+
     text-align: center;
+
     
 }
 .demoForm{
-    margin-left:20em;
-    margin-right: 20em;
+
+    width: 100%;
+
+    display: block;
+    text-align: center;
+
 }
 .form-control{
-    width: 100%;
+    width: 35%;
+    
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+h1{
+    
+    
+    width:100%;
 }
 
 h2{
     padding-top: 10px;
+    
 }
 
 .imagen-login{
-    width:50em;
-    height: 20em;
+    position: relative;
+    width:90%;
+    height: 18em;
     border: 1px solid black;
     border-radius: 1em;
-    padding:2em;
+    padding:1em;
 }

@@ -118,14 +118,14 @@ class Login extends Component {
 			<Container className="form-login">
 				<img className="imagen-login" src={Logo} alt="Imagen del ministerio de salud" />
 				<br/>
-				<br/>
+				
 				<h1>Sistema de gestion COVID-19</h1>
-				<br/>
+				
 				<Form className="demoForm">
 					<h2>Inicio de Sesión</h2>
 
 					<div className={`form-group ${this.errorClass(this.state.formErrors.user)}`}>
-						<label htmlFor="user">Usuario</label>
+						<label htmlFor="user">Usuario: </label>
 						<input
 							type="user"
 							required
@@ -137,7 +137,7 @@ class Login extends Component {
 						/>
 					</div>
 					<div className={`form-group ${this.errorClass(this.state.formErrors.password)}`} >
-						<label htmlFor="password">Contraseña</label>
+						<label htmlFor="password">Contraseña:</label>
 						<input
 							type="password"
 							className="form-control"
