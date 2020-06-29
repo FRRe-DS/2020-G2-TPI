@@ -11,3 +11,5 @@ const Ciudad = new mongoose.Schema({
                 }
 
             })
+
+module.exports = mongoose.model('Ciudad',Ciudad)
