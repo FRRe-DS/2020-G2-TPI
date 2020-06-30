@@ -1,32 +1,27 @@
-const Medicos = require('../models/Medicos');
+const Ciudad = require('../models/Ciudad');
 
-exports.registrarMedicos = async (req,res,next) =>{
-    
-
-    const medicos = new Medicos(req.body);
+exports.nuevaCiudad = async(req,res,next) =>{
+    const ciudad = new Ciudad(req.body);
 
     try {
-        await medicos.save();
+        await ciudad.save();
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
-        res.json({mensaje:"Los medicos se agregaron correctamente"});
+        res.json({mensaje:"Las ciudades se agregaron correctamente"});
     } catch (error) {
         console.log(error);
         next();
     }
 }
 
-//cuando obtengo los medicos
-
-
-exports.getMedicos = async(req,res,next) =>{
+exports.getCiudad = async(req,res,next) =>{
     try {
-        const medicos = await Medicos.find({});
+        const ciudad = await Ciudad.find({}).sort({nombreCiudad:1});
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
-        res.json(medicos);
+        res.json(ciudad);
     } catch (error) {
         console.log(error);
         next();

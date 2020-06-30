@@ -9,7 +9,7 @@ const Recursos = require('../models/Recursos');
 exports.registrarRecursos = async (req,res,next) =>{
     
     const recursos = new Recursos(req.body);
-    console.log(req.body);
+    
     try {
         await recursos.save();
         res.statusCode = 200;
