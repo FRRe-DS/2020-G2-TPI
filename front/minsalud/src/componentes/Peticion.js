@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './css/peticion.css'
 import Button from 'react-bootstrap/Button'
 import BotonModal from './Modal'
-import RealizarEnvio from './RealizarEnvio'
+
 class Peticion extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +16,10 @@ class Peticion extends Component {
 
 
 traerData(){
-const url = `${this.props.url}peticiones`;
+//Traigo el id desde la url para hacer un ruteo comodo 
+let idPeticionURL = window.location.href.replace('http://localhost:3000/peticion/','');
+this.setState({idPeticion: idPeticionURL});
+const url = `${this.props.url}encontrarPeticion?idPeticion=${idPeticionURL}`;
 fetch(url, {
   method: "GET"
  
@@ -24,14 +27,12 @@ fetch(url, {
 .then(data => 
   { 
 
-    //Traigo el id desde la url para hacer un ruteo comodo 
-    let idPeticionURL = window.location.href.replace('http://localhost:3000/peticion/','')
-    this.setState({idPeticion: idPeticionURL})
+    console.log(data)
     //agrego un if para separar del json los medicos y la peticion en si
     
-    if(data[0].Peticion.hasOwnProperty('medicos')){
+    if(data.Peticion.hasOwnProperty('medicos')){
     
-    let {medicos, respondidaCompletamente, ...peticion} = data[0].Peticion
+    let {medicos, respondidaCompletamente, ...peticion} = data.Peticion
     this.setState({
       recursos:peticion,
       medicos:medicos,
@@ -40,7 +41,7 @@ fetch(url, {
     })
 
   } else{
-    let {respondidaCompletamente, ...peticion} = data[0].Peticion
+    let {respondidaCompletamente, ...peticion} = data.Peticion
   
   
     this.setState({
@@ -65,7 +66,7 @@ fetch(url, {
       }
     }   
   render() {
-
+    
       return (
         <div id="container-peticion">
           <h3>Peticion: {this.state.idPeticion.substr(-5)}</h3>
@@ -106,7 +107,7 @@ fetch(url, {
             <div className="botones-peticion">
             <Button className='boton' variant="secondary" size="lg" href="/peticiones">Volver</Button >
             <BotonModal className='boton' boton="Rechazar Peticion" head="Rechazo de peticion"/>
-            <Button className='boton' variant="primary" size="lg" href="/envio/:id">Responder peticion</Button >
+            <Button className='boton' variant="primary" size="lg" href={`/envio/${this.state.idPeticion}`}>Responder peticion</Button >
             </div> 
                
         </div>

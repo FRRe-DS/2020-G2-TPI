@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import CardPeticion from './CardPeticion';
 
+import ReactDOM from 'react-dom'
 
 class Peticiones extends Component{
     constructor(props) {
@@ -18,7 +19,10 @@ class Peticiones extends Component{
        
       }).then(resp=>resp.json())
       .then(data => this.setState({peticiones: data}))
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        
+      })
     }
     //se usa este hook para poder colocar los datos despues del renderizado
       
@@ -35,6 +39,7 @@ class Peticiones extends Component{
             {
               this.state.peticiones.map( peticion => <CardPeticion peticion={peticion}  />)
           }
+          
           </Fragment>
           );
         
