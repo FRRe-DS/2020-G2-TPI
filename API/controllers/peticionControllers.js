@@ -42,7 +42,6 @@ exports.obtenerPeticiones = async(req,res,next) =>{
 
 exports.rechazarPeticion = async(req,res,next) =>{
     try{
-<<<<<<< HEAD
         
         if(mongoose.Types.ObjectId.isValid(req.query.idPeticion)){
 
@@ -62,21 +61,6 @@ exports.rechazarPeticion = async(req,res,next) =>{
                         res.json({mensaje:"Peticion rechazada"});
                     }
                 })
-=======
-        res.statusCode = 200;
-        res.setHeader('content-type', 'application/json');
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        const peticion = await Peticion.findById(req.query.idPeticion);
-        console.log(peticion);
-        peticion.Peticion.rechazada=true;
-        console.log("PETICION ACTUALIZADA");
-        console.log(peticion);
-
-        //actualizo la peticion
-        Peticion.findByIdAndUpdate(req.query.idPeticion, {"Peticion": peticion.Peticion}, {useFindAndModify: false} ,(err, result) => {
-            if(err){
-                res.json({mensaje: "Peticion inexistente"})
->>>>>>> trabajoFront
             } else{
                 res.json({mensaje:"La peticion ya ha sido rechazada anteriormente"});
             }
