@@ -53,7 +53,7 @@ exports.rechazarPeticion = async(req,res,next) =>{
         //actualizo la peticion
         Peticion.findByIdAndUpdate(req.query.idPeticion, {"Peticion": peticion.Peticion}, {useFindAndModify: false} ,(err, result) => {
             if(err){
-                res.send(err)
+                res.json({mensaje: "Peticion inexistente"})
             } else{
                 res.json({mensaje:"Peticion rechazada"});
             }
