@@ -123,6 +123,19 @@ functions:
             requestBody:
                 description: "Empty request body"
       - http:
+          path: /centroHospitalarioId
+          method: GET
+          cors: true
+          documentation:
+            summary: "Gets a Centros Hospitalario"
+            requestBody:
+                description: "Empty request body"
+            pathParams:
+                -
+                    name: idCentro
+                    required: true
+                    description: "Id of Centro Hospitalario"
+      - http:
           path: /envios
           method: GET
           cors: true

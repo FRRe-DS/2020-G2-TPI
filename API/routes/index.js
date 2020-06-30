@@ -92,7 +92,6 @@ router.post('/generarMedicos',
 medicosController.generarMedicosRandom
 )
 
-
 router.get('/rechazarPeticion',
 peticionController.rechazarPeticion
 )
