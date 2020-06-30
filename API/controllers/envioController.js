@@ -1,5 +1,6 @@
 const Envio = require('../models/Envios');
 const Peticion = require('../models/Peticion');
+const Medico = require('../models/Medicos');
 const Validacion = require('../validacion/envioValidator');
 const {actualizarRecursos} = require('../controllers/recursosController');
 
@@ -14,6 +15,7 @@ exports.nuevoEnvio = async(req,res,next) =>{
     res.setHeader('content-type', 'application/json');
     res.setHeader('Access-Control-Allow-Origin', '*');
     let recursosValidos=true
+    let nuevos_medicos = new Medico();
     try{
         console.log(envioActual.idCentro);
         recursos=await Recursos.find({});
@@ -49,9 +51,58 @@ exports.nuevoEnvio = async(req,res,next) =>{
                         recursosValidos=false;
                     }
                     break;
+                case "medicos":
+                    const medicos = await Medico.find({});
+                    const listaMedicosMongo = medicos[0].Medicos
+                    const listaMedicosEnvio = envioActual.medicos 
+                    console.log(medicos);
+                    console.log("LISTA MEDICOS MONGO ANTES "+ listaMedicosMongo);
+                    //listaMedicosMongo.forEach(element => {
+                    //    console.log(element)
+                    //});
+                    //listaMedicosMongo.forEach(element => {
+                    //    console.log("elemento"+element);
+                    //});
+                    //console.log("LISTA MEDICOS ENVIO "+ listaMedicosEnvio);
+                    //console.log("lista medicos envio "+listaMedicosEnvio.especialidad)
+
+                    
+                    
+                    
+                    console.log("--------------------------------------------")
+                    
+                    nuevos_medicos.Medicos = medicos[0].Medicos
+                    console.log("NUEVOS MEDICOS"+nuevos_medicos.Medicos);
+                    medicos[0].Medicos.forEach((element,index) =>{
+                        for (let itemenvio in listaMedicosEnvio){
+                            //console.log("holi"+element.especialidad);
+                            //console.log("mongo"+typeof listaMedicosMongo);
+                            //console.log(listaMedicosEnvio[itemenvio].especialidad)
+                            if (element.especialidad == listaMedicosEnvio[itemenvio].especialidad){
+                                console.log("MATCH! "+listaMedicosEnvio[itemenvio].especialidad);
+                                console.log(element.especialidad+"esta en la pos" + index);
+                                //puedo hacer el envio,me da el cuero
+                                if (element.cantidad >= listaMedicosEnvio[itemenvio].cantidad){
+                                    nuevos_medicos.Medicos[index].cantidad -= listaMedicosEnvio[itemenvio].cantidad
+                                }
+                                else{
+                                    console.log("NO TE ALCANZA")
+                                    res.json({"message":"Medicos insuficientes"})
+                                    recursosValidos=false;
+                                }
+                            }
+                        }
+                    });
+                    console.log("LISTA MEDICOS MONGO DESPUES "+ nuevos_medicos.Medicos)
+                    await Medico.deleteOne({});
+                    await nuevos_medicos.save();
+                    
                 default:
                     break;
             }
+
+            //ahora pregunto si el envio tiene medicos 
+
         }
         // recursos Validos empieza como true, si alguno de los campos que envio no cumple, se pone el flag a false
         
@@ -80,62 +131,68 @@ exports.nuevoEnvio = async(req,res,next) =>{
                 Peticion.findById(envioActual.idPeticion, (error, peti) => {
 
                     if(peti){
-                        
-                        //console.log('EXISTE LA PETICION!')
-                        //console.log('LA PETICIÓN ANTES DE REALIZAR EL ENVIO:')
-                        //console.log(peti.Peticion)
+                        //veo si la peticion no esta rechazada
+                        if(peti.Peticion.hasOwnProperty('rechazada') == false){
 
-                        // ACTUALIZAR LA PETICION
-                        // actualizar valores
-                        for(var key in peti.Peticion){
-                            if(peti.Peticion.hasOwnProperty(key)){
 
-                                if(recursos.includes(key) && envioActual[key] != undefined){
-                                    //console.log('Se han enviado: '+ envioActual[key] + 'del recurso:' + key)
-                                    peti.Peticion[key] -= envioActual[key]
-                                    //evitar que los recursos sean negativos en la peticion
-                                    if(peti.Peticion[key] <= 0)
-                                    {
-                                        peti.Peticion[key]=0;
+                            //console.log('EXISTE LA PETICION!')
+                            //console.log('LA PETICIÓN ANTES DE REALIZAR EL ENVIO:')
+                            //console.log(peti.Peticion)
+
+                            // ACTUALIZAR LA PETICION
+                            // actualizar valores
+                            for(var key in peti.Peticion){
+                                if(peti.Peticion.hasOwnProperty(key)){
+
+                                    if(recursos.includes(key) && envioActual[key] != undefined){
+                                        //console.log('Se han enviado: '+ envioActual[key] + 'del recurso:' + key)
+                                        peti.Peticion[key] -= envioActual[key]
+                                        //evitar que los recursos sean negativos en la peticion
+                                        if(peti.Peticion[key] <= 0)
+                                        {
+                                            peti.Peticion[key]=0;
+                                        }
+                                            
+                                        //console.log('Falta enviar: ' + peti.Peticion[key] + 'del recurso ' + key)
                                     }
                                         
-                                    //console.log('Falta enviar: ' + peti.Peticion[key] + 'del recurso ' + key)
                                 }
-                                    
                             }
-                        }
-                        //actualizacion de medicos
-                        for(var i in envioActual.medicos)
-                        {
-                            
-                            for(var j in peti.Peticion.medicos)
+                            //actualizacion de medicos
+                            for(var i in envioActual.medicos)
                             {
-                                if (envioActual.medicos[i].especialidad===peti.Peticion.medicos[j].especialidad)
+                                
+                                for(var j in peti.Peticion.medicos)
                                 {
-                                    console.log(envioActual.medicos[i].especialidad);
-                                    console.log(peti.Peticion.medicos[j].especialidad);
-                                    peti.Peticion.medicos[j].cantidad-=envioActual.medicos[i].cantidad;
-                                    if(peti.Peticion.medicos[j].cantidad <= 0)
+                                    if (envioActual.medicos[i].especialidad===peti.Peticion.medicos[j].especialidad)
                                     {
-                                        peti.Peticion.medicos[j].cantidad=0;
+                                        console.log(envioActual.medicos[i].especialidad);
+                                        console.log(peti.Peticion.medicos[j].especialidad);
+                                        peti.Peticion.medicos[j].cantidad-=envioActual.medicos[i].cantidad;
+                                        if(peti.Peticion.medicos[j].cantidad <= 0)
+                                        {
+                                            peti.Peticion.medicos[j].cantidad=0;
+                                        }
                                     }
                                 }
                             }
-                        }
-                        //peti.Peticion.respondidaCompletamente = peticionCompletada;
-                        //console.log('LA PETICIÓN DESPUES DE REALIZAR EL ENVIO:')
-                        //console.log(peti.Peticion)
-                        peti.Peticion.respondidaCompletamente = Validacion.isPeticionEmpty(peti.Peticion);
-                        // actualizar en base de datos
-                    Peticion.findByIdAndUpdate(envioActual.idPeticion, {"Peticion": peti.Peticion}, {useFindAndModify: false} ,(err, result) => {
-                        if(err){
-                            res.send(err)
-                        } else{
-                            res.json({mensaje:"Envio de prueba realizado"});
-                        }
-                        
-                    })
+                            //peti.Peticion.respondidaCompletamente = peticionCompletada;
+                            //console.log('LA PETICIÓN DESPUES DE REALIZAR EL ENVIO:')
+                            //console.log(peti.Peticion)
+                            peti.Peticion.respondidaCompletamente = Validacion.isPeticionEmpty(peti.Peticion);
+                            // actualizar en base de datos
+                        Peticion.findByIdAndUpdate(envioActual.idPeticion, {"Peticion": peti.Peticion}, {useFindAndModify: false} ,(err, result) => {
+                            if(err){
+                                res.send(err)
+                            } else{
+                                res.json({mensaje:"Envio de prueba realizado"});
+                            }
+                            
+                        })
                     
+                        }else{
+                            res.json({mensaje:"La peticion ya fue rechazada"})
+                        }
                         
                         // cambio de estado de peticion? 
                     // we pera
