@@ -75,7 +75,6 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
 
 exports.generarRecursosRandom = async (req,res,next) =>{
     
-    
     const recursos = await Recursos.find({});
     //var random = Math.round(Math.random() * (maximo - minimo) + minimo);
     

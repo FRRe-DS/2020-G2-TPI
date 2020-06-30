@@ -32,3 +32,36 @@ exports.getMedicos = async(req,res,next) =>{
         next();
     }
 }
+
+exports.generarMedicosRandom = async(req,res,next) =>{
+    
+    // query
+    const medicos = await Medicos.find({});
+
+    console.log(medicos[0].Medicos); 
+
+    let nuevosMedicos = new Medicos();
+
+    medicos[0].Medicos.forEach(medico => {
+        // console.log(medico)
+        // generamos entre 0 y 5 medicos
+        // var random = Math.round(Math.random() * (maximo - minimo) + minimo);
+        var cantidadMedicosNuevos = Math.round(Math.random() * 5);
+        medico.cantidad =  medico.cantidad + cantidadMedicosNuevos
+    });
+
+    nuevosMedicos.Medicos = medicos[0].Medicos
+
+    // console.log(nuevosMedicos.Medicos); 
+
+    try {
+        await Medicos.deleteOne({});
+        await nuevosMedicos.save();
+        res.json({mensaje:"Medicos generados"});
+
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+
+}

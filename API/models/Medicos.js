@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Medicos = new mongoose.Schema({
-	Medicos:{
+	Medicos:[{
 			cantidad: {
 				type:Number,
 				required:false
@@ -10,6 +10,6 @@ const Medicos = new mongoose.Schema({
 				type:String,
 				required:false
 			}
-		}
+		}]
 });
 module.exports = mongoose.model('Medicos',Medicos);

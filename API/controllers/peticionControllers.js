@@ -28,6 +28,7 @@ exports.nuevaPeticion = async (req,res,next) =>{
 
 
 exports.obtenerPeticiones = async(req,res,next) =>{
+    console.log(Math.round(Math.random() * (10 - 1) + 1));
     try {
         const peticiones = await Peticion.find({});
         res.statusCode = 200;
