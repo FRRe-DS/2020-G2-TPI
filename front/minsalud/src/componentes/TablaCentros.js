@@ -31,6 +31,7 @@ class TablaCentros extends Component{
   render() {
  
         return(
+          <div className="centros-container">
           <Table striped bordered hover className="tabla-centros table table-dark">
         <thead>
           <tr>
@@ -47,6 +48,7 @@ class TablaCentros extends Component{
         }
         </tbody>
       </Table>
+      </div>
         )}
       
       }

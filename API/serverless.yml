@@ -72,6 +72,11 @@ functions:
             requestModels: 
                 "application/json" : "login"
       - http:
+            path: /encontrarPeticion
+            method: GET
+            cors: true
+            
+      - http:
           path: /register
           method: POST
           cors: true

@@ -6,7 +6,7 @@ import './css/tarjeta.css'
 class CardPeticion extends Component {
     render() {
     const peticion = this.props.peticion.Peticion
-    
+    var idPeticion = this.props.peticion._id
     var fecha = this.props.peticion.createdAt.split("T")[0]
     var hora = this.props.peticion.createdAt.split("T")[1].split(".")[0] 
     let estadoPeticion = peticion.respondidaCompletamente
@@ -15,6 +15,9 @@ class CardPeticion extends Component {
     if(estadoPeticion === true){
       estado = 'Resuelta'
       colorAlerta = 'success'
+    }else if(peticion.hasOwnProperty('rechazada')){
+      estado = 'Rechazada'
+      colorAlerta = 'danger'
     }
       return (
           <div className="tarjeta">
@@ -24,7 +27,7 @@ class CardPeticion extends Component {
             <Card.Title>Ciudad</Card.Title>
             <Card.Text>
             <ul>
-            <li>Fecha: {fecha}</li>
+            <li>Fecha de solicitud: {fecha}</li>
             <li>Hora: {hora}</li>
             <br/>
             <Alert variant={colorAlerta}>
@@ -32,7 +35,7 @@ class CardPeticion extends Component {
             </Alert>
             </ul>
             </Card.Text>
-            <Button variant="primary" href="/peticion/:id">Ver detalles</Button>
+            <Button variant="primary" href={`/peticion/${idPeticion}`}>Ver detalles</Button>
         </Card.Body>
         </Card>
         <br/>

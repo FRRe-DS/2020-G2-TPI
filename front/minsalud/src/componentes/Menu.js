@@ -5,9 +5,9 @@ import './css/menu.css';
 const Menu = () => {
     return ( 
     <div className="menu">
-    <Nav defaultActiveKey="/peticiones" className="flex-column">
-    <div><b>Menu</b></div>
-    <Nav.Link href="/centrosmedicos" className="menu-item">Centros Hospitalarios</Nav.Link>
+    <Nav className="flex-column">
+    <div><h3>Menu</h3></div>
+    <Nav.Link href="/centrosmedicos" className="menu-item">Centros Hospit.</Nav.Link>
     <Nav.Link href="/recursos" className="menu-item">Recursos disponibles</Nav.Link>
     
     <Nav.Link href="/peticiones" className="menu-item">Gestion de peticiones</Nav.Link> 
