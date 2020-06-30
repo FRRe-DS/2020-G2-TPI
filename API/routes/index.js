@@ -58,6 +58,9 @@ centrosHospitalariosController.registerCentro
 router.get('/centrosHospitalarios',
 centrosHospitalariosController.getCentros
 )
+router.get('/centroHospitalarioId',
+centrosHospitalariosController.getCentroId
+)
 
 router.post('/informes',
 informesController.registrarInforme
@@ -82,8 +85,6 @@ medicosController.registrarMedicos
 router.get('/medicos',
 medicosController.getMedicos
 )
-
-
 
 router.get('/rechazarPeticion',
 peticionController.rechazarPeticion

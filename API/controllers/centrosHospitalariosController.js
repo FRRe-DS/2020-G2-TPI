@@ -27,3 +27,16 @@ exports.getCentros = async(req,res,next) =>{
         next();
     }
 }
+
+exports.getCentroId = async(req,res,next) =>{
+    try {
+        const CentroHospitalario = await CentrosHospitalario.find({'idCentro': req.query.idCentro});
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.json({CentroHospitalario});
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+}
