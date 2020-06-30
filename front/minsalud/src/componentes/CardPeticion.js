@@ -15,6 +15,9 @@ class CardPeticion extends Component {
     if(estadoPeticion === true){
       estado = 'Resuelta'
       colorAlerta = 'success'
+    }else if(peticion.hasOwnProperty('rechazada')){
+      estado = 'Rechazada'
+      colorAlerta = 'danger'
     }
       return (
           <div className="tarjeta">

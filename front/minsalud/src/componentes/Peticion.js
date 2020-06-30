@@ -106,8 +106,8 @@ fetch(url, {
             </ul>
             <div className="botones-peticion">
             <Button className='boton' variant="secondary" size="lg" href="/peticiones">Volver</Button >
-            <BotonModal className='boton' boton="Rechazar Peticion" head="Rechazo de peticion"/>
-            <Button className='boton' variant="primary" size="lg" href={`/envio/${this.state.idPeticion}`}>Responder peticion</Button >
+            <BotonModal className='boton' boton="Rechazar Peticion" url={this.props.url} head="Rechazo de peticion" idPeticion={this.state.idPeticion}/>
+            <Button className='boton' variant="primary" size="lg"  href={`/envio/${this.state.idPeticion}`}>Responder peticion</Button >
             </div> 
                
         </div>
