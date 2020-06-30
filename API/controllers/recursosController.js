@@ -77,27 +77,32 @@ exports.generarRecursosRandom = async (req,res,next) =>{
     
     
     const recursos = await Recursos.find({});
-    var random = Math.round(Math.random() * (10 - 1) + 1);
-    console.log(random);
-    console.log(recursos[0].Recursos.camillasDisponible);
+    //var random = Math.round(Math.random() * (maximo - minimo) + minimo);
+    
     const nuevosRecursos ={
         Recursos :{
-            camillasDisponible : recursos[0].Recursos.camillasDisponible + random,
-            jabonLitrosDisponible : recursos[0].Recursos.jabonLitrosDisponible,
-            alcoholLitrosDisponible :recursos[0].Recursos.alcoholLitrosDisponible,
-            barbijosDisponible : recursos[0].Recursos.barbijosDisponible,
-            jeringasDisponible: recursos[0].Recursos.jeringasDisponible,
-            cofiasDisponible : recursos[0].Recursos.cofiasDisponible
+            //camillas 10 - 50
+            camillasDisponible : recursos[0].Recursos.camillasDisponible + Math.round(Math.random() * (40) + 10),
+            //jabon 10.000 - 30.000
+            jabonLitrosDisponible : recursos[0].Recursos.jabonLitrosDisponible + Math.round(Math.random() * (20000) + 10000),
+            //alcohol 20.000 - 50.000
+            alcoholLitrosDisponible :recursos[0].Recursos.alcoholLitrosDisponible + Math.round(Math.random() * (30000) + 20000),
+            //barbijos 1.000 - 5.000
+            barbijosDisponible : recursos[0].Recursos.barbijosDisponible + Math.round(Math.random() * (4000) + 1000),
+            //jeringas 5.000 - 15.000
+            jeringasDisponible: recursos[0].Recursos.jeringasDisponible + Math.round(Math.random() * (10000) + 5000),
+            //cofias 1.000 - 5.000
+            cofiasDisponible : recursos[0].Recursos.cofiasDisponible + Math.round(Math.random() * (4000) + 1000)
         }
     }
-    console.log(nuevosRecursos.Recursos.camillasDisponible);
+
     try {
         await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(err, result) => {
-            console.log('entreeeeeeeeeee');
+            
             if(err){
                 res.send(err)
             } else{
-                // res.json({mensaje:"Recursos actualizados"});
+                res.json({mensaje:"Recursos generados"});
             }
         }); 
     } catch (error) {
