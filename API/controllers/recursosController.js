@@ -9,7 +9,7 @@ const Recursos = require('../models/Recursos');
 exports.registrarRecursos = async (req,res,next) =>{
     
     const recursos = new Recursos(req.body);
-    
+
     try {
         await recursos.save();
         res.statusCode = 200;
@@ -63,9 +63,7 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
         }
     }); 
     // res.json({mensaje:"Los recursos se actualizaron correctamente"});
-    
-
-    
+       
     
     }
     catch (error){
@@ -73,4 +71,37 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
         next();
     }
     
+}
+
+exports.generarRecursosRandom = async (req,res,next) =>{
+    
+    
+    const recursos = await Recursos.find({});
+    var random = Math.round(Math.random() * (10 - 1) + 1);
+    console.log(random);
+    console.log(recursos[0].Recursos.camillasDisponible);
+    const nuevosRecursos ={
+        Recursos :{
+            camillasDisponible : recursos[0].Recursos.camillasDisponible + random,
+            jabonLitrosDisponible : recursos[0].Recursos.jabonLitrosDisponible,
+            alcoholLitrosDisponible :recursos[0].Recursos.alcoholLitrosDisponible,
+            barbijosDisponible : recursos[0].Recursos.barbijosDisponible,
+            jeringasDisponible: recursos[0].Recursos.jeringasDisponible,
+            cofiasDisponible : recursos[0].Recursos.cofiasDisponible
+        }
+    }
+    console.log(nuevosRecursos.Recursos.camillasDisponible);
+    try {
+        await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(err, result) => {
+            console.log('entreeeeeeeeeee');
+            if(err){
+                res.send(err)
+            } else{
+                // res.json({mensaje:"Recursos actualizados"});
+            }
+        }); 
+    } catch (error) {
+        console.log(error);
+        next();
+    }
 }

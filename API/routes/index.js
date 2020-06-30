@@ -70,7 +70,9 @@ informesController.getInforme
 router.post('/recursos',
 recursosController.registrarRecursos
 )
-
+router.post('/generarRecursos',
+recursosController.generarRecursosRandom
+)
 router.get('/recursos',
 recursosController.getRecursos
 )
