@@ -11,7 +11,7 @@ class Peticion extends Component {
   medicos: {},
   idPeticion:'',
   estado:{},
-  rechazada:'false',
+  rechazada:false,
   activo:false
 }
 }
@@ -63,8 +63,8 @@ fetch(url, {
     })
     
   }
-  //tengo que hacer la comparacion flexible porque el rechazo en el back se hace como string y no booleano
-  if(this.state.estado || this.state.rechazada==true){
+  
+  if(this.state.estado || this.state.rechazada){
     this.setState({activo:true})
   }
   
