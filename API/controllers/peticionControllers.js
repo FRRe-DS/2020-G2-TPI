@@ -44,14 +44,14 @@ exports.rechazarPeticion = async(req,res,next) =>{
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
-        const peticion = await Peticion.findById(req.body.idPeticion);
+        const peticion = await Peticion.findById(req.query.idPeticion);
         console.log(peticion);
         peticion.Peticion.rechazada=true;
         console.log("PETICION ACTUALIZADA");
         console.log(peticion);
 
         //actualizo la peticion
-        Peticion.findByIdAndUpdate(req.body.idPeticion, {"Peticion": peticion.Peticion}, {useFindAndModify: false} ,(err, result) => {
+        Peticion.findByIdAndUpdate(req.query.idPeticion, {"Peticion": peticion.Peticion}, {useFindAndModify: false} ,(err, result) => {
             if(err){
                 res.send(err)
             } else{
