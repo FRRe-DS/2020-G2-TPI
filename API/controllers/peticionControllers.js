@@ -41,6 +41,9 @@ exports.obtenerPeticiones = async(req,res,next) =>{
 
 exports.rechazarPeticion = async(req,res,next) =>{
     try{
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
         const peticion = await Peticion.findById(req.body.idPeticion);
         console.log(peticion);
         peticion.Peticion.rechazada=true;
@@ -67,6 +70,9 @@ exports.rechazarPeticion = async(req,res,next) =>{
 
 exports.encontrarPeticionId= async(req,res,next) =>{
     try{
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
         console.log(req.query.idPeticion)
         const peticion = await Peticion.findById(req.query.idPeticion);
         console.log(typeof peticion)
