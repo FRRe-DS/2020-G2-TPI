@@ -1,10 +1,12 @@
 *{
     font-family: 'Open Sans', sans-serif;
+    
 }
 
 .header{
     background-color:#41B1C2;
     color: white;
+    width: 100%;
 }
 .header .container-foto-head{
 background-color: rgba(255, 255, 255, 0.945);
@@ -13,23 +15,31 @@ border-radius: 0.5em;
 padding-left: 0.5em;
 padding-right: 0.5em;
 }
+
 h1{
     text-align: center;
 }
+
 .app-container{
     display:grid;
+    
     margin-top:3em;
     width:98%;
     grid-template-columns: repeat(5,1fr);
-    position: absolute;;
+    position: absolute;
 }
 
-.tabla-centros th, td, tr {
-    border: 1px solid black;
-    text-align: center;
+.tabla-centros{
+    grid-column: 2/6; 
 }
 
 .tabla-centros {
+    border: 2px solid black;
+    text-align: center;
+    
+}
+
+.centros-container{
     grid-column: 2/6;
 }
 
@@ -40,3 +50,5 @@ h1{
     height:25em;
     opacity: 0.5;
 }
+
+

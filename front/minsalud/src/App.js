@@ -121,7 +121,7 @@ class App extends Component {
 			  <div className="app-container">
 				
 				<Menu />
-        <Peticion url={this.state.url}/>
+        <Peticion url={this.state.url} idPeticion/>
         
 			  </div>
         </div>

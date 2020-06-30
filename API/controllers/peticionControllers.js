@@ -1,5 +1,9 @@
 const Peticion = require('../models/Peticion');
+
 const Medico = require('../models/Medicos');
+
+const mongoose = require('mongoose');
+
 
 //cuando creo una nueva peticion
 
@@ -55,26 +59,58 @@ exports.obtenerPeticiones = async(req,res,next) =>{
 
 exports.rechazarPeticion = async(req,res,next) =>{
     try{
-        const peticion = await Peticion.findById(req.body.idPeticion);
-        console.log(peticion);
-        peticion.Peticion.rechazada=true;
-        console.log("PETICION ACTUALIZADA");
-        console.log(peticion);
+        
+        if(mongoose.Types.ObjectId.isValid(req.query.idPeticion)){
 
-        //actualizo la peticion
-        Peticion.findByIdAndUpdate(req.body.idPeticion, {"Peticion": peticion.Peticion}, {useFindAndModify: false} ,(err, result) => {
-            if(err){
-                res.send(err)
+            const peticion = await Peticion.findById(req.query.idPeticion);
+
+            if(!peticion.Peticion.rechazada){
+                // console.log(peticion);
+                peticion.Peticion.rechazada=true;
+                // console.log("PETICION ACTUALIZADA");
+                // console.log(peticion);
+        
+                //actualizo la peticion
+                Peticion.findByIdAndUpdate(req.query.idPeticion, {"Peticion": peticion.Peticion}, {useFindAndModify: false} ,(err, result) => {
+                    if(err){
+                        res.send(err)
+                    } else{
+                        res.json({mensaje:"Peticion rechazada"});
+                    }
+                })
             } else{
-                res.json({mensaje:"Peticion rechazada"});
+                res.json({mensaje:"La peticion ya ha sido rechazada anteriormente"});
             }
-        })
-
-
-
-
+        } else{
+            res.json({mensaje:"La petición no exite"});
+        }
+        
     }catch(error){
         console.log(error);
+        next();
+    }
+}
+
+exports.encontrarPeticionId= async(req,res,next) =>{
+    try{
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        console.log(req.query.idPeticion)
+        const peticion = await Peticion.findById(req.query.idPeticion);
+        console.log(typeof peticion)
+        console.log(peticion)
+        if(peticion == null)
+        {
+            res.json({"mensaje":"Peticion inexistente"})
+        }
+        else
+        {
+            res.json(peticion)
+        }
+    }catch(error)
+    {
+        console.log(error)
         next();
     }
 }

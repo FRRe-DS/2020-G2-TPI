@@ -1,13 +1,14 @@
 .envio-container{
     grid-column: 2/6;
-    display: block;
     border: 0.1em solid black;
     position: relative;
     border-radius: 1em;
-    width:90%;
+    width:100%;
     padding:1em;
+    border:2px solid black;
 }
 
 h2{
     text-align: center;
 }
+
