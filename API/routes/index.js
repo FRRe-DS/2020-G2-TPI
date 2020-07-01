@@ -55,6 +55,7 @@ loginController.registerUser
 router.post('/centrosHospitalarios',
 centrosHospitalariosController.registerCentro
 )
+
 router.get('/centrosHospitalarios',
 centrosHospitalariosController.getCentros
 )
@@ -74,6 +75,10 @@ router.post('/recursos',
 recursosController.registrarRecursos
 )
 
+router.post('/generarRecursos',
+recursosController.generarRecursosRandom
+)
+
 router.get('/recursos',
 recursosController.getRecursos
 )
@@ -84,6 +89,10 @@ medicosController.registrarMedicos
 
 router.get('/medicos',
 medicosController.getMedicos
+)
+
+router.post('/generarMedicos',
+medicosController.generarMedicosRandom
 )
 
 router.get('/rechazarPeticion',
