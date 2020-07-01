@@ -10,6 +10,10 @@ const CentrosHospitalarios = new mongoose.Schema({
             type:String,
             required:true
         },
+        idCiudad:{
+            type:Number,
+            required:true
+        },
         ciudad:{
             type:String,
             required:true
