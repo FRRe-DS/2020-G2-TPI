@@ -6,9 +6,24 @@
     width:100%;
     padding:1em;
     border:2px solid black;
+    margin-bottom:1%;
 }
 
 h2{
     text-align: center;
 }
 
+.form-envio{
+    margin-left:0;
+}
+
+
+.botones-envio{
+    width:20em;
+    position: absolute;
+    right:0;
+    bottom:0;
+    margin-bottom:1%;
+
+    
+}
