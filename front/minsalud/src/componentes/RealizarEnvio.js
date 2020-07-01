@@ -20,7 +20,7 @@ class RealizarEnvio extends Component {
     }).then(resp=>resp.json())
     .then(recu => this.setState({recursos: recu[0].Recursos}))
     
-    const urlCentros = `${this.props.url}CentrosHospitalarios`;
+    const urlCentros = `${this.props.url}centroshospitalarios`;
     fetch(urlCentros, {
       method: "GET"
       //,headers: {
@@ -30,11 +30,22 @@ class RealizarEnvio extends Component {
 
   }
   //se usa este hook para poder colocar los datos despues del renderizado
-  componentDidMount() {
+  componentWillMount() {
     if(this.state.recursos.length ===0 || this.state.centrosAPI.length ===0){
       this.traerData()
-    }}
+    }
+    
 
+}
+    
+    controlMinimo(recurso){
+        if(parseInt(recurso, 10)>0) {
+            return 1
+        }else{
+            return 0
+        } 
+    }
+    
     enviarPeticion(){
         console.log("Soy un envio")
     }
@@ -68,10 +79,7 @@ class RealizarEnvio extends Component {
                     <Form.Label column="lg">Camillas</Form.Label>
                     {        
                     <Form.Group>  
-                    <Form.Control as="select">
-                    {
-                    [...Array(this.state.recursos["camillasDisponible"])].map((e, i) =>  <option>{i}</option>)
-                    }
+                    <Form.Control type="number" max={this.state.recursos["camillasDisponible"]} min={this.controlMinimo('camillasDisponible')}>
                     </Form.Control>
                     </Form.Group>
                     }
@@ -82,10 +90,8 @@ class RealizarEnvio extends Component {
                     <Form.Label column="lg">Jabon en litros</Form.Label>
                     {        
                     <Form.Group>  
-                    <Form.Control as="select">
-                    {
-                    [...Array(this.state.recursos["jabonLitrosDisponible"])].map((e, i) =>  <option>{i}</option>)
-                    }
+                    <Form.Control type="number" max={this.state.recursos["jabonLitrosDisponible"]} min={this.controlMinimo('jabonLitrosDisponible')}>
+
                     </Form.Control>
                     </Form.Group>
                     }
@@ -96,10 +102,7 @@ class RealizarEnvio extends Component {
                     <Form.Label column="lg">Litros de alcohol en gel</Form.Label>
                     {        
                     <Form.Group>  
-                    <Form.Control as="select">
-                    {
-                    [...Array(this.state.recursos["alcoholLitrosDisponible"])].map((e, i) =>  <option>{i}</option>)
-                    }
+                    <Form.Control type="number" max={this.state.recursos["alcoholLitrosDisponible"]} min={this.controlMinimo('alcoholLitrosDisponible')}>
                     </Form.Control>
                     </Form.Group>
                     }
@@ -110,10 +113,7 @@ class RealizarEnvio extends Component {
                     <Form.Label column="lg">Barbijos</Form.Label>
                     {        
                     <Form.Group>  
-                    <Form.Control as="select">
-                    {
-                    [...Array(this.state.recursos["barbijosDisponible"])].map((e, i) =>  <option>{i}</option>)
-                    }
+                    <Form.Control type="number" max={this.state.recursos["barbijosDisponible"]} min={this.controlMinimo('barbijosDisponible')}>
                     </Form.Control>
                     </Form.Group>
                     }
@@ -124,10 +124,8 @@ class RealizarEnvio extends Component {
                     <Form.Label column="lg">Jeringas</Form.Label>
                     {        
                     <Form.Group>  
-                    <Form.Control as="select">
-                    {
-                    [...Array(this.state.recursos["jeringasDisponible"])].map((e, i) =>  <option>{i}</option>)
-                    }
+                    <Form.Control type="number" max={this.state.recursos["jeringasDisponible"]} min={this.controlMinimo('jeringasDisponible')}>
+
                     </Form.Control>
                     </Form.Group>
                     }
@@ -138,10 +136,7 @@ class RealizarEnvio extends Component {
                     <Form.Label column="lg">Cofias</Form.Label>
                     {        
                     <Form.Group>  
-                    <Form.Control as="select">
-                    {
-                    [...Array(this.state.recursos["cofiasDisponible"])].map((e, i) =>  <option>{i}</option>)
-                    }
+                    <Form.Control type="number" max={this.state.recursos["cofiasDisponible"]} min={this.controlMinimo('cofiasDisponible')}>
                     </Form.Control>
                     </Form.Group>
                     }
