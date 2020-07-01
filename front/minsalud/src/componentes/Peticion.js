@@ -10,7 +10,9 @@ class Peticion extends Component {
   recursos: [],
   medicos: {},
   idPeticion:'',
-  estado:{}
+  estado:{},
+  rechazada:false,
+  activo:false
 }
 }
 
@@ -51,8 +53,23 @@ fetch(url, {
     })
   }
   
+  //destructuring para sacar el atributo de rechazo en caso de tenerlo
+  if(this.state.recursos.hasOwnProperty("rechazada")){
+    let{rechazada, ...peticion} = this.state.recursos
+    this.setState({
+      recursos:peticion,
+      rechazada
+      
+    })
+    
+  }
+  
+  if(this.state.estado || this.state.rechazada){
+    this.setState({activo:true})
+  }
+  
   })
-
+  
 .catch(error => console.log(error))
 }
 //ESTO ES TRAERME UNA PETICION PORQUE TODAVIA NO TENGO ID DE PETICIONES
@@ -105,9 +122,9 @@ fetch(url, {
 
             </ul>
             <div className="botones-peticion">
-            <Button className='boton' variant="secondary" size="lg" href="/peticiones">Volver</Button >
-            <BotonModal className='boton' boton="Rechazar Peticion" url={this.props.url} head="Rechazo de peticion" idPeticion={this.state.idPeticion}/>
-            <Button className='boton' variant="primary" size="lg"  href={`/envio/${this.state.idPeticion}`}>Responder peticion</Button >
+            <Button className='boton' variant="secondary" size="lg" href="/peticiones" > Volver</Button >
+            <BotonModal className='boton' boton="Rechazar Peticion" url={this.props.url} head="Rechazo de peticion" idPeticion={this.state.idPeticion} estadoBoton={this.state.activo}/>
+            <Button className='boton' variant="primary" size="lg" disabled={this.state.activo} href={`/envio/${this.state.idPeticion}`}>Responder peticion</Button >
             </div> 
                
         </div>

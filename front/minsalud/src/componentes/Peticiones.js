@@ -1,7 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import CardPeticion from './CardPeticion';
 
-import ReactDOM from 'react-dom'
 
 class Peticiones extends Component{
     constructor(props) {

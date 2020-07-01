@@ -1,4 +1,4 @@
-import React, {useState, setShow} from 'react';
+import React, {useState} from 'react';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import ReactDOM from 'react-dom'
@@ -6,15 +6,14 @@ import Alert from 'react-bootstrap/Alert'
 function BotonModal(props) {
     const [show, setShow] = useState(false);
     let idPeticion = props.idPeticion
-    console.log('peticion:' + idPeticion)
     const url = `${props.url}rechazarPeticion?idPeticion=${idPeticion}`
-    const handleClose = () => {
+    const handleConfirmacion = () => {
       
       fetch(url, {
         method: "GET",
-      }).then(resp=>resp.json())
-      .then(data=>{
-        console.log(data)
+      })
+      .then(resp=>{
+        resp.json()
         ReactDOM.render(           
           <Alert variant="success">
           Peticion rechazada
@@ -43,11 +42,11 @@ function BotonModal(props) {
 
     };
     const handleShow = () => setShow(true);
-    
+    const handleClose = () => setShow(false)
     
     return (
       <>
-        <Button variant="warning" onClick={handleShow} size="lg">
+        <Button variant="warning" onClick={handleShow} size="lg" disabled={props.estadoBoton}>
           {props.boton}
         </Button>
   
@@ -61,7 +60,7 @@ function BotonModal(props) {
             <Button variant="secondary" onClick={handleClose}>
                 Cerrar
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={handleConfirmacion}>
                 Confirmar
             </Button>
           </Modal.Footer>
