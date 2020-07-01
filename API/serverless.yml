@@ -174,6 +174,26 @@ functions:
           path: /recursos
           method: POST
           cors: true
+    # ALE CONTROLA ESTE !
+      - http:
+          path: /generarRecursos
+          method: POST
+          cors: true
+          documentation:
+            summary: "Genera nuevos recursos de forma aleatoria"
+            requestBody:
+                description: "??????????????????"
+            requestModels:
+                "application/json": "recurso"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "???????????????????"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "???????????????????"
       - http:
           path: /medicos
           method: GET
@@ -201,6 +221,27 @@ functions:
                     statusCode: "403"
                     responseBody:
                         descripcion: "Ocurre cuando se supera la cuota diaria"
+
+        # ALE CONTROLA ESTE !
+      - http:
+          path: /generarMedicos
+          method: POST
+          cors: true
+          documentation:
+            summary: "Genera nuevos medicos de forma aleatoria"
+            requestBody:
+                description: "??????????????????"
+            requestModels:
+                "application/json": "medico"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "???????????????????"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "???????????????????"
       - http:
           path: /rechazarPeticion
           method: GET
