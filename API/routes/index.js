@@ -11,7 +11,7 @@ const medicosController = require('../controllers/medicosController');
 const statController = require('../controllers/statController')
 
 const ciudadController = require('../controllers/ciudadController');
-
+const validacionController = require('../controllers/validacionController')
 router.get('/',(req,res)=>{
     console.log("Hola,probando");
     res.json({message:"mensaje escrito en consola"});
@@ -45,6 +45,10 @@ router.get('/peticiones',
 
 router.post('/login',
 loginController.logUser
+)
+
+router.post('/logout',
+loginController.logout
 )
 
 router.post('/register',
@@ -111,4 +115,5 @@ router.post('/ciudad',ciudadController.nuevaCiudad)
 
 router.get('/ciudad',ciudadController.getCiudad)
 
+router.get('/validarSesion', loginController.validarSesion)
 module.exports = router;
