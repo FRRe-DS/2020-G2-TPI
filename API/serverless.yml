@@ -349,7 +349,9 @@ custom:
                         idCentro:
                             type: number
                         nombre:
-                            type: string  
+                            type: string
+                        idCiudad:
+                            type: number  
                         ciudad:
                             type: string 
                         direccion:
