@@ -9,6 +9,7 @@ const apiController = require('../controllers/apiController');
 const recursosController = require('../controllers/recursosController');
 const medicosController = require('../controllers/medicosController');
 const statController = require('../controllers/statController')
+const obtenerInformesController = require('../controllers/obtenerInformesController')
 
 const ciudadController = require('../controllers/ciudadController');
 
@@ -110,5 +111,9 @@ router.post('/stat',statController.agregarEstadistica)
 router.post('/ciudad',ciudadController.nuevaCiudad)
 
 router.get('/ciudad',ciudadController.getCiudad)
+
+router.post('/obtenerInformes',
+obtenerInformesController.registrarInformes
+)
 
 module.exports = router;

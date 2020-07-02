@@ -1,12 +1,37 @@
+const mongoose = require('mongoose');
 const InformeHospitalMinisterio = require('../models/InformeHospitalAMinisterio');
+var request = require('request');
 const ciudades = require('../models/Ciudad');
 
-exports.registrarInforme = async (req,res,next) => {
+exports.registrarInformes = async (req,res,next) => {
 
-    // control de cantidades de tests realizados
-    if(req.body.pruebasRealizadas.realizadas == (req.body.pruebasRealizadas.sinResultado + req.body.pruebasRealizadas.positivas +req.body.pruebasRealizadas.negativas)){
+  var options = {
+    'method': 'GET',
+    'url': 'http://localhost:5000/informes',
+    'headers': {
+    }
+  };
 
-        const nuevoInforme = new InformeHospitalMinisterio(req.body);
+  var respuesta = null;
+
+  request(options, function (error, response) {
+    
+    if (error) throw new Error(error);
+
+    respuesta = JSON.parse(response.body);
+  
+  });
+
+    // console.log(JSON.parse(response.body)); 
+    // const respuesta = JSON.parse(response.body);
+
+    for( item in respuesta.Informes){
+
+      console.log(respuesta.Informes[item])
+      
+      if(respuesta.Informes[item].pruebasRealizadas.realizadas == (respuesta.Informes[item].pruebasRealizadas.sinResultado + respuesta.Informes[item].pruebasRealizadas.positivas +respuesta.Informes[item].pruebasRealizadas.negativas)){
+
+        const nuevoInforme = new InformeHospitalMinisterio(respuesta.Informes[item]);
         const ciudad = (await ciudades.find().limit(1))[0].Ciudades;
         var ciudadValida = false;
         
@@ -34,18 +59,10 @@ exports.registrarInforme = async (req,res,next) => {
     } else{
         res.json({mensaje:"Errores en las cantidades de tests realizados del informe"});
     }
-} 
 
-exports.getInforme = async(req,res,next) =>{
-    try {
-        const Informes = await InformeHospitalMinisterio.find({}); 
-        res.statusCode = 200;
-        res.setHeader('content-type', 'application/json');
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.json({Informes})
-    } catch (error) {
-        console.log(error);
-        next();
+    
     }
+
+
 }
 
