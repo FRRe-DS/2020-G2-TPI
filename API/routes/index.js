@@ -103,7 +103,13 @@ router.get('/rechazarPeticion',
 peticionController.rechazarPeticion
 )
 
-router.get('/encontrarPeticion',peticionController.encontrarPeticionId)
+router.get('/encontrarPeticion',
+peticionController.encontrarPeticionId
+)
+
+router.get('/encontrarPeticionesFecha',
+peticionController.encontrarPeticionFecha
+)
 
 router.get('/actualizarEstadisticas',statController.registrarNuevaEstadistica)
 
