@@ -5,7 +5,6 @@ const Validacion = require('../validacion/envioValidator');
 const {actualizarRecursos} = require('../controllers/recursosController');
 
 const Recursos = require('../models/Recursos');
-//crear un nuevo Envio
 
 exports.nuevoEnvio = async(req,res,next) =>{
     const envio = new Envio(req.body);
@@ -17,13 +16,8 @@ exports.nuevoEnvio = async(req,res,next) =>{
     let recursosValidos=true
     let nuevos_medicos = new Medico();
     try{
-        console.log(envioActual.idCentro);
         recursos=await Recursos.find({});
-        console.log(recursos[0].Recursos);
         for (const item in envioActual){
-            //console.log("Item "+item);
-            //console.log("Recurso "+recursos[0].Recursos[item]);
-            //console.log("Envio "+envioActual[item]);
             //pregunta si la cantidad que quiero enviar de cada recurso es menor a lo que tengo disponible
             switch (item) {
                 case "camillas":
@@ -55,76 +49,39 @@ exports.nuevoEnvio = async(req,res,next) =>{
                     const medicos = await Medico.find({});
                     const listaMedicosMongo = medicos[0].Medicos
                     const listaMedicosEnvio = envioActual.medicos 
-                    console.log(medicos);
-                    console.log("LISTA MEDICOS MONGO ANTES "+ listaMedicosMongo);
-                    //listaMedicosMongo.forEach(element => {
-                    //    console.log(element)
-                    //});
-                    //listaMedicosMongo.forEach(element => {
-                    //    console.log("elemento"+element);
-                    //});
-                    //console.log("LISTA MEDICOS ENVIO "+ listaMedicosEnvio);
-                    //console.log("lista medicos envio "+listaMedicosEnvio.especialidad)
-
-                    
-                    
-                    
-                    console.log("--------------------------------------------")
-                    
+                   
                     nuevos_medicos.Medicos = medicos[0].Medicos
-                    console.log("NUEVOS MEDICOS"+nuevos_medicos.Medicos);
+
                     medicos[0].Medicos.forEach((element,index) =>{
                         for (let itemenvio in listaMedicosEnvio){
-                            //console.log("holi"+element.especialidad);
-                            //console.log("mongo"+typeof listaMedicosMongo);
-                            //console.log(listaMedicosEnvio[itemenvio].especialidad)
-                            if (element.especialidad == listaMedicosEnvio[itemenvio].especialidad){
-                                console.log("MATCH! "+listaMedicosEnvio[itemenvio].especialidad);
-                                console.log(element.especialidad+"esta en la pos" + index);
+                            if (element.especialidad == listaMedicosEnvio[itemenvio].especialidad){;
                                 //puedo hacer el envio,me da el cuero
                                 if (element.cantidad >= listaMedicosEnvio[itemenvio].cantidad){
                                     nuevos_medicos.Medicos[index].cantidad -= listaMedicosEnvio[itemenvio].cantidad
                                 }
                                 else{
-                                    console.log("NO TE ALCANZA")
                                     res.json({"message":"Medicos insuficientes"})
                                     recursosValidos=false;
                                 }
                             }
                         }
                     });
-                    console.log("LISTA MEDICOS MONGO DESPUES "+ nuevos_medicos.Medicos)
                     await Medico.deleteOne({});
                     await nuevos_medicos.save();
                     
                 default:
                     break;
             }
-
-            //ahora pregunto si el envio tiene medicos 
-
         }
         // recursos Validos empieza como true, si alguno de los campos que envio no cumple, se pone el flag a false
         
-        
-        
-        
-        
-        // FALTA CONTROLAR LOS MEDICOS ACA ARRIBA 
-
-
-
         if(recursosValidos){
-             // envio tiene id peticion? 
 
-             console.log('estoy antes del metodo');
+             // envio tiene id peticion? 
              actualizarRecursos(envioActual);
 
-             if(envioActual.hasOwnProperty("idPeticion")){
-                //console.log('LA PETICIÓN EXISTE EN EL ENVIO')
+             if(envioActual.hasOwnProperty("idPeticion")){   
                 
-                
-                // FALTA TRATAR MEDICOS!!!!!!
                 const recursos = ["camillas","alcoholLitros","jabonLitros","barbijos","jeringas","cofias"]
                 
                 // buscar peticion en base de datos
@@ -134,40 +91,27 @@ exports.nuevoEnvio = async(req,res,next) =>{
                         //veo si la peticion no esta rechazada
                         if(peti.Peticion.hasOwnProperty('rechazada') == false){
 
-
-                            //console.log('EXISTE LA PETICION!')
-                            //console.log('LA PETICIÓN ANTES DE REALIZAR EL ENVIO:')
-                            //console.log(peti.Peticion)
-
-                            // ACTUALIZAR LA PETICION
                             // actualizar valores
                             for(var key in peti.Peticion){
                                 if(peti.Peticion.hasOwnProperty(key)){
 
                                     if(recursos.includes(key) && envioActual[key] != undefined){
-                                        //console.log('Se han enviado: '+ envioActual[key] + 'del recurso:' + key)
                                         peti.Peticion[key] -= envioActual[key]
                                         //evitar que los recursos sean negativos en la peticion
                                         if(peti.Peticion[key] <= 0)
                                         {
                                             peti.Peticion[key]=0;
                                         }
-                                            
-                                        //console.log('Falta enviar: ' + peti.Peticion[key] + 'del recurso ' + key)
-                                    }
-                                        
+                                    }    
                                 }
                             }
                             //actualizacion de medicos
                             for(var i in envioActual.medicos)
-                            {
-                                
+                            { 
                                 for(var j in peti.Peticion.medicos)
                                 {
                                     if (envioActual.medicos[i].especialidad===peti.Peticion.medicos[j].especialidad)
                                     {
-                                        console.log(envioActual.medicos[i].especialidad);
-                                        console.log(peti.Peticion.medicos[j].especialidad);
                                         peti.Peticion.medicos[j].cantidad-=envioActual.medicos[i].cantidad;
                                         if(peti.Peticion.medicos[j].cantidad <= 0)
                                         {
@@ -176,9 +120,6 @@ exports.nuevoEnvio = async(req,res,next) =>{
                                     }
                                 }
                             }
-                            //peti.Peticion.respondidaCompletamente = peticionCompletada;
-                            //console.log('LA PETICIÓN DESPUES DE REALIZAR EL ENVIO:')
-                            //console.log(peti.Peticion)
                             peti.Peticion.respondidaCompletamente = Validacion.isPeticionEmpty(peti.Peticion);
                             // actualizar en base de datos
                         Peticion.findByIdAndUpdate(envioActual.idPeticion, {"Peticion": peti.Peticion}, {useFindAndModify: false} ,(err, result) => {
@@ -187,32 +128,20 @@ exports.nuevoEnvio = async(req,res,next) =>{
                             } else{
                                 res.json({mensaje:"Envio de prueba realizado"});
                             }
-                            
                         })
-                    
                         }else{
                             res.json({mensaje:"La peticion ya fue rechazada"})
-                        }
-                        
-                        // cambio de estado de peticion? 
-                    // we pera
-                        
+                        }                  
         
                     } else{
                         // error, no existe la peticion en la base de datos
                         res.json({mensaje: error})
                     }
-                })
-
-                // si la encontramos, update 
-                
+                })   
             } else {
-                console.log('LA PETICIÓN NO EXISTE EN EL ENVIO')
-                // guardar envio
                 // guardar envio
                 await envio.save();
                 res.statusCode = 200;
-                
                 res.json({mensaje:"El envio se agrego correctamente"});
             }
         } else {
@@ -228,7 +157,6 @@ exports.nuevoEnvio = async(req,res,next) =>{
 }
 
 //obtener todos los envios
-
 exports.obtenerEnvios = async(req,res,next)=>{
     try{
         const envios = await Envio.find({});
