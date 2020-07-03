@@ -7,17 +7,30 @@
     padding:1em;
     border:2px solid black;
     margin-bottom:1%;
+
 }
 
 h2{
-    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(5,1fr); 
 }
+
+#select-envio-centros{
+    border:2px solid black;
+    width:60%;
+    margin-right:50%;
+    margin-left:0
+}
+
 
 .form-envio{
+    border:2px solid black;
     margin-left:0;
+    margin-right: 5%; 
+    width:40%;
+    display: inline;
+    
 }
-
-
 .botones-envio{
     width:20em;
     position: absolute;
@@ -26,4 +39,27 @@ h2{
     margin-bottom:1%;
 
     
+}
+
+.recursos-envio{
+    border-right:2px solid black;
+}
+
+.grid-envio{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    
+}
+
+
+.medicos-envio{
+    margin-left: 2%;
+    
+}
+
+.cant-envio{
+    border: 2px solid black;
+    width: 25%;
+   margin-right:15%;
+   display: inline;
 }

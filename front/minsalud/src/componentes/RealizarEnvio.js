@@ -13,7 +13,8 @@ class RealizarEnvio extends Component {
             centroPeticion:{
                 id:0, 
                 nombre:""},
-      envio:{}
+      envio:{},
+      medicos:[]
     }}
     traerData(){
     const urlRecursos = `${this.props.url}recursos`;
@@ -24,6 +25,14 @@ class RealizarEnvio extends Component {
     }).then(resp=>resp.json())
     .then(recu => this.setState({recursos: recu[0].Recursos}))
     
+    const urlMedicos = `${this.props.url}medicos`;
+    fetch(urlMedicos, {
+      method: "GET"
+      //,headers: {
+      //  "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR"}
+    }).then(resp=>resp.json())
+    .then(data => this.setState({medicos: data[0].Medicos}))
+
     const urlCentros = `${this.props.url}centroshospitalarios`;
     fetch(urlCentros, {
       method: "GET"
@@ -55,6 +64,9 @@ class RealizarEnvio extends Component {
         .catch(error=>console.log(error))    
 
     }
+
+
+    
 
 
     
@@ -108,16 +120,44 @@ class RealizarEnvio extends Component {
         console.log("Soy un envio")
     }
     
-    
+    recursoPeticion(recurso){
+        
+        if(this.state.peticion.hasOwnProperty(`${recurso}`)){
+            return(this.state.peticion.recurso)
+        }else{
+            return 0
+        }
+    }
+
+
+    generacionMedico = ()=> {
+        let medicoDIV =
+        <Form.Group>
+        <Form.Label column="lg">Especialidad</Form.Label>
+        <Form.Control as="select" className="form-envio">
+        <option></option>
+        {
+        this.state.medicos.map( med => <option value={med._id}>{med.especialidad[0].toUpperCase() +  
+            med.especialidad.slice(1)}</option>)
+        }
+        </Form.Control>
+
+        <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={this.controlMinimo('cofiasDisponible')} defaultValue={0}/>
+        </Form.Group>
+        
+        console.log(this.state)
+    ReactDOM.render(medicoDIV, document.getElementById('otro-medico'))
+    }
         
     render(){
-        
+        console.log(this.state.medicos)
+        console.log(this.state.centrosAPI)
        
         return (
         <div className="envio-container">
-            <h2>Generacion de un envio</h2>
+            <h1>Generacion de un envio</h1>
             <Form>
-                {/* COMO PLACEHOLDER ESTARIA BUENO TRAER LOS DATOS DEL ENVIO*/}
+                
                 <Form.Group>
                     <Form.Label column="lg" >Centro Hospitario</Form.Label>
                             
@@ -129,15 +169,22 @@ class RealizarEnvio extends Component {
                     }
                     </Form.Control>
                     
-                    
-                </Form.Group>
+                <hr style={{color: "black", borderColor : '#000000' }}/>
 
+                
+                
+            
+                
+                </Form.Group>
+            <div className="grid-envio">
+                <div className="recursos-envio">
+                <h2 style={{color: "black", borderColor : '#000000' }}>Recursos</h2>
                 {/*Campo para las camillas */ }
                 <Form.Group>
                     <Form.Label column="lg">Camillas</Form.Label>
                             
                       
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["camillasDisponible"]} min={this.controlMinimo('camillasDisponible')} />
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["camillasDisponible"]} min={this.controlMinimo('camillasDisponible')} defaultValue={this.recursoPeticion("camillas")} />
                     
                     
                 </Form.Group>
@@ -146,25 +193,27 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Jabon en litros</Form.Label>
  
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jabonLitrosDisponible"]} min={this.controlMinimo('jabonLitrosDisponible')} />
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jabonLitrosDisponible"]} min={this.controlMinimo('jabonLitrosDisponible')} defaultValue={0}/>
 
                     
                 </Form.Group>
-                
+               
                 {/*Campo para el alcohol en gel*/ }
                 <Form.Group>
                     <Form.Label column="lg">Litros de alcohol en gel</Form.Label>
                     
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["alcoholLitrosDisponible"]} min={this.controlMinimo('alcoholLitrosDisponible')} />
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["alcoholLitrosDisponible"]} min={this.controlMinimo('alcoholLitrosDisponible')} defaultValue={0}/>
                     
 
                 </Form.Group>
+        
 
+           
                 {/*Campo para el alcohol en gel*/ }
                 <Form.Group>
                     <Form.Label column="lg">Barbijos</Form.Label>
  
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["barbijosDisponible"]} min={this.controlMinimo('barbijosDisponible')} />
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["barbijosDisponible"]} min={this.controlMinimo('barbijosDisponible')} defaultValue={0}/>
                     
 
                 </Form.Group>
@@ -173,7 +222,7 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Jeringas</Form.Label>
  
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jeringasDisponible"]} min={this.controlMinimo('jeringasDisponible')} />
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jeringasDisponible"]} min={this.controlMinimo('jeringasDisponible')} defaultValue={0}/>
 
                     
 
@@ -183,11 +232,41 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Cofias</Form.Label>
 
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={this.controlMinimo('cofiasDisponible')} />
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={this.controlMinimo('cofiasDisponible')} defaultValue={0}/>
                     
 
                 </Form.Group>
+                </div>
 
+                <div className= "medicos-envio">
+                    <h2>Medicos</h2>
+                    
+                
+                <Form.Group>
+                    
+                            
+                <Form.Label column="lg">Especialidad</Form.Label>
+                    <Form.Control as="select" className="form-envio">
+                    <option></option>
+                    {
+                    this.state.medicos.map( med => <option value={med._id}>{med.especialidad[0].toUpperCase() +  
+                        med.especialidad.slice(1)}</option>)
+                    }
+                    </Form.Control>
+
+                    <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={this.controlMinimo('cofiasDisponible')} defaultValue={0} onChange={this.generacionMedico} />
+                    
+
+                </Form.Group>
+                <div id="otro-medico"></div>
+
+
+
+
+                </div>
+                    
+
+                </div>
                 <br />
 
                 <div className="botones-envio">
