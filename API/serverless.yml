@@ -31,7 +31,7 @@ functions:
           documentation:
             summary: "Metodo para uso de CENTROS HOSPITALARIOS. Adds a new peticion to the list of existing peticiones"
             requestBody:
-                description: "It asks for resources and has the hospital id"
+                description: "It asks for resources and has the hospital id. If you dont want a resource, dont add it to the body"
             pathParams:
                 -
                     name: x-api-key
@@ -61,6 +61,17 @@ functions:
                     name: x-api-key
                     required: true
                     description: "API Key identifier"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Array of peticiones"
+                    responseModels:
+                        "application/json" : "peticion"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando no se utiliza una clave API-Key o cuando se supera la quota diaria"   
       - http:
           path: /login
           method: POST
@@ -71,10 +82,38 @@ functions:
                 description: "Contiene un usuario y el hash de una contrasenia"
             requestModels: 
                 "application/json" : "login"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Login exitoso"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Ocurre cuando se supera la cuota diaria"
+                    
       - http:
             path: /encontrarPeticion
             method: GET
             cors: true
+            documentation:
+                summary: "Allows to find a peticion by its mongo id"
+                queryParams:
+                    -
+                        name: "idPeticion"
+                        description: "Mongo ID for the peticion object"
+                methodResponses:
+                    -
+                        statusCode: "200"
+                        responseBody:
+                            description: "a single peticion"
+                        responseModels:
+                            "application/json" : "peticion"
+                    -
+                        statusCode: "403"
+                        responseBody:
+                            description: "Ocurre cuando se supera la cuota diaria"
+                
             
       - http:
           path: /register
@@ -174,7 +213,6 @@ functions:
           path: /recursos
           method: POST
           cors: true
-    # ALE CONTROLA ESTE !
       - http:
           path: /generarRecursos
           method: POST

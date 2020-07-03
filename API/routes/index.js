@@ -34,15 +34,15 @@ router.post('/pruebas',(req,res)=>{
     
     res.send(req.body);
 })
-
+// DOC STATUS: Complete
 router.post('/peticiones',
     peticionController.nuevaPeticion
 )
-
+// DOC STATUS: Complete
 router.get('/peticiones',
     peticionController.obtenerPeticiones
 )
-
+// DOC STATUS: Complete
 router.post('/login',
 loginController.logUser
 )
@@ -102,7 +102,7 @@ medicosController.generarMedicosRandom
 router.get('/rechazarPeticion',
 peticionController.rechazarPeticion
 )
-
+// DOC STATUS: Complete
 router.get('/encontrarPeticion',peticionController.encontrarPeticionId)
 
 router.get('/actualizarEstadisticas',statController.registrarNuevaEstadistica)
