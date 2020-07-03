@@ -33,7 +33,7 @@ mongoose.connect(MONGOURI,{
 })
 .then(()=> {
     console.log("Me conecte a mongo")
-    console.log(mongoose.connection);
+    //console.log(mongoose.connection);
     var mongoStore = new MongoStore({
         mongooseConnection:mongoose.connection
     });

@@ -30,7 +30,7 @@ router.post('/envios',
 // router.get('/apiDoc',apiController.enviar)
 
 router.post('/pruebas',(req,res)=>{
-    console.log(req.body);
+    //console.log(req.body);
     
     res.send(req.body);
 })
