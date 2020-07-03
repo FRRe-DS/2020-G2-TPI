@@ -14,36 +14,39 @@ exports.registrarInformes = async (req,res,next) => {
     }
   };
 
-  var respuesta = null;
+  // var respuesta = null;
 
-  request(options, function (error, response) {
+  var respuesta = request(options, function (error, response) {
     
     if (error) throw new Error(error);
 
-    respuesta = JSON.parse(response.body);
+    return JSON.parse(response.body);
+
+    // console.log(respuesta)
   
   });
 
     // console.log(JSON.parse(response.body)); 
     // const respuesta = JSON.parse(response.body);
+    console.log(respuesta)
 
-    for( item in respuesta.Informes){
+    // for( item in respuesta.Informes){
 
-      console.log(respuesta.Informes[item])
+    //   console.log(respuesta.Informes[item])
 
-        try {
-          let peticionTemporal = new Peticion(respuesta.Informes[item])
-          await peticionTemporal.save(); 
-          res.statusCode = 200;
-          res.setHeader('content-type', 'application/json');
-          res.setHeader('Access-Control-Allow-Origin', '*');
-          res.json({mensaje:"El informe se guardo en la base"});    
-        } catch (error) {
-            console.log(error);
-            next();
-        }
+    //     try {
+    //       let peticionTemporal = new Peticion(respuesta.Informes[item])
+    //       await peticionTemporal.save(); 
+    //       res.statusCode = 200;
+    //       res.setHeader('content-type', 'application/json');
+    //       res.setHeader('Access-Control-Allow-Origin', '*');
+    //       res.json({mensaje:"El informe se guardo en la base"});    
+    //     } catch (error) {
+    //         console.log(error);
+    //         next();
+    //     }
     
-    }
+    // }
 
 
 }
