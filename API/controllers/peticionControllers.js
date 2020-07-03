@@ -120,3 +120,17 @@ exports.encontrarPeticionId= async(req,res,next) =>{
         next();
     }
 }
+
+exports.encontrarPeticionFecha= async(req,res,next) =>{
+    try {
+        const peticion = await Peticion.find({}).sort({createdAt:1});
+        
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.json(peticion);
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+}
