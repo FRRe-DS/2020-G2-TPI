@@ -14,7 +14,9 @@ class RealizarEnvio extends Component {
                 id:0, 
                 nombre:""},
       envio:{},
-      medicos:[]
+      medicos:[],
+      idDIVmedico:0,
+      estadoCantMed:true
     }}
     traerData(){
     const urlRecursos = `${this.props.url}recursos`;
@@ -79,7 +81,7 @@ class RealizarEnvio extends Component {
   componentWillMount() {
     if(this.state.recursos.length ===0 || this.state.centrosAPI.length ===0){
       this.traerData()
-
+      
     }
     
 
@@ -108,13 +110,7 @@ class RealizarEnvio extends Component {
     
 }
 
-    controlMinimo(recurso){
-        if(parseInt(recurso, 10)>0) {
-            return "1"
-        }else{
-            return "0"
-        } 
-    }
+
     
     enviarPeticion(){
         console.log("Soy un envio")
@@ -129,29 +125,43 @@ class RealizarEnvio extends Component {
         }
     }
 
-
+    
     generacionMedico = ()=> {
+        let medicoID=this.state.idDIVmedico
+        
+        
+        medicoID = medicoID+1
         let medicoDIV =
+        <>
         <Form.Group>
         <Form.Label column="lg">Especialidad</Form.Label>
-        <Form.Control as="select" className="form-envio">
+        <Form.Control as="select" className="form-envio" onInput={this.generacionMedico} id={`select-med${medicoID}`}>
         <option></option>
         {
         this.state.medicos.map( med => <option value={med._id}>{med.especialidad[0].toUpperCase() +  
             med.especialidad.slice(1)}</option>)
         }
         </Form.Control>
-
-        <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={this.controlMinimo('cofiasDisponible')} defaultValue={0}/>
+        <Form.Label column lg="1.5">
+            Cantidad: 
+        </Form.Label>
+        <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0} />
         </Form.Group>
+
+        < div id={`otro-medico${medicoID+1}`}></div>
+        </>
         
-        console.log(this.state)
-    ReactDOM.render(medicoDIV, document.getElementById('otro-medico'))
+        console.log(medicoID)
+        
+    ReactDOM.render(medicoDIV, document.getElementById(`otro-medico${medicoID}`))
+    this.setState({idDIVmedico:medicoID}) 
     }
         
+
+
     render(){
-        console.log(this.state.medicos)
-        console.log(this.state.centrosAPI)
+        //console.log(this.state.medicos)
+        //console.log(this.state.centrosAPI)
        
         return (
         <div className="envio-container">
@@ -162,7 +172,8 @@ class RealizarEnvio extends Component {
                     <Form.Label column="lg" >Centro Hospitario</Form.Label>
                             
                       
-                    <Form.Control as="select" className="form-envio" id="select-envio-centros">
+                    <Form.Control as="select" className="form-envio" id="select-envio-centros" onChange={e=>console.log(e.target.value)
+                } required>
                     <option></option>
                     {
                     this.state.centrosAPI.map( centro => <option value={centro.idCentro}>{centro.nombre}</option>)
@@ -184,7 +195,7 @@ class RealizarEnvio extends Component {
                     <Form.Label column="lg">Camillas</Form.Label>
                             
                       
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["camillasDisponible"]} min={this.controlMinimo('camillasDisponible')} defaultValue={this.recursoPeticion("camillas")} />
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["camillasDisponible"]} min={0} defaultValue={this.recursoPeticion("camillas")} />
                     
                     
                 </Form.Group>
@@ -193,7 +204,7 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Jabon en litros</Form.Label>
  
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jabonLitrosDisponible"]} min={this.controlMinimo('jabonLitrosDisponible')} defaultValue={0}/>
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jabonLitrosDisponible"]} min={0} defaultValue={0}/>
 
                     
                 </Form.Group>
@@ -202,7 +213,7 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Litros de alcohol en gel</Form.Label>
                     
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["alcoholLitrosDisponible"]} min={this.controlMinimo('alcoholLitrosDisponible')} defaultValue={0}/>
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["alcoholLitrosDisponible"]} min={0} defaultValue={0}/>
                     
 
                 </Form.Group>
@@ -213,7 +224,7 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Barbijos</Form.Label>
  
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["barbijosDisponible"]} min={this.controlMinimo('barbijosDisponible')} defaultValue={0}/>
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["barbijosDisponible"]} min={0} defaultValue={0}/>
                     
 
                 </Form.Group>
@@ -222,7 +233,7 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Jeringas</Form.Label>
  
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jeringasDisponible"]} min={this.controlMinimo('jeringasDisponible')} defaultValue={0}/>
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jeringasDisponible"]} min={0} defaultValue={0}/>
 
                     
 
@@ -232,41 +243,45 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Cofias</Form.Label>
 
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={this.controlMinimo('cofiasDisponible')} defaultValue={0}/>
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0}/>
                     
 
                 </Form.Group>
                 </div>
 
-                <div className= "medicos-envio">
+        <div className= "medicos-envio">
                     <h2>Medicos</h2>
                     
-                
+            <div id={"otro-medico0"}>
                 <Form.Group>
                     
-                            
+                         
                 <Form.Label column="lg">Especialidad</Form.Label>
-                    <Form.Control as="select" className="form-envio">
+                    <Form.Control as="select" className="form-envio" onInput={this.generacionMedico} >
                     <option></option>
                     {
-                    this.state.medicos.map( med => <option value={med._id}>{med.especialidad[0].toUpperCase() +  
+                    this.state.medicos.map( med => <option value={med.especialidad}>{med.especialidad[0].toUpperCase() +  
                         med.especialidad.slice(1)}</option>)
                     }
                     </Form.Control>
-
-                    <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={this.controlMinimo('cofiasDisponible')} defaultValue={0} onChange={this.generacionMedico} />
+                    <Form.Label column lg="1.5">
+                        Cantidad: 
+                    </Form.Label>
+                    <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0} />
                     
 
                 </Form.Group>
-                <div id="otro-medico"></div>
+            </div>
+            <div id={"otro-medico1"}>
+
+            </div>
 
 
 
-
-                </div>
+        </div>
                     
 
-                </div>
+        </div>
                 <br />
 
                 <div className="botones-envio">
