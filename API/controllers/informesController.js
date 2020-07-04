@@ -6,14 +6,13 @@ const Stat = require('../models/Stat');
 
 exports.registrarInforme = async (req,res,next) => {
 
-
     // control de cantidades de tests realizados
     if(req.body.pruebasRealizadas.realizadas == (req.body.pruebasRealizadas.sinResultado + req.body.pruebasRealizadas.positivas +req.body.pruebasRealizadas.negativas)){
 
         const nuevoInforme = new InformeHospitalMinisterio(req.body);
         const ciudad = (await ciudades.find().limit(1))[0].Ciudades;
         const hospitales = (await centrosHospitalarios.find());
-        
+    
         var ciudadValida = false;
         var hospitalValido = false;
         
@@ -41,7 +40,6 @@ exports.registrarInforme = async (req,res,next) => {
             
         });
         
-
         try {
             if(ciudadValida){
                 if(hospitalValido){
@@ -54,25 +52,22 @@ exports.registrarInforme = async (req,res,next) => {
 
                     for(i in copiaUltimaEstadistica[0].dataCiudades)
                     {
-                        console.log(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad)
+                        // console.log(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad)
                         if(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad == nuevoInforme.nombreCiudad)
                         {
-                            console.log("Entre aqui")
+                            // console.log("Entre aqui")
                             nuevaEstadistica.dataCiudades[i].cantidades.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
                             nuevaEstadistica.dataCiudades[i].cantidades.recuperados += nuevoInforme.resumenCasos.cantidadCurados
                             nuevaEstadistica.dataCiudades[i].cantidades.muertos += nuevoInforme.resumenCasos.cantidadMuertos
                             nuevaEstadistica.totales.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
                             nuevaEstadistica.totales.recuperados += nuevoInforme.resumenCasos.cantidadCurados
                             nuevaEstadistica.totales.muertos += nuevoInforme.resumenCasos.cantidadMuertos
+                            nuevaEstadistica.totales.poblacionTotal -= nuevoInforme.resumenCasos.cantidadMuertos
                         }
                     }
                     nuevoInforme.impactadoEnEstadisticas = true;
                     await nuevoInforme.save();
                     await nuevaEstadistica.save();
-
-                    console.log(nuevoInforme.nombreCiudad)
-
-
 
                     res.statusCode = 200;
                     res.setHeader('content-type', 'application/json');
@@ -106,4 +101,3 @@ exports.getInforme = async(req,res,next) =>{
         next();
     }
 }
-
