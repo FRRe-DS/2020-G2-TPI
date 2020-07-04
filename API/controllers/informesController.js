@@ -2,6 +2,7 @@ const InformeHospitalMinisterio = require('../models/InformeHospitalAMinisterio'
 const ciudades = require('../models/Ciudad');
 const centrosHospitalarios = require('../models/CentrosHospitalarios');
 const { nuevoEnvio } = require('./envioController');
+const Stat = require('../models/Stat');
 
 exports.registrarInforme = async (req,res,next) => {
 
@@ -44,11 +45,39 @@ exports.registrarInforme = async (req,res,next) => {
         try {
             if(ciudadValida){
                 if(hospitalValido){
-                    await nuevoInforme.save(); 
+                    
+                    
+                    const copiaUltimaEstadistica = await Stat.find({}).sort({createdAt:-1}).limit(1)
+                    const nuevaEstadistica = new Stat();
+                    nuevaEstadistica.dataCiudades = copiaUltimaEstadistica[0].dataCiudades
+                    nuevaEstadistica.totales = copiaUltimaEstadistica[0].totales
+
+                    for(i in copiaUltimaEstadistica[0].dataCiudades)
+                    {
+                        console.log(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad)
+                        if(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad == nuevoInforme.nombreCiudad)
+                        {
+                            console.log("Entre aqui")
+                            nuevaEstadistica.dataCiudades[i].cantidades.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
+                            nuevaEstadistica.dataCiudades[i].cantidades.recuperados += nuevoInforme.resumenCasos.cantidadCurados
+                            nuevaEstadistica.dataCiudades[i].cantidades.muertos += nuevoInforme.resumenCasos.cantidadMuertos
+                            nuevaEstadistica.totales.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
+                            nuevaEstadistica.totales.recuperados += nuevoInforme.resumenCasos.cantidadCurados
+                            nuevaEstadistica.totales.muertos += nuevoInforme.resumenCasos.cantidadMuertos
+                        }
+                    }
+                    nuevoInforme.impactadoEnEstadisticas = true;
+                    await nuevoInforme.save();
+                    await nuevaEstadistica.save();
+
+                    console.log(nuevoInforme.nombreCiudad)
+
+
+
                     res.statusCode = 200;
                     res.setHeader('content-type', 'application/json');
                     res.setHeader('Access-Control-Allow-Origin', '*');
-                    res.json({mensaje:"El informe se guardo en la base"});
+                    res.json({mensaje:"El informe se guardo en la base y se actualizaron las estadisticas"});
                 }else {
                     res.json({mensaje:"El hospital NO es valido"});
                 } 
