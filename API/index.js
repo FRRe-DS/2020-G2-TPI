@@ -9,12 +9,7 @@ const MongoStore = require('connect-mongo')(session);
 
 const bodyParser = require('body-parser')
 const {EXPRESS_SECRET} = require('./secrets');
-require('./models/Ministerio');
-require('./models/Peticion');
-require('./models/CentrosHospitalarios');
-require('./models/InformeHospitalAMinisterio');
-require('./models/Recursos');
-require('./models/Medicos');
+
 app.use(express.json());
 
 app.use(bodyParser.json());      
