@@ -121,28 +121,25 @@ statController.obtenerTodasEstadisticas
 router.post('/stat',
 statController.agregarEstadistica
 )
-
+// DOC STATUS: Complete
 router.get('/encontrarPeticion',
 peticionController.encontrarPeticionId
 )
-
+// DOC STATUS: Complete
 router.get('/encontrarPeticionesFecha',
 peticionController.encontrarPeticionFecha
 )
-
+// DOC STATUS: Complete
 router.get('/actualizarEstadisticas',statController.registrarNuevaEstadistica)
-
+// DOC STATUS: Complete
 router.get('/stat',statController.obtenerTodasEstadisticas)
-
+// DOC STATUS: Complete
 router.post('/stat',statController.agregarEstadistica)
-
+// DOC STATUS: Complete
 router.post('/ciudad',ciudadController.nuevaCiudad)
-
+// DOC STATUS: Complete
 router.get('/ciudad',ciudadController.getCiudad)
 
-router.get('/ciudad',
-ciudadController.getCiudad
-)
 // DOC STATUS: Complete
 router.get('/validarSesion', 
 loginController.validarSesion
