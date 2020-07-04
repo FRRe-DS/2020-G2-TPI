@@ -88,7 +88,7 @@ exports.rechazarPeticion = async(req,res,next) =>{
                 res.json({mensaje:"La peticion ya ha sido rechazada anteriormente"});
             }
         } else{
-            res.json({mensaje:"La petición no exite"});
+            res.json({mensaje:"La petición no existe"});
         }
         
     }catch(error){

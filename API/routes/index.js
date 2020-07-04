@@ -18,11 +18,13 @@ router.get('/',(req,res)=>{
 });
 
 
-//Envios 
+//Envios
+// DOC STATUS: Complete 
 router.get('/envios',
     envioController.obtenerEnvios
     );
 
+// DOC STATUS: Complete
 router.post('/envios', 
     envioController.nuevoEnvio)
 
@@ -46,74 +48,89 @@ router.get('/peticiones',
 router.post('/login',
 loginController.logUser
 )
-
+// DOC STATUS: Complete
 router.post('/logout',
 loginController.logout
 )
-
+// DOC STATUS: Complete
 router.post('/register',
 loginController.registerUser
 )
 
-
+// DOC STATUS: Complete
 router.post('/centrosHospitalarios',
 centrosHospitalariosController.registerCentro
 )
-
+// DOC STATUS: Complete
 router.get('/centrosHospitalarios',
 centrosHospitalariosController.getCentros
 )
+// DOC STATUS: Complete
 router.get('/centroHospitalarioId',
 centrosHospitalariosController.getCentroId
 )
-
+// DOC STATUS: Complete
 router.post('/informes',
 informesController.registrarInforme
 )
-
+// DOC STATUS: Complete
 router.get('/informes',
 informesController.getInforme
 )
-
+// DOC STATUS: Complete
 router.post('/recursos',
 recursosController.registrarRecursos
 )
-
+// DOC STATUS: Complete
 router.post('/generarRecursos',
 recursosController.generarRecursosRandom
 )
-
+// DOC STATUS: Complete
 router.get('/recursos',
 recursosController.getRecursos
 )
-
+// DOC STATUS: Complete
 router.post('/medicos',
 medicosController.registrarMedicos
 )
-
+// DOC STATUS: Complete
 router.get('/medicos',
 medicosController.getMedicos
 )
-
+// DOC STATUS: Complete
 router.post('/generarMedicos',
 medicosController.generarMedicosRandom
 )
-
+// DOC STATUS: Complete
 router.get('/rechazarPeticion',
 peticionController.rechazarPeticion
 )
 // DOC STATUS: Complete
-router.get('/encontrarPeticion',peticionController.encontrarPeticionId)
+router.get('/encontrarPeticion',
+peticionController.encontrarPeticionId
+)
+// DOC STATUS: Complete
+router.get('/actualizarEstadisticas',
+statController.registrarNuevaEstadistica
+)
+// DOC STATUS: Complete
+router.get('/stat',
+statController.obtenerTodasEstadisticas
+)
+// DOC STATUS: Complete
+router.post('/stat',
+statController.agregarEstadistica
+)
 
-router.get('/actualizarEstadisticas',statController.registrarNuevaEstadistica)
+router.post('/ciudad',
+ciudadController.nuevaCiudad
+)
 
-router.get('/stat',statController.obtenerTodasEstadisticas)
-
-router.post('/stat',statController.agregarEstadistica)
-
-router.post('/ciudad',ciudadController.nuevaCiudad)
-
-router.get('/ciudad',ciudadController.getCiudad)
-
-router.get('/validarSesion', loginController.validarSesion)
+router.get('/ciudad',
+ciudadController.getCiudad
+)
+// DOC STATUS: Complete
+router.get('/validarSesion', 
+loginController.validarSesion
+)
 module.exports = router;
