@@ -126,16 +126,16 @@ class RealizarEnvio extends Component {
     }
 
     
-    generacionMedico = ()=> {
+    generacionMedico = (e)=> {
         let medicoID=this.state.idDIVmedico
         
-        
+        if(e.target.value !==""){
         medicoID = medicoID+1
         let medicoDIV =
         <>
         <Form.Group>
         <Form.Label column="lg">Especialidad</Form.Label>
-        <Form.Control as="select" className="form-envio" onInput={this.generacionMedico} id={`select-med${medicoID}`}>
+        <Form.Control as="select" className="form-envio" onInput={e=>this.generacionMedico(e)} id={`select-med${medicoID}`}>
         <option></option>
         {
         this.state.medicos.map( med => <option value={med._id}>{med.especialidad[0].toUpperCase() +  
@@ -145,7 +145,8 @@ class RealizarEnvio extends Component {
         <Form.Label column lg="1.5">
             Cantidad: 
         </Form.Label>
-        <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0} />
+        <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0} style={{marginRight:"5%"}}/>
+        <Button variant="danger" size="sm" onClick={e=>this.removerMedico(medicoID)}>X</Button>
         </Form.Group>
 
         < div id={`otro-medico${medicoID+1}`}></div>
@@ -156,7 +157,15 @@ class RealizarEnvio extends Component {
     ReactDOM.render(medicoDIV, document.getElementById(`otro-medico${medicoID}`))
     this.setState({idDIVmedico:medicoID}) 
     }
-        
+    }
+    
+
+    removerMedico(id){
+        let medicoID=id-1;
+        ReactDOM.render(<div></div>, document.getElementById(`otro-medico${id}`))
+    this.setState({idDIVmedico:medicoID})
+    console.log("borrarr")
+    }
 
 
     render(){
@@ -256,7 +265,7 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     
                          
-                <Form.Label column="lg">Especialidad</Form.Label>
+                <Form.Label column="lg" >Especialidad</Form.Label>
                     <Form.Control as="select" className="form-envio" onInput={this.generacionMedico} >
                     <option></option>
                     {
@@ -271,6 +280,8 @@ class RealizarEnvio extends Component {
                     
 
                 </Form.Group>
+                
+                
             </div>
             <div id={"otro-medico1"}>
 
