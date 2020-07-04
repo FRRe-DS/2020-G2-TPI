@@ -160,7 +160,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-aws-nodejs/dev/1593382723246-2020-06-28T22:18:43.246Z/serverless-aws-nodejs.zip"
+                "S3Key": "serverless/serverless-aws-nodejs/dev/1593890566280-2020-07-04T19:22:46.280Z/serverless-aws-nodejs.zip"
               },
               "FunctionName": "serverless-aws-nodejs-dev-app",
               "Handler": "index.server",
@@ -178,14 +178,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionJKl1XQoGrlqFgRGwWLstorXhNXqwnkTdGeRP0FQ8k": {
+          "AppLambdaVersion9QDVRsTq41xTwxZqbtai6Sx74n5b7g8jciZcuWxAZs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "IaGVIKYcW41Zrqj/ocZXLcwG+msulKNhycZM4ZT5RaU="
+              "CodeSha256": "hUd3/Aqpin9kAFhc1T8y1o3vwRqCxsXZtT3MYBfvIZg="
             }
           },
           "ApiGatewayRestApi": {
@@ -245,6 +245,21 @@
               }
             }
           },
+          "ApiGatewayResourceEncontrarpeticionesfecha": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "encontrarPeticionesFecha",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayResourceLogin": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
@@ -255,6 +270,21 @@
                 ]
               },
               "PathPart": "login",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceEncontrarpeticion": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "encontrarPeticion",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -290,6 +320,21 @@
               }
             }
           },
+          "ApiGatewayResourceCentrohospitalarioid": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "centroHospitalarioId",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayResourceEnvios": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
@@ -320,6 +365,21 @@
               }
             }
           },
+          "ApiGatewayResourceGenerarrecursos": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "generarRecursos",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayResourceMedicos": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
@@ -330,6 +390,21 @@
                 ]
               },
               "PathPart": "medicos",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGenerarmedicos": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "generarMedicos",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -390,6 +465,51 @@
                 ]
               },
               "PathPart": "stat",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceLogout": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "logout",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceValidarsesion": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "validarSesion",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCiudad": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "ciudad",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -578,6 +698,51 @@
               }
             }
           },
+          "ApiGatewayMethodEncontrarpeticionesfechaOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceEncontrarpeticionesfecha"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayMethodLoginOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -617,6 +782,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceLogin"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodEncontrarpeticionOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceEncontrarpeticion"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -713,6 +923,51 @@
               }
             }
           },
+          "ApiGatewayMethodCentrohospitalarioidOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCentrohospitalarioid"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayMethodEnviosOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -803,6 +1058,51 @@
               }
             }
           },
+          "ApiGatewayMethodGenerarrecursosOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGenerarrecursos"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayMethodMedicosOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -842,6 +1142,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceMedicos"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodGenerarmedicosOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGenerarmedicos"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1012,7 +1357,7 @@
                     "ResponseParameters": {
                       "method.response.header.Access-Control-Allow-Origin": "'*'",
                       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST,GET'"
                     },
                     "ResponseTemplates": {
                       "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
@@ -1022,6 +1367,141 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceStat"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodLogoutOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceLogout"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodValidarsesionOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceValidarsesion"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodCiudadOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCiudad"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1260,8 +1740,79 @@
                   ]
                 }
               },
-              "MethodResponses": []
-            }
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseModels": {
+                    "application/json": "peticion"
+                  }
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
+            },
+            "DependsOn": [
+              "peticionModel"
+            ]
+          },
+          "ApiGatewayMethodEncontrarpeticionesfechaGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {
+                "method.request.path.x-api-key": true
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceEncontrarpeticionesfecha"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseModels": {
+                    "application/json": "peticion"
+                  }
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
+            },
+            "DependsOn": [
+              "peticionModel"
+            ]
           },
           "ApiGatewayMethodLoginPost": {
             "Type": "AWS::ApiGateway::Method",
@@ -1303,13 +1854,78 @@
                   ]
                 }
               },
-              "MethodResponses": [],
+              "MethodResponses": [
+                {
+                  "StatusCode": "200"
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ],
               "RequestModels": {
                 "application/json": "login"
               }
             },
             "DependsOn": [
               "loginModel"
+            ]
+          },
+          "ApiGatewayMethodEncontrarpeticionGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {
+                "method.request.querystring.idPeticion": false
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceEncontrarpeticion"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseModels": {
+                    "application/json": "peticion"
+                  }
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
+            },
+            "DependsOn": [
+              "peticionModel"
             ]
           },
           "ApiGatewayMethodRegisterPost": {
@@ -1464,8 +2080,79 @@
                   ]
                 }
               },
-              "MethodResponses": []
-            }
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseModels": {
+                    "application/json": "centrosHospitalarios"
+                  }
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
+            },
+            "DependsOn": [
+              "centrosHospitalariosModel"
+            ]
+          },
+          "ApiGatewayMethodCentrohospitalarioidGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {
+                "method.request.querystring.idCentro": false
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCentrohospitalarioid"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseModels": {
+                    "application/json": "centrosHospitalarios"
+                  }
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
+            },
+            "DependsOn": [
+              "centrosHospitalariosModel"
+            ]
           },
           "ApiGatewayMethodEnviosGet": {
             "Type": "AWS::ApiGateway::Method",
@@ -1507,8 +2194,21 @@
                   ]
                 }
               },
-              "MethodResponses": []
-            }
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseModels": {
+                    "application/json": "envio"
+                  }
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
+            },
+            "DependsOn": [
+              "envioModel"
+            ]
           },
           "ApiGatewayMethodEnviosPost": {
             "Type": "AWS::ApiGateway::Method",
@@ -1606,8 +2306,21 @@
                   ]
                 }
               },
-              "MethodResponses": []
-            }
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseModels": {
+                    "application/json": "recurso"
+                  }
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
+            },
+            "DependsOn": [
+              "recursoModel"
+            ]
           },
           "ApiGatewayMethodRecursosPost": {
             "Type": "AWS::ApiGateway::Method",
@@ -1649,8 +2362,77 @@
                   ]
                 }
               },
-              "MethodResponses": []
-            }
+              "MethodResponses": [
+                {
+                  "StatusCode": "200"
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ],
+              "RequestModels": {
+                "application/json": "recurso"
+              }
+            },
+            "DependsOn": [
+              "recursoModel"
+            ]
+          },
+          "ApiGatewayMethodGenerarrecursosPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGenerarrecursos"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [
+                {
+                  "StatusCode": "200"
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ],
+              "RequestModels": {
+                "application/json": "recurso"
+              }
+            },
+            "DependsOn": [
+              "recursoModel"
+            ]
           },
           "ApiGatewayMethodMedicosGet": {
             "Type": "AWS::ApiGateway::Method",
@@ -1692,8 +2474,21 @@
                   ]
                 }
               },
-              "MethodResponses": []
-            }
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseModels": {
+                    "application/json": "listamedicos"
+                  }
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
+            },
+            "DependsOn": [
+              "listamedicosModel"
+            ]
           },
           "ApiGatewayMethodMedicosPost": {
             "Type": "AWS::ApiGateway::Method",
@@ -1744,19 +2539,69 @@
                 }
               ],
               "RequestModels": {
-                "application/json": "medico"
+                "application/json": "listamedicos"
               }
             },
             "DependsOn": [
-              "medicoModel"
+              "listamedicosModel"
             ]
+          },
+          "ApiGatewayMethodGenerarmedicosPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGenerarmedicos"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [
+                {
+                  "StatusCode": "200"
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
+            }
           },
           "ApiGatewayMethodRechazarpeticionGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "GET",
               "RequestParameters": {
-                "method.request.path.idPeticion": true
+                "method.request.querystring.idPeticion": true
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceRechazarpeticion"
@@ -1793,7 +2638,14 @@
                   ]
                 }
               },
-              "MethodResponses": []
+              "MethodResponses": [
+                {
+                  "StatusCode": "200"
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
             }
           },
           "ApiGatewayMethodInformesGet": {
@@ -1968,7 +2820,222 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1593382490502": {
+          "ApiGatewayMethodLogoutPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceLogout"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodValidarsesionGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceValidarsesion"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodStatPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceStat"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodCiudadPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCiudad"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodCiudadGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCiudad"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayDeployment1593890545192": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1981,36 +3048,54 @@
               "ApiGatewayMethodProxyVarOptions",
               "ApiGatewayMethodPruebasOptions",
               "ApiGatewayMethodPeticionesOptions",
+              "ApiGatewayMethodEncontrarpeticionesfechaOptions",
               "ApiGatewayMethodLoginOptions",
+              "ApiGatewayMethodEncontrarpeticionOptions",
               "ApiGatewayMethodRegisterOptions",
               "ApiGatewayMethodCentroshospitalariosOptions",
+              "ApiGatewayMethodCentrohospitalarioidOptions",
               "ApiGatewayMethodEnviosOptions",
               "ApiGatewayMethodRecursosOptions",
+              "ApiGatewayMethodGenerarrecursosOptions",
               "ApiGatewayMethodMedicosOptions",
+              "ApiGatewayMethodGenerarmedicosOptions",
               "ApiGatewayMethodRechazarpeticionOptions",
               "ApiGatewayMethodInformesOptions",
               "ApiGatewayMethodActualizarestadisticasOptions",
               "ApiGatewayMethodStatOptions",
+              "ApiGatewayMethodLogoutOptions",
+              "ApiGatewayMethodValidarsesionOptions",
+              "ApiGatewayMethodCiudadOptions",
               "ApiGatewayMethodAny",
               "ApiGatewayMethodProxyVarAny",
               "ApiGatewayMethodPruebasPost",
               "ApiGatewayMethodPeticionesPost",
               "ApiGatewayMethodPeticionesGet",
+              "ApiGatewayMethodEncontrarpeticionesfechaGet",
               "ApiGatewayMethodLoginPost",
+              "ApiGatewayMethodEncontrarpeticionGet",
               "ApiGatewayMethodRegisterPost",
               "ApiGatewayMethodCentroshospitalariosPost",
               "ApiGatewayMethodCentroshospitalariosGet",
+              "ApiGatewayMethodCentrohospitalarioidGet",
               "ApiGatewayMethodEnviosGet",
               "ApiGatewayMethodEnviosPost",
               "ApiGatewayMethodRecursosGet",
               "ApiGatewayMethodRecursosPost",
+              "ApiGatewayMethodGenerarrecursosPost",
               "ApiGatewayMethodMedicosGet",
               "ApiGatewayMethodMedicosPost",
+              "ApiGatewayMethodGenerarmedicosPost",
               "ApiGatewayMethodRechazarpeticionGet",
               "ApiGatewayMethodInformesGet",
               "ApiGatewayMethodInformesPost",
               "ApiGatewayMethodActualizarestadisticasGet",
-              "ApiGatewayMethodStatGet"
+              "ApiGatewayMethodStatGet",
+              "ApiGatewayMethodLogoutPost",
+              "ApiGatewayMethodValidarsesionGet",
+              "ApiGatewayMethodStatPost",
+              "ApiGatewayMethodCiudadPost",
+              "ApiGatewayMethodCiudadGet"
             ]
           },
           "AppLambdaPermissionApiGateway": {
@@ -2088,13 +3173,13 @@
                   "nombre": {
                     "type": "string"
                   },
+                  "idCiudad": {
+                    "type": "number"
+                  },
                   "ciudad": {
                     "type": "string"
                   },
                   "direccion": {
-                    "type": "string"
-                  },
-                  "tipo": {
                     "type": "string"
                   }
                 }
@@ -2283,6 +3368,12 @@
                         "type": "boolean"
                       }
                     }
+                  },
+                  "createdAt": {
+                    "type": "string"
+                  },
+                  "updatedAt": {
+                    "type": "string"
                   }
                 }
               }
@@ -2387,6 +3478,69 @@
             "DependsOn": [
               "ciudadModel"
             ]
+          },
+          "listamedicosModel": {
+            "Type": "AWS::ApiGateway::Model",
+            "Properties": {
+              "RestApiId": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"loginModel\"][\"Properties\"][\"RestApiId\"]"
+              },
+              "ContentType": "application/json",
+              "Name": "listamedicos",
+              "Schema": {
+                "type": "object",
+                "properties": {
+                  "Medicos": {
+                    "type": "array",
+                    "items": {
+                      "$ref": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "https://apigateway.amazonaws.com/restapis",
+                            {
+                              "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"loginModel\"][\"Properties\"][\"RestApiId\"]"
+                            },
+                            "models",
+                            "medico"
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "DependsOn": [
+              "medicoModel"
+            ]
+          },
+          "localidadModel": {
+            "Type": "AWS::ApiGateway::Model",
+            "Properties": {
+              "RestApiId": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"loginModel\"][\"Properties\"][\"RestApiId\"]"
+              },
+              "ContentType": "application/json",
+              "Name": "localidad",
+              "Schema": {
+                "type": "object",
+                "properties": {
+                  "idCiudad": {
+                    "type": "number"
+                  },
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "latitud": {
+                    "type": "number"
+                  },
+                  "longitud": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
           },
           "informeModel": {
             "Type": "AWS::ApiGateway::Model",
@@ -2512,7 +3666,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionJKl1XQoGrlqFgRGwWLstorXhNXqwnkTdGeRP0FQ8k"
+              "Ref": "AppLambdaVersion9QDVRsTq41xTwxZqbtai6Sx74n5b7g8jciZcuWxAZs"
             }
           },
           "ServiceEndpoint": {
@@ -2617,7 +3771,7 @@
     },
     "custom": {
       "documentation": {
-        "version": "1.10",
+        "version": "2.0",
         "summary": "API FAKE del Ministerio de Salud del Chaco",
         "description": "API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.",
         "resources": [
@@ -2681,6 +3835,20 @@
             "contentType": "application/json",
             "schema": {
               "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"estadisticaModel\"][\"Properties\"][\"Schema\"]"
+            }
+          },
+          {
+            "name": "listamedicos",
+            "contentType": "application/json",
+            "schema": {
+              "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"listamedicosModel\"][\"Properties\"][\"Schema\"]"
+            }
+          },
+          {
+            "name": "localidad",
+            "contentType": "application/json",
+            "schema": {
+              "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"localidadModel\"][\"Properties\"][\"Schema\"]"
             }
           },
           {
@@ -2811,7 +3979,7 @@
               "documentation": {
                 "summary": "Metodo para uso de CENTROS HOSPITALARIOS. Adds a new peticion to the list of existing peticiones",
                 "requestBody": {
-                  "description": "It asks for resources and has the hospital id"
+                  "description": "It asks for resources and has the hospital id. If you dont want a resource, dont add it to the body"
                 },
                 "pathParams": [
                   {
@@ -2875,6 +4043,79 @@
                     "required": true,
                     "description": "API Key identifier"
                   }
+                ],
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "Array of peticiones"
+                    },
+                    "responseModels": {
+                      "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodPeticionesGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando no se utiliza una clave API-Key o cuando se supera la quota diaria"
+                    }
+                  }
+                ]
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "encontrarPeticionesFecha",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Gets a list of all the existing peticiones ordered by date",
+                "requestBody": {
+                  "description": "Empty request body"
+                },
+                "pathParams": [
+                  {
+                    "name": "x-api-key",
+                    "required": true,
+                    "description": "API Key identifier"
+                  }
+                ],
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "Array of peticiones"
+                    },
+                    "responseModels": {
+                      "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodEncontrarpeticionesfechaGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando no se utiliza una clave API-Key o cuando se supera la quota diaria"
+                    }
+                  }
                 ]
               },
               "integration": "AWS_PROXY"
@@ -2910,7 +4151,73 @@
                 },
                 "requestModels": {
                   "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodLoginPost\"][\"Properties\"][\"RequestModels\"]"
-                }
+                },
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "Login exitoso"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "description": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "encontrarPeticion",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Allows to find a peticion by its mongo id",
+                "queryParams": [
+                  {
+                    "name": "idPeticion",
+                    "description": "Mongo ID for the peticion object"
+                  }
+                ],
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "a single peticion"
+                    },
+                    "responseModels": {
+                      "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodEncontrarpeticionGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "description": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -3040,7 +4347,73 @@
                 "summary": "Gets a list of all the existing Centros Hospitalarios",
                 "requestBody": {
                   "description": "Empty request body"
-                }
+                },
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseModels": {
+                      "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodCentroshospitalariosGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "centroHospitalarioId",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Gets a Centros Hospitalario",
+                "requestBody": {
+                  "description": "Empty request body"
+                },
+                "queryParams": [
+                  {
+                    "name": "idCentro",
+                    "description": "Id of Centro Hospitalario"
+                  }
+                ],
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseModels": {
+                      "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodCentrohospitalarioidGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -3072,7 +4445,21 @@
                 "summary": "Gets a list of all the existing Envios",
                 "requestBody": {
                   "description": "Empty request body"
-                }
+                },
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseModels": {
+                      "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodEnviosGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -3153,7 +4540,24 @@
                 "summary": "Gets a list of all the existing Recursos",
                 "requestBody": {
                   "description": "Empty request body"
-                }
+                },
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "Array of recursos"
+                    },
+                    "responseModels": {
+                      "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodRecursosGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -3180,6 +4584,78 @@
                   "X-Amz-User-Agent"
                 ],
                 "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Allows first load of recursos",
+                "requestBody": {
+                  "description": "Document with all the resources and the quantity of those"
+                },
+                "requestModels": {
+                  "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodRecursosPost\"][\"Properties\"][\"RequestModels\"]"
+                },
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "Array of recursos"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "generarRecursos",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Genera nuevos recursos de forma aleatoria",
+                "requestBody": {
+                  "description": "Empty"
+                },
+                "requestModels": {
+                  "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodGenerarrecursosPost\"][\"Properties\"][\"RequestModels\"]"
+                },
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "Recursos generados"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -3211,7 +4687,24 @@
                 "summary": "Gets a list of all the existing Medicos",
                 "requestBody": {
                   "description": "Empty request body"
-                }
+                },
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "Document of every type of medico"
+                    },
+                    "responseModels": {
+                      "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodMedicosGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
               },
               "integration": "AWS_PROXY"
             }
@@ -3267,6 +4760,52 @@
           },
           {
             "http": {
+              "path": "generarMedicos",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Genera nuevos medicos de forma aleatoria",
+                "requestBody": {
+                  "description": "None"
+                },
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "Aviso de confirmacion"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
               "path": "rechazarPeticion",
               "method": "get",
               "cors": {
@@ -3293,11 +4832,25 @@
                 "requestBody": {
                   "description": "Empty request body"
                 },
-                "pathParams": [
+                "queryParams": [
                   {
                     "name": "idPeticion",
                     "required": true,
                     "description": "ID of peticion"
+                  }
+                ],
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "Peticion rechazada"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "descripcion": "Ocurre cuando se supera la cuota diaria"
+                    }
                   }
                 ]
               },
@@ -3328,13 +4881,14 @@
                 "allowCredentials": false
               },
               "documentation": {
-                "summary": "Shows all the informes saved in our database"
+                "summary": "Devuelve todos los informes"
               },
               "methodResponses": [
                 {
                   "statusCode": "200",
                   "responseBody": {
-                    "description": "Every informe saved"
+                    "description": "Every informe saved",
+                    "responseModel": "informe"
                   }
                 },
                 {
@@ -3371,7 +4925,7 @@
                 "allowCredentials": false
               },
               "documentation": {
-                "summary": "Adds a new informe to our database"
+                "summary": "Añade un nuevo informe"
               },
               "requestBody": {
                 "description": "It has basic hospital info, number of cases, deaths,tests, and resources of the hospital"
@@ -3484,6 +5038,223 @@
               ],
               "integration": "AWS_PROXY"
             }
+          },
+          {
+            "http": {
+              "path": "logout",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Desloguea a un usuario, borra su sesion de la BD"
+              },
+              "methodResponses": [
+                {
+                  "statusCode": "200",
+                  "responseBody": {
+                    "description": "None"
+                  }
+                },
+                {
+                  "statusCode": "403",
+                  "responseBody": {
+                    "description": "Cuando se supera la cuota diaria de request"
+                  }
+                }
+              ],
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "validarSesion",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Valida la sesion de un usuario "
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "stat",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Agrega un nuevo modelo de estadisticas -se ejecuta una sola vez"
+              },
+              "requestBody": {
+                "description": "Contiene las estadisticas de todas las ciudades y unas totales"
+              },
+              "requestModels": {
+                "aplication/json": "estadistica"
+              },
+              "methodResponses": [
+                {
+                  "statusCode": "200",
+                  "responseBody": {
+                    "description": "Estadistica guardada correctamente"
+                  }
+                },
+                {
+                  "statusCode": "403",
+                  "responseBody": {
+                    "description": "Cuando se supera la cuota diaria"
+                  }
+                }
+              ],
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "ciudad",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Agrega una ciudad"
+              },
+              "requestBody": {
+                "description": "Contiene una ciudad, su latitud y longitud"
+              },
+              "requestModels": {
+                "application/json": "localidad"
+              },
+              "methodResponses": [
+                {
+                  "statusCode": "200",
+                  "responseBody": {
+                    "description": "localidad guardada correctamente"
+                  }
+                },
+                {
+                  "statusCode": "403",
+                  "responseBody": {
+                    "description": "Cuando se supera la cuota diaria"
+                  }
+                }
+              ],
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "ciudad",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Muestra las ciudades"
+              },
+              "requestBody": {
+                "description": "None"
+              },
+              "methodResponses": [
+                {
+                  "statusCode": "200",
+                  "responseBody": {
+                    "description": "Arreglo de localidades"
+                  },
+                  "responseModels": "localidad"
+                },
+                {
+                  "statusCode": "403",
+                  "responseBody": {
+                    "description": "Cuando se supera la cuota diaria"
+                  }
+                }
+              ],
+              "integration": "AWS_PROXY"
+            }
           }
         ],
         "name": "serverless-aws-nodejs-dev-app",
@@ -3492,7 +5263,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionJKl1XQoGrlqFgRGwWLstorXhNXqwnkTdGeRP0FQ8k"
+        "versionLogicalId": "AppLambdaVersion9QDVRsTq41xTwxZqbtai6Sx74n5b7g8jciZcuWxAZs"
       }
     },
     "serviceFilename": "serverless.yml",
@@ -3501,7 +5272,7 @@
     "artifact": "/home/ale/Documents/Universidad/DACS/2020-G2-TPI/API/.serverless/serverless-aws-nodejs.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1593382723246-2020-06-28T22:18:43.246Z",
+    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1593890566280-2020-07-04T19:22:46.280Z",
     "artifact": "serverless-aws-nodejs.zip"
   }
 }
