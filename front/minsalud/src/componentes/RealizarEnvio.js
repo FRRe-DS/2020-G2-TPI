@@ -3,6 +3,7 @@ import './css/envio.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import ReactDOM from 'react-dom'
+import Alert from 'react-bootstrap/Alert'
 class RealizarEnvio extends Component {
     constructor(props) {
 		super(props);
@@ -16,7 +17,8 @@ class RealizarEnvio extends Component {
             envio:{},
             medicos:[],
             idDIVmedico:0,
-            estadoCantMed:true
+            estadoCantMed:true,
+            medicoEnvio:[]
     }}
     traerData(){
     const urlRecursos = `${this.props.url}recursos`;
@@ -133,6 +135,7 @@ class RealizarEnvio extends Component {
         
         if(e.target.value !==""){
         medicoID = medicoID+1
+        
         let medicoDIV =
         <>
         <Form.Group>
@@ -171,15 +174,53 @@ class RealizarEnvio extends Component {
 
     agregarElemEnvio(e){
         e.preventDefault();
-        if(parseInt(e.target.value)<0){console.log("NO FLACO")} //tirar alerta y no modificar el campo
+        console.log("HOLA")
+        console.log(e.target)
         let envioPrevio= this.state.envio
         let valorElemento = parseInt(e.target.value);
         let nombreElemento = e.target.name;
         let cargaElemento = envioPrevio;
+        if(parseInt(e.target.value)<0){
+
+            ReactDOM.render(<Alert variant="danger">No valores negativos por favor</Alert>, document.getElementById("error-negativo"))
+            setTimeout(()=>{
+                ReactDOM.render(<div></div>, document.getElementById('error-negativo'))	
+                
+              },2000)
+              
+              delete cargaElemento[nombreElemento]
+              this.setState({envio: cargaElemento})
+              return e.target.value = 0 
+        }else{
         cargaElemento[nombreElemento] = valorElemento;
         this.setState({envio: cargaElemento})
-        
     }
+
+
+    
+    }
+
+    agregarEnvioMed(e){
+        e.preventDefault();
+        let medPrevios = this.state.medicoEnvio
+        let valor = e.target.value
+        let nombre = e.target.name
+        let cargaElemento = [];
+        let especialidad;
+        let cant = 0;
+        if(nombre==="especialidad"){
+            console.log("soy una especialidad")
+            especialidad = valor
+        }else{
+            console.log("soy una cantidad")
+            cant = valor
+        }
+        cargaElemento[especialidad] = cant
+        medPrevios.push(cargaElemento)
+        console.log(medPrevios)
+        
+    
+}
 
     render(){
         //console.log(this.state.medicos)
@@ -211,6 +252,7 @@ class RealizarEnvio extends Component {
             <div className="grid-envio">
                 <div className="recursos-envio">
                 <h2 style={{color: "black", borderColor : '#000000' }}>Recursos</h2>
+                <div id="error-negativo"></div>
                 {/*Campo para las camillas */ }
                 <Form.Group>
                     <Form.Label column="lg">Camillas</Form.Label>
@@ -278,7 +320,8 @@ class RealizarEnvio extends Component {
                     
                          
                 <Form.Label column="lg" >Especialidad</Form.Label>
-                    <Form.Control as="select" className="form-envio" onInput={this.generacionMedico} >
+                    <Form.Control as="select" className="form-envio" onChange={this.generacionMedico} 
+                    onInput={e=>this.agregarEnvioMed(e)} name="especialidad">
                     <option></option>
                     {
                     this.state.medicos.map( med => <option value={med.especialidad}>{med.especialidad[0].toUpperCase() +  
@@ -288,7 +331,8 @@ class RealizarEnvio extends Component {
                     <Form.Label column lg="1.5">
                         Cantidad: 
                     </Form.Label>
-                    <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0} />
+                    <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0} onChange={e=>this.agregarEnvioMed(e)}
+                    name="cantidad-med"/>
                     
 
                 </Form.Group>
