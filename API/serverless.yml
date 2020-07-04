@@ -114,8 +114,7 @@ functions:
                 -
                     statusCode: "403"
                     responseBody:
-                        description: "Ocurre cuando se supera la cuota diaria"
-                    
+                        description: "Ocurre cuando se supera la cuota diaria"            
       - http:
             path: /encontrarPeticion
             method: GET
@@ -136,9 +135,7 @@ functions:
                     -
                         statusCode: "403"
                         responseBody:
-                            description: "Ocurre cuando se supera la cuota diaria"
-                
-            
+                            description: "Ocurre cuando se supera la cuota diaria"       
       - http:
           path: /register
           method: POST
@@ -455,22 +452,6 @@ functions:
                     responseBody:
                         description: "Cuando se supera la cuota diaria de request"
       - http:
-            path: /logout
-            method: POST
-            cors: true
-            documentation:
-                summary: "Desloguea a un usuario, borra su sesion de la BD"
-            methodResponses:
-                -
-                    statusCode: "200"
-                    responseBody:
-                        description: "None"
-                -
-                    statusCode: "403"
-                    responseBody:
-                        description: "Cuando se supera la cuota diaria de request"
-
-      - http:
             path: /validarSesion
             method: GET
             cors: true
@@ -536,7 +517,7 @@ functions:
 
 custom:
     documentation:
-        version: '2.0'
+        version: '1.9'
         summary: 'API FAKE del Ministerio de Salud del Chaco'
         description: 'API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.'
         resources: 
@@ -597,8 +578,7 @@ custom:
                         jeringasDisponible:
                             type: number
                         cofiasDisponible:
-                            type: number
-                        
+                            type: number           
             -
                 name: envio
                 contentType: "application/json"
@@ -796,13 +776,5 @@ custom:
                             type: string
                         updatedAt: 
                             type: string
-                        
-                                    
-                                
-                                     
-                                
-
-
-
 plugins:
   - serverless-aws-documentation 

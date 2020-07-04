@@ -160,7 +160,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-aws-nodejs/dev/1593890566280-2020-07-04T19:22:46.280Z/serverless-aws-nodejs.zip"
+                "S3Key": "serverless/serverless-aws-nodejs/dev/1593893169925-2020-07-04T20:06:09.925Z/serverless-aws-nodejs.zip"
               },
               "FunctionName": "serverless-aws-nodejs-dev-app",
               "Handler": "index.server",
@@ -178,14 +178,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersion9QDVRsTq41xTwxZqbtai6Sx74n5b7g8jciZcuWxAZs": {
+          "AppLambdaVersionBizAckqhH93tpGyEcPlGheOlrQnu2cbJVIeDLia64I": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "hUd3/Aqpin9kAFhc1T8y1o3vwRqCxsXZtT3MYBfvIZg="
+              "CodeSha256": "OucPPN8bfREQwqFxMKlmlhSWTNUsYXwBJqtRKF1THao="
             }
           },
           "ApiGatewayRestApi": {
@@ -465,21 +465,6 @@
                 ]
               },
               "PathPart": "stat",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayResourceLogout": {
-            "Type": "AWS::ApiGateway::Resource",
-            "Properties": {
-              "ParentId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
-                ]
-              },
-              "PathPart": "logout",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -1367,51 +1352,6 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceStat"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayMethodLogoutOptions": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "AuthorizationType": "NONE",
-              "HttpMethod": "OPTIONS",
-              "MethodResponses": [
-                {
-                  "StatusCode": "200",
-                  "ResponseParameters": {
-                    "method.response.header.Access-Control-Allow-Origin": true,
-                    "method.response.header.Access-Control-Allow-Headers": true,
-                    "method.response.header.Access-Control-Allow-Methods": true
-                  },
-                  "ResponseModels": {}
-                }
-              ],
-              "RequestParameters": {},
-              "Integration": {
-                "Type": "MOCK",
-                "RequestTemplates": {
-                  "application/json": "{statusCode:200}"
-                },
-                "ContentHandling": "CONVERT_TO_TEXT",
-                "IntegrationResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": "'*'",
-                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
-                    },
-                    "ResponseTemplates": {
-                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                    }
-                  }
-                ]
-              },
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceLogout"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -2820,49 +2760,6 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayMethodLogoutPost": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "POST",
-              "RequestParameters": {},
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceLogout"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "AppLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            }
-          },
           "ApiGatewayMethodValidarsesionGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -3035,7 +2932,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1593890545192": {
+          "ApiGatewayDeployment1593893147140": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -3063,7 +2960,6 @@
               "ApiGatewayMethodInformesOptions",
               "ApiGatewayMethodActualizarestadisticasOptions",
               "ApiGatewayMethodStatOptions",
-              "ApiGatewayMethodLogoutOptions",
               "ApiGatewayMethodValidarsesionOptions",
               "ApiGatewayMethodCiudadOptions",
               "ApiGatewayMethodAny",
@@ -3091,7 +2987,6 @@
               "ApiGatewayMethodInformesPost",
               "ApiGatewayMethodActualizarestadisticasGet",
               "ApiGatewayMethodStatGet",
-              "ApiGatewayMethodLogoutPost",
               "ApiGatewayMethodValidarsesionGet",
               "ApiGatewayMethodStatPost",
               "ApiGatewayMethodCiudadPost",
@@ -3666,7 +3561,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersion9QDVRsTq41xTwxZqbtai6Sx74n5b7g8jciZcuWxAZs"
+              "Ref": "AppLambdaVersionBizAckqhH93tpGyEcPlGheOlrQnu2cbJVIeDLia64I"
             }
           },
           "ServiceEndpoint": {
@@ -3771,7 +3666,7 @@
     },
     "custom": {
       "documentation": {
-        "version": "2.0",
+        "version": "1.9",
         "summary": "API FAKE del Ministerio de Salud del Chaco",
         "description": "API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.",
         "resources": [
@@ -5041,49 +4936,6 @@
           },
           {
             "http": {
-              "path": "logout",
-              "method": "post",
-              "cors": {
-                "origins": [
-                  "*"
-                ],
-                "origin": "*",
-                "methods": [
-                  "OPTIONS",
-                  "POST"
-                ],
-                "headers": [
-                  "Content-Type",
-                  "X-Amz-Date",
-                  "Authorization",
-                  "X-Api-Key",
-                  "X-Amz-Security-Token",
-                  "X-Amz-User-Agent"
-                ],
-                "allowCredentials": false
-              },
-              "documentation": {
-                "summary": "Desloguea a un usuario, borra su sesion de la BD"
-              },
-              "methodResponses": [
-                {
-                  "statusCode": "200",
-                  "responseBody": {
-                    "description": "None"
-                  }
-                },
-                {
-                  "statusCode": "403",
-                  "responseBody": {
-                    "description": "Cuando se supera la cuota diaria de request"
-                  }
-                }
-              ],
-              "integration": "AWS_PROXY"
-            }
-          },
-          {
-            "http": {
               "path": "validarSesion",
               "method": "get",
               "cors": {
@@ -5263,7 +5115,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersion9QDVRsTq41xTwxZqbtai6Sx74n5b7g8jciZcuWxAZs"
+        "versionLogicalId": "AppLambdaVersionBizAckqhH93tpGyEcPlGheOlrQnu2cbJVIeDLia64I"
       }
     },
     "serviceFilename": "serverless.yml",
@@ -5272,7 +5124,7 @@
     "artifact": "/home/ale/Documents/Universidad/DACS/2020-G2-TPI/API/.serverless/serverless-aws-nodejs.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1593890566280-2020-07-04T19:22:46.280Z",
+    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1593893169925-2020-07-04T20:06:09.925Z",
     "artifact": "serverless-aws-nodejs.zip"
   }
 }
