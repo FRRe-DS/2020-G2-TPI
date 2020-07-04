@@ -1,0 +1,204 @@
+{
+    "idCentro":40852579831,
+    "nombre":"Qualitest Pharmaceuticals",
+    "idCiudad":4,
+    "ciudad":"General Jose de San Martin",
+    "direccion":"Freschi 43", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":40961085344,
+    "nombre":"PUREMEDY",
+    "idCiudad":7,
+    "ciudad":"Quitilipi",
+    "direccion":"Santa Fe 596", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":41070221950,
+    "nombre":"Walgreen Company",
+    "idCiudad":3,
+    "ciudad":"Villa Angela",
+    "direccion":"Entre Rios 2", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":42020390272,
+    "nombre":" Energetix Corp",
+    "idCiudad":14,
+    "ciudad":"Corzuela",
+    "direccion":"Jose Maria Paz 4174", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":42059316764,
+    "nombre":"The Body Shop Wake Forest ",
+    "idCiudad":7,
+    "ciudad":"Quitilipi",
+    "direccion":"Av 25 de Mayo 2173", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":42310483077,
+    "nombre":"Crossing Cultures, LLC dba Goddess Garden  ",
+    "idCiudad":9,
+    "ciudad":"Machagai",
+    "direccion":"Formosa 8352", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":42668055615,
+    "nombre":"B. Braun Medical Inc.",
+    "idCiudad":10,
+    "ciudad":"Tres Isletas",
+    "direccion":"Los Andes 1", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":42720753018,
+    "nombre":"Western Family Foods, Inc.",
+    "idCiudad":11,
+    "ciudad":"La Leonesa",
+    "direccion":"Franklin 970", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":43265794922,
+    "nombre":"Paramesh Banerji Life Sciences LLC",
+    "idCiudad":11,
+    "ciudad":"La Leonesa",
+    "direccion":"Delfino 51", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":44250491896,
+    "nombre":"Aurobindo Pharma Limited ",
+    "idCiudad":12,
+    "ciudad":"Las Palmas",
+    "direccion":"San Roque 73776", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":45113796126,
+    "nombre":"Hospira Worldwide, Inc.",
+    "idCiudad":7,
+    "ciudad":"Quitilipi",
+    "direccion":"Corrientes 99724", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":45289437675,
+    "nombre":"3M ESPE Dental Products ",
+    "idCiudad":3,
+    "ciudad":"Villa Angela",
+    "direccion":"Av Avalos 887", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":45523456321,
+    "nombre":"Sandoz Inc",
+    "idCiudad":6,
+    "ciudad":"Charata",
+    "direccion":"Necochea 47642", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":45765995792,
+    "nombre":"Hospira, Inc.",
+    "idCiudad":15,
+    "ciudad":"Villa Berthet",
+    "direccion":"Cangallo 586", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":45883444461,
+    "nombre":"Rising Pharmaceuticals, Inc",
+    "idCiudad":6,
+    "ciudad":"Charata",
+    "direccion":"Roldan 79", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":46438330946,
+    "nombre":"Glenmark Generics Inc., USA ",
+    "idCiudad":8,
+    "ciudad":"Las Breñas",
+    "direccion":"Jujuy 5351", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":46696965888,
+    "nombre":"Promex, LLC",
+    "idCiudad":5,
+    "ciudad":"Juan Jose Castelli",
+    "direccion":"Muñiz 2", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":46873745893,
+    "nombre":"Precision Dermatology, Inc.",
+    "idCiudad":6,
+    "ciudad":"Charata",
+    "direccion":"Salta 29", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":47069407799,
+    "nombre":"Amgen Inc",
+    "idCiudad":13,
+    "ciudad":"General Pinedo",
+    "direccion":"AYacucho 94", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":47981316204,
+    "nombre":"AvKARE, Inc.",
+    "idCiudad":5,
+    "ciudad":"Juan Jose Castelli",
+    "direccion":"1ro de Mayo 83515", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":48061957795,
+    "nombre":"McKesson Packaging Services a business unit of McKesson Corporation",
+    "idCiudad":9,
+    "ciudad":"Machagai",
+    "direccion":"Almirante Brown 49", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":48587001401,
+    "nombre":"DZA Brands LLC",
+    "idCiudad":3,
+    "ciudad":"Villa Angela",
+    "direccion":"Paraguay 411", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":49259815744,
+    "nombre":"Teva Pharmaceuticals USA Inc",
+    "idCiudad":13,
+    "ciudad":"General Pinedo",
+    "direccion":"Lustringer 55281", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":49393527436,
+    "nombre":"Global Pharmaceuticals, Division of Impax Laboratories Inc.",
+    "idCiudad":9,
+    "ciudad":"Machagai",
+    "direccion":"Frondizi 35142", 
+    "tipo":"Hospital"
+},
+{
+    "idCentro":49416356774,
+    "nombre":"PD-Rx Pharmaceuticals, Inc.",
+    "idCiudad":14,
+    "ciudad":"Corzuela",
+    "direccion":"Obligado 9", 
+    "tipo":"Hospital"
+},
+
+
+
+
