@@ -31,7 +31,7 @@ functions:
           documentation:
             summary: "Metodo para uso de CENTROS HOSPITALARIOS. Adds a new peticion to the list of existing peticiones"
             requestBody:
-                description: "It asks for resources and has the hospital id"
+                description: "It asks for resources and has the hospital id. If you dont want a resource, dont add it to the body"
             pathParams:
                 -
                     name: x-api-key
@@ -61,6 +61,17 @@ functions:
                     name: x-api-key
                     required: true
                     description: "API Key identifier"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Array of peticiones"
+                    responseModels:
+                        "application/json" : "peticion"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando no se utiliza una clave API-Key o cuando se supera la quota diaria"   
       - http:
           path: /login
           method: POST
@@ -71,10 +82,38 @@ functions:
                 description: "Contiene un usuario y el hash de una contrasenia"
             requestModels: 
                 "application/json" : "login"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Login exitoso"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Ocurre cuando se supera la cuota diaria"
+                    
       - http:
             path: /encontrarPeticion
             method: GET
             cors: true
+            documentation:
+                summary: "Allows to find a peticion by its mongo id"
+                queryParams:
+                    -
+                        name: "idPeticion"
+                        description: "Mongo ID for the peticion object"
+                methodResponses:
+                    -
+                        statusCode: "200"
+                        responseBody:
+                            description: "a single peticion"
+                        responseModels:
+                            "application/json" : "peticion"
+                    -
+                        statusCode: "403"
+                        responseBody:
+                            description: "Ocurre cuando se supera la cuota diaria"
+                
             
       - http:
           path: /register
@@ -122,6 +161,15 @@ functions:
             summary: "Gets a list of all the existing Centros Hospitalarios"
             requestBody:
                 description: "Empty request body"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseModels:
+                        "application/json": "centrosHospitalarios"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /centroHospitalarioId
           method: GET
@@ -130,11 +178,19 @@ functions:
             summary: "Gets a Centros Hospitalario"
             requestBody:
                 description: "Empty request body"
-            pathParams:
+            queryParams:
                 -
                     name: idCentro
-                    required: true
                     description: "Id of Centro Hospitalario"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseModels:
+                        "application/json": "centrosHospitalarios"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /envios
           method: GET
@@ -143,6 +199,15 @@ functions:
             summary: "Gets a list of all the existing Envios"
             requestBody:
                 description: "Empty request body"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseModels:
+                        "application/json": "envio"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"         
       - http:
           path: /envios
           method: POST
@@ -170,11 +235,37 @@ functions:
             summary: "Gets a list of all the existing Recursos"
             requestBody:
                 description: "Empty request body"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Array of recursos"
+                    responseModels:
+                        "application/json" : "recurso"
+                
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /recursos
           method: POST
           cors: true
-    # ALE CONTROLA ESTE !
+          documentation:
+            summary: "Allows first load of recursos"
+            requestBody:
+                description: "Document with all the resources and the quantity of those"
+            requestModels:
+                "application/json" : "recurso"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Array of recursos"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /generarRecursos
           method: POST
@@ -182,18 +273,18 @@ functions:
           documentation:
             summary: "Genera nuevos recursos de forma aleatoria"
             requestBody:
-                description: "??????????????????"
+                description: "Empty"
             requestModels:
                 "application/json": "recurso"
             methodResponses:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "???????????????????"
+                        description: "Recursos generados"
                 -
                     statusCode: "403"
                     responseBody:
-                        descripcion: "???????????????????"
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /medicos
           method: GET
@@ -202,6 +293,17 @@ functions:
             summary: "Gets a list of all the existing Medicos"
             requestBody:
                 description: "Empty request body"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Document of every type of medico"
+                    responseModels:
+                        "application/json": "listamedicos"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /medicos
           method: POST
@@ -211,7 +313,7 @@ functions:
             requestBody:
                 description: "It asks for a new Medico"
             requestModels:
-                "application/json": "medico"
+                "application/json": "listamedicos"
             methodResponses:
                 -
                     statusCode: "200"
@@ -247,33 +349,42 @@ functions:
             summary: "Gets a peticion of all the existing by id"
             requestBody:
                 description: "Empty request body"
-            pathParams:
+            queryParams:
                 -
                     name: idPeticion
                     required: true
                     description: "ID of peticion"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                            description: "Peticion rechazada"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /informes
           method: GET
           cors: true
           documentation:
-            summary: "Shows all the informes saved in our database"
+            summary: "Devuelve todos los informes"
           methodResponses:
             -
                 statusCode : "200"
                 responseBody:
                     description: "Every informe saved"
+                    responseModel: "informe"
             -
                 statusCode: "403"
                 responseBody:
                     descripcion: "Cuando se supera la cuota diaria"
-
       - http:
             path: /informes
             method: POST
             cors: true
             documentation:
-                summary: "Adds a new informe to our database"
+                summary: "Añade un nuevo informe"
             requestBody:
                 description: "It has basic hospital info, number of cases, deaths,tests, and resources of the hospital"
             requestModels:
@@ -319,7 +430,86 @@ functions:
                     statusCode: "403"
                     responseBody:
                         description: "Cuando se supera la cuota diaria de request"
-                        
+      - http:
+            path: /logout
+            method: POST
+            cors: true
+            documentation:
+                summary: "Desloguea a un usuario, borra su sesion de la BD"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "None"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Cuando se supera la cuota diaria de request"
+
+      - http:
+            path: /validarSesion
+            method: GET
+            cors: true
+            documentation:
+                summary: "Valida la sesion de un usuario "
+      - http:
+            path: /stat
+            method: POST
+            cors: true
+            documentation:
+                summary: "Agrega un nuevo modelo de estadisticas -se ejecuta una sola vez"
+            requestBody:
+                description: "Contiene las estadisticas de todas las ciudades y unas totales"
+            requestModels: 
+                "aplication/json": "estadistica"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Estadistica guardada correctamente"
+                -
+                    statusCode : "403"
+                    responseBody:
+                        description: "Cuando se supera la cuota diaria"
+      - http:
+            path: /ciudad
+            method: POST
+            cors: true
+            documentation:
+                summary: "Agrega una ciudad"
+            requestBody:
+                description: "Contiene una ciudad, su latitud y longitud"
+            requestModels:
+                "application/json": "localidad"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "localidad guardada correctamente"
+                -
+                    statusCode : "403"
+                    responseBody:
+                        description: "Cuando se supera la cuota diaria"
+      -http:
+            path: /ciudad
+            method: GET
+            cors: true
+            documentation:
+                summary: "Muestra las ciudades"
+            requestBody:
+                description: "None"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Arreglo de localidades"
+                    responseModels: "localidad"
+                -
+                    statusCode : "403"
+                    responseBody:
+                        description: "Cuando se supera la cuota diaria"
+
+
 custom:
     documentation:
         version: '1.10'
@@ -355,8 +545,6 @@ custom:
                         ciudad:
                             type: string 
                         direccion:
-                            type: string 
-                        tipo:
                             type: string 
             -
                 name: medico
@@ -499,6 +687,30 @@ custom:
                             type: string
                         updatedAt: 
                             type: string
+            -
+                name: listamedicos
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        Medicos:
+                            type: array
+                            items:
+                                $ref: "{{model: medico}}"
+            -
+                name: localidad
+                contentType: "application/json"
+                schema:
+                    type: object
+                    properties:
+                        idCiudad:
+                            type: number
+                        nombre:
+                            type: string
+                        latitud:
+                            type: number
+                        longitud:
+                            type: number
             -
                 name: informe
                 contentType: "application/json"
