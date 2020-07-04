@@ -514,7 +514,7 @@ functions:
                     statusCode : "403"
                     responseBody:
                         description: "Cuando se supera la cuota diaria"
-      -http:
+      - http:
             path: /ciudad
             method: GET
             cors: true
