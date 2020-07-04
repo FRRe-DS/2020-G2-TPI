@@ -13,10 +13,10 @@ class RealizarEnvio extends Component {
             centroPeticion:{
                 id:0, 
                 nombre:""},
-      envio:{},
-      medicos:[],
-      idDIVmedico:0,
-      estadoCantMed:true
+            envio:{},
+            medicos:[],
+            idDIVmedico:0,
+            estadoCantMed:true
     }}
     traerData(){
     const urlRecursos = `${this.props.url}recursos`;
@@ -104,6 +104,8 @@ class RealizarEnvio extends Component {
         this.setState({centroPeticion:data.CentroHospitalario[0]})
         
     ReactDOM.render(<option value={this.state.centroPeticion.idCentro}>{this.state.centroPeticion.nombre}</option>, document.getElementById('select-envio-centros'))
+            this.setState({envio:{"idPeticion": this.state.centroPeticion.idCentro}})
+            
     }    
 }
         )
@@ -164,14 +166,25 @@ class RealizarEnvio extends Component {
         let medicoID=id-1;
         ReactDOM.render(<div></div>, document.getElementById(`otro-medico${id}`))
     this.setState({idDIVmedico:medicoID})
-    console.log("borrarr")
+    
     }
 
+    agregarElemEnvio(e){
+        e.preventDefault();
+        if(parseInt(e.target.value)<0){console.log("NO FLACO")} //tirar alerta y no modificar el campo
+        let envioPrevio= this.state.envio
+        let valorElemento = parseInt(e.target.value);
+        let nombreElemento = e.target.name;
+        let cargaElemento = envioPrevio;
+        cargaElemento[nombreElemento] = valorElemento;
+        this.setState({envio: cargaElemento})
+        
+    }
 
     render(){
         //console.log(this.state.medicos)
         //console.log(this.state.centrosAPI)
-       
+       console.log(this.state.envio)
         return (
         <div className="envio-container">
             <h1>Generacion de un envio</h1>
@@ -181,8 +194,7 @@ class RealizarEnvio extends Component {
                     <Form.Label column="lg" >Centro Hospitario</Form.Label>
                             
                       
-                    <Form.Control as="select" className="form-envio" id="select-envio-centros" onChange={e=>console.log(e.target.value)
-                } required>
+                    <Form.Control as="select" className="form-envio" id="select-envio-centros" onChange={e=>this.agregarElemEnvio(e)} name="idCentro" required>
                     <option></option>
                     {
                     this.state.centrosAPI.map( centro => <option value={centro.idCentro}>{centro.nombre}</option>)
@@ -204,7 +216,7 @@ class RealizarEnvio extends Component {
                     <Form.Label column="lg">Camillas</Form.Label>
                             
                       
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["camillasDisponible"]} min={0} defaultValue={this.recursoPeticion("camillas")} />
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["camillasDisponible"]} min={0} defaultValue={this.recursoPeticion("camillas")} onChange={e=>this.agregarElemEnvio(e)} name="camillas" />
                     
                     
                 </Form.Group>
@@ -213,7 +225,7 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Jabon en litros</Form.Label>
  
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jabonLitrosDisponible"]} min={0} defaultValue={0}/>
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jabonLitrosDisponible"]} min={0} defaultValue={0} onChange={e=>this.agregarElemEnvio(e)} name="jabonLitros"/>
 
                     
                 </Form.Group>
@@ -222,18 +234,18 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Litros de alcohol en gel</Form.Label>
                     
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["alcoholLitrosDisponible"]} min={0} defaultValue={0}/>
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["alcoholLitrosDisponible"]} min={0} defaultValue={0} onChange={e=>this.agregarElemEnvio(e)} name="alcoholLitros"/>
                     
 
                 </Form.Group>
         
 
            
-                {/*Campo para el alcohol en gel*/ }
+                {/*Campo para barbijos*/ }
                 <Form.Group>
                     <Form.Label column="lg">Barbijos</Form.Label>
  
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["barbijosDisponible"]} min={0} defaultValue={0}/>
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["barbijosDisponible"]} min={0} defaultValue={0} onChange={e=>this.agregarElemEnvio(e)} name="barbijos"/>
                     
 
                 </Form.Group>
@@ -242,17 +254,17 @@ class RealizarEnvio extends Component {
                 <Form.Group>
                     <Form.Label column="lg">Jeringas</Form.Label>
  
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jeringasDisponible"]} min={0} defaultValue={0}/>
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["jeringasDisponible"]} min={0} defaultValue={0} onChange={e=>this.agregarElemEnvio(e)} name="jeringas"/>
 
                     
 
                 </Form.Group>
 
-                    {/*Campo para jeringas */ }
+                    {/*Campo para cofias*/ }
                 <Form.Group>
                     <Form.Label column="lg">Cofias</Form.Label>
 
-                    <Form.Control className="form-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0}/>
+                    <Form.Control className="form-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0} onChange={e=>this.agregarElemEnvio(e)} name="cofias"/>
                     
 
                 </Form.Group>
