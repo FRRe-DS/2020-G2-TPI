@@ -30,7 +30,7 @@ exports.obtenerDatos= async(req,res,next) =>{
               var nuevaEstadistica = new Stat();
               nuevaEstadistica.dataCiudades = copiaUltimaEstadistica[0].dataCiudades
               nuevaEstadistica.totales = copiaUltimaEstadistica[0].totales
-
+              console.log("ULTIMA ESTADISTICA ANTES de crear"+copiaUltimaEstadistica);
               for(i in copiaUltimaEstadistica[0].dataCiudades)
               {
                   // console.log(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad)
@@ -54,12 +54,15 @@ exports.obtenerDatos= async(req,res,next) =>{
               nuevoInforme.impactadoEnEstadisticas = true;
               // console.log('NUEVO INFORME: ')
               // console.log(nuevoInforme)
+              
+              copiaUltimaEstadistica = [new Stat(nuevaEstadistica)];
+              console.log("ULTIMA ESTADISTICA Despues de crear"+copiaUltimaEstadistica);
               await nuevoInforme.save();
               // console.log('NUEVA ESTADISTICA: ')
               // console.log(nuevaEstadistica)
               await nuevaEstadistica.save();
 
-              copiaUltimaEstadistica = nuevaEstadistica
+              
 
             } catch (error) {
               console.log(error)
