@@ -52,7 +52,7 @@ exports.nuevaPeticion = async (req,res,next) =>{
 exports.obtenerPeticiones = async(req,res,next) =>{
     console.log(Math.round(Math.random() * (10 - 1) + 1));
     try {
-        const peticion = await Peticion.find({}).sort({createdAt:1});
+        const peticiones = await Peticion.find({}).sort({createdAt:1});
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
