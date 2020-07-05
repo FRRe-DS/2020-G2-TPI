@@ -5,7 +5,7 @@ import Header from "./componentes/Header";
 import Menu from "./componentes/Menu";
 import TablaCentros from "./componentes/TablaCentros";
 import Login from "./componentes/Login";
-
+import BotonGeneracion from "./componentes/GeneracionAleatoria"
 import Peticiones from './componentes/Peticiones';
 import TablaRecursos from './componentes/TablaRecursos';
 import Peticion from './componentes/Peticion'
@@ -17,7 +17,8 @@ import Logo from "./componentes/img/ministerio-logo.png"
 class App extends Component {
 	state = {
     
-    url:"https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/"
+    url:"http://localhost:5000/",
+    sesion:true
 	};
 
   render() {
@@ -51,12 +52,16 @@ class App extends Component {
               return (
               <div>
                 <Header />
+                {this.state.sesion ?
+                (<>
                 <h1>Centros hospitalarios</h1>
                 <div className="app-container">
                   
                   <Menu />
                   <TablaCentros url={this.state.url} />
                 </div>
+                </>) : <div></div>
+                }
                 </div>
               );
             }}
@@ -98,8 +103,10 @@ class App extends Component {
         <div>
         <Header />
         <h1>Recursos disponibles</h1>
+
+        
 			  <div className="app-container">
-				
+				<BotonGeneracion url={this.state.url} />
 				<Menu/>
         <TablaRecursos url={this.state.url}/>
         

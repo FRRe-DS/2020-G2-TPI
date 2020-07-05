@@ -52,3 +52,8 @@ h1{
 }
 
 
+#boton-aleatorio{
+    grid-column: 5/6;
+    margin-bottom:5%;
+
+}
