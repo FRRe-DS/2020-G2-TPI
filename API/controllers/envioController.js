@@ -13,6 +13,8 @@ exports.nuevoEnvio = async(req,res,next) =>{
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.statusCode = 200;
 
+    var mensajeRes = '';
+
     let recursosValidos=true
     let nuevos_medicos = new Medico();
     try{
@@ -52,8 +54,10 @@ exports.nuevoEnvio = async(req,res,next) =>{
                     const medicos = await Medico.find({});
                     // console.log("Medicos actuales en reserva")
                     // console.log(medicos)
+
                     const listaMedicosMongo = medicos[0].Medicos
                     const listaMedicosEnvio = envioActual.medicos 
+                    
                     nuevos_medicos.Medicos = medicos[0].Medicos
         
                     medicos[0].Medicos.forEach((element,index) =>{
@@ -82,12 +86,9 @@ exports.nuevoEnvio = async(req,res,next) =>{
         
         if(recursosValidos){
 
-             // envio tiene id peticion? 
-
              // ACTUALIZAR RECURSOS --------------------------------------------
-             // actualizarRecursos(envioActual);
 
-             try{
+            try{
 
                 const arregloRecursos = ["camillas","alcoholLitros","jabonLitros","barbijos","jeringas","cofias"]
                 
@@ -121,11 +122,13 @@ exports.nuevoEnvio = async(req,res,next) =>{
                 // }
 
                 // opcion 1 
+
                 await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(err, result) => {
                     if(err){
                         res.send(err)
                     } else{
-                        res.json({mensaje:"Recursos actualizados"});
+                        mensajeRes = mensajeRes + "Recursos actualizados;"; 
+                        // res.json({mensaje:"Recursos actualizados"});
                     }
                 }); 
                 }
@@ -181,27 +184,33 @@ exports.nuevoEnvio = async(req,res,next) =>{
                             if(err){
                                 res.send(err)
                             } else{
-                                res.json({mensaje:"Envio de prueba realizado"});
+                                // res.json({mensaje:"Envio de prueba realizado"});
+                                mensajeRes = mensajeRes + "Envio de prueba realizado;"
                             }
                         })
                         }else{
-                            res.json({mensaje:"La peticion ya fue rechazada"})
+                            mensajeRes = mensajeRes + " La peticion ya fue rechazada;"
+                            // res.json({mensaje:"La peticion ya fue rechazada"})
                         }                  
         
                     } else{
                         // error, no existe la peticion en la base de datos
-                        res.json({mensaje: error})
+                        res.send(err)
                     }
                 })   
             } else {
                 // guardar envio sin peticion
                 await envio.save();
-                // res.statusCode = 200;
-                res.json({mensaje:"El envio se agrego correctamente"});
+                // res.json({mensaje:"El envio se agrego correctamente"});
+                mensajeRes = mensajeRes + "El envio se agrego correctamente;"
             }
+            
         } else {
-            res.json({mensaje:"No te dan los recursos papi"});
-        }        
+            // res.json({mensaje:"No te dan los recursos papi"});
+            mensajeRes = mensajeRes + "No te dan los recursos papi;"
+            
+        }      
+        res.json({mensaje: mensajeRes}); 
     }
     catch(error)
     {
