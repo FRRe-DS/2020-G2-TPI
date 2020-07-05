@@ -164,13 +164,13 @@ class RealizarEnvio extends Component {
         }
         
         let ObjetoEnvio = {"Envio":envio}
-        /*fetch(`${this.props.url}envios`,{
+        fetch(`${this.props.url}envios`,{
 			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
+			//headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(ObjetoEnvio)
         }).then(resp=>resp.json())
         .then(data=>console.log(data))
-        */
+        .catch(error=>console.log(error))
 
     }
     
