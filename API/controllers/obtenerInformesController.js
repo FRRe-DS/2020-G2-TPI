@@ -1,40 +1,53 @@
 const mongoose = require('mongoose');
-const Informes = require('../models/InformeHospitalAMinisterio');
+const InformeHospitalMinisterio = require('../models/InformeHospitalAMinisterio');
 var request = require('request');
+const ciudades = require('../models/Ciudad');
+const Peticion = require('../models/Peticion');
 
-var options = {
-  'method': 'GET',
-  'url': 'http://localhost:5000/informes',
-  'headers': {
-  }
-};
-request(options, function (error, response) {
+exports.registrarInformes = async (req,res,next) => {
 
-  if (error) throw new Error(error);
+  var options = {
+    'method': 'GET',
+    'url': 'https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/peticiones',
+    'headers': {
+      'x-api-key': 'FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR'
+    }
+  };
 
-  // response ES UN STRING, por eso hacemos esto
-  // console.log(JSON.parse(response.body)); 
+  // var respuesta = null;
 
-  const respuesta = JSON.parse(response.body);
+  var respuesta = request(options, function (error, response) {
+    
+    if (error) throw new Error(error);
 
-  for( item in respuesta.Informes){
-    console.log(respuesta.Informes[item])
+    return JSON.parse(response.body);
 
-    var options = {
-      method: 'POST',
-      url: 'http://localhost:5000/informes',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: respuesta.Informes[item]
-    };
+    // console.log(respuesta)
+  
+  });
 
-    request(options, function (error, response) {
-      if (error) throw new Error(error);
-      console.log(response.body);
-    });
+    // console.log(JSON.parse(response.body)); 
+    // const respuesta = JSON.parse(response.body);
+    console.log(respuesta)
 
-  }
+    // for( item in respuesta.Informes){
+
+    //   console.log(respuesta.Informes[item])
+
+    //     try {
+    //       let peticionTemporal = new Peticion(respuesta.Informes[item])
+    //       await peticionTemporal.save(); 
+    //       res.statusCode = 200;
+    //       res.setHeader('content-type', 'application/json');
+    //       res.setHeader('Access-Control-Allow-Origin', '*');
+    //       res.json({mensaje:"El informe se guardo en la base"});    
+    //     } catch (error) {
+    //         console.log(error);
+    //         next();
+    //     }
+    
+    // }
 
 
-});
+}
+
