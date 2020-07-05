@@ -1,53 +1,78 @@
-const mongoose = require('mongoose');
-const InformeHospitalMinisterio = require('../models/InformeHospitalAMinisterio');
-var request = require('request');
-const ciudades = require('../models/Ciudad');
-const Peticion = require('../models/Peticion');
+// COPIA DE OTRO CODIGO 
 
-exports.registrarInformes = async (req,res,next) => {
+const fetch = require('node-fetch')
+// const Aburrido = require('../models/Aburrido')
+const Informes = require('../models/InformeHospitalAMinisterio')
+const Stat = require('../models/Stat')
 
-  var options = {
-    'method': 'GET',
-    'url': 'https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/peticiones',
-    'headers': {
-      'x-api-key': 'FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR'
+exports.obtenerDatos= async(req,res,next) =>{
+    try{
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+
+        const datos = await fetch('https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/informes');
+        const respuestaJSON = await datos.json();
+
+
+        var copiaUltimaEstadistica = await Stat.find({}).sort({createdAt:-1}).limit(1)
+
+        respuestaJSON.Informes.forEach(async (informe) => {
+            // console.log(informe.nombreHospital);
+
+            try {
+              delete informe._id
+              var nuevoInforme = new Informes(informe)
+              // console.log(nuevoInforme)
+              
+              // tratamiento de estadisticas
+
+              var nuevaEstadistica = new Stat();
+              nuevaEstadistica.dataCiudades = copiaUltimaEstadistica[0].dataCiudades
+              nuevaEstadistica.totales = copiaUltimaEstadistica[0].totales
+
+              for(i in copiaUltimaEstadistica[0].dataCiudades)
+              {
+                  // console.log(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad)
+                  if(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad == nuevoInforme.nombreCiudad)
+                  { 
+                      console.log('POBLACION TOTAL ANTES DE RESTAR')
+                      console.log(nuevaEstadistica.totales.poblacionTotal)
+                      nuevaEstadistica.dataCiudades[i].cantidades.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
+                      nuevaEstadistica.dataCiudades[i].cantidades.recuperados += nuevoInforme.resumenCasos.cantidadCurados
+                      nuevaEstadistica.dataCiudades[i].cantidades.muertos += nuevoInforme.resumenCasos.cantidadMuertos
+                      nuevaEstadistica.totales.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
+                      nuevaEstadistica.totales.recuperados += nuevoInforme.resumenCasos.cantidadCurados
+                      nuevaEstadistica.totales.muertos += nuevoInforme.resumenCasos.cantidadMuertos
+                      nuevaEstadistica.totales.poblacionTotal -= nuevoInforme.resumenCasos.cantidadMuertos
+
+                      console.log('POBLACION TOTAL DESPUES DE RESTAR ' + nuevoInforme.resumenCasos.cantidadMuertos +  ' MUERTES' )
+                      console.log(nuevaEstadistica.totales.poblacionTotal)
+                  }
+              }
+
+              nuevoInforme.impactadoEnEstadisticas = true;
+              // console.log('NUEVO INFORME: ')
+              // console.log(nuevoInforme)
+              await nuevoInforme.save();
+              // console.log('NUEVA ESTADISTICA: ')
+              // console.log(nuevaEstadistica)
+              await nuevaEstadistica.save();
+
+              copiaUltimaEstadistica = nuevaEstadistica
+
+            } catch (error) {
+              console.log(error)
+              next();
+            }
+            
+        })
+
+        res.json({mensaje:"Los informes fueron guardados"});
+        
+    } catch(error) {
+        console.log(error)
+        next();
     }
-  };
-
-  // var respuesta = null;
-
-  var respuesta = request(options, function (error, response) {
-    
-    if (error) throw new Error(error);
-
-    return JSON.parse(response.body);
-
-    // console.log(respuesta)
-  
-  });
-
-    // console.log(JSON.parse(response.body)); 
-    // const respuesta = JSON.parse(response.body);
-    console.log(respuesta)
-
-    // for( item in respuesta.Informes){
-
-    //   console.log(respuesta.Informes[item])
-
-    //     try {
-    //       let peticionTemporal = new Peticion(respuesta.Informes[item])
-    //       await peticionTemporal.save(); 
-    //       res.statusCode = 200;
-    //       res.setHeader('content-type', 'application/json');
-    //       res.setHeader('Access-Control-Allow-Origin', '*');
-    //       res.json({mensaje:"El informe se guardo en la base"});    
-    //     } catch (error) {
-    //         console.log(error);
-    //         next();
-    //     }
-    
-    // }
-
-
 }
 
