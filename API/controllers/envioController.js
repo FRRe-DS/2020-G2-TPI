@@ -94,7 +94,7 @@ exports.nuevoEnvio = async(req,res,next) =>{
 
                     if(peti){
                         //veo si la peticion no esta rechazada
-                        if(peti.Peticion.hasOwnProperty('rechazada') == false){
+                        if(peti.Peticion.rechazada == false){
 
                             // actualizar valores
                             for(var key in peti.Peticion){
