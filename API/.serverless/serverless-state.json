@@ -160,7 +160,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/g2-sesiones/dev/1593914036994-2020-07-05T01:53:56.994Z/g2-sesiones.zip"
+                "S3Key": "serverless/g2-sesiones/dev/1593949658381-2020-07-05T11:47:38.381Z/g2-sesiones.zip"
               },
               "FunctionName": "g2-sesiones-dev-app",
               "Handler": "index.server",
@@ -178,14 +178,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersion1ceGHjIwX0ZDoWm3PWwYPaLSPNqRMnx25VN5WfTeM": {
+          "AppLambdaVersion4kGNpUN6VtXu1eyphbIaivhs8BZmZRV1D4zaOCRuGCM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "sW5RU7zHkLrqG42XEsT+eA4JNmNsuR8VEcfQDKdZb+A="
+              "CodeSha256": "4RHsggOK3MR2GSKapggGU7XRi58nn2RiAlf8CENZKWM="
             }
           },
           "ApiGatewayRestApi": {
@@ -3035,7 +3035,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1593914017552": {
+          "ApiGatewayDeployment1593949392416": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -3666,7 +3666,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersion1ceGHjIwX0ZDoWm3PWwYPaLSPNqRMnx25VN5WfTeM"
+              "Ref": "AppLambdaVersion4kGNpUN6VtXu1eyphbIaivhs8BZmZRV1D4zaOCRuGCM"
             }
           },
           "ServiceEndpoint": {
@@ -5246,7 +5246,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersion1ceGHjIwX0ZDoWm3PWwYPaLSPNqRMnx25VN5WfTeM"
+        "versionLogicalId": "AppLambdaVersion4kGNpUN6VtXu1eyphbIaivhs8BZmZRV1D4zaOCRuGCM"
       }
     },
     "serviceFilename": "serverless.yml",
@@ -5255,7 +5255,7 @@
     "artifact": "/home/ale/Documents/Universidad/DACS/2020-G2-TPI/API/.serverless/g2-sesiones.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/g2-sesiones/dev/1593914036994-2020-07-05T01:53:56.994Z",
+    "artifactDirectoryName": "serverless/g2-sesiones/dev/1593949658381-2020-07-05T11:47:38.381Z",
     "artifact": "g2-sesiones.zip"
   }
 }

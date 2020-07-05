@@ -34,7 +34,7 @@ mongoose.connect(MONGOURI,{
             name: 'idk',
             secret: EXPRESS_SECRET,
             store: new MongoStore({
-                mongooseConnection: mongoose.connection,
+                url: 'mongodb+srv://admin:LosFachas@alecluster-3uwzx.mongodb.net/test?retryWrites=true&w=majority',
                 ttl: 14*24*60*60,
             }),
             resave: false,
