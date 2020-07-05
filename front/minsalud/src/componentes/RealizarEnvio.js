@@ -35,7 +35,8 @@ class RealizarEnvio extends Component {
       //,headers: {
       //  "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR"}
     }).then(resp=>resp.json())
-    .then(data => this.setState({medicos: data[0].Medicos}))
+    .then(data => {console.log(data[0].Medicos)
+                    this.setState({medicos: data[0].Medicos})})
 
     const urlCentros = `${this.props.url}centroshospitalarios`;
     fetch(urlCentros, {
@@ -69,6 +70,12 @@ class RealizarEnvio extends Component {
 
     }
 
+    if(this.state.Peticion){
+        let cargaElemento = {};
+        cargaElemento["idPeticion"] = this.state.Peticion._id;
+        console.log(cargaElemento)
+        this.setState({envio: cargaElemento})
+    }
 
     
 
@@ -136,7 +143,8 @@ class RealizarEnvio extends Component {
 
                 //con este condicional vemos que no supere la cantidad disponible de cada especialista
                 if(cant<=cantEspecialista){
-                objMed[especialidad]=cant
+                objMed["especialidad"]=especialidad;
+                objMed["cantidad"]=cant;
                 envioDeMedicos.push(objMed)
                 objMed={}
             }else{
@@ -164,6 +172,8 @@ class RealizarEnvio extends Component {
         }
         
         let ObjetoEnvio = {"Envio":envio}
+        console.log(ObjetoEnvio)
+        
         fetch(`${this.props.url}envios`,{
 			method: 'POST',
 			//headers: { 'Content-Type': 'application/json' },
@@ -257,7 +267,7 @@ class RealizarEnvio extends Component {
 
 
     render(){
-       
+        console.log(this.state.peticion)
         return (
         <div className="envio-container">
             <h1>Generacion de un envio</h1>
