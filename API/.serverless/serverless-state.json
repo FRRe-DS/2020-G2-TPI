@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "serverless-aws-nodejs",
+    "service": "g2-sesiones",
     "serviceObject": {
-      "name": "serverless-aws-nodejs"
+      "name": "g2-sesiones"
     },
     "provider": {
       "stage": "dev",
@@ -73,7 +73,7 @@
           "AppLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-aws-nodejs-dev-app"
+              "LogGroupName": "/aws/lambda/g2-sesiones-dev-app"
             }
           },
           "IamRoleLambdaExecution": {
@@ -101,7 +101,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "serverless-aws-nodejs",
+                        "g2-sesiones",
                         "dev",
                         "lambda"
                       ]
@@ -118,7 +118,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-aws-nodejs-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/g2-sesiones-dev*:*"
                           }
                         ]
                       },
@@ -129,7 +129,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-aws-nodejs-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/g2-sesiones-dev*:*:*"
                           }
                         ]
                       }
@@ -142,7 +142,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "serverless-aws-nodejs",
+                    "g2-sesiones",
                     "dev",
                     {
                       "Ref": "AWS::Region"
@@ -160,9 +160,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-aws-nodejs/dev/1593898824577-2020-07-04T21:40:24.577Z/serverless-aws-nodejs.zip"
+                "S3Key": "serverless/g2-sesiones/dev/1593914036994-2020-07-05T01:53:56.994Z/g2-sesiones.zip"
               },
-              "FunctionName": "serverless-aws-nodejs-dev-app",
+              "FunctionName": "g2-sesiones-dev-app",
               "Handler": "index.server",
               "MemorySize": 1024,
               "Role": {
@@ -178,20 +178,20 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersion7S4iBcmJAYFANCiShvX17xUWkEY913FAezxe0sY": {
+          "AppLambdaVersion1ceGHjIwX0ZDoWm3PWwYPaLSPNqRMnx25VN5WfTeM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "MUaTxCZFSbarDnsY6UriHIU9vfDnoc40ONNOSnGhVrI="
+              "CodeSha256": "sW5RU7zHkLrqG42XEsT+eA4JNmNsuR8VEcfQDKdZb+A="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-serverless-aws-nodejs",
+              "Name": "dev-g2-sesiones",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -225,6 +225,21 @@
                 ]
               },
               "PathPart": "pruebas",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceLogout": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "logout",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -632,6 +647,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourcePruebas"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodLogoutOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceLogout"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1544,6 +1604,49 @@
               "RequestParameters": {},
               "ResourceId": {
                 "Ref": "ApiGatewayResourcePruebas"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodLogoutPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceLogout"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -2932,7 +3035,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1593898799556": {
+          "ApiGatewayDeployment1593914017552": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -2944,6 +3047,7 @@
               "ApiGatewayMethodOptions",
               "ApiGatewayMethodProxyVarOptions",
               "ApiGatewayMethodPruebasOptions",
+              "ApiGatewayMethodLogoutOptions",
               "ApiGatewayMethodPeticionesOptions",
               "ApiGatewayMethodEncontrarpeticionesfechaOptions",
               "ApiGatewayMethodLoginOptions",
@@ -2965,6 +3069,7 @@
               "ApiGatewayMethodAny",
               "ApiGatewayMethodProxyVarAny",
               "ApiGatewayMethodPruebasPost",
+              "ApiGatewayMethodLogoutPost",
               "ApiGatewayMethodPeticionesPost",
               "ApiGatewayMethodPeticionesGet",
               "ApiGatewayMethodEncontrarpeticionesfechaGet",
@@ -3561,7 +3666,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersion7S4iBcmJAYFANCiShvX17xUWkEY913FAezxe0sY"
+              "Ref": "AppLambdaVersion1ceGHjIwX0ZDoWm3PWwYPaLSPNqRMnx25VN5WfTeM"
             }
           },
           "ServiceEndpoint": {
@@ -3844,6 +3949,32 @@
                 "requestBody": {
                   "description": "Any json file will work"
                 }
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "logout",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
               },
               "integration": "AWS_PROXY"
             }
@@ -5109,22 +5240,22 @@
             }
           }
         ],
-        "name": "serverless-aws-nodejs-dev-app",
+        "name": "g2-sesiones-dev-app",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersion7S4iBcmJAYFANCiShvX17xUWkEY913FAezxe0sY"
+        "versionLogicalId": "AppLambdaVersion1ceGHjIwX0ZDoWm3PWwYPaLSPNqRMnx25VN5WfTeM"
       }
     },
     "serviceFilename": "serverless.yml",
     "layers": {},
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "/home/ale/Documents/Universidad/DACS/2020-G2-TPI/API/.serverless/serverless-aws-nodejs.zip"
+    "artifact": "/home/ale/Documents/Universidad/DACS/2020-G2-TPI/API/.serverless/g2-sesiones.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1593898824577-2020-07-04T21:40:24.577Z",
-    "artifact": "serverless-aws-nodejs.zip"
+    "artifactDirectoryName": "serverless/g2-sesiones/dev/1593914036994-2020-07-05T01:53:56.994Z",
+    "artifact": "g2-sesiones.zip"
   }
 }

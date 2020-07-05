@@ -138,5 +138,10 @@ router.post('/ciudad',ciudadController.nuevaCiudad)
 // DOC STATUS: Complete
 router.get('/ciudad',ciudadController.getCiudad)
 
-
+router.post('/logout',
+loginController.logout
+)
+router.get('/validarSesion', 
+loginController.validarSesion
+)
 module.exports = router;

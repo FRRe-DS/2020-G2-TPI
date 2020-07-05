@@ -1,4 +1,4 @@
-service: serverless-aws-nodejs
+service: g2-sesiones
 provider:
   name: aws #Define the cloud provider to use
   runtime: nodejs12.x 
@@ -24,6 +24,10 @@ functions:
             summary: "Testing purposes, returns the body of the method"
             requestBody:
                 description: "Any json file will work"
+      - http:
+            path: /logout
+            method: POST
+            cors: true
       - http:
           path: /peticiones
           method: POST
