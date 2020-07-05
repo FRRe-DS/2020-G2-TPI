@@ -117,7 +117,18 @@ class RealizarEnvio extends Component {
 
     
     enviarPeticion(){
+        let envioDeMedicos = [];
         console.log("Soy un envio")
+        let especialidad
+        let cant
+        let cantidadMedicos = this.state.idDIVmedico;
+        
+        for (let i=0; i< cantidadMedicos + 1; i++){
+            especialidad = document.getElementById(`otro-medico${i}`).getElementsByClassName("form-group")[0].getElementsByTagName("select")[0].value
+            cant = document.getElementById(`otro-medico${i}`).getElementsByClassName("form-group")[0].getElementsByTagName("input")[0].value
+            console.log(especialidad)
+            console.log(cant)
+        }
     }
     
     recursoPeticion(recurso){
@@ -143,7 +154,7 @@ class RealizarEnvio extends Component {
         <Form.Control as="select" className="form-envio" onInput={e=>this.generacionMedico(e)} id={`select-med${medicoID}`}>
         <option></option>
         {
-        this.state.medicos.map( med => <option value={med._id}>{med.especialidad[0].toUpperCase() +  
+        this.state.medicos.map( med => <option value={med.especialidad}>{med.especialidad[0].toUpperCase() +  
             med.especialidad.slice(1)}</option>)
         }
         </Form.Control>
@@ -157,7 +168,7 @@ class RealizarEnvio extends Component {
         < div id={`otro-medico${medicoID+1}`}></div>
         </>
         
-        console.log(medicoID)
+        
         
     ReactDOM.render(medicoDIV, document.getElementById(`otro-medico${medicoID}`))
     this.setState({idDIVmedico:medicoID}) 
@@ -200,27 +211,7 @@ class RealizarEnvio extends Component {
     
     }
 
-    agregarEnvioMed(e){
-        e.preventDefault();
-        let medPrevios = this.state.medicoEnvio
-        let valor = e.target.value
-        let nombre = e.target.name
-        let cargaElemento = [];
-        let especialidad;
-        let cant = 0;
-        if(nombre==="especialidad"){
-            console.log("soy una especialidad")
-            especialidad = valor
-        }else{
-            console.log("soy una cantidad")
-            cant = valor
-        }
-        cargaElemento[especialidad] = cant
-        medPrevios.push(cargaElemento)
-        console.log(medPrevios)
-        
-    
-}
+
 
     render(){
         //console.log(this.state.medicos)
@@ -321,7 +312,7 @@ class RealizarEnvio extends Component {
                          
                 <Form.Label column="lg" >Especialidad</Form.Label>
                     <Form.Control as="select" className="form-envio" onChange={this.generacionMedico} 
-                    onInput={e=>this.agregarEnvioMed(e)} name="especialidad">
+                     name="especialidad">
                     <option></option>
                     {
                     this.state.medicos.map( med => <option value={med.especialidad}>{med.especialidad[0].toUpperCase() +  
@@ -331,7 +322,7 @@ class RealizarEnvio extends Component {
                     <Form.Label column lg="1.5">
                         Cantidad: 
                     </Form.Label>
-                    <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0} onChange={e=>this.agregarEnvioMed(e)}
+                    <Form.Control className="cant-envio" type="number" max={this.state.recursos["cofiasDisponible"]} min={0} defaultValue={0} 
                     name="cantidad-med"/>
                     
 
@@ -352,7 +343,7 @@ class RealizarEnvio extends Component {
                 <br />
 
                 <div className="botones-envio">
-                <Button  className="boton" variant="primary" onClick={this.enviarPeticion}>
+                <Button  className="boton" variant="primary" onClick={e => this.enviarPeticion()}>
                     Realizar Envio
                 </Button>
                 <Button  className="boton" variant="secondary" href="/peticiones">
