@@ -123,10 +123,7 @@ statController.agregarEstadistica
 router.get('/encontrarPeticion',
 peticionController.encontrarPeticionId
 )
-// DOC STATUS: Complete
-router.get('/encontrarPeticionesFecha',
-peticionController.encontrarPeticionFecha
-)
+
 // DOC STATUS: Complete
 router.get('/actualizarEstadisticas',statController.registrarNuevaEstadistica)
 // DOC STATUS: Complete
