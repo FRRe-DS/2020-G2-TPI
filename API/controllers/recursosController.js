@@ -44,6 +44,7 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
     const recursos = await Recursos.find({});
     const nuevosRecursos ={
         Recursos :{
+        //aca esta el bug. Se estan restando valores que no existen y js es malisimo con esas cosas
         camillasDisponible : recursos[0].Recursos.camillasDisponible - envioActual.camillas,
         jabonLitrosDisponible : recursos[0].Recursos.jabonLitrosDisponible - envioActual.jabonLitros,
         alcoholLitrosDisponible :recursos[0].Recursos.alcoholLitrosDisponible - envioActual.alcoholLitros,

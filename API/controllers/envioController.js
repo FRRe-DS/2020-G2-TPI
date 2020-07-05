@@ -49,14 +49,16 @@ exports.nuevoEnvio = async(req,res,next) =>{
                     break;
                 case "medicos":
                     const medicos = await Medico.find({});
+                    console.log("Medicos actuales en reserva")
+                    console.log(medicos)
                     const listaMedicosMongo = medicos[0].Medicos
                     const listaMedicosEnvio = envioActual.medicos 
                    
                     nuevos_medicos.Medicos = medicos[0].Medicos
-
+        
                     medicos[0].Medicos.forEach((element,index) =>{
                         for (let itemenvio in listaMedicosEnvio){
-                            if (element.especialidad == listaMedicosEnvio[itemenvio].especialidad){;
+                            if (element.especialidad == listaMedicosEnvio[itemenvio].especialidad){
                                 //puedo hacer el envio,me da el cuero
                                 if (element.cantidad >= listaMedicosEnvio[itemenvio].cantidad){
                                     nuevos_medicos.Medicos[index].cantidad -= listaMedicosEnvio[itemenvio].cantidad
@@ -64,6 +66,7 @@ exports.nuevoEnvio = async(req,res,next) =>{
                                 else{
                                     res.json({"message":"Medicos insuficientes"})
                                     recursosValidos=false;
+                                    /*aca no deberia terminar la cosa? un return o algo asi?*/
                                 }
                             }
                         }
