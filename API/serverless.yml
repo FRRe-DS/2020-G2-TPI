@@ -114,8 +114,7 @@ functions:
                 -
                     statusCode: "403"
                     responseBody:
-                        description: "Ocurre cuando se supera la cuota diaria"
-                    
+                        description: "Ocurre cuando se supera la cuota diaria"            
       - http:
             path: /encontrarPeticion
             method: GET
@@ -136,7 +135,7 @@ functions:
                     -
                         statusCode: "403"
                         responseBody:
-                            description: "Ocurre cuando se supera la cuota diaria" 
+                            description: "Ocurre cuando se supera la cuota diaria"       
       - http:
           path: /register
           method: POST
@@ -453,6 +452,7 @@ functions:
                     responseBody:
                         description: "Cuando se supera la cuota diaria de request"
       - http:
+<<<<<<< HEAD
             path: /logout
             method: POST
             cors: true
@@ -468,6 +468,8 @@ functions:
                     responseBody:
                         description: "Cuando se supera la cuota diaria de request"
       - http:
+=======
+>>>>>>> masterSinSesion
             path: /validarSesion
             method: GET
             cors: true
@@ -592,7 +594,11 @@ custom:
                         jeringasDisponible:
                             type: number
                         cofiasDisponible:
+<<<<<<< HEAD
                             type: number     
+=======
+                            type: number           
+>>>>>>> masterSinSesion
             -
                 name: envio
                 contentType: "application/json"
@@ -790,13 +796,5 @@ custom:
                             type: string
                         updatedAt: 
                             type: string
-                        
-                                    
-                                
-                                     
-                                
-
-
-
 plugins:
   - serverless-aws-documentation 

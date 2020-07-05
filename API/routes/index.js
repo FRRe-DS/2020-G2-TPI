@@ -49,9 +49,7 @@ router.post('/login',
 loginController.logUser
 )
 // DOC STATUS: Complete
-router.post('/logout',
-loginController.logout
-)
+
 // DOC STATUS: Complete
 router.post('/register',
 loginController.registerUser
@@ -140,8 +138,5 @@ router.post('/ciudad',ciudadController.nuevaCiudad)
 // DOC STATUS: Complete
 router.get('/ciudad',ciudadController.getCiudad)
 
-// DOC STATUS: Complete
-router.get('/validarSesion', 
-loginController.validarSesion
-)
+
 module.exports = router;
