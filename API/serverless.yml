@@ -73,30 +73,6 @@ functions:
                     responseBody:
                         descripcion: "Ocurre cuando no se utiliza una clave API-Key o cuando se supera la quota diaria"   
       - http:
-            path: /encontrarPeticionesFecha
-            method: GET
-            cors: true
-            documentation:
-              summary: "Gets a list of all the existing peticiones ordered by date"
-              requestBody:
-                  description: "Empty request body"
-              pathParams:
-                  -
-                      name: x-api-key
-                      required: true
-                      description: "API Key identifier"
-              methodResponses:
-                  -
-                      statusCode: "200"
-                      responseBody:
-                          description: "Array of peticiones"
-                      responseModels:
-                          "application/json" : "peticion"
-                  -
-                      statusCode: "403"
-                      responseBody:
-                          descripcion: "Ocurre cuando no se utiliza una clave API-Key o cuando se supera la quota diaria"
-      - http:
           path: /login
           method: POST
           cors: true
