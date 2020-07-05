@@ -1,10 +1,7 @@
 const Recursos = require('../models/Recursos');
 
-
 //SOLO AL PRINCIPIO, TOCAS DE VUELTA ESTE METODO Y ROMPES TODO
 //TENEMOS QUE USAR UN METODO PARA ACTUALIZAR EL UNICO ELEMENTO DE LA COLECCION
-
-
 
 exports.registrarRecursos = async (req,res,next) =>{
     
@@ -41,8 +38,17 @@ exports.getRecursos = async(req,res,next) =>{
 
 exports.actualizarRecursos = async (envioActual,req,res,next)=>{
     try{
-    const recursos = await Recursos.find({});
-    const nuevosRecursos ={
+
+        const arregloRecursos = ["camillas","alcoholLitros","jabonLitros","barbijos","jeringas","cofias"]
+        
+        arregloRecursos.forEach(recurso => {
+            if(!envioActual.hasOwnProperty(recurso)){
+                envioActual[recurso] = 0 
+            }
+        });
+
+        const recursos = await Recursos.find({});
+        const nuevosRecursos ={
         Recursos :{
         //aca esta el bug. Se estan restando valores que no existen y js es malisimo con esas cosas
         camillasDisponible : recursos[0].Recursos.camillasDisponible - envioActual.camillas,
@@ -53,16 +59,25 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
         cofiasDisponible : recursos[0].Recursos.cofiasDisponible - envioActual.cofias
         }
     }
+
     console.log(nuevosRecursos);
-    console.log(recursos[0].Recursos);
-    await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(err, result) => {
-        console.log('entreeeeeeeeeee');
-        if(err){
-            res.send(err)
-        } else{
-            // res.json({mensaje:"Recursos actualizados"});
-        }
-    }); 
+
+    console.log(res)
+    
+    try {
+        await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false})
+        res.json({mensaje:"Recursos actualizados"});
+    } catch (error) {
+        console.log(error)
+        res.json({mensaje: error});
+    }
+    // await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(req, res, next) => {
+    //     if(err){
+    //         res.send(err)
+    //     } else{
+    //         res.json({mensaje:"Recursos actualizados"});
+    //     }
+    // }); 
     // res.json({mensaje:"Los recursos se actualizaron correctamente"});
        
     

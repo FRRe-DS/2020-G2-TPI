@@ -2,8 +2,7 @@ const Envio = require('../models/Envios');
 const Peticion = require('../models/Peticion');
 const Medico = require('../models/Medicos');
 const Validacion = require('../validacion/envioValidator');
-const {actualizarRecursos} = require('../controllers/recursosController');
-
+// const {actualizarRecursos} = require('../controllers/recursosController');
 const Recursos = require('../models/Recursos');
 
 exports.nuevoEnvio = async(req,res,next) =>{
@@ -12,10 +11,12 @@ exports.nuevoEnvio = async(req,res,next) =>{
     //Esto debe ir primero para evitar conflictos CORS
     res.setHeader('content-type', 'application/json');
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.statusCode = 200;
+
     let recursosValidos=true
     let nuevos_medicos = new Medico();
     try{
-        console.log(req.body)
+        // console.log(req.body)
         const envio = new Envio(req.body);
         const envioActual = req.body.Envio
         recursos=await Recursos.find({});
@@ -49,11 +50,10 @@ exports.nuevoEnvio = async(req,res,next) =>{
                     break;
                 case "medicos":
                     const medicos = await Medico.find({});
-                    console.log("Medicos actuales en reserva")
-                    console.log(medicos)
+                    // console.log("Medicos actuales en reserva")
+                    // console.log(medicos)
                     const listaMedicosMongo = medicos[0].Medicos
                     const listaMedicosEnvio = envioActual.medicos 
-                   
                     nuevos_medicos.Medicos = medicos[0].Medicos
         
                     medicos[0].Medicos.forEach((element,index) =>{
@@ -64,8 +64,8 @@ exports.nuevoEnvio = async(req,res,next) =>{
                                     nuevos_medicos.Medicos[index].cantidad -= listaMedicosEnvio[itemenvio].cantidad
                                 }
                                 else{
-                                    res.json({"message":"Medicos insuficientes"})
                                     recursosValidos=false;
+                                    
                                     /*aca no deberia terminar la cosa? un return o algo asi?*/
                                 }
                             }
@@ -83,9 +83,60 @@ exports.nuevoEnvio = async(req,res,next) =>{
         if(recursosValidos){
 
              // envio tiene id peticion? 
-             actualizarRecursos(envioActual);
 
-             if(envioActual.hasOwnProperty("idPeticion")){   
+             // ACTUALIZAR RECURSOS --------------------------------------------
+             // actualizarRecursos(envioActual);
+
+             try{
+
+                const arregloRecursos = ["camillas","alcoholLitros","jabonLitros","barbijos","jeringas","cofias"]
+                
+                arregloRecursos.forEach(recurso => {
+                    if(!envioActual.hasOwnProperty(recurso)){
+                        envioActual[recurso] = 0 
+                    }
+                });
+        
+                const recursos = await Recursos.find({});
+                const nuevosRecursos ={
+                Recursos :{
+                    camillasDisponible : recursos[0].Recursos.camillasDisponible - envioActual.camillas,
+                    jabonLitrosDisponible : recursos[0].Recursos.jabonLitrosDisponible - envioActual.jabonLitros,
+                    alcoholLitrosDisponible :recursos[0].Recursos.alcoholLitrosDisponible - envioActual.alcoholLitros,
+                    barbijosDisponible : recursos[0].Recursos.barbijosDisponible - envioActual.barbijos,
+                    jeringasDisponible: recursos[0].Recursos.jeringasDisponible - envioActual.jeringas,
+                    cofiasDisponible : recursos[0].Recursos.cofiasDisponible - envioActual.cofias
+                    }
+                }
+        
+                // console.log(nuevosRecursos);
+            
+                // opcion 2
+                // try {
+                //     await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false})
+                //     res.json({mensaje:"Recursos actualizados"});
+                // } catch (error) {
+                //     console.log(error)
+                //     res.json({mensaje: error});
+                // }
+
+                // opcion 1 
+                await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(err, result) => {
+                    if(err){
+                        res.send(err)
+                    } else{
+                        res.json({mensaje:"Recursos actualizados"});
+                    }
+                }); 
+                }
+                catch (error){
+                    console.log(error);
+                    next();
+                }
+
+             // ----------------------------------------------
+
+            if(envioActual.hasOwnProperty("idPeticion")){   
                 
                 const recursos = ["camillas","alcoholLitros","jabonLitros","barbijos","jeringas","cofias"]
                 
@@ -99,7 +150,6 @@ exports.nuevoEnvio = async(req,res,next) =>{
                             // actualizar valores
                             for(var key in peti.Peticion){
                                 if(peti.Peticion.hasOwnProperty(key)){
-
                                     if(recursos.includes(key) && envioActual[key] != undefined){
                                         peti.Peticion[key] -= envioActual[key]
                                         //evitar que los recursos sean negativos en la peticion
@@ -144,9 +194,9 @@ exports.nuevoEnvio = async(req,res,next) =>{
                     }
                 })   
             } else {
-                // guardar envio
+                // guardar envio sin peticion
                 await envio.save();
-                res.statusCode = 200;
+                // res.statusCode = 200;
                 res.json({mensaje:"El envio se agrego correctamente"});
             }
         } else {
