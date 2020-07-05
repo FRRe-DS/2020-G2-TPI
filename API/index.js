@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const PORT = 5000;
 const {MONGOURI} = require('./keys');
 const sls = require('serverless-http');
-
+app.use(express.json())
 
 mongoose.connect(MONGOURI,{
     useNewUrlParser:true,

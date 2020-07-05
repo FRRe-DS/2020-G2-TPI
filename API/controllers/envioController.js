@@ -7,15 +7,17 @@ const {actualizarRecursos} = require('../controllers/recursosController');
 const Recursos = require('../models/Recursos');
 
 exports.nuevoEnvio = async(req,res,next) =>{
-    const envio = new Envio(req.body);
     
-    const envioActual = req.body.Envio
+    
     //Esto debe ir primero para evitar conflictos CORS
     res.setHeader('content-type', 'application/json');
     res.setHeader('Access-Control-Allow-Origin', '*');
     let recursosValidos=true
     let nuevos_medicos = new Medico();
     try{
+        console.log(req.body)
+        const envio = new Envio(req.body);
+        const envioActual = req.body.Envio
         recursos=await Recursos.find({});
         for (const item in envioActual){
             //pregunta si la cantidad que quiero enviar de cada recurso es menor a lo que tengo disponible

@@ -26,7 +26,7 @@ router.get('/envios',
 
 // DOC STATUS: Complete
 router.post('/envios', 
-    envioController.nuevoEnvio)
+    envioController.nuevoEnvio);
 
 //Api Documentation
 // router.get('/apiDoc',apiController.enviar)
