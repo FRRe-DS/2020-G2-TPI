@@ -35,8 +35,7 @@ class RealizarEnvio extends Component {
       //,headers: {
       //  "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR"}
     }).then(resp=>resp.json())
-    .then(data => {console.log(data[0].Medicos)
-                    this.setState({medicos: data[0].Medicos})})
+    .then(data => {this.setState({medicos: data[0].Medicos})})
 
     const urlCentros = `${this.props.url}centroshospitalarios`;
     fetch(urlCentros, {
@@ -48,15 +47,12 @@ class RealizarEnvio extends Component {
 
     //Emparejar un envio con un centro
     let idPeticionURL = window.location.href.replace('http://localhost:3000/envio/','');
-   if(idPeticionURL===":id"){
-        //
-        //
-        console.log("estamos tratando un envio sin una peticion asociada")
-        //
-        //
-    }else{
-        
+   if(idPeticionURL !== ":id"){
         //este es el caso en el un envio se genere porque tenia una peticion asociada
+
+        let cargaElemento = {};
+            cargaElemento["idPeticion"] = idPeticionURL;
+            this.setState({envio: cargaElemento}) 
         fetch(`${this.props.url}encontrarPeticion?idPeticion=${idPeticionURL}`,{
             method:"GET"
 
@@ -65,17 +61,11 @@ class RealizarEnvio extends Component {
         .then(data => {
             this.setState({peticion:data})
             this.obtenerCentroHosp()
-    })
-        .catch(error=>console.log(error))    
-
+        })    
+        .catch(error=>console.log(error))
     }
 
-    if(this.state.Peticion){
-        let cargaElemento = {};
-        cargaElemento["idPeticion"] = this.state.Peticion._id;
-        console.log(cargaElemento)
-        this.setState({envio: cargaElemento})
-    }
+    
 
     
 
@@ -128,60 +118,76 @@ class RealizarEnvio extends Component {
         let envioDeMedicos = [];
         console.log("Soy un envio")
         let especialidad;
-        let cant;
+        let cant=0;
         let objMed={};
         let medAPI = this.state.medicos
         let cantidadMedicos = this.state.idDIVmedico;
         let envio = this.state.envio;
-        for (let i=0; i< cantidadMedicos + 1; i++){
-            especialidad = document.getElementById(`otro-medico${i}`).getElementsByClassName("form-group")[0].getElementsByTagName("select")[0].value
-            cant = parseInt(document.getElementById(`otro-medico${i}`).getElementsByClassName("form-group")[0].getElementsByTagName("input")[0].value)
-            let cantEspecialista;
-            cantEspecialista = medAPI.find(elem => elem.especialidad ===especialidad);
-            cantEspecialista = cantEspecialista.cantidad
-            if(cant>0 && especialidad !==""){
-
-                //con este condicional vemos que no supere la cantidad disponible de cada especialista
-                if(cant<=cantEspecialista){
-                objMed["especialidad"]=especialidad;
-                objMed["cantidad"]=cant;
-                envioDeMedicos.push(objMed)
-                objMed={}
-            }else{
-                document.getElementById(`otro-medico${i}`).getElementsByClassName("form-group")[0].getElementsByTagName("input")[0].value = 0
-                
-                ReactDOM.render(<Alert variant="danger">Valor del especialista {especialidad} no disponible</Alert>, document.getElementById("error-medico"))
-            setTimeout(()=>{
-                ReactDOM.render(<div></div>, document.getElementById('error-medico'))	
-                
-              },2000)
-            }
-            }else{
-                ReactDOM.render(<Alert variant="danger">No ingrese valores negativos</Alert>, document.getElementById("error-medico"))
-            setTimeout(()=>{
-                ReactDOM.render(<div></div>, document.getElementById('error-medico'));
-                document.getElementById(`otro-medico${i}`).getElementsByClassName("form-group")[0].getElementsByTagName("input")[0].value = 0	
-                
-              },2000)
-            }
-
-        }
-        console.log(envioDeMedicos)
-        if(envioDeMedicos.length>0){
-            envio["medicos"] = envioDeMedicos
-        }
         
-        let ObjetoEnvio = {"Envio":envio}
-        console.log(ObjetoEnvio)
-        
-        fetch(`${this.props.url}envios`,{
-			method: 'POST',
-			//headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(ObjetoEnvio)
-        }).then(resp=>resp.json())
-        .then(data=>console.log(data))
-        .catch(error=>console.log(error))
+        //Lo primero a hacer es ver si ya tenemos asignado un centro hospitalario
+        //Tambien hay que corroborar que tenga algun tipo de recurso
+        if (this.state.envio.hasOwnProperty("idCentro") && Object.keys(this.state.envio).length>2){
+            
+            for (let i=0; i< cantidadMedicos + 1; i++){
+                especialidad = document.getElementById(`otro-medico${i}`).getElementsByClassName("form-group")[0].getElementsByTagName("select")[0].value
+                cant = parseInt(document.getElementById(`otro-medico${i}`).getElementsByClassName("form-group")[0].getElementsByTagName("input")[0].value)
+                let cantEspecialista;
+                cantEspecialista = medAPI.find(elem => elem.especialidad ===especialidad);
+                if(cantEspecialista){
+                cantEspecialista = cantEspecialista.cantidad
+            }
+                if(cant>0 && especialidad !==""){
 
+                    //con este condicional vemos que no supere la cantidad disponible de cada especialista
+                    if(cant<=cantEspecialista){
+                        objMed["especialidad"]=especialidad;
+                        objMed["cantidad"]=cant;
+                        envioDeMedicos.push(objMed)
+                        objMed={}
+                    }else{
+                        document.getElementById(`otro-medico${i}`).getElementsByClassName("form-group")[0].getElementsByTagName("input")[0].value = 0
+                        
+                        ReactDOM.render(<Alert variant="danger">Valor del especialista {especialidad} no disponible</Alert>, document.getElementById("error-medico"))
+                    setTimeout(()=>{
+                        ReactDOM.render(<div></div>, document.getElementById('error-medico'))	
+                        
+                    },2000)
+                    }
+                }else if(cant<0){
+                    ReactDOM.render(<Alert variant="danger">Ingrese valores mayores a 0</Alert>, document.getElementById("error-medico"))
+                setTimeout(()=>{
+                    ReactDOM.render(<div></div>, document.getElementById('error-medico'));
+                    document.getElementById(`otro-medico${i}`).getElementsByClassName("form-group")[0].getElementsByTagName("input")[0].value = 0	
+                    
+                },2000)
+                }
+
+            }
+            
+            if(envioDeMedicos.length>0){
+                envio["medicos"] = envioDeMedicos
+            }
+            
+            let ObjetoEnvio = {"Envio":envio}
+            console.log(ObjetoEnvio)
+            
+            /*fetch(`${this.props.url}envios`,{
+                method: 'POST',
+                //headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(ObjetoEnvio)
+            }).then(resp=>resp.json())
+            .then(data=>console.log(data))
+            .catch(error=>console.log(error))*/
+    }else{
+
+        ReactDOM.render(<Alert variant="danger">Recuerde que es obligatorio ingresar un centro y enviar recursos</Alert>, document.getElementById("error-incompleto"))
+                setTimeout(()=>{
+                    ReactDOM.render(<div></div>, document.getElementById('error-incompleto'))	
+                    
+                },3000)
+        
+
+    }
     }
     
     recursoPeticion(recurso){
@@ -238,8 +244,6 @@ class RealizarEnvio extends Component {
 
     agregarElemEnvio(e){
         e.preventDefault();
-        console.log("HOLA")
-        console.log(e.target)
         let envioPrevio= this.state.envio
         let valorElemento = parseInt(e.target.value);
         let nombreElemento = e.target.name;
@@ -267,7 +271,7 @@ class RealizarEnvio extends Component {
 
 
     render(){
-        console.log(this.state.peticion)
+        
         return (
         <div className="envio-container">
             <h1>Generacion de un envio</h1>
@@ -278,12 +282,12 @@ class RealizarEnvio extends Component {
                             
                       
                     <Form.Control as="select" className="form-envio" id="select-envio-centros" onChange={e=>this.agregarElemEnvio(e)} name="idCentro" required>
-                    <option></option>
+                    <option hidden="" disabled="disabled" selected="selected" value=""></option>
                     {
                     this.state.centrosAPI.map( centro => <option value={centro.idCentro}>{centro.nombre}</option>)
                     }
                     </Form.Control>
-                    
+                <div id="error-incompleto"></div>  
                 <hr style={{color: "black", borderColor : '#000000' }}/>
 
                 
