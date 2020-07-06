@@ -16,12 +16,16 @@ exports.obtenerDatos= async(req,res,next) =>{
 
         var informesUsados = await Informes.find({},{createdAt:true})
         
+        var ultimaFechaExterior = new Date('1990-01-01 00:00:00')
+        console.log("Ultima Fecha exterior: inicio")
+        console.log(ultimaFechaExterior)
         //borrar este for de abajo
         var ultimaFechaLeida = await FechaInformes.findOne({},{fecha:true})
-        
+        console.log("Ultima Fecha Leida")
+        ultimaFechaLeida = new Date(ultimaFechaLeida.fecha)
         console.log(ultimaFechaLeida)
-        /*
         
+        /*
         if(informesUsados.length !== 0)
         {
             for( i in informesUsados)
@@ -29,7 +33,7 @@ exports.obtenerDatos= async(req,res,next) =>{
                 informesUsados[i] = informesUsados[i].createdAt
                 console.log("Iteracion en informesUsados para dejar el campo createdAt")
             }
-        }
+        }*/
         
         informesEnFormatoC=[]
         respuestaJSON.forEach(element => {
@@ -38,12 +42,11 @@ exports.obtenerDatos= async(req,res,next) =>{
             //y aniadir .ReporteHospitalario entre element y [item] linea 45
             //tambien recordar eliminar .Informes del respuesta de JSON
             //chequeamos si el elemento esta entre los no usados
-            console.log("INFORMES USADOS")
-            console.log(informesUsados)
-            if(!(informesUsados.includes(element.ReporteHospitalario.createdAt)))
+            var tempFecha= new Date(element.ReporteHospitalario.createdAt)
+            if(tempFecha > ultimaFechaLeida)
             {
-                console.log("El elemento no esta en el arreglo")
-                console.log(element.ReporteHospitalario.createdAt)
+                
+                //console.log(element.ReporteHospitalario.createdAt)
                 for(var item in element.ReporteHospitalario)
                 {
                     
@@ -52,13 +55,19 @@ exports.obtenerDatos= async(req,res,next) =>{
                         temp[item] = element.ReporteHospitalario[item]
                     }
                 }
+                if(tempFecha > ultimaFechaExterior)
+                {
+                    ultimaFechaExterior = new Date(temp.createdAt)
+                } 
                 informesEnFormatoC.push(temp)
+
             }
 
             
         });
-        console.log(informesEnFormatoC)
-        
+        console.log(ultimaFechaExterior)
+        //console.log(informesEnFormatoC)
+        /*
         var copiaUltimaEstadistica = await Stat.find({}).sort({createdAt:-1}).limit(1)
 
         informesEnFormatoC.forEach(async (informe) => {
