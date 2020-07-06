@@ -59,6 +59,7 @@ exports.registrarInforme = async (req,res,next) => {
                             nuevaEstadistica.dataCiudades[i].cantidades.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
                             nuevaEstadistica.dataCiudades[i].cantidades.recuperados += nuevoInforme.resumenCasos.cantidadCurados
                             nuevaEstadistica.dataCiudades[i].cantidades.muertos += nuevoInforme.resumenCasos.cantidadMuertos
+                            nuevaEstadistica.dataCiudades[i].poblacion -= nuevoInforme.resumenCasos.cantidadMuertos
                             nuevaEstadistica.totales.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
                             nuevaEstadistica.totales.recuperados += nuevoInforme.resumenCasos.cantidadCurados
                             nuevaEstadistica.totales.muertos += nuevoInforme.resumenCasos.cantidadMuertos
