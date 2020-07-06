@@ -9,7 +9,7 @@ const BotonGeneracion = (props) => {
 
     const generarMed = (e)=>{
         e.preventDefault();
-        fetch(`${url}medicos`,{
+        fetch(`${url}generarMedicos`,{
 			method: 'POST',
 			//headers: { 'Content-Type': 'application/json' },
 			
@@ -20,7 +20,7 @@ const BotonGeneracion = (props) => {
 
     const generarRec= (e)=>{
         e.preventDefault();
-        fetch(`${url}recursos`,{
+        fetch(`${url}generarRecursos`,{
 			method: 'POST',
 			//headers: { 'Content-Type': 'application/json' },
 			

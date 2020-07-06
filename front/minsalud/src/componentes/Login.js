@@ -97,8 +97,7 @@ class Login extends Component {
 					
 					this.setState({ingreso:true})
 					
-					this.props.history.push('home') //Esta es una forma fea pero no encontre otra
-					
+					this.props.history.push('home') 
 				}else{
 				let alarma = <Alert variant='danger' className="w-50">Error: usuario o contraseña incorrecto</Alert>
 				ReactDOM.render(alarma, document.getElementById('error-ingreso'))

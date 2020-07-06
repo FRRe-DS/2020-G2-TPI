@@ -4,6 +4,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import ReactDOM from 'react-dom'
 import Alert from 'react-bootstrap/Alert'
+import InfoPeticion from './infoPeticion'
+import { withRouter } from 'react-router-dom';
 class RealizarEnvio extends Component {
     constructor(props) {
 		super(props);
@@ -171,13 +173,32 @@ class RealizarEnvio extends Component {
             let ObjetoEnvio = {"Envio":envio}
             console.log(ObjetoEnvio)
             
-            /*fetch(`${this.props.url}envios`,{
+            fetch(`${this.props.url}envios`,{
                 method: 'POST',
-                //headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(ObjetoEnvio)
             }).then(resp=>resp.json())
-            .then(data=>console.log(data))
-            .catch(error=>console.log(error))*/
+            .then(data=>{
+                //Exito del envio
+                //mensaje-peticion para renderizar el mensaje
+                if(data.mensaje ==="Recursos ActualizadosEl envio se agrego correctamente"){
+                    ReactDOM.render(<Alert variant="success">La peticion fue completamente respondida</Alert>, document.getElementById("mensaje-envio"))
+                }
+                else{ReactDOM.render(<Alert variant="success">{data.mensaje}</Alert>, document.getElementById("mensaje-envio"))
+                }
+                setTimeout(()=>{
+                    ReactDOM.render(<div></div>, document.getElementById('mensaje-envio'))	
+                    
+                },3000)
+            })
+            .catch(error=>{
+                ReactDOM.render(<Alert variant="danger">Error en el envio</Alert>, document.getElementById("mensaje-envio"))
+
+                setTimeout(()=>{
+                    this.props.history.push('/peticiones')	
+                    
+                },4000)
+            })
     }else{
 
         ReactDOM.render(<Alert variant="danger">Recuerde que es obligatorio ingresar un centro y enviar recursos</Alert>, document.getElementById("error-incompleto"))
@@ -287,6 +308,7 @@ class RealizarEnvio extends Component {
                     this.state.centrosAPI.map( centro => <option value={centro.idCentro}>{centro.nombre}</option>)
                     }
                     </Form.Control>
+                    <InfoPeticion peticion={this.state.peticion}/>
                 <div id="error-incompleto"></div>  
                 <hr style={{color: "black", borderColor : '#000000' }}/>
 
@@ -405,9 +427,11 @@ class RealizarEnvio extends Component {
                 <Button  className="boton" variant="secondary" href="/peticiones">
                     Regresar
                 </Button>
+                
                 </div>
+                
             </Form>
-            
+            < div id="mensaje-envio"></div>
 
 
         </div>
@@ -417,4 +441,4 @@ class RealizarEnvio extends Component {
   }
 
 
-export default RealizarEnvio;
+export default withRouter(RealizarEnvio);
