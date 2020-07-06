@@ -140,11 +140,6 @@ router.post('/ciudad',ciudadController.nuevaCiudad)
 // DOC STATUS: Complete
 router.get('/ciudad',ciudadController.getCiudad)
 
-// DOC STATUS: Complete
-router.get('/validarSesion', 
-loginController.validarSesion
-)
-
 // con el fin de probar la lectura de informes, usamos el siguiente endpoint
 router.post('/obtenerDatos',
 obtenerInformesController.obtenerDatos

@@ -794,7 +794,5 @@ custom:
                             type: boolean
                         createdAt:
                             type: string
-                        updatedAt: 
-                            type: string
 plugins:
   - serverless-aws-documentation 
