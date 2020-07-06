@@ -2,10 +2,10 @@ function isPeticionEmpty(datosPeticion)
     {
         var status = true;
         const recursos = ["camillas","alcoholLitros","jabonLitros","barbijos","jeringas","cofias"];
-        console.log("I got here");
+        // console.log("I got here");
 
         for(var key in recursos){
-            console.log(datosPeticion[recursos[key]]);
+            // console.log(datosPeticion[recursos[key]]);
             if(datosPeticion.hasOwnProperty(recursos[key]))
             {
                     if(datosPeticion[recursos[key]]!==0)

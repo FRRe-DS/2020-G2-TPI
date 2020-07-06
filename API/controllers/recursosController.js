@@ -71,6 +71,7 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
         console.log(error)
         res.json({mensaje: error});
     }
+    
     // await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(req, res, next) => {
     //     if(err){
     //         res.send(err)
@@ -79,7 +80,6 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
     //     }
     // }); 
     // res.json({mensaje:"Los recursos se actualizaron correctamente"});
-       
     
     }
     catch (error){

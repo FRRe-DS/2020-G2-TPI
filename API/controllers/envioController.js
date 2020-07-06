@@ -13,17 +13,19 @@ exports.nuevoEnvio = async(req,res,next) =>{
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.statusCode = 200;
 
-    var mensajeRes = '';
+    // var mensajeRes = '';
 
     let recursosValidos=true
     let nuevos_medicos = new Medico();
+
     try{
         // console.log(req.body)
         const envio = new Envio(req.body);
         const envioActual = req.body.Envio
-        recursos=await Recursos.find({});
+        recursos = await Recursos.find({});
         for (const item in envioActual){
             //pregunta si la cantidad que quiero enviar de cada recurso es menor a lo que tengo disponible
+            
             switch (item) {
                 case "camillas":
                     if(recursos[0].Recursos.camillasDisponible<envioActual[item]){
@@ -32,6 +34,11 @@ exports.nuevoEnvio = async(req,res,next) =>{
                     break;
                 case "jabonLitros":
                     if(recursos[0].Recursos.jabonLitrosDisponible<envioActual[item]){
+                        recursosValidos=false;
+                    }
+                    break;
+                case "alcoholLitros":
+                    if(recursos[0].Recursos.alcoholLitrosDisponible<envioActual[item]){
                         recursosValidos=false;
                     }
                     break;
@@ -84,14 +91,17 @@ exports.nuevoEnvio = async(req,res,next) =>{
         }
         // recursos Validos empieza como true, si alguno de los campos que envio no cumple, se pone el flag a false
         
+        var mensajeRes = '';
+
         if(recursosValidos){
-
-             // ACTUALIZAR RECURSOS --------------------------------------------
-
+            console.log('Si hay suficientes recursos')
+            mensajeRes = mensajeRes + "Si hay suficientes recursos;"
+             // ACTUALIZAR RECURSOS
             try{
 
                 const arregloRecursos = ["camillas","alcoholLitros","jabonLitros","barbijos","jeringas","cofias"]
                 
+                // cambiar NaN por 0
                 arregloRecursos.forEach(recurso => {
                     if(!envioActual.hasOwnProperty(recurso)){
                         envioActual[recurso] = 0 
@@ -99,70 +109,65 @@ exports.nuevoEnvio = async(req,res,next) =>{
                 });
         
                 const recursos = await Recursos.find({});
+
+                // nuevo objeto de recursos 
                 const nuevosRecursos ={
-                Recursos :{
-                    camillasDisponible : recursos[0].Recursos.camillasDisponible - envioActual.camillas,
-                    jabonLitrosDisponible : recursos[0].Recursos.jabonLitrosDisponible - envioActual.jabonLitros,
-                    alcoholLitrosDisponible :recursos[0].Recursos.alcoholLitrosDisponible - envioActual.alcoholLitros,
-                    barbijosDisponible : recursos[0].Recursos.barbijosDisponible - envioActual.barbijos,
-                    jeringasDisponible: recursos[0].Recursos.jeringasDisponible - envioActual.jeringas,
-                    cofiasDisponible : recursos[0].Recursos.cofiasDisponible - envioActual.cofias
+                    Recursos :{
+                        camillasDisponible : recursos[0].Recursos.camillasDisponible - envioActual.camillas,
+                        jabonLitrosDisponible : recursos[0].Recursos.jabonLitrosDisponible - envioActual.jabonLitros,
+                        alcoholLitrosDisponible :recursos[0].Recursos.alcoholLitrosDisponible - envioActual.alcoholLitros,
+                        barbijosDisponible : recursos[0].Recursos.barbijosDisponible - envioActual.barbijos,
+                        jeringasDisponible: recursos[0].Recursos.jeringasDisponible - envioActual.jeringas,
+                        cofiasDisponible : recursos[0].Recursos.cofiasDisponible - envioActual.cofias
+                        }
                     }
-                }
-        
-                // console.log(nuevosRecursos);
-            
-                // opcion 2
-                // try {
-                //     await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false})
-                //     res.json({mensaje:"Recursos actualizados"});
-                // } catch (error) {
-                //     console.log(error)
-                //     res.json({mensaje: error});
-                // }
 
-                // opcion 1 
-
-                await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(err, result) => {
-                    if(err){
-                        res.send(err)
-                    } else{
-                        mensajeRes = mensajeRes + "Recursos actualizados;"; 
-                        // res.json({mensaje:"Recursos actualizados"});
-                    }
-                }); 
-                }
-                catch (error){
+                    // actualizacion de los recursos en la base de datos
+                    await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(err, result) => {
+                        if(err){
+                            console.log('hubo un error al intentar actualizar los recursos en la bd')
+                            res.send(err)
+                        } else{
+                            console.log('recursos actualizados')
+                            mensajeRes = mensajeRes + "Recursos actualizados;"; 
+                            // res.json({mensaje:"Recursos actualizados"});
+                        }
+                    }); 
+                } catch (error){
+                    console.log('hubo un error al intentar actualizar los recursos (no solo en la bd)')
                     console.log(error);
                     next();
                 }
 
-             // ----------------------------------------------
+             // la bd de recursos esta actualizada... 
 
             if(envioActual.hasOwnProperty("idPeticion")){   
-                
+                // es un envio asociado a una peticion
+
                 const recursos = ["camillas","alcoholLitros","jabonLitros","barbijos","jeringas","cofias"]
                 
                 // buscar peticion en base de datos
                 Peticion.findById(envioActual.idPeticion, (error, peti) => {
 
                     if(peti){
-                        //veo si la peticion no esta rechazada
+                        // veo si la peticion no esta rechazada
                         if(peti.Peticion.rechazada == false){
+                            mensajeRes = mensajeRes + "la peticion no fue rechazada;"
+                            // la peticion no fue rechazada
 
-                            // actualizar valores
+                            // actualizar valores de la peticion 
                             for(var key in peti.Peticion){
                                 if(peti.Peticion.hasOwnProperty(key)){
                                     if(recursos.includes(key) && envioActual[key] != undefined){
+                                        // a la peticion le restamos lo que le enviamos
                                         peti.Peticion[key] -= envioActual[key]
-                                        //evitar que los recursos sean negativos en la peticion
-                                        if(peti.Peticion[key] <= 0)
-                                        {
-                                            peti.Peticion[key]=0;
-                                        }
+
+                                        // evitar que los recursos sean negativos en la peticion
+                                        if(peti.Peticion[key] <= 0) { peti.Peticion[key] = 0; }
                                     }    
                                 }
                             }
+
                             //actualizacion de medicos
                             for(var i in envioActual.medicos)
                             { 
@@ -178,40 +183,54 @@ exports.nuevoEnvio = async(req,res,next) =>{
                                     }
                                 }
                             }
+
+                            // si todos los campos de la peticion son 0, se respondió completamente
                             peti.Peticion.respondidaCompletamente = Validacion.isPeticionEmpty(peti.Peticion);
-                            // actualizar en base de datos
-                        Peticion.findByIdAndUpdate(envioActual.idPeticion, {"Peticion": peti.Peticion}, {useFindAndModify: false} ,(err, result) => {
-                            if(err){
-                                res.send(err)
-                            } else{
-                                // res.json({mensaje:"Envio de prueba realizado"});
-                                mensajeRes = mensajeRes + "Envio de prueba realizado;"
-                            }
-                        })
-                        }else{
+
+                            // actualizar peticion en base de datos
+                            Peticion.findByIdAndUpdate(envioActual.idPeticion, {"Peticion": peti.Peticion}, {useFindAndModify: false} ,(err, result) => {
+                                if(err){
+                                    console.log('hubo un error, no se pudo actualizar la peticion en la bd')
+                                    res.send(err)
+                                } else{
+                                    // res.json({mensaje:"Envio de prueba realizado"});
+                                    console.log('Peticion actualizada en la base de datos')
+                                    mensajeRes = mensajeRes + "Peticion actualizada en la base de datos;"
+                                }
+                            })
+
+                        } else{
+                            // la peticion fue rechaza, no es posible hacer un envio
+                            console.log('la peticion ya fue rechazada')
                             mensajeRes = mensajeRes + " La peticion ya fue rechazada;"
                             // res.json({mensaje:"La peticion ya fue rechazada"})
                         }                  
         
                     } else{
                         // error, no existe la peticion en la base de datos
-                        res.send(err)
+                        // res.send(" La peticion no existe en la base de datos;")
+                        console.log('la peticion no existe en la base de datos');
+                        mensajeRes = mensajeRes + " La peticion no existe en la base de datos;"
+                        console.log(mensajeRes)
                     }
                 })   
             } else {
                 // guardar envio sin peticion
                 await envio.save();
                 // res.json({mensaje:"El envio se agrego correctamente"});
-                mensajeRes = mensajeRes + "El envio se agrego correctamente;"
+                console.log('el envio (sin peticion) se agrego correctamente')
+                mensajeRes = mensajeRes + "El envio (sin peticion) se agrego correctamente;"
             }
             
         } else {
             // res.json({mensaje:"No te dan los recursos papi"});
-            mensajeRes = mensajeRes + "No te dan los recursos papi;"
+            console.log('No hay suficientes recursos')
+            mensajeRes = mensajeRes + "No hay suficientes recursos;"
             
         }      
         res.json({mensaje: mensajeRes}); 
     }
+
     catch(error)
     {
         console.log(error);
