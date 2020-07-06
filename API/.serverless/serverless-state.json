@@ -160,7 +160,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-aws-nodejs/dev/1593898824577-2020-07-04T21:40:24.577Z/serverless-aws-nodejs.zip"
+                "S3Key": "serverless/serverless-aws-nodejs/dev/1594003729823-2020-07-06T02:48:49.823Z/serverless-aws-nodejs.zip"
               },
               "FunctionName": "serverless-aws-nodejs-dev-app",
               "Handler": "index.server",
@@ -178,14 +178,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersion7S4iBcmJAYFANCiShvX17xUWkEY913FAezxe0sY": {
+          "AppLambdaVersionSMXMErDXkmv3WyAMQLQoT12B8ZdYCWtxfCQQvkvN8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "MUaTxCZFSbarDnsY6UriHIU9vfDnoc40ONNOSnGhVrI="
+              "CodeSha256": "pMpVyaz2Dwl+y9VlJyPL313N4Rc3tc1WlM/MsGFwxV0="
             }
           },
           "ApiGatewayRestApi": {
@@ -240,21 +240,6 @@
                 ]
               },
               "PathPart": "peticiones",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayResourceEncontrarpeticionesfecha": {
-            "Type": "AWS::ApiGateway::Resource",
-            "Properties": {
-              "ParentId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
-                ]
-              },
-              "PathPart": "encontrarPeticionesFecha",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -677,51 +662,6 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourcePeticiones"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayMethodEncontrarpeticionesfechaOptions": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "AuthorizationType": "NONE",
-              "HttpMethod": "OPTIONS",
-              "MethodResponses": [
-                {
-                  "StatusCode": "200",
-                  "ResponseParameters": {
-                    "method.response.header.Access-Control-Allow-Origin": true,
-                    "method.response.header.Access-Control-Allow-Headers": true,
-                    "method.response.header.Access-Control-Allow-Methods": true
-                  },
-                  "ResponseModels": {}
-                }
-              ],
-              "RequestParameters": {},
-              "Integration": {
-                "Type": "MOCK",
-                "RequestTemplates": {
-                  "application/json": "{statusCode:200}"
-                },
-                "ContentHandling": "CONVERT_TO_TEXT",
-                "IntegrationResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": "'*'",
-                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
-                    },
-                    "ResponseTemplates": {
-                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-                    }
-                  }
-                ]
-              },
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceEncontrarpeticionesfecha"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1647,64 +1587,6 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourcePeticiones"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "AppLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": [
-                {
-                  "StatusCode": "200",
-                  "ResponseModels": {
-                    "application/json": "peticion"
-                  }
-                },
-                {
-                  "StatusCode": "403"
-                }
-              ]
-            },
-            "DependsOn": [
-              "peticionModel"
-            ]
-          },
-          "ApiGatewayMethodEncontrarpeticionesfechaGet": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "GET",
-              "RequestParameters": {
-                "method.request.path.x-api-key": true
-              },
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceEncontrarpeticionesfecha"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -2932,7 +2814,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1593898799556": {
+          "ApiGatewayDeployment1594003712953": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -2945,7 +2827,6 @@
               "ApiGatewayMethodProxyVarOptions",
               "ApiGatewayMethodPruebasOptions",
               "ApiGatewayMethodPeticionesOptions",
-              "ApiGatewayMethodEncontrarpeticionesfechaOptions",
               "ApiGatewayMethodLoginOptions",
               "ApiGatewayMethodEncontrarpeticionOptions",
               "ApiGatewayMethodRegisterOptions",
@@ -2967,7 +2848,6 @@
               "ApiGatewayMethodPruebasPost",
               "ApiGatewayMethodPeticionesPost",
               "ApiGatewayMethodPeticionesGet",
-              "ApiGatewayMethodEncontrarpeticionesfechaGet",
               "ApiGatewayMethodLoginPost",
               "ApiGatewayMethodEncontrarpeticionGet",
               "ApiGatewayMethodRegisterPost",
@@ -3540,9 +3420,6 @@
                   },
                   "createdAt": {
                     "type": "string"
-                  },
-                  "updatedAt": {
-                    "type": "string"
                   }
                 }
               }
@@ -3561,7 +3438,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersion7S4iBcmJAYFANCiShvX17xUWkEY913FAezxe0sY"
+              "Ref": "AppLambdaVersionSMXMErDXkmv3WyAMQLQoT12B8ZdYCWtxfCQQvkvN8"
             }
           },
           "ServiceEndpoint": {
@@ -3666,7 +3543,7 @@
     },
     "custom": {
       "documentation": {
-        "version": "1.9",
+        "version": "2.1",
         "summary": "API FAKE del Ministerio de Salud del Chaco",
         "description": "API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.",
         "resources": [
@@ -3947,62 +3824,6 @@
                     },
                     "responseModels": {
                       "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodPeticionesGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
-                    }
-                  },
-                  {
-                    "statusCode": "403",
-                    "responseBody": {
-                      "descripcion": "Ocurre cuando no se utiliza una clave API-Key o cuando se supera la quota diaria"
-                    }
-                  }
-                ]
-              },
-              "integration": "AWS_PROXY"
-            }
-          },
-          {
-            "http": {
-              "path": "encontrarPeticionesFecha",
-              "method": "get",
-              "cors": {
-                "origins": [
-                  "*"
-                ],
-                "origin": "*",
-                "methods": [
-                  "OPTIONS",
-                  "GET"
-                ],
-                "headers": [
-                  "Content-Type",
-                  "X-Amz-Date",
-                  "Authorization",
-                  "X-Api-Key",
-                  "X-Amz-Security-Token",
-                  "X-Amz-User-Agent"
-                ],
-                "allowCredentials": false
-              },
-              "documentation": {
-                "summary": "Gets a list of all the existing peticiones ordered by date",
-                "requestBody": {
-                  "description": "Empty request body"
-                },
-                "pathParams": [
-                  {
-                    "name": "x-api-key",
-                    "required": true,
-                    "description": "API Key identifier"
-                  }
-                ],
-                "methodResponses": [
-                  {
-                    "statusCode": "200",
-                    "responseBody": {
-                      "description": "Array of peticiones"
-                    },
-                    "responseModels": {
-                      "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodEncontrarpeticionesfechaGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
                     }
                   },
                   {
@@ -5115,7 +4936,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersion7S4iBcmJAYFANCiShvX17xUWkEY913FAezxe0sY"
+        "versionLogicalId": "AppLambdaVersionSMXMErDXkmv3WyAMQLQoT12B8ZdYCWtxfCQQvkvN8"
       }
     },
     "serviceFilename": "serverless.yml",
@@ -5124,7 +4945,7 @@
     "artifact": "/home/ale/Documents/Universidad/DACS/2020-G2-TPI/API/.serverless/serverless-aws-nodejs.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1593898824577-2020-07-04T21:40:24.577Z",
+    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1594003729823-2020-07-06T02:48:49.823Z",
     "artifact": "serverless-aws-nodejs.zip"
   }
 }

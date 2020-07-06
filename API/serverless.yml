@@ -428,24 +428,6 @@ functions:
                     responseBody:
                         description: "Cuando se supera la cuota diaria de request"
       - http:
-<<<<<<< HEAD
-            path: /logout
-            method: POST
-            cors: true
-            documentation:
-                summary: "Desloguea a un usuario, borra su sesion de la BD"
-            methodResponses:
-                -
-                    statusCode: "200"
-                    responseBody:
-                        description: "None"
-                -
-                    statusCode: "403"
-                    responseBody:
-                        description: "Cuando se supera la cuota diaria de request"
-      - http:
-=======
->>>>>>> masterSinSesion
             path: /validarSesion
             method: GET
             cors: true
@@ -509,7 +491,7 @@ functions:
                         description: "Cuando se supera la cuota diaria"
 custom:
     documentation:
-        version: '1.9'
+        version: '2.1'
         summary: 'API FAKE del Ministerio de Salud del Chaco'
         description: 'API para recibir peticiones y para manejo interno del grupo ministerio de salud. Esto es un trabajo practico de la universidad, no es una api real de ministerio.'
         resources: 
@@ -570,11 +552,7 @@ custom:
                         jeringasDisponible:
                             type: number
                         cofiasDisponible:
-<<<<<<< HEAD
-                            type: number     
-=======
                             type: number           
->>>>>>> masterSinSesion
             -
                 name: envio
                 contentType: "application/json"

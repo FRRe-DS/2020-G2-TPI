@@ -2,6 +2,7 @@ const fetch = require('node-fetch')
 // const Aburrido = require('../models/Aburrido')
 const Informes = require('../models/InformeHospitalAMinisterio')
 const Stat = require('../models/Stat')
+const FechaInformes = require('../models/FechaInformes')
 
 exports.obtenerDatos= async(req,res,next) =>{
     try{
@@ -9,22 +10,29 @@ exports.obtenerDatos= async(req,res,next) =>{
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
 
-        const datos = await fetch('http://localhost:5000/informes');
+        const datos = await fetch('http://54.237.73.187:3000/reporte');
         const respuestaJSON = await datos.json();
         console.log(respuestaJSON)
 
         var informesUsados = await Informes.find({},{createdAt:true})
-        //borrar este for de abajo
         
-        for( i in informesUsados)
+        //borrar este for de abajo
+        var ultimaFechaLeida = await FechaInformes.findOne({},{fecha:true})
+        
+        console.log(ultimaFechaLeida)
+        /*
+        
+        if(informesUsados.length !== 0)
         {
-            informesUsados[i] = informesUsados[i].createdAt
+            for( i in informesUsados)
+            {
+                informesUsados[i] = informesUsados[i].createdAt
+                console.log("Iteracion en informesUsados para dejar el campo createdAt")
+            }
         }
         
-        
-        
         informesEnFormatoC=[]
-        respuestaJSON.Informes.forEach(element => {
+        respuestaJSON.forEach(element => {
             temp={}
             //descomentar estas lineas cuando llegue el endpoint de mr bravin
             //y aniadir .ReporteHospitalario entre element y [item] linea 45
@@ -32,16 +40,16 @@ exports.obtenerDatos= async(req,res,next) =>{
             //chequeamos si el elemento esta entre los no usados
             console.log("INFORMES USADOS")
             console.log(informesUsados)
-            if(!(informesUsados.includes(element.createdAt)))
+            if(!(informesUsados.includes(element.ReporteHospitalario.createdAt)))
             {
                 console.log("El elemento no esta en el arreglo")
-                console.log(element.createdAt)
-                for(var item in element)
+                console.log(element.ReporteHospitalario.createdAt)
+                for(var item in element.ReporteHospitalario)
                 {
                     
                     if(item !== '_id')
                     {
-                        temp[item] = element[item]
+                        temp[item] = element.ReporteHospitalario[item]
                     }
                 }
                 informesEnFormatoC.push(temp)
@@ -104,7 +112,7 @@ exports.obtenerDatos= async(req,res,next) =>{
             }
             
         })
-        
+        */
         res.json({mensaje:"Los informes fueron guardados"});
         
     } catch(error) {
