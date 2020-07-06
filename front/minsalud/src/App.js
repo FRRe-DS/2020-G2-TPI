@@ -15,13 +15,15 @@ import Logo from "./componentes/img/ministerio-logo.png"
 
 
 class App extends Component {
-	state = {
+  
+  state = {
     
     url:"http://localhost:5000/",
     sesion:true
-	};
+	}
 
   render() {
+    console.log(this.props)
     return (
       <Router>
         
