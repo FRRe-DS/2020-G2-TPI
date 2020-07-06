@@ -194,7 +194,7 @@ class App extends Component {
         <div>
         <Header />
 			  <div className="app-container">
-				<Envio/>
+				<Envio url={this.state.url}/>
 				<Menu />
         
         
