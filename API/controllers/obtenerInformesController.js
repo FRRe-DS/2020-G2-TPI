@@ -14,7 +14,7 @@ exports.obtenerDatos= async(req,res,next) =>{
         const respuestaJSON = await datos.json();
         console.log(respuestaJSON)
 
-        var informesUsados = await Informes.find({},{createdAt:true})
+        //var informesUsados = await Informes.find({},{createdAt:true})
         
         var ultimaFechaExterior = new Date('1990-01-01 00:00:00')
         console.log("Ultima Fecha exterior: inicio")
@@ -34,7 +34,9 @@ exports.obtenerDatos= async(req,res,next) =>{
                 console.log("Iteracion en informesUsados para dejar el campo createdAt")
             }
         }*/
-        
+        console.log("Longitud respuestaJson")
+        console.log(respuestaJSON.length)
+
         informesEnFormatoC=[]
         respuestaJSON.forEach(element => {
             temp={}
@@ -65,9 +67,12 @@ exports.obtenerDatos= async(req,res,next) =>{
 
             
         });
+        console.log("Longitud InformesenFormatoC")
+        console.log(informesEnFormatoC.length)
+        
         console.log(ultimaFechaExterior)
         //console.log(informesEnFormatoC)
-        /*
+        
         var copiaUltimaEstadistica = await Stat.find({}).sort({createdAt:-1}).limit(1)
 
         informesEnFormatoC.forEach(async (informe) => {
@@ -109,10 +114,10 @@ exports.obtenerDatos= async(req,res,next) =>{
               copiaUltimaEstadistica = [new Stat(nuevaEstadistica)];
               //console.log("ULTIMA ESTADISTICA Despues de crear"+copiaUltimaEstadistica);
               await nuevoInforme.save();
+              await nuevaEstadistica.save();
               // console.log('NUEVA ESTADISTICA: ')
               // console.log(nuevaEstadistica)
-              await nuevaEstadistica.save();
-
+              
               
 
             } catch (error) {
@@ -121,12 +126,17 @@ exports.obtenerDatos= async(req,res,next) =>{
             }
             
         })
-        */
+        
         res.json({mensaje:"Los informes fueron guardados"});
         
+        var nuevaFechaExterior = new FechaInformes()
+        nuevaFechaExterior.fecha=ultimaFechaExterior
+        nuevaFechaExterior.deleteOne()
+        await nuevaFechaExterior.save()
     } catch(error) {
         console.log(error)
         next();
     }
+    
 }
 
