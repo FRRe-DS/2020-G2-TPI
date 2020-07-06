@@ -4,8 +4,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
 const BotonGeneracion = (props) => {
     let url = props.url;
-    let urlMed;
-    let urlRecurso
+
 
     const generarMed = (e)=>{
         e.preventDefault();
