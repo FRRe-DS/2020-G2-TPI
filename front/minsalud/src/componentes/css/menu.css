@@ -14,14 +14,17 @@
     
 }
 
+
+
 .menu-item{
     list-style-type: none;
-    width:80%;
+    width:100%;
     margin-bottom:1em;
     color:white;
     margin-right:15em;
     padding:0.3em;
     font-weight: bolder;
+    border:2px solid black
 }
 
 
@@ -31,6 +34,6 @@
     background-color: #0e6f7e;
     padding:0.5em;
     transition:ease 1s;
-    width:100%;
+    
     
 }

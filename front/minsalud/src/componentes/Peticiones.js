@@ -36,7 +36,7 @@ class Peticiones extends Component{
           return(
             <Fragment>
             {
-              this.state.peticiones.map( peticion => <CardPeticion peticion={peticion}  />)
+              this.state.peticiones.map( peticion => <CardPeticion peticion={peticion} url={this.props.url} />)
           }
           
           </Fragment>

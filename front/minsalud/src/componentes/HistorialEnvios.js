@@ -17,7 +17,7 @@ class HistorialEnvios extends Component{
         method: "GET"
        
       }).then(resp=>resp.json())
-      .then(data => this.setState({peticiones: data}))
+      .then(data => this.setState({envios: data}))
       .catch(error => {
         console.log(error)
         
@@ -30,14 +30,16 @@ class HistorialEnvios extends Component{
               this.traerData()
             }
           } 
-        
+    
     render() {
-        
+        console.log(this.props.url)
+    console.log(this.state.envios)    
           return(
             <Fragment>
             {
-              this.state.envio.map( envio => <CardEnvio envio={envio}  />)
-          }
+              this.state.envios.map( envio => <CardEnvio envio={envio}  url={this.props.url}/>)
+             }
+             
           
           </Fragment>
           );
