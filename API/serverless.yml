@@ -111,7 +111,28 @@ functions:
                     -
                         statusCode: "403"
                         responseBody:
-                            description: "Ocurre cuando se supera la cuota diaria"       
+                            description: "Ocurre cuando se supera la cuota diaria" 
+          - http:
+            path: /envioId
+            method: GET
+            cors: true
+            documentation:
+                summary: "Allows to find a envio by its mongo id"
+                queryParams:
+                    -
+                        name: "idEnvio"
+                        description: "Mongo ID for the envio object"
+                methodResponses:
+                    -
+                        statusCode: "200"
+                        responseBody:
+                            description: "a single envio"
+                        responseModels:
+                            "application/json" : "envio"
+                    -
+                        statusCode: "403"
+                        responseBody:
+                            description: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /register
           method: POST

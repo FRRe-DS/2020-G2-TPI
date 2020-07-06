@@ -22,6 +22,10 @@ router.get('/',(req,res)=>{
 
 //Envios
 // DOC STATUS: Complete 
+router.get('/envioId',
+    envioController.obtenerEnvioId
+    );
+
 router.get('/envios',
     envioController.obtenerEnvios
     );
