@@ -9,6 +9,8 @@ const apiController = require('../controllers/apiController');
 const recursosController = require('../controllers/recursosController');
 const medicosController = require('../controllers/medicosController');
 const statController = require('../controllers/statController')
+// const obtenerInformesController = require('../controllers/obtenerInformesController')
+const obtenerInformesController = require('../controllers/obtenerInformesController')
 
 const ciudadController = require('../controllers/ciudadController');
 const validacionController = require('../controllers/validacionController')
@@ -135,5 +137,9 @@ router.post('/ciudad',ciudadController.nuevaCiudad)
 // DOC STATUS: Complete
 router.get('/ciudad',ciudadController.getCiudad)
 
+// con el fin de probar la lectura de informes, usamos el siguiente endpoint
+router.post('/obtenerDatos',
+obtenerInformesController.obtenerDatos
+)
 
 module.exports = router;

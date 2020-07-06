@@ -52,31 +52,31 @@ const InformeHospitalAMinisterio = new mongoose.Schema({
     Recursos:{
         camillasDisponibles:{
             type:Number,
-            required:true
+            required:false
         },
         camillasOcupadas:{
             type:Number,
-            required:true
+            required:false
         },
         jabonLitros:{
             type:Number,
-            required:true
+            required:false
         },
         alcoholLitros:{
             type:Number,
-            required:true
+            required:false
         },
         barbijos:{
             type:Number,
-            required:true
+            required:false
         },
         jeringas:{
             type:Number,
-            required:true
+            required:false
         },
         cofias:{
             type:Number,
-            required:true
+            required:false
         },
         medicos:[{
 			cantidad: {
@@ -93,8 +93,12 @@ const InformeHospitalAMinisterio = new mongoose.Schema({
     impactadoEnEstadisticas:{
         type: Boolean,
         required: false
+    },
+    createdAt:{
+        type:String,
+        required:true
     }
-},{timestamps : true});
+});
 
 
 module.exports = mongoose.model('InformeHospitalAMinisterio',InformeHospitalAMinisterio );
