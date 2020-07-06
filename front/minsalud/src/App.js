@@ -12,7 +12,7 @@ import Peticion from './componentes/Peticion'
 // importar informacion a cerca de los centros hospitalarios
 import RealizarEnvio from './componentes/RealizarEnvio'
 import Logo from "./componentes/img/ministerio-logo.png"
-
+import HistorialEnvios from './componentes/HistorialEnvios'
 
 class App extends Component {
   
@@ -23,7 +23,7 @@ class App extends Component {
 	}
 
   render() {
-    console.log(this.props)
+    
     return (
       <Router>
         
@@ -151,6 +151,30 @@ class App extends Component {
 				
 				<Menu/>
         <RealizarEnvio url={this.state.url}/>
+        
+			  </div>
+        </div>
+			);
+		  }}
+          
+          />
+
+          {/* Ruta para ver el historial de envios */}  
+      <Route 
+          exact path="/historial"
+          
+          render={() => {
+			return (
+        <div>
+        <Header />
+        <h1>Historial de envios</h1>
+
+        
+			  <div className="app-container">
+				
+				<Menu/>
+        {/* <HistorialEnvios url={this.state.url}/> */}
+        
         
 			  </div>
         </div>
