@@ -1,23 +1,23 @@
 import React, {Component, Fragment} from 'react';
-import CardPeticion from './CardPeticion';
+import CardEnvio from './CardEnvio';
 
 
-class Peticiones extends Component{
+class HistorialEnvios extends Component{
     constructor(props) {
           super(props);
           this.state = {
-        peticiones: []
+        envios: []
       }
     }
   
   
       traerData(){
-      const url = `${this.props.url}peticiones`;
+      const url = `${this.props.url}envios`;
       fetch(url, {
         method: "GET"
        
       }).then(resp=>resp.json())
-      .then(data => this.setState({peticiones: data}))
+      .then(data => this.setState({envios: data}))
       .catch(error => {
         console.log(error)
         
@@ -26,18 +26,20 @@ class Peticiones extends Component{
     //se usa este hook para poder colocar los datos despues del renderizado
       
         componentDidMount() {
-            if(this.state.peticiones.length ===0 ){
+            if(this.state.envios.length ===0 ){
               this.traerData()
             }
           } 
-        
+    
     render() {
-        
+        console.log(this.props.url)
+    console.log(this.state.envios)    
           return(
             <Fragment>
             {
-              this.state.peticiones.map( peticion => <CardPeticion peticion={peticion} url={this.props.url} />)
-          }
+              this.state.envios.map( envio => <CardEnvio envio={envio}  url={this.props.url}/>)
+             }
+             
           
           </Fragment>
           );
@@ -48,4 +50,4 @@ class Peticiones extends Component{
     
     }
 
-    export default Peticiones;
+    export default HistorialEnvios;
