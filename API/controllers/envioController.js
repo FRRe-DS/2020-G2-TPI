@@ -253,3 +253,28 @@ exports.obtenerEnvios = async(req,res,next)=>{
         next();
     }
 }
+
+exports.obtenerEnvioId = async(req,res,next)=>{
+    try{
+        res.statusCode = 200;
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        console.log(req.query.idEnvio)
+        const envio = await Envio.findById(req.query.idEnvio);
+        console.log(typeof envio)
+        console.log(envio)
+        if(envio == null)
+        {
+            res.json({"mensaje":"Envio inexistente"})
+        }
+        else
+        {
+            res.json(envio)
+        }
+    }catch(error)
+    {
+        console.log(error);
+        next();
+    }
+}
+

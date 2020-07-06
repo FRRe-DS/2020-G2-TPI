@@ -4,7 +4,30 @@ import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
 import './css/tarjeta.css'
 class CardPeticion extends Component {
-    render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+  centroHosp: 
+    {nombre:""}
+  
+}
+}
+  componentWillMount(){
+    const url = `${this.props.url}centroHospitalarioId?idCentro=${this.props.peticion.Peticion.idCentro}`;
+    fetch(url, {
+      method: "GET"
+     
+    }).then(resp=>resp.json())
+    .then(data =>{
+      if(data.CentroHospitalario[0] !== undefined){
+      this.setState({centroHosp:data.CentroHospitalario[0]}
+        )}})
+    .catch(error => console.log(error))
+      
+    }
+    
+  
+  render() {
     const peticion = this.props.peticion.Peticion
     var idPeticion = this.props.peticion._id
     var fecha = this.props.peticion.createdAt.split("T")[0]
@@ -19,12 +42,13 @@ class CardPeticion extends Component {
       estado = 'Rechazada'
       colorAlerta = 'danger'
     }
+    
       return (
           <div className="tarjeta">
         <Card >
-        <Card.Header as="h5">Centro num: {peticion.idCentro}</Card.Header>
+        <Card.Header as="h5">Centro Hospitalario: {this.state.centroHosp.nombre} </Card.Header>
         <Card.Body>
-            <Card.Title>Ciudad</Card.Title>
+      <Card.Title>Ciudad: {this.state.centroHosp.ciudad}</Card.Title>
             <Card.Text>
             <ul>
             <li>Fecha de solicitud: {fecha}</li>

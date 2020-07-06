@@ -303,7 +303,7 @@ class RealizarEnvio extends Component {
                             
                       
                     <Form.Control as="select" className="form-envio" id="select-envio-centros" onChange={e=>this.agregarElemEnvio(e)} name="idCentro" required>
-                    <option hidden="" disabled="disabled" selected="selected" value=""></option>
+                    <option value=""></option>
                     {
                     this.state.centrosAPI.map( centro => <option value={centro.idCentro}>{centro.nombre}</option>)
                     }

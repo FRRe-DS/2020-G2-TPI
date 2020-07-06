@@ -2,6 +2,7 @@ const fetch = require('node-fetch')
 // const Aburrido = require('../models/Aburrido')
 const Informes = require('../models/InformeHospitalAMinisterio')
 const Stat = require('../models/Stat')
+const FechaInformes = require('../models/FechaInformes')
 
 exports.obtenerDatos= async(req,res,next) =>{
     try{
@@ -9,47 +10,68 @@ exports.obtenerDatos= async(req,res,next) =>{
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
 
-        const datos = await fetch('http://localhost:5000/informes');
+        const datos = await fetch('http://54.237.73.187:3000/reporte');
         const respuestaJSON = await datos.json();
         console.log(respuestaJSON)
 
-        var informesUsados = await Informes.find({},{createdAt:true})
+        //var informesUsados = await Informes.find({},{createdAt:true})
+        
+        var ultimaFechaExterior = new Date('1990-01-01 00:00:00')
+        console.log("Ultima Fecha exterior: inicio")
+        console.log(ultimaFechaExterior)
         //borrar este for de abajo
+        var ultimaFechaLeida = await FechaInformes.findOne({},{fecha:true})
+        console.log("Ultima Fecha Leida")
+        ultimaFechaLeida = new Date(ultimaFechaLeida.fecha)
+        console.log(ultimaFechaLeida)
         
-        for( i in informesUsados)
+        /*
+        if(informesUsados.length !== 0)
         {
-            informesUsados[i] = informesUsados[i].createdAt
-        }
-        
-        
-        
+            for( i in informesUsados)
+            {
+                informesUsados[i] = informesUsados[i].createdAt
+                console.log("Iteracion en informesUsados para dejar el campo createdAt")
+            }
+        }*/
+        console.log("Longitud respuestaJson")
+        console.log(respuestaJSON.length)
+
         informesEnFormatoC=[]
-        respuestaJSON.Informes.forEach(element => {
+        respuestaJSON.forEach(element => {
             temp={}
             //descomentar estas lineas cuando llegue el endpoint de mr bravin
             //y aniadir .ReporteHospitalario entre element y [item] linea 45
             //tambien recordar eliminar .Informes del respuesta de JSON
             //chequeamos si el elemento esta entre los no usados
-            console.log("INFORMES USADOS")
-            console.log(informesUsados)
-            if(!(informesUsados.includes(element.createdAt)))
+            var tempFecha= new Date(element.ReporteHospitalario.createdAt)
+            if(tempFecha > ultimaFechaLeida)
             {
-                console.log("El elemento no esta en el arreglo")
-                console.log(element.createdAt)
-                for(var item in element)
+                
+                //console.log(element.ReporteHospitalario.createdAt)
+                for(var item in element.ReporteHospitalario)
                 {
                     
                     if(item !== '_id')
                     {
-                        temp[item] = element[item]
+                        temp[item] = element.ReporteHospitalario[item]
                     }
                 }
+                if(tempFecha > ultimaFechaExterior)
+                {
+                    ultimaFechaExterior = new Date(temp.createdAt)
+                } 
                 informesEnFormatoC.push(temp)
+
             }
 
             
         });
-        console.log(informesEnFormatoC)
+        console.log("Longitud InformesenFormatoC")
+        console.log(informesEnFormatoC.length)
+        
+        console.log(ultimaFechaExterior)
+        //console.log(informesEnFormatoC)
         
         var copiaUltimaEstadistica = await Stat.find({}).sort({createdAt:-1}).limit(1)
 
@@ -92,10 +114,10 @@ exports.obtenerDatos= async(req,res,next) =>{
               copiaUltimaEstadistica = [new Stat(nuevaEstadistica)];
               //console.log("ULTIMA ESTADISTICA Despues de crear"+copiaUltimaEstadistica);
               await nuevoInforme.save();
+              await nuevaEstadistica.save();
               // console.log('NUEVA ESTADISTICA: ')
               // console.log(nuevaEstadistica)
-              await nuevaEstadistica.save();
-
+              
               
 
             } catch (error) {
@@ -107,9 +129,14 @@ exports.obtenerDatos= async(req,res,next) =>{
         
         res.json({mensaje:"Los informes fueron guardados"});
         
+        var nuevaFechaExterior = new FechaInformes()
+        nuevaFechaExterior.fecha=ultimaFechaExterior
+        nuevaFechaExterior.deleteOne()
+        await nuevaFechaExterior.save()
     } catch(error) {
         console.log(error)
         next();
     }
+    
 }
 

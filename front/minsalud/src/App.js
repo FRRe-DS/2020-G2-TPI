@@ -9,9 +9,10 @@ import BotonGeneracion from "./componentes/GeneracionAleatoria"
 import Peticiones from './componentes/Peticiones';
 import TablaRecursos from './componentes/TablaRecursos';
 import Peticion from './componentes/Peticion'
-// importar informacion a cerca de los centros hospitalarios
 import RealizarEnvio from './componentes/RealizarEnvio'
 import Logo from "./componentes/img/ministerio-logo.png"
+import HistorialEnvios from './componentes/HistorialEnvios'
+import Envio from './componentes/Envio'
 
 
 class App extends Component {
@@ -23,7 +24,7 @@ class App extends Component {
 	}
 
   render() {
-    console.log(this.props)
+    
     return (
       <Router>
         
@@ -155,6 +156,51 @@ class App extends Component {
 			  </div>
         </div>
 			);
+		  }}
+          
+          />
+
+          {/* Ruta para ver el historial de envios */}  
+      <Route 
+          exact path="/historialEnvios"
+          
+          render={() => {
+			return (
+        <div>
+        <Header />
+        <h1>Historial de envios</h1>
+
+        
+			  <div className="app-container">
+				
+				<Menu/>
+        <HistorialEnvios url={this.state.url}/> 
+        
+        
+			  </div>
+        </div>
+			);
+		  }}
+          
+          />
+
+
+      {/* Ruta de una paticion en particular, el envio de id se hace desde /peticiones */}
+ <Route 
+          exact path="/mostrarEnvio/:id"
+          
+          render={() => {
+			return (
+        <div>
+        <Header />
+			  <div className="app-container">
+				<Envio/>
+				<Menu />
+        
+        
+			  </div>
+        </div>
+      );
 		  }}
           
           />

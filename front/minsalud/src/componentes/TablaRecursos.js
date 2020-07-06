@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Table from 'react-bootstrap/Table';
 import Recurso from './Recurso'
-import Button from 'react-bootstrap/Button'
+
 class TablaRecursos extends Component{
   constructor(props) {
 		super(props);
