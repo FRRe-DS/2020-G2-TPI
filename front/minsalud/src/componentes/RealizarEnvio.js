@@ -168,7 +168,7 @@ class RealizarEnvio extends Component {
                 }
             
             let ObjetoEnvio = {"Envio":envio}
-            console.log(ObjetoEnvio)
+            
             
             fetch(`${this.props.url}envios`,{
                 method: 'POST',
