@@ -9,5 +9,4 @@ COPY package-lock.json /srv/app/back
 RUN npm install
 
 COPY . /srv/app/back
-
 CMD ["npm","run","dev"]
