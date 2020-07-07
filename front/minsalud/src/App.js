@@ -19,8 +19,8 @@ class App extends Component {
   
   state = {
     
-    url:"http://localhost:5000/",
-    sesion:false,
+    url:"https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/",
+    sesion:false
     
 	}
   componentDidMount(){
