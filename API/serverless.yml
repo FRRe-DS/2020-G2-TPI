@@ -25,6 +25,12 @@ functions:
             requestBody:
                 description: "Any json file will work"
       - http:
+          path: /obtenerDatos
+          method: POST
+          cors: true
+          documentation:
+            summary: "Actualiza las estadisticas"
+      - http:
           path: /peticiones
           method: POST
           cors: true
