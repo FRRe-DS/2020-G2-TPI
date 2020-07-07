@@ -228,7 +228,7 @@ class App extends Component {
           render={() => {
 			return (
         <div>
-          this.state.sesion ?
+          {this.state.sesion ?
                 <>
         <Header />
 			  <div className="app-container">
@@ -237,7 +237,7 @@ class App extends Component {
         
         
 			  </div>
-        </> : <div></div>}
+        </> : <div></div>}}
         </div>
       );
 		  }}
