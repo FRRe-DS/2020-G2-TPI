@@ -146,6 +146,9 @@ class Login extends Component {
 							value={this.state.password}
 							onChange={this.handleUserInput}
 						/>
+						<div id='error-ingreso'>
+
+						</div>
 					</div>
 					<Button 
 					type="submit" className="btn btn-primary" size="md"
@@ -158,9 +161,7 @@ class Login extends Component {
 						<FormErrors formErrors={this.state.formErrors} />
 					</div>
 					<br/>
-					<div id='error-ingreso'>
-
-					</div>
+					
 					
 					
 					

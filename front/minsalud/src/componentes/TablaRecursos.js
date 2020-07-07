@@ -14,8 +14,7 @@ class TablaRecursos extends Component{
     traerData(){
     const url = `${this.props.url}recursos`;
     fetch(url, {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json' }
+      method: "GET"
     }).then(resp=>resp.json())
     .then(recu => this.setState({recursos: recu[0].Recursos}))
   

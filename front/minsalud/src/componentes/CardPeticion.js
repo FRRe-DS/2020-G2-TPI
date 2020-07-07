@@ -15,8 +15,7 @@ class CardPeticion extends Component {
   componentWillMount(){
     const url = `${this.props.url}centroHospitalarioId?idCentro=${this.props.peticion.Peticion.idCentro}`;
     fetch(url, {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json' }
+      method: "GET"
      
     }).then(resp=>resp.json())
     .then(data =>{
