@@ -168,7 +168,7 @@ class RealizarEnvio extends Component {
                 }
             
             let ObjetoEnvio = {"Envio":envio}
-            console.log(ObjetoEnvio)
+            
             
             fetch(`${this.props.url}envios`,{
                 method: 'POST',
@@ -266,6 +266,8 @@ class RealizarEnvio extends Component {
         let valorElemento = parseInt(e.target.value);
         let nombreElemento = e.target.name;
         let cargaElemento = envioPrevio;
+        
+        
         if(parseInt(e.target.value)<0){
 
             ReactDOM.render(<Alert variant="danger">No valores negativos por favor</Alert>, document.getElementById("error-negativo"))
@@ -274,6 +276,15 @@ class RealizarEnvio extends Component {
                 
               },2000)
               
+              delete cargaElemento[nombreElemento]
+              this.setState({envio: cargaElemento})
+              return e.target.value = 0 
+        }else if(valorElemento>this.state.recursos[`${nombreElemento}Disponible`]){
+        ReactDOM.render(<Alert variant="danger">Solo hay {this.state.recursos[`${nombreElemento}Disponible`]} {nombreElemento} Disponibles</Alert>, document.getElementById("error-negativo"))
+            setTimeout(()=>{
+                ReactDOM.render(<div></div>, document.getElementById('error-negativo'))	
+                
+              },2000)
               delete cargaElemento[nombreElemento]
               this.setState({envio: cargaElemento})
               return e.target.value = 0 
