@@ -20,12 +20,24 @@ class App extends Component {
   state = {
     
     url:"http://localhost:5000/",
-    sesion:true
+    sesion:false,
+    
 	}
-
+  componentDidMount(){
+    
+    if (parseInt(sessionStorage.getItem('ingreso'))===null){
+      console.log("no hay nada")
+      
+    }else if(sessionStorage.hasOwnProperty("ingreso")){
+      this.setState({sesion:true})
+    }
+    
+  }
   render() {
     
-    return (
+    return (<>
+      
+      
       <Router>
         
         <Switch>
@@ -36,12 +48,17 @@ class App extends Component {
             render={() => {
               return (
               <div>
+                
+                {this.state.sesion ?
+                <>
                 <Header />
                 <div className="app-container">
                   
                   <Menu />
                   <img className="imagen-home" src={Logo} alt="logo del ministerio"/>
                 </div>
+                </> : <div></div>
+            }
                 </div>
               );
             }}
@@ -54,9 +71,10 @@ class App extends Component {
             render={() => {
               return (
               <div>
-                <Header />
+                
                 {this.state.sesion ?
                 (<>
+                <Header />
                 <h1>Centros hospitalarios</h1>
                 <div className="app-container">
                   
@@ -72,8 +90,11 @@ class App extends Component {
           {/* Ruta Login */}
           <Route 
           exact path="/"
+          render={() => {
+            return (
+            <Login/>
+            )}}
           
-          component={Login}
           
           />
 
@@ -85,6 +106,8 @@ class App extends Component {
           render={() => {
 			return (
         <div>
+          {this.state.sesion ?
+                <>
                 <Header />
                 <h1>Peticiones</h1>
 			  <div className="app-container">
@@ -92,6 +115,7 @@ class App extends Component {
 				<Menu/>
         <Peticiones url={this.state.url} />
 			  </div>
+          </> : <div></div> }
         </div>
 			);
 		  }}
@@ -104,6 +128,8 @@ class App extends Component {
           render={() => {
 			return (
         <div>
+          {this.state.sesion ?
+                <>
         <Header />
         <h1>Recursos disponibles</h1>
 
@@ -114,6 +140,7 @@ class App extends Component {
         <TablaRecursos url={this.state.url}/>
         
 			  </div>
+        </> : <div></div>}
         </div>
 			);
 		  }}
@@ -127,6 +154,8 @@ class App extends Component {
           render={() => {
 			return (
         <div>
+          {this.state.sesion ?
+                <>
         <Header />
 			  <div className="app-container">
 				
@@ -134,6 +163,7 @@ class App extends Component {
         <Peticion url={this.state.url} idPeticion/>
         
 			  </div>
+        </> : <div></div>}
         </div>
       );
 		  }}
@@ -147,6 +177,8 @@ class App extends Component {
           render={() => {
 			return (
         <div>
+          {this.state.sesion ?
+                <>
         <Header />
 			  <div className="app-container">
 				
@@ -154,6 +186,7 @@ class App extends Component {
         <RealizarEnvio url={this.state.url}/>
         
 			  </div>
+        </> : <div></div>}
         </div>
 			);
 		  }}
@@ -167,6 +200,8 @@ class App extends Component {
           render={() => {
 			return (
         <div>
+          {this.state.sesion ?
+                <>
         <Header />
         <h1>Historial de envios</h1>
 
@@ -178,6 +213,7 @@ class App extends Component {
         
         
 			  </div>
+        </> : <div></div>}
         </div>
 			);
 		  }}
@@ -192,6 +228,8 @@ class App extends Component {
           render={() => {
 			return (
         <div>
+          this.state.sesion ?
+                <>
         <Header />
 			  <div className="app-container">
 				<Envio url={this.state.url}/>
@@ -199,6 +237,7 @@ class App extends Component {
         
         
 			  </div>
+        </> : <div></div>}
         </div>
       );
 		  }}
@@ -206,6 +245,8 @@ class App extends Component {
           />
         </Switch>
       </Router>
+
+      </>
     );
   }
 }

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
-import Alert from 'react-bootstrap/Alert'
 import './css/tarjeta.css'
 
 class CardEnvio extends Component {

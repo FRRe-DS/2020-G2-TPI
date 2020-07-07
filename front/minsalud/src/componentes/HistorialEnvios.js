@@ -32,8 +32,8 @@ class HistorialEnvios extends Component{
           } 
     
     render() {
-        console.log(this.props.url)
-    console.log(this.state.envios)    
+        
+      
           return(
             <Fragment>
             {
