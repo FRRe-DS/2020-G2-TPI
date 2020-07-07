@@ -43,6 +43,12 @@ Para correr el proyecto con docker, ejecutamos el siguiente comando en la carpet
 ```
 docker-compose up
 ```
+### Login
+
+Para loguearse se puede debe usar:
+
+Usuario: user00
+Contraseña: 9hVUNzn
 
 ### Links de deploy
 * [Front en React del Login](http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/login)
