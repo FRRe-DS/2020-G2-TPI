@@ -1,5 +1,4 @@
 const fetch = require('node-fetch')
-// const Aburrido = require('../models/Aburrido')
 const Informes = require('../models/InformeHospitalAMinisterio')
 const Stat = require('../models/Stat')
 const FechaInformes = require('../models/FechaInformes')
@@ -10,133 +9,128 @@ exports.obtenerDatos= async(req,res,next) =>{
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
 
+        // obtener los datos de bravin
         const datos = await fetch('http://54.237.73.187:3000/reporte');
         const respuestaJSON = await datos.json();
-        console.log(respuestaJSON)
 
-        //var informesUsados = await Informes.find({},{createdAt:true})
-        
+        // console.log(respuestaJSON)
+
+        // fecha bastante vieja para comparar empezar a comparar
         var ultimaFechaExterior = new Date('1990-01-01 00:00:00')
-        console.log("Ultima Fecha exterior: inicio")
-        console.log(ultimaFechaExterior)
-        //borrar este for de abajo
-        var ultimaFechaLeida = await FechaInformes.findOne({},{fecha:true})
-        console.log("Ultima Fecha Leida")
-        ultimaFechaLeida = new Date(ultimaFechaLeida.fecha)
-        console.log(ultimaFechaLeida)
-        
-        /*
-        if(informesUsados.length !== 0)
-        {
-            for( i in informesUsados)
-            {
-                informesUsados[i] = informesUsados[i].createdAt
-                console.log("Iteracion en informesUsados para dejar el campo createdAt")
-            }
-        }*/
-        console.log("Longitud respuestaJson")
-        console.log(respuestaJSON.length)
 
-        informesEnFormatoC=[]
+        // la ultima fecha que leimos informes (1 sola en la bd)
+        var ultimaFechaLeida = await FechaInformes.findOne({},{fecha:true})
+        
+        // para sacar el _id, nos quedamos con la fecha sola 
+        ultimaFechaLeida = new Date(ultimaFechaLeida.fecha)
+
+        // console.log("Ultima Fecha Leida")
+        // console.log(ultimaFechaLeida)
+    
+        informesEnFormatoC = []
+
+        // pasamos a nuestro formato de informes (sin el campo mayor)
         respuestaJSON.forEach(element => {
-            temp={}
-            //descomentar estas lineas cuando llegue el endpoint de mr bravin
-            //y aniadir .ReporteHospitalario entre element y [item] linea 45
-            //tambien recordar eliminar .Informes del respuesta de JSON
+            // temp tiene todos los informes que llegan de bravin pero en nuestro formato (ininformesEnFormatoC)
+            temp = {}
+
             //chequeamos si el elemento esta entre los no usados
-            var tempFecha= new Date(element.ReporteHospitalario.createdAt)
+            // fecha que tiene cada informe
+            var tempFecha = new Date(element.ReporteHospitalario.createdAt)
+            
+            // console.log('LA FECHA DEL INFORME: ') 
+            // console.log(tempFecha)
+
             if(tempFecha > ultimaFechaLeida)
             {
+                console.log(tempFecha > ultimaFechaLeida)
+                console.log('NO LEIMOS ESTE INFORME')
+                console.log('FECHA DEL INFORME: '+ tempFecha)
+                console.log('ULTIMA FECHA LEIDA: '+ ultimaFechaLeida)
+
+                // no leimos este informe
                 
-                //console.log(element.ReporteHospitalario.createdAt)
+                // como no tenemos el campo "ReporteHospitalario" hacemos lo siguiente
                 for(var item in element.ReporteHospitalario)
                 {
-                    
-                    if(item !== '_id')
-                    {
-                        temp[item] = element.ReporteHospitalario[item]
-                    }
+                    // agregamos todos los campos al futuro informe con nuestro formato
+                    temp[item] = element.ReporteHospitalario[item]
                 }
+
                 if(tempFecha > ultimaFechaExterior)
                 {
-                    ultimaFechaExterior = new Date(temp.createdAt)
+                    
+                    // se actualiza la ultima fecha con la mas reciente de los informes
+                    ultimaFechaExterior = tempFecha
                 } 
+
                 informesEnFormatoC.push(temp)
 
             }
 
             
         });
-        console.log("Longitud InformesenFormatoC")
-        console.log(informesEnFormatoC.length)
-        
-        console.log(ultimaFechaExterior)
-        //console.log(informesEnFormatoC)
-        
+                
+        // trae la ultima estadistica
         var copiaUltimaEstadistica = await Stat.find({}).sort({createdAt:-1}).limit(1)
 
+
         informesEnFormatoC.forEach(async (informe) => {
-
-            try {
-              var nuevoInforme = new Informes(informe)
-              
-              // tratamiento de estadisticas
-
-              var nuevaEstadistica = new Stat();
-              nuevaEstadistica.dataCiudades = copiaUltimaEstadistica[0].dataCiudades
-              nuevaEstadistica.totales = copiaUltimaEstadistica[0].totales
-              //console.log("ULTIMA ESTADISTICA ANTES de crear"+copiaUltimaEstadistica);
-              for(i in copiaUltimaEstadistica[0].dataCiudades)
-              {
-                  // console.log(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad)
-                  if(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad == nuevoInforme.nombreCiudad)
-                  { 
-                      //console.log('POBLACION TOTAL ANTES DE RESTAR')
-                      //console.log(nuevaEstadistica.totales.poblacionTotal)
-                      nuevaEstadistica.dataCiudades[i].cantidades.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
-                      nuevaEstadistica.dataCiudades[i].cantidades.recuperados += nuevoInforme.resumenCasos.cantidadCurados
-                      nuevaEstadistica.dataCiudades[i].cantidades.muertos += nuevoInforme.resumenCasos.cantidadMuertos
-                      nuevaEstadistica.dataCiudades[i].poblacion -= nuevoInforme.resumenCasos.cantidadMuertos
-                      nuevaEstadistica.totales.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
-                      nuevaEstadistica.totales.recuperados += nuevoInforme.resumenCasos.cantidadCurados
-                      nuevaEstadistica.totales.muertos += nuevoInforme.resumenCasos.cantidadMuertos
-                      nuevaEstadistica.totales.poblacionTotal -= nuevoInforme.resumenCasos.cantidadMuertos
-
-                      //console.log('POBLACION TOTAL DESPUES DE RESTAR ' + nuevoInforme.resumenCasos.cantidadMuertos +  ' MUERTES' )
-                      //console.log(nuevaEstadistica.totales.poblacionTotal)
-                  }
-              }
-
-              nuevoInforme.impactadoEnEstadisticas = true;
-              // console.log('NUEVO INFORME: ')
-              // console.log(nuevoInforme)
-              
-              copiaUltimaEstadistica = [new Stat(nuevaEstadistica)];
-              //console.log("ULTIMA ESTADISTICA Despues de crear"+copiaUltimaEstadistica);
-              await nuevoInforme.save();
-              await nuevaEstadistica.save();
-              // console.log('NUEVA ESTADISTICA: ')
-              // console.log(nuevaEstadistica)
-              
-              
-
-            } catch (error) {
-              console.log(error)
-              next();
-            }
             
-        })
+            // actualizar las estadisticas
+            try {
+                var nuevoInforme = new Informes(informe)
+                
+                // tratamiento de estadisticas
+
+                var nuevaEstadistica = new Stat();
+                nuevaEstadistica.dataCiudades = copiaUltimaEstadistica[0].dataCiudades
+                nuevaEstadistica.totales = copiaUltimaEstadistica[0].totales
+                //console.log("ULTIMA ESTADISTICA ANTES de crear"+copiaUltimaEstadistica);
+                for(i in copiaUltimaEstadistica[0].dataCiudades)
+                {
+                    // console.log(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad)
+                    if(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad == nuevoInforme.nombreCiudad)
+                    { 
+                        nuevaEstadistica.dataCiudades[i].cantidades.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
+                        nuevaEstadistica.dataCiudades[i].cantidades.recuperados += nuevoInforme.resumenCasos.cantidadCurados
+                        nuevaEstadistica.dataCiudades[i].cantidades.muertos += nuevoInforme.resumenCasos.cantidadMuertos
+                        nuevaEstadistica.dataCiudades[i].poblacion -= nuevoInforme.resumenCasos.cantidadMuertos
+                        nuevaEstadistica.totales.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
+                        nuevaEstadistica.totales.recuperados += nuevoInforme.resumenCasos.cantidadCurados
+                        nuevaEstadistica.totales.muertos += nuevoInforme.resumenCasos.cantidadMuertos
+                        nuevaEstadistica.totales.poblacionTotal -= nuevoInforme.resumenCasos.cantidadMuertos
+                    }
+                }
+
+                nuevoInforme.impactadoEnEstadisticas = true;
+                
+                copiaUltimaEstadistica = [new Stat(nuevaEstadistica)];
+
+                await nuevoInforme.save();
+                await nuevaEstadistica.save();
+                
+                } catch (error) {
+                    console.log(error)
+                    next();
+                }   
+        });
+
+        // console.log('TODAS las estadisticas se actualizaron')
         
         res.json({mensaje:"Los informes fueron guardados"});
         
+        // actualizacion nueva fecha exterior
         var nuevaFechaExterior = new FechaInformes()
-        nuevaFechaExterior.fecha=ultimaFechaExterior
-        nuevaFechaExterior.deleteOne()
+        nuevaFechaExterior.fecha = ultimaFechaExterior
+        await FechaInformes.deleteOne({})
+        console.log('borramos la nueva fecha ext')
         await nuevaFechaExterior.save()
+        console.log('guardamos la nueva fecha ext y es: ' + nuevaFechaExterior.fecha)
+
     } catch(error) {
         console.log(error)
         next();
     }
-    
 }
 
