@@ -53,8 +53,7 @@ class RealizarEnvio extends Component {
             cargaElemento["idPeticion"] = idPeticionURL;
             this.setState({envio: cargaElemento}) 
         fetch(`${this.props.url}encontrarPeticion?idPeticion=${idPeticionURL}`,{
-            method:"GET",
-            headers: { "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR" }
+            method:"GET"
 
 
         }).then(resp=>resp.json())
