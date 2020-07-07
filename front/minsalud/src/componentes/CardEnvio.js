@@ -14,7 +14,8 @@ class CardEnvio extends Component {
   componentWillMount(){
     const url = `${this.props.url}centroHospitalarioId?idCentro=${this.props.envio.Envio.idCentro}`;
     fetch(url, {
-      method: "GET"
+      method: "GET",
+      headers: { 'Content-Type': 'application/json' }
      
     }).then(resp=>resp.json())
     .then(data =>{

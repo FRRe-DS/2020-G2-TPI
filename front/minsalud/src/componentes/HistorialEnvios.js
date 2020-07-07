@@ -14,7 +14,9 @@ class HistorialEnvios extends Component{
       traerData(){
       const url = `${this.props.url}envios`;
       fetch(url, {
-        method: "GET"
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' }
+        
        
       }).then(resp=>resp.json())
       .then(data => this.setState({envios: data}))

@@ -23,7 +23,9 @@ let idPeticionURL = window.location.href.replace('http://localhost:3000/peticion
 this.setState({idPeticion: idPeticionURL});
 const url = `${this.props.url}encontrarPeticion?idPeticion=${idPeticionURL}`;
 fetch(url, {
-  method: "GET"
+  method: "GET",
+  headers: { 'Content-Type': 'application/json',
+            "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR" }
  
 }).then(resp=>resp.json())
 .then(data => 
