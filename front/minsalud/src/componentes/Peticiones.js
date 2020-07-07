@@ -14,9 +14,7 @@ class Peticiones extends Component{
       traerData(){
       const url = `${this.props.url}peticiones`;
       fetch(url, {
-        method: "GET",
-        headers: { "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR" }
-       
+        method: "GET"
       }).then(resp=>resp.json())
       .then(data => this.setState({peticiones: data}))
       .catch(error => {

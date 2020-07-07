@@ -20,6 +20,7 @@ class CardPeticion extends Component {
     }).then(resp=>resp.json())
     .then(data =>{
       if(data.CentroHospitalario[0] !== undefined){
+        
       this.setState({centroHosp:data.CentroHospitalario[0]}
         )}})
     .catch(error => console.log(error))
