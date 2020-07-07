@@ -25,6 +25,12 @@ functions:
             requestBody:
                 description: "Any json file will work"
       - http:
+          path: /obtenerDatos
+          method: POST
+          cors: true
+          documentation:
+            summary: "Actualiza las estadisticas"
+      - http:
           path: /peticiones
           method: POST
           cors: true
@@ -147,7 +153,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "El usuario se agrego correctamente"
+                        description: "El usuario se agrego correctamente"
                 -
                     statusCode: "403"
                     responseBody:
@@ -166,7 +172,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "El Centro Hospitalario se agrego correctamente"
+                        description: "El Centro Hospitalario se agrego correctamente"
                 -
                     statusCode: "403"
                     responseBody:
@@ -240,7 +246,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "El Envio se agrego correctamente"
+                        description: "El Envio se agrego correctamente"
                 -
                     statusCode: "403"
                     responseBody:
@@ -351,7 +357,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "El Medico se agrego correctamente"
+                        description: "El Medico se agrego correctamente"
                 -
                     statusCode: "403"
                     responseBody:
@@ -369,7 +375,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "Aviso de confirmacion"
+                        description: "Aviso de confirmacion"
                 -
                     statusCode: "403"
                     responseBody:
@@ -391,7 +397,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "Peticion rechazada"
+                        description: "Peticion rechazada"
                 -
                     statusCode: "403"
                     responseBody:

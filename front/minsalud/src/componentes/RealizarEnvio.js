@@ -25,30 +25,27 @@ class RealizarEnvio extends Component {
     traerData(){
     const urlRecursos = `${this.props.url}recursos`;
     fetch(urlRecursos, {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json'}
+      method: "GET"
       
     }).then(resp=>resp.json())
     .then(recu => this.setState({recursos: recu[0].Recursos}))
     
     const urlMedicos = `${this.props.url}medicos`;
     fetch(urlMedicos, {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json'}
+      method: "GET"
       
     }).then(resp=>resp.json())
     .then(data => {this.setState({medicos: data[0].Medicos})})
 
     const urlCentros = `${this.props.url}centroshospitalarios`;
     fetch(urlCentros, {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json'}
+      method: "GET"
       
     }).then(resp=>resp.json())
     .then(data => this.setState({centrosAPI: data.CentrosHospitalarios}))
 
     //Emparejar un envio con un centro
-    let idPeticionURL = window.location.href.replace('http://localhost:3000/envio/','');
+    let idPeticionURL = window.location.href.replace('`http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/envio/','');
    if(idPeticionURL !== ":id"){
         //este es el caso en el un envio se genere porque tenia una peticion asociada
 
@@ -57,8 +54,7 @@ class RealizarEnvio extends Component {
             this.setState({envio: cargaElemento}) 
         fetch(`${this.props.url}encontrarPeticion?idPeticion=${idPeticionURL}`,{
             method:"GET",
-            headers: { 'Content-Type': 'application/json',
-            "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR" }
+            headers: { "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR" }
 
 
         }).then(resp=>resp.json())
@@ -95,8 +91,7 @@ class RealizarEnvio extends Component {
     
         const urlCentrosMedicosID = `${this.props.url}centroHospitalarioId?idCentro=${this.state.peticion.Peticion.idCentro}`;
         fetch(urlCentrosMedicosID, {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json'}
+      method: "GET"
       
     }).then(resp=>resp.json())
     .then(data => {

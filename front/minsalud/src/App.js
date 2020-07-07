@@ -19,8 +19,8 @@ class App extends Component {
   
   state = {
     
-    url:"http://localhost:5000/",
-    sesion:false,
+    url:"https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/",
+    sesion:false
     
 	}
   componentDidMount(){
@@ -228,7 +228,7 @@ class App extends Component {
           render={() => {
 			return (
         <div>
-          this.state.sesion ?
+          {this.state.sesion ?
                 <>
         <Header />
 			  <div className="app-container">
@@ -237,7 +237,7 @@ class App extends Component {
         
         
 			  </div>
-        </> : <div></div>}
+        </> : <div></div>}}
         </div>
       );
 		  }}

@@ -160,7 +160,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-aws-nodejs/dev/1594130082599-2020-07-07T13:54:42.599Z/serverless-aws-nodejs.zip"
+                "S3Key": "serverless/serverless-aws-nodejs/dev/1594146807821-2020-07-07T18:33:27.821Z/serverless-aws-nodejs.zip"
               },
               "FunctionName": "serverless-aws-nodejs-dev-app",
               "Handler": "index.server",
@@ -178,18 +178,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionteAIuWjpHETtcYYiE03Qy4OWyfd9mZqUjRhapv7NvI4": {
+          "AppLambdaVersionFshiqHJP0Dben9iEMGIOvV7KDObRHAHd5W9akIOUg": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "7x1XQi38xeNsSXfWqtsGdfG4Sn/yXFYR3yrX2J36+OA="
-            }
-          },
           "ApiGatewayRestApi": {
-            "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
               "Name": "dev-serverless-aws-nodejs",
               "EndpointConfiguration": {
@@ -225,6 +221,21 @@
                 ]
               },
               "PathPart": "pruebas",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceObtenerdatos": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "obtenerDatos",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -632,6 +643,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourcePruebas"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodObtenerdatosOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceObtenerdatos"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1544,6 +1600,49 @@
               "RequestParameters": {},
               "ResourceId": {
                 "Ref": "ApiGatewayResourcePruebas"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodObtenerdatosPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceObtenerdatos"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -2932,7 +3031,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1594130062163": {
+          "ApiGatewayDeployment1594146778187": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -2944,6 +3043,7 @@
               "ApiGatewayMethodOptions",
               "ApiGatewayMethodProxyVarOptions",
               "ApiGatewayMethodPruebasOptions",
+              "ApiGatewayMethodObtenerdatosOptions",
               "ApiGatewayMethodPeticionesOptions",
               "ApiGatewayMethodLoginOptions",
               "ApiGatewayMethodEncontrarpeticionOptions",
@@ -2965,6 +3065,7 @@
               "ApiGatewayMethodAny",
               "ApiGatewayMethodProxyVarAny",
               "ApiGatewayMethodPruebasPost",
+              "ApiGatewayMethodObtenerdatosPost",
               "ApiGatewayMethodPeticionesPost",
               "ApiGatewayMethodPeticionesGet",
               "ApiGatewayMethodLoginPost",
@@ -3558,7 +3659,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionteAIuWjpHETtcYYiE03Qy4OWyfd9mZqUjRhapv7NvI4"
+              "Ref": "AppLambdaVersionFshiqHJP0Dben9iEMGIOvV7KDObRHAHd5W9akIOUg"
             }
           },
           "ServiceEndpoint": {
@@ -3841,6 +3942,35 @@
                 "requestBody": {
                   "description": "Any json file will work"
                 }
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "obtenerDatos",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Actualiza las estadisticas"
               },
               "integration": "AWS_PROXY"
             }
@@ -5108,7 +5238,11 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
+<<<<<<< HEAD
         "versionLogicalId": "AppLambdaVersionteAIuWjpHETtcYYiE03Qy4OWyfd9mZqUjRhapv7NvI4"
+=======
+        "versionLogicalId": "AppLambdaVersionFshiqHJP0Dben9iEMGIOvV7KDObRHAHd5W9akIOUg"
+>>>>>>> llamadaEndpointInformes
       }
     },
     "serviceFilename": "serverless.yml",
@@ -5117,7 +5251,7 @@
     "artifact": "/home/ale/Documents/Universidad/DACS/2020-G2-TPI/API/.serverless/serverless-aws-nodejs.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1594130082599-2020-07-07T13:54:42.599Z",
+    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1594146807821-2020-07-07T18:33:27.821Z",
     "artifact": "serverless-aws-nodejs.zip"
   }
 }

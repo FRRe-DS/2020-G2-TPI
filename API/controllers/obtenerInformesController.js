@@ -1,8 +1,8 @@
 const fetch = require('node-fetch')
-// const Aburrido = require('../models/Aburrido')
+
 const Informes = require('../models/InformeHospitalAMinisterio')
 const Stat = require('../models/Stat')
-const FechaInformes = require('../models/FechaInformes')
+
 
 exports.obtenerDatos= async(req,res,next) =>{
     try{
@@ -12,22 +12,15 @@ exports.obtenerDatos= async(req,res,next) =>{
 
         const datos = await fetch('http://54.237.73.187:3000/reporte');
         const respuestaJSON = await datos.json();
-        console.log(respuestaJSON)
+        
 
-        //var informesUsados = await Informes.find({},{createdAt:true})
-        
-        var ultimaFechaExterior = new Date('1990-01-01 00:00:00')
-        console.log("Ultima Fecha exterior: inicio")
-        console.log(ultimaFechaExterior)
-        //borrar este for de abajo
-        var ultimaFechaLeida = await FechaInformes.findOne({},{fecha:true})
-        console.log("Ultima Fecha Leida")
-        ultimaFechaLeida = new Date(ultimaFechaLeida.fecha)
-        console.log(ultimaFechaLeida)
         
         
-        console.log("Longitud respuestaJson")
-        console.log(respuestaJSON.length)
+       
+        
+        
+       
+       
 
         informesEnFormatoC=[]
         respuestaJSON.forEach(element => {
@@ -36,33 +29,24 @@ exports.obtenerDatos= async(req,res,next) =>{
             //y aniadir .ReporteHospitalario entre element y [item] linea 45
             //tambien recordar eliminar .Informes del respuesta de JSON
             //chequeamos si el elemento esta entre los no usados
-            var tempFecha= new Date(element.ReporteHospitalario.createdAt)
-            if(tempFecha > ultimaFechaLeida)
+            //console.log(element.ReporteHospitalario.createdAt)
+            for(var item in element.ReporteHospitalario)
             {
                 
-                //console.log(element.ReporteHospitalario.createdAt)
-                for(var item in element.ReporteHospitalario)
+                if(item !== '_id')
                 {
-                    
-                    if(item !== '_id')
-                    {
-                        temp[item] = element.ReporteHospitalario[item]
-                    }
+                    temp[item] = element.ReporteHospitalario[item]
                 }
-                if(tempFecha > ultimaFechaExterior)
-                {
-                    ultimaFechaExterior = new Date(temp.createdAt)
-                } 
-                informesEnFormatoC.push(temp)
-
             }
+            informesEnFormatoC.push(temp)
+
+            
 
             
         });
         console.log("Longitud InformesenFormatoC")
         console.log(informesEnFormatoC.length)
-        
-        console.log(ultimaFechaExterior)
+    
         //console.log(informesEnFormatoC)
         
         var copiaUltimaEstadistica = await Stat.find({}).sort({createdAt:-1}).limit(1)
@@ -120,11 +104,6 @@ exports.obtenerDatos= async(req,res,next) =>{
         })
         
         res.json({mensaje:"Los informes fueron guardados"});
-        
-        var nuevaFechaExterior = new FechaInformes()
-        nuevaFechaExterior.fecha=ultimaFechaExterior
-        nuevaFechaExterior.deleteOne()
-        await nuevaFechaExterior.save()
     } catch(error) {
         console.log(error)
         next();
