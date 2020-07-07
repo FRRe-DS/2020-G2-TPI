@@ -13,7 +13,7 @@ import RealizarEnvio from './componentes/RealizarEnvio'
 import Logo from "./componentes/img/ministerio-logo.png"
 import HistorialEnvios from './componentes/HistorialEnvios'
 import Envio from './componentes/Envio'
-
+import TablaMedicos from './componentes/TablaMedicos'
 
 class App extends Component {
   
@@ -220,7 +220,28 @@ class App extends Component {
           
           />
 
-
+{/* Ruta para el la tabla de medicos*/}
+<Route
+            exact
+            path="/medicosDisponibles"
+            render={() => {
+              return (
+              <div>
+                
+                {this.state.sesion ?
+                <>
+                <Header />
+                <div className="app-container">
+                  
+                  <Menu />
+                  <TablaMedicos url={this.state.url} />
+                </div>
+                </> : <div></div>
+            }
+                </div>
+              );
+            }}
+          />
       {/* Ruta de una paticion en particular, el envio de id se hace desde /peticiones */}
  <Route 
           exact path="/mostrarEnvio/:id"
@@ -237,7 +258,7 @@ class App extends Component {
         
         
 			  </div>
-        </> : <div></div>}}
+        </> : <div></div>}
         </div>
       );
 		  }}
