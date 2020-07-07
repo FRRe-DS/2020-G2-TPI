@@ -3,8 +3,6 @@ const Validacion = require('../validacion/peticionValidator')
 const Medico = require('../models/Medicos');
 const mongoose = require('mongoose');
 
-// exports.nuevaPeticion = (req,res,next) =>{
-
 exports.nuevaPeticion = async (req,res,next) =>{  
 
     // validaciones de medicos
@@ -50,7 +48,7 @@ exports.nuevaPeticion = async (req,res,next) =>{
 
 // cuando obtengo las peticiones 
 exports.obtenerPeticiones = async(req,res,next) =>{
-    console.log(Math.round(Math.random() * (10 - 1) + 1));
+
     try {
         const peticiones = await Peticion.find({}).sort({createdAt:1});
         res.statusCode = 200;
@@ -71,11 +69,8 @@ exports.rechazarPeticion = async(req,res,next) =>{
             const peticion = await Peticion.findById(req.query.idPeticion);
 
             if(!peticion.Peticion.rechazada){
-                // console.log(peticion);
                 peticion.Peticion.rechazada=true;
-                // console.log("PETICION ACTUALIZADA");
-                // console.log(peticion);
-        
+ 
                 //actualizo la peticion
                 Peticion.findByIdAndUpdate(req.query.idPeticion, {"Peticion": peticion.Peticion}, {useFindAndModify: false} ,(err, result) => {
                     if(err){
@@ -102,10 +97,8 @@ exports.encontrarPeticionId= async(req,res,next) =>{
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
-        console.log(req.query.idPeticion)
         const peticion = await Peticion.findById(req.query.idPeticion);
-        console.log(typeof peticion)
-        console.log(peticion)
+
         if(peticion == null)
         {
             res.json({"mensaje":"Peticion inexistente"})

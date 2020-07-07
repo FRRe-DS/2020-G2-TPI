@@ -20,7 +20,7 @@ mongoose.connect(MONGOURI,{
     console.log('Error de conexion',err);
 })
 .then(()=> {
-    console.log("Me conecte a mongo")
+    console.log("Me conecte a mongo db")
     
 })
 //console.log(mongoose.connection)

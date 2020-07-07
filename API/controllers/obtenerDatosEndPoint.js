@@ -26,11 +26,9 @@ exports.obtenerDatos= async(req,res,next) =>{
             res.statusCode = 200;
             res.setHeader('content-type', 'application/json');
             res.setHeader('Access-Control-Allow-Origin', '*');
-            // res.json({mensaje:"La nueva actividad fue cargada correctamente!"});
         }
 
         res.json({mensaje:"La nueva actividad fue cargada correctamente!"});
-
 
     } catch(error) {
         console.log(error)

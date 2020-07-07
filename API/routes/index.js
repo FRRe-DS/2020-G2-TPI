@@ -15,7 +15,6 @@ const obtenerInformesController = require('../controllers/obtenerInformesControl
 const ciudadController = require('../controllers/ciudadController');
 const validacionController = require('../controllers/validacionController')
 router.get('/',(req,res)=>{
-    console.log("Hola,probando");
     res.json({message:"mensaje escrito en consola"});
 });
 
@@ -34,11 +33,8 @@ router.get('/envios',
 router.post('/envios', 
     envioController.nuevoEnvio);
 
-//Api Documentation
-// router.get('/apiDoc',apiController.enviar)
-
 router.post('/pruebas',(req,res)=>{
-    //console.log(req.body);
+   
     
     res.send(req.body);
 })

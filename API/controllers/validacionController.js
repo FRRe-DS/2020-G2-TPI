@@ -7,8 +7,6 @@ exports.validarSesion = async(req, res, next) =>{
     try {
         await new Promise(resolve => setTimeout(resolve, 1000))
         let sess = req.session;
-        console.log("sesion desde validacion")
-        console.log(sess)
         if(sess){
             res.json({resultado:true})
         }
