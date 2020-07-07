@@ -98,47 +98,47 @@ functions:
                     responseBody:
                         description: "Ocurre cuando se supera la cuota diaria"            
       - http:
-            path: /encontrarPeticion
-            method: GET
-            cors: true
-            documentation:
-                summary: "Allows to find a peticion by its mongo id"
-                queryParams:
-                    -
-                        name: "idPeticion"
-                        description: "Mongo ID for the peticion object"
-                methodResponses:
-                    -
-                        statusCode: "200"
-                        responseBody:
-                            description: "a single peticion"
-                        responseModels:
-                            "application/json" : "peticion"
-                    -
-                        statusCode: "403"
-                        responseBody:
-                            description: "Ocurre cuando se supera la cuota diaria" 
-          - http:
-            path: /envioId
-            method: GET
-            cors: true
-            documentation:
-                summary: "Allows to find a envio by its mongo id"
-                queryParams:
-                    -
-                        name: "idEnvio"
-                        description: "Mongo ID for the envio object"
-                methodResponses:
-                    -
-                        statusCode: "200"
-                        responseBody:
-                            description: "a single envio"
-                        responseModels:
-                            "application/json" : "envio"
-                    -
-                        statusCode: "403"
-                        responseBody:
-                            description: "Ocurre cuando se supera la cuota diaria"
+          path: /encontrarPeticion
+          method: GET
+          cors: true
+          documentation:
+            summary: "Allows to find a peticion by its mongo id"
+            queryParams:
+                -
+                    name: "idPeticion"
+                    description: "Mongo ID for the peticion object"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "a single peticion"
+                    responseModels:
+                        "application/json" : "peticion"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Ocurre cuando se supera la cuota diaria" 
+      - http:
+          path: /envioId
+          method: GET
+          cors: true
+          documentation:
+            summary: "Allows to find a envio by its mongo id"
+            queryParams:
+                -
+                    name: "idEnvio"
+                    description: "Mongo ID for the envio object"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "a single envio"
+                    responseModels:
+                        "application/json" : "envio"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /register
           method: POST
@@ -153,7 +153,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "El usuario se agrego correctamente"
+                        description: "El usuario se agrego correctamente"
                 -
                     statusCode: "403"
                     responseBody:
@@ -172,7 +172,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "El Centro Hospitalario se agrego correctamente"
+                        description: "El Centro Hospitalario se agrego correctamente"
                 -
                     statusCode: "403"
                     responseBody:
@@ -246,7 +246,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "El Envio se agrego correctamente"
+                        description: "El Envio se agrego correctamente"
                 -
                     statusCode: "403"
                     responseBody:
@@ -342,7 +342,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "El Medico se agrego correctamente"
+                        description: "El Medico se agrego correctamente"
                 -
                     statusCode: "403"
                     responseBody:
@@ -360,7 +360,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "Aviso de confirmacion"
+                        description: "Aviso de confirmacion"
                 -
                     statusCode: "403"
                     responseBody:
@@ -382,7 +382,7 @@ functions:
                 -
                     statusCode: "200"
                     responseBody:
-                            description: "Peticion rechazada"
+                        description: "Peticion rechazada"
                 -
                     statusCode: "403"
                     responseBody:
