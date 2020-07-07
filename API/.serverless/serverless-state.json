@@ -160,7 +160,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-aws-nodejs/dev/1594003729823-2020-07-06T02:48:49.823Z/serverless-aws-nodejs.zip"
+                "S3Key": "serverless/serverless-aws-nodejs/dev/1594130082599-2020-07-07T13:54:42.599Z/serverless-aws-nodejs.zip"
               },
               "FunctionName": "serverless-aws-nodejs-dev-app",
               "Handler": "index.server",
@@ -178,14 +178,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionSMXMErDXkmv3WyAMQLQoT12B8ZdYCWtxfCQQvkvN8": {
+          "AppLambdaVersionteAIuWjpHETtcYYiE03Qy4OWyfd9mZqUjRhapv7NvI4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "pMpVyaz2Dwl+y9VlJyPL313N4Rc3tc1WlM/MsGFwxV0="
+              "CodeSha256": "7x1XQi38xeNsSXfWqtsGdfG4Sn/yXFYR3yrX2J36+OA="
             }
           },
           "ApiGatewayRestApi": {
@@ -270,6 +270,21 @@
                 ]
               },
               "PathPart": "encontrarPeticion",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceEnvioid": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "envioId",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -752,6 +767,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceEncontrarpeticion"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodEnvioidOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceEnvioid"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1748,6 +1808,64 @@
             },
             "DependsOn": [
               "peticionModel"
+            ]
+          },
+          "ApiGatewayMethodEnvioidGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {
+                "method.request.querystring.idEnvio": false
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceEnvioid"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "AppLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseModels": {
+                    "application/json": "envio"
+                  }
+                },
+                {
+                  "StatusCode": "403"
+                }
+              ]
+            },
+            "DependsOn": [
+              "envioModel"
             ]
           },
           "ApiGatewayMethodRegisterPost": {
@@ -2814,7 +2932,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1594003712953": {
+          "ApiGatewayDeployment1594130062163": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -2829,6 +2947,7 @@
               "ApiGatewayMethodPeticionesOptions",
               "ApiGatewayMethodLoginOptions",
               "ApiGatewayMethodEncontrarpeticionOptions",
+              "ApiGatewayMethodEnvioidOptions",
               "ApiGatewayMethodRegisterOptions",
               "ApiGatewayMethodCentroshospitalariosOptions",
               "ApiGatewayMethodCentrohospitalarioidOptions",
@@ -2850,6 +2969,7 @@
               "ApiGatewayMethodPeticionesGet",
               "ApiGatewayMethodLoginPost",
               "ApiGatewayMethodEncontrarpeticionGet",
+              "ApiGatewayMethodEnvioidGet",
               "ApiGatewayMethodRegisterPost",
               "ApiGatewayMethodCentroshospitalariosPost",
               "ApiGatewayMethodCentroshospitalariosGet",
@@ -3438,7 +3558,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionSMXMErDXkmv3WyAMQLQoT12B8ZdYCWtxfCQQvkvN8"
+              "Ref": "AppLambdaVersionteAIuWjpHETtcYYiE03Qy4OWyfd9mZqUjRhapv7NvI4"
             }
           },
           "ServiceEndpoint": {
@@ -3925,6 +4045,58 @@
                     },
                     "responseModels": {
                       "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodEncontrarpeticionGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
+                    }
+                  },
+                  {
+                    "statusCode": "403",
+                    "responseBody": {
+                      "description": "Ocurre cuando se supera la cuota diaria"
+                    }
+                  }
+                ]
+              },
+              "integration": "AWS_PROXY"
+            }
+          },
+          {
+            "http": {
+              "path": "envioId",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "documentation": {
+                "summary": "Allows to find a envio by its mongo id",
+                "queryParams": [
+                  {
+                    "name": "idEnvio",
+                    "description": "Mongo ID for the envio object"
+                  }
+                ],
+                "methodResponses": [
+                  {
+                    "statusCode": "200",
+                    "responseBody": {
+                      "description": "a single envio"
+                    },
+                    "responseModels": {
+                      "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ApiGatewayMethodEnvioidGet\"][\"Properties\"][\"MethodResponses\"][0][\"ResponseModels\"]"
                     }
                   },
                   {
@@ -4936,7 +5108,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionSMXMErDXkmv3WyAMQLQoT12B8ZdYCWtxfCQQvkvN8"
+        "versionLogicalId": "AppLambdaVersionteAIuWjpHETtcYYiE03Qy4OWyfd9mZqUjRhapv7NvI4"
       }
     },
     "serviceFilename": "serverless.yml",
@@ -4945,7 +5117,7 @@
     "artifact": "/home/ale/Documents/Universidad/DACS/2020-G2-TPI/API/.serverless/serverless-aws-nodejs.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1594003729823-2020-07-06T02:48:49.823Z",
+    "artifactDirectoryName": "serverless/serverless-aws-nodejs/dev/1594130082599-2020-07-07T13:54:42.599Z",
     "artifact": "serverless-aws-nodejs.zip"
   }
 }

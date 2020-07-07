@@ -92,47 +92,47 @@ functions:
                     responseBody:
                         description: "Ocurre cuando se supera la cuota diaria"            
       - http:
-            path: /encontrarPeticion
-            method: GET
-            cors: true
-            documentation:
-                summary: "Allows to find a peticion by its mongo id"
-                queryParams:
-                    -
-                        name: "idPeticion"
-                        description: "Mongo ID for the peticion object"
-                methodResponses:
-                    -
-                        statusCode: "200"
-                        responseBody:
-                            description: "a single peticion"
-                        responseModels:
-                            "application/json" : "peticion"
-                    -
-                        statusCode: "403"
-                        responseBody:
-                            description: "Ocurre cuando se supera la cuota diaria" 
-          - http:
-            path: /envioId
-            method: GET
-            cors: true
-            documentation:
-                summary: "Allows to find a envio by its mongo id"
-                queryParams:
-                    -
-                        name: "idEnvio"
-                        description: "Mongo ID for the envio object"
-                methodResponses:
-                    -
-                        statusCode: "200"
-                        responseBody:
-                            description: "a single envio"
-                        responseModels:
-                            "application/json" : "envio"
-                    -
-                        statusCode: "403"
-                        responseBody:
-                            description: "Ocurre cuando se supera la cuota diaria"
+          path: /encontrarPeticion
+          method: GET
+          cors: true
+          documentation:
+            summary: "Allows to find a peticion by its mongo id"
+            queryParams:
+                -
+                    name: "idPeticion"
+                    description: "Mongo ID for the peticion object"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "a single peticion"
+                    responseModels:
+                        "application/json" : "peticion"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Ocurre cuando se supera la cuota diaria" 
+      - http:
+          path: /envioId
+          method: GET
+          cors: true
+          documentation:
+            summary: "Allows to find a envio by its mongo id"
+            queryParams:
+                -
+                    name: "idEnvio"
+                    description: "Mongo ID for the envio object"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "a single envio"
+                    responseModels:
+                        "application/json" : "envio"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Ocurre cuando se supera la cuota diaria"
       - http:
           path: /register
           method: POST
