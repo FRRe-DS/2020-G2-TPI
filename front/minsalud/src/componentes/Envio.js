@@ -16,7 +16,7 @@ class Envio extends Component {
 
 traerData(){
 //Traigo el id desde la url para hacer un ruteo comodo 
-let idEnvioURL = window.location.href.replace('http://localhost:3000/mostrarEnvio/','');
+let idEnvioURL = window.location.href.replace('http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/mostrarEnvio/','');
 this.setState({idEnvio: idEnvioURL});
 
 
