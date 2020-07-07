@@ -266,6 +266,21 @@ functions:
                     responseBody:
                         descripcion: "Ocurre cuando se supera la cuota diaria"
       - http:
+          path: /obtenerDatos
+          method: POST
+          cors: true
+          documentation:
+            summary: "Actualiza las estadisticas trayendo los reportes"
+            methodResponses:
+                -
+                    statusCode: "200"
+                    responseBody:
+                        description: "Los informes fueron guardados"
+                -
+                    statusCode: "403"
+                    responseBody:
+                        description: "Se supero la cuota diaria de uso"
+      - http:
           path: /recursos
           method: POST
           cors: true

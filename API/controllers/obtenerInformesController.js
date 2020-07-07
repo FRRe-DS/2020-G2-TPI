@@ -25,15 +25,7 @@ exports.obtenerDatos= async(req,res,next) =>{
         ultimaFechaLeida = new Date(ultimaFechaLeida.fecha)
         console.log(ultimaFechaLeida)
         
-        /*
-        if(informesUsados.length !== 0)
-        {
-            for( i in informesUsados)
-            {
-                informesUsados[i] = informesUsados[i].createdAt
-                console.log("Iteracion en informesUsados para dejar el campo createdAt")
-            }
-        }*/
+        
         console.log("Longitud respuestaJson")
         console.log(respuestaJSON.length)
 
