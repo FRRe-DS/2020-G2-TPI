@@ -45,7 +45,7 @@ docker-compose up
 ```
 ### Login
 
-Para loguearse se puede debe usar:
+Para loguearse debe usar:
 
 * Usuario: user00
 * Contraseña: 9hVUNzn
