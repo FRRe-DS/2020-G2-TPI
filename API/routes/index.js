@@ -5,7 +5,7 @@ const loginController = require('../controllers/loginController')
 const informesController = require('../controllers/informesController');
 const centrosHospitalariosController = require('../controllers/centrosHospitalariosController');
 const envioController = require('../controllers/envioController');
-const apiController = require('../controllers/apiController');
+
 const recursosController = require('../controllers/recursosController');
 const medicosController = require('../controllers/medicosController');
 const statController = require('../controllers/statController')
