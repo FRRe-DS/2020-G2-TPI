@@ -18,15 +18,17 @@ traerData(){
 //Traigo el id desde la url para hacer un ruteo comodo 
 let idEnvioURL = window.location.href.replace('http://localhost:3000/mostrarEnvio/','');
 this.setState({idEnvio: idEnvioURL});
-const url = `${this.props.url}encontrarPeticion?idPeticion=${idEnvioURL}`;
+
+
+const url = `${this.props.url}envioId?idEnvio=${idEnvioURL}`;
 fetch(url, {
-  method: "GET"
+  method: "GET",
+  headers: { 'Content-Type': 'application/json' }
  
 }).then(resp=>resp.json())
 .then(data => 
   { 
-
-    console.log(data)
+    
     //agrego un if para separar del json los medicos y el envio en si
     
     if(data.Envio.hasOwnProperty('medicos')){
@@ -65,7 +67,7 @@ fetch(url, {
       }
     }   
   render() {
-    
+        
       return (
         <div id="container-peticion">
           <h3>ENVIO: {this.state.idEnvio.substr(-5)}</h3>

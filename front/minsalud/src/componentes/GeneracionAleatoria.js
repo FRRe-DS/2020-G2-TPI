@@ -10,7 +10,7 @@ const BotonGeneracion = (props) => {
         e.preventDefault();
         fetch(`${url}generarMedicos`,{
 			method: 'POST',
-			//headers: { 'Content-Type': 'application/json' },
+			headers: { 'Content-Type': 'application/json' },
 			
         }).then(resp=>resp.json())
         .then(data=>console.log(data))
@@ -21,7 +21,7 @@ const BotonGeneracion = (props) => {
         e.preventDefault();
         fetch(`${url}generarRecursos`,{
 			method: 'POST',
-			//headers: { 'Content-Type': 'application/json' },
+			headers: { 'Content-Type': 'application/json' },
 			
         }).then(resp=>resp.json())
         .then(data=>console.log(data))

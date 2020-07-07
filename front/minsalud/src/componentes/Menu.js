@@ -12,7 +12,7 @@ const Menu = () => {
     
     <Nav.Link href="/peticiones" className="menu-item">Gestion de peticiones</Nav.Link> 
     <Nav.Link href="/historialEnvios" className="menu-item">Historial de envios</Nav.Link>
-    <Nav.Link href="/historialEnvios" className="menu-item">Recursos hospital</Nav.Link>
+    
     
 
   </Nav> 

@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import Logo from "./img/ministerio-logo.png"
 import Alert from 'react-bootstrap/Alert'
-
+import { withRouter } from 'react-router-dom';
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -81,6 +81,7 @@ class Login extends Component {
 		e.preventDefault()
 		const hash = sha256(hpass)
 		const url = 'https://6iubewzdng.execute-api.sa-east-1.amazonaws.com/dev/login';
+		const mySessionStorage = window.sessionStorage
 		
 		const requestOptions = {
 			method: 'POST',
@@ -96,7 +97,7 @@ class Login extends Component {
 				if (data.mensaje==='Login exitoso'){
 					
 					this.setState({ingreso:true})
-					
+					mySessionStorage.setItem('ingreso', Math.random())
 					this.props.history.push('home') 
 				}else{
 				let alarma = <Alert variant='danger' className="w-50">Error: usuario o contraseña incorrecto</Alert>
@@ -169,4 +170,4 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+export default withRouter(Login);

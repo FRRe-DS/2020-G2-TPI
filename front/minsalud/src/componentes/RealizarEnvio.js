@@ -25,25 +25,25 @@ class RealizarEnvio extends Component {
     traerData(){
     const urlRecursos = `${this.props.url}recursos`;
     fetch(urlRecursos, {
-      method: "GET"
-      //,headers: {
-      //  "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR"}
+      method: "GET",
+      headers: { 'Content-Type': 'application/json'}
+      
     }).then(resp=>resp.json())
     .then(recu => this.setState({recursos: recu[0].Recursos}))
     
     const urlMedicos = `${this.props.url}medicos`;
     fetch(urlMedicos, {
-      method: "GET"
-      //,headers: {
-      //  "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR"}
+      method: "GET",
+      headers: { 'Content-Type': 'application/json'}
+      
     }).then(resp=>resp.json())
     .then(data => {this.setState({medicos: data[0].Medicos})})
 
     const urlCentros = `${this.props.url}centroshospitalarios`;
     fetch(urlCentros, {
-      method: "GET"
-      //,headers: {
-      //  "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR"}
+      method: "GET",
+      headers: { 'Content-Type': 'application/json'}
+      
     }).then(resp=>resp.json())
     .then(data => this.setState({centrosAPI: data.CentrosHospitalarios}))
 
@@ -56,7 +56,9 @@ class RealizarEnvio extends Component {
             cargaElemento["idPeticion"] = idPeticionURL;
             this.setState({envio: cargaElemento}) 
         fetch(`${this.props.url}encontrarPeticion?idPeticion=${idPeticionURL}`,{
-            method:"GET"
+            method:"GET",
+            headers: { 'Content-Type': 'application/json',
+            "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR" }
 
 
         }).then(resp=>resp.json())
@@ -93,9 +95,9 @@ class RealizarEnvio extends Component {
     
         const urlCentrosMedicosID = `${this.props.url}centroHospitalarioId?idCentro=${this.state.peticion.Peticion.idCentro}`;
         fetch(urlCentrosMedicosID, {
-      method: "GET"
-      //,headers: {
-      //  "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR"}
+      method: "GET",
+      headers: { 'Content-Type': 'application/json'}
+      
     }).then(resp=>resp.json())
     .then(data => {
         

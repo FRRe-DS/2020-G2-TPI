@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
-import Alert from 'react-bootstrap/Alert'
 import './css/tarjeta.css'
 
 class CardEnvio extends Component {
@@ -15,7 +14,8 @@ class CardEnvio extends Component {
   componentWillMount(){
     const url = `${this.props.url}centroHospitalarioId?idCentro=${this.props.envio.Envio.idCentro}`;
     fetch(url, {
-      method: "GET"
+      method: "GET",
+      headers: { 'Content-Type': 'application/json' }
      
     }).then(resp=>resp.json())
     .then(data =>{

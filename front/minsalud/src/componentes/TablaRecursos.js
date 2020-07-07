@@ -15,8 +15,7 @@ class TablaRecursos extends Component{
     const url = `${this.props.url}recursos`;
     fetch(url, {
       method: "GET"
-      //,headers: {
-      //  "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR"}
+      headers: { 'Content-Type': 'application/json' }
     }).then(resp=>resp.json())
     .then(recu => this.setState({recursos: recu[0].Recursos}))
   
