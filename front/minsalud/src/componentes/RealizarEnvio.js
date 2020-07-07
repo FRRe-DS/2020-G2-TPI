@@ -100,8 +100,9 @@ class RealizarEnvio extends Component {
         if(data.CentroHospitalario[0]!==undefined && data.CentroHospitalario[0].hasOwnProperty("idCentro")){
         this.setState({centroPeticion:data.CentroHospitalario[0]})
         
-    ReactDOM.render(<option value={this.state.centroPeticion.idCentro}>{this.state.centroPeticion.nombre}</option>, document.getElementById('select-envio-centros'))
-            this.setState({envio:{"idPeticion": this.state.centroPeticion.idCentro}})
+        ReactDOM.render(<option value={this.state.centroPeticion.idCentro}> {this.state.centroPeticion.nombre}</option>, document.getElementById('select-envio-centros'));
+
+        this.setState({envio:{"idCentro": this.state.centroPeticion.idCentro}})
             
     }    
 }
@@ -134,7 +135,7 @@ class RealizarEnvio extends Component {
                 if(cantEspecialista){
                 cantEspecialista = cantEspecialista.cantidad
             }
-                if(cant>0 && especialidad !==""){
+            if(cant>0 && especialidad !==""){
 
                     //con este condicional vemos que no supere la cantidad disponible de cada especialista
                     if(cant<=cantEspecialista){
@@ -162,9 +163,9 @@ class RealizarEnvio extends Component {
 
             }
             
-            if(envioDeMedicos.length>0){
-                envio["medicos"] = envioDeMedicos
-            }
+                if(envioDeMedicos.length>0){
+                    envio["medicos"] = envioDeMedicos
+                }
             
             let ObjetoEnvio = {"Envio":envio}
             console.log(ObjetoEnvio)
