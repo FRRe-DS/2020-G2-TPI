@@ -8,6 +8,7 @@ function InfoPeticion(props) {
     var med;
     var peticionMostrar
     var medMostrar={}
+    var activo = false
     
     if(props.peticion.Peticion !== undefined){
         
@@ -40,6 +41,8 @@ function InfoPeticion(props) {
         }
         peticionMostrar = JSON.stringify(peticionMostrar)
         medMostrar = JSON.stringify(medMostrar)
+        }else{
+          activo = true
         }
     
     
@@ -65,7 +68,7 @@ function InfoPeticion(props) {
       
       const Info = () => (
         <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-          <Button variant="success"  style={{"marginLeft":"80%"}}>Mostrar peticion</Button>
+          <Button variant="success"  style={{"marginLeft":"80%"}} disabled={activo} >Mostrar peticion</Button>
         </OverlayTrigger>
       );
     
