@@ -1,7 +1,7 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "version" : "2020-07-04T21:22:09Z",
+    "version" : "2020-07-07T18:39:04Z",
     "title" : "dev-serverless-aws-nodejs"
   },
   "host" : "6iubewzdng.execute-api.sa-east-1.amazonaws.com",
@@ -409,22 +409,20 @@
         }
       }
     },
-    "/encontrarPeticionesFecha" : {
+    "/envioId" : {
       "get" : {
-        "summary" : "Gets a list of all the existing peticiones ordered by date",
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "x-api-key",
-          "in" : "path",
-          "description" : "API Key identifier",
-          "required" : true,
+          "name" : "idEnvio",
+          "in" : "query",
+          "required" : false,
           "type" : "string"
         } ],
         "responses" : {
           "200" : {
             "description" : "200 response",
             "schema" : {
-              "$ref" : "#/definitions/peticion"
+              "$ref" : "#/definitions/envio"
             }
           },
           "403" : {
@@ -837,58 +835,6 @@
         }
       }
     },
-    "/logout" : {
-      "post" : {
-        "responses" : { },
-        "x-amazon-apigateway-integration" : {
-          "uri" : "arn:aws:apigateway:sa-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:sa-east-1:768095478863:function:serverless-aws-nodejs-dev-app/invocations",
-          "passthroughBehavior" : "when_no_match",
-          "httpMethod" : "POST",
-          "type" : "aws_proxy"
-        }
-      },
-      "options" : {
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "responses" : {
-          "200" : {
-            "description" : "200 response",
-            "headers" : {
-              "Access-Control-Allow-Origin" : {
-                "type" : "string"
-              },
-              "Access-Control-Allow-Methods" : {
-                "type" : "string"
-              },
-              "Access-Control-Allow-Headers" : {
-                "type" : "string"
-              }
-            }
-          }
-        },
-        "x-amazon-apigateway-integration" : {
-          "responses" : {
-            "default" : {
-              "statusCode" : "200",
-              "responseParameters" : {
-                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,POST'",
-                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                "method.response.header.Access-Control-Allow-Origin" : "'*'"
-              },
-              "responseTemplates" : {
-                "application/json" : "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
-              }
-            }
-          },
-          "requestTemplates" : {
-            "application/json" : "{statusCode:200}"
-          },
-          "passthroughBehavior" : "when_no_match",
-          "contentHandling" : "CONVERT_TO_TEXT",
-          "type" : "mock"
-        }
-      }
-    },
     "/medicos" : {
       "get" : {
         "summary" : "Gets a list of all the existing Medicos",
@@ -963,6 +909,58 @@
               "statusCode" : "200",
               "responseParameters" : {
                 "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,POST,GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              },
+              "responseTemplates" : {
+                "application/json" : "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{statusCode:200}"
+          },
+          "passthroughBehavior" : "when_no_match",
+          "contentHandling" : "CONVERT_TO_TEXT",
+          "type" : "mock"
+        }
+      }
+    },
+    "/obtenerDatos" : {
+      "post" : {
+        "responses" : { },
+        "x-amazon-apigateway-integration" : {
+          "uri" : "arn:aws:apigateway:sa-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:sa-east-1:768095478863:function:serverless-aws-nodejs-dev-app/invocations",
+          "passthroughBehavior" : "when_no_match",
+          "httpMethod" : "POST",
+          "type" : "aws_proxy"
+        }
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,POST'",
                 "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
                 "method.response.header.Access-Control-Allow-Origin" : "'*'"
               },
@@ -1704,8 +1702,8 @@
     }
   },
   "x-amazon-apigateway-documentation" : {
-    "version" : "1.9",
-    "createdDate" : "2020-07-04T20:12:50Z",
+    "version" : "2.1",
+    "createdDate" : "2020-07-06T03:00:40Z",
     "documentationParts" : [ {
       "location" : {
         "type" : "METHOD",
@@ -1768,15 +1766,6 @@
       },
       "properties" : {
         "summary" : "Allows to find a peticion by its mongo id"
-      }
-    }, {
-      "location" : {
-        "type" : "METHOD",
-        "path" : "/encontrarPeticionesFecha",
-        "method" : "GET"
-      },
-      "properties" : {
-        "summary" : "Gets a list of all the existing peticiones ordered by date"
       }
     }, {
       "location" : {
@@ -1952,16 +1941,6 @@
     }, {
       "location" : {
         "type" : "PATH_PARAMETER",
-        "path" : "/encontrarPeticionesFecha",
-        "method" : "GET",
-        "name" : "x-api-key"
-      },
-      "properties" : {
-        "description" : "API Key identifier"
-      }
-    }, {
-      "location" : {
-        "type" : "PATH_PARAMETER",
         "path" : "/peticiones",
         "method" : "GET",
         "name" : "x-api-key"
@@ -2035,15 +2014,6 @@
       },
       "properties" : {
         "description" : "It asks for a new Centro Hospitalario"
-      }
-    }, {
-      "location" : {
-        "type" : "REQUEST_BODY",
-        "path" : "/encontrarPeticionesFecha",
-        "method" : "GET"
-      },
-      "properties" : {
-        "description" : "Empty request body"
       }
     }, {
       "location" : {
@@ -2208,16 +2178,6 @@
       },
       "properties" : {
         "description" : "Ocurre cuando se supera la cuota diaria"
-      }
-    }, {
-      "location" : {
-        "type" : "RESPONSE_BODY",
-        "path" : "/encontrarPeticionesFecha",
-        "method" : "GET",
-        "statusCode" : "200"
-      },
-      "properties" : {
-        "description" : "Array of peticiones"
       }
     }, {
       "location" : {
