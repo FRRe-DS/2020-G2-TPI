@@ -38,6 +38,12 @@ npm start
 ```
 Para lanzar el servidor de React, esto abrira en el navegador predeterminado el frontEnd del proyecto
 
+### Docker
+Para correr el proyecto con docker, ejecutamos el siguiente comando en la carpeta raiz del proyecto
+```
+docker-compose up
+```
+
 ### Links de deploy
 * [Front en React del Login](http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/login)
 * [Front en React para el admin del ministerio](http://fronthealthministry.s3-website-sa-east-1.amazonaws.com)
