@@ -115,7 +115,7 @@ class RealizarEnvio extends Component {
     enviarPeticion(e){
         e.preventDefault()
         let envioDeMedicos = [];
-        console.log("Soy un envio")
+        
         let especialidad;
         let cant=0;
         let objMed={};
