@@ -9,8 +9,9 @@ const Menu = () => {
     <div><h3>Menu</h3></div>
     <Nav.Link href="/centrosmedicos" className="menu-item">Centros Hospit.</Nav.Link>
     <Nav.Link href="/recursos" className="menu-item">Recursos disponibles</Nav.Link>
-    
+    <Nav.Link href="/medicosDisponibles" className="menu-item">Medicos disponibles</Nav.Link>
     <Nav.Link href="/peticiones" className="menu-item">Gestion de peticiones</Nav.Link> 
+    <Nav.Link href="/envio/:id" className="menu-item">Generar envio</Nav.Link>
     <Nav.Link href="/historialEnvios" className="menu-item">Historial de envios</Nav.Link>
     
     

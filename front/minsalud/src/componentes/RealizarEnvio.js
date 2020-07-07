@@ -45,7 +45,7 @@ class RealizarEnvio extends Component {
     .then(data => this.setState({centrosAPI: data.CentrosHospitalarios}))
 
     //Emparejar un envio con un centro
-    let idPeticionURL = window.location.href.replace('`http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/envio/','');
+    let idPeticionURL = window.location.href.replace('http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/envio/','');
    if(idPeticionURL !== ":id"){
         //este es el caso en el un envio se genere porque tenia una peticion asociada
 
@@ -53,8 +53,7 @@ class RealizarEnvio extends Component {
             cargaElemento["idPeticion"] = idPeticionURL;
             this.setState({envio: cargaElemento}) 
         fetch(`${this.props.url}encontrarPeticion?idPeticion=${idPeticionURL}`,{
-            method:"GET",
-            headers: { "x-api-key": "FTlS2bc9lo1OtmzHCBrju4ZL8PqFM5yr4JB775RR" }
+            method:"GET"
 
 
         }).then(resp=>resp.json())
@@ -101,8 +100,9 @@ class RealizarEnvio extends Component {
         if(data.CentroHospitalario[0]!==undefined && data.CentroHospitalario[0].hasOwnProperty("idCentro")){
         this.setState({centroPeticion:data.CentroHospitalario[0]})
         
-    ReactDOM.render(<option value={this.state.centroPeticion.idCentro}>{this.state.centroPeticion.nombre}</option>, document.getElementById('select-envio-centros'))
-            this.setState({envio:{"idPeticion": this.state.centroPeticion.idCentro}})
+        ReactDOM.render(<option value={this.state.centroPeticion.idCentro}> {this.state.centroPeticion.nombre}</option>, document.getElementById('select-envio-centros'));
+
+        this.setState({envio:{"idCentro": this.state.centroPeticion.idCentro}})
             
     }    
 }
@@ -115,7 +115,7 @@ class RealizarEnvio extends Component {
     enviarPeticion(e){
         e.preventDefault()
         let envioDeMedicos = [];
-        console.log("Soy un envio")
+        
         let especialidad;
         let cant=0;
         let objMed={};
@@ -135,7 +135,7 @@ class RealizarEnvio extends Component {
                 if(cantEspecialista){
                 cantEspecialista = cantEspecialista.cantidad
             }
-                if(cant>0 && especialidad !==""){
+            if(cant>0 && especialidad !==""){
 
                     //con este condicional vemos que no supere la cantidad disponible de cada especialista
                     if(cant<=cantEspecialista){
@@ -163,12 +163,12 @@ class RealizarEnvio extends Component {
 
             }
             
-            if(envioDeMedicos.length>0){
-                envio["medicos"] = envioDeMedicos
-            }
+                if(envioDeMedicos.length>0){
+                    envio["medicos"] = envioDeMedicos
+                }
             
             let ObjetoEnvio = {"Envio":envio}
-            console.log(ObjetoEnvio)
+            
             
             fetch(`${this.props.url}envios`,{
                 method: 'POST',
@@ -266,6 +266,8 @@ class RealizarEnvio extends Component {
         let valorElemento = parseInt(e.target.value);
         let nombreElemento = e.target.name;
         let cargaElemento = envioPrevio;
+        
+        
         if(parseInt(e.target.value)<0){
 
             ReactDOM.render(<Alert variant="danger">No valores negativos por favor</Alert>, document.getElementById("error-negativo"))
@@ -274,6 +276,15 @@ class RealizarEnvio extends Component {
                 
               },2000)
               
+              delete cargaElemento[nombreElemento]
+              this.setState({envio: cargaElemento})
+              return e.target.value = 0 
+        }else if(valorElemento>this.state.recursos[`${nombreElemento}Disponible`]){
+        ReactDOM.render(<Alert variant="danger">Solo hay {this.state.recursos[`${nombreElemento}Disponible`]} {nombreElemento} Disponibles</Alert>, document.getElementById("error-negativo"))
+            setTimeout(()=>{
+                ReactDOM.render(<div></div>, document.getElementById('error-negativo'))	
+                
+              },2000)
               delete cargaElemento[nombreElemento]
               this.setState({envio: cargaElemento})
               return e.target.value = 0 
