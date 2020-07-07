@@ -47,8 +47,8 @@ docker-compose up
 
 Para loguearse se puede debe usar:
 
-Usuario: user00
-Contraseña: 9hVUNzn
+* Usuario: user00
+* Contraseña: 9hVUNzn
 
 ### Links de deploy
 * [Front en React del Login](http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/login)
