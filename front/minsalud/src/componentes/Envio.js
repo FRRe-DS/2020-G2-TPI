@@ -22,8 +22,7 @@ this.setState({idEnvio: idEnvioURL});
 
 const url = `${this.props.url}envioId?idEnvio=${idEnvioURL}`;
 fetch(url, {
-  method: "GET",
-  headers: { 'Content-Type': 'application/json' }
+  method: "GET"
  
 }).then(resp=>resp.json())
 .then(data => 

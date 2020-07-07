@@ -14,8 +14,7 @@ class TablaCentros extends Component{
     traerData(){
     const url = `${this.props.url}CentrosHospitalarios`;
     fetch(url, {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json'}
+      method: "GET"
     }).then(resp=>resp.json())
     .then(data => this.setState({centrosAPI: data.CentrosHospitalarios}))
   
