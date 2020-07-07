@@ -7,8 +7,6 @@ const Recursos = require('../models/Recursos');
 
 exports.nuevoEnvio = async(req,res,next) =>{
     
-    
-    //Esto debe ir primero para evitar conflictos CORS
     res.setHeader('content-type', 'application/json');
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.statusCode = 200;
@@ -18,12 +16,12 @@ exports.nuevoEnvio = async(req,res,next) =>{
     let recursosValidos=true
     let nuevos_medicos = new Medico();
     try{
-        // console.log(req.body)
+
         const envio = new Envio(req.body);
         const envioActual = req.body.Envio
         recursos=await Recursos.find({});
         for (const item in envioActual){
-            //pregunta si la cantidad que quiero enviar de cada recurso es menor a lo que tengo disponible
+         
             switch (item) {
                 case "camillas":
                     if(recursos[0].Recursos.camillasDisponible<envioActual[item]){
@@ -52,8 +50,6 @@ exports.nuevoEnvio = async(req,res,next) =>{
                     break;
                 case "medicos":
                     const medicos = await Medico.find({});
-                    // console.log("Medicos actuales en reserva")
-                    // console.log(medicos)
 
                     const listaMedicosMongo = medicos[0].Medicos
                     const listaMedicosEnvio = envioActual.medicos 
@@ -63,14 +59,13 @@ exports.nuevoEnvio = async(req,res,next) =>{
                     medicos[0].Medicos.forEach((element,index) =>{
                         for (let itemenvio in listaMedicosEnvio){
                             if (element.especialidad == listaMedicosEnvio[itemenvio].especialidad){
-                                //puedo hacer el envio,me da el cuero
+                          
                                 if (element.cantidad >= listaMedicosEnvio[itemenvio].cantidad){
                                     nuevos_medicos.Medicos[index].cantidad -= listaMedicosEnvio[itemenvio].cantidad
                                 }
                                 else{
                                     recursosValidos=false;
-                                    
-                                    /*aca no deberia terminar la cosa? un return o algo asi?*/
+
                                 }
                             }
                         }
@@ -82,14 +77,10 @@ exports.nuevoEnvio = async(req,res,next) =>{
                     break;
             }
         }
-        // recursos Validos empieza como true, si alguno de los campos que envio no cumple, se pone el flag a false
-        
+ 
         if(recursosValidos){
 
-             // ACTUALIZAR RECURSOS --------------------------------------------
-
             try{
-
                 const arregloRecursos = ["camillas","alcoholLitros","jabonLitros","barbijos","jeringas","cofias"]
                 
                 arregloRecursos.forEach(recurso => {
@@ -110,25 +101,13 @@ exports.nuevoEnvio = async(req,res,next) =>{
                     }
                 }
         
-                // console.log(nuevosRecursos);
-            
-                // opcion 2
-                // try {
-                //     await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false})
-                //     res.json({mensaje:"Recursos actualizados"});
-                // } catch (error) {
-                //     console.log(error)
-                //     res.json({mensaje: error});
-                // }
-
-                // opcion 1 
 
                 await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(err, result) => {
                     if(err){
                         res.send(err)
                     } else{
                         mensajeRes = mensajeRes + "Recursos actualizados;"; 
-                        // res.json({mensaje:"Recursos actualizados"});
+                       
                     }
                 }); 
                 }
@@ -179,36 +158,34 @@ exports.nuevoEnvio = async(req,res,next) =>{
                                 }
                             }
                             peti.Peticion.respondidaCompletamente = Validacion.isPeticionEmpty(peti.Peticion);
-                            // actualizar en base de datos
+                
                         Peticion.findByIdAndUpdate(envioActual.idPeticion, {"Peticion": peti.Peticion}, {useFindAndModify: false} ,(err, result) => {
                             if(err){
                                 res.send(err)
                             } else{
-                                // res.json({mensaje:"Envio de prueba realizado"});
+                            
                                 mensajeRes = mensajeRes + "Envio de prueba realizado;"
                             }
                         })
                         }else{
                             mensajeRes = mensajeRes + " La peticion ya fue rechazada;"
-                            // res.json({mensaje:"La peticion ya fue rechazada"})
+                 
                         }                  
         
                     } else{
-                        // error, no existe la peticion en la base de datos
+
                         res.send(err)
                     }
                 })   
             } else {
-                // guardar envio sin peticion
+  
                 await envio.save();
-                // res.json({mensaje:"El envio se agrego correctamente"});
+            
                 mensajeRes = mensajeRes + "El envio se agrego correctamente;"
             }
             
         } else {
-            // res.json({mensaje:"No te dan los recursos papi"});
-            mensajeRes = mensajeRes + "No te dan los recursos papi;"
-            
+            mensajeRes = mensajeRes + "Recursos insuficientes;"            
         }      
         res.json({mensaje: mensajeRes}); 
     }
@@ -240,10 +217,7 @@ exports.obtenerEnvioId = async(req,res,next)=>{
         res.statusCode = 200;
         res.setHeader('content-type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
-        console.log(req.query.idEnvio)
         const envio = await Envio.findById(req.query.idEnvio);
-        console.log(typeof envio)
-        console.log(envio)
         if(envio == null)
         {
             res.json({"mensaje":"Envio inexistente"})

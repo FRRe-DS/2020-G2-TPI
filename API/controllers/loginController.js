@@ -6,11 +6,9 @@ exports.logUser = async(req,res,next) =>{
     res.statusCode = 200;
     res.setHeader('content-type', 'application/json');
     res.setHeader('Access-Control-Allow-Origin', '*');
-    let sess;
+    
     try {
         
-        console.log(req.body.user);
-        console.log(req.body.phash);
         const usuarios = await User.find({
              user: log.user, phash: log.phash 
         });

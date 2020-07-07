@@ -52,10 +52,10 @@ exports.registrarInforme = async (req,res,next) => {
 
                     for(i in copiaUltimaEstadistica[0].dataCiudades)
                     {
-                        // console.log(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad)
+                        
                         if(copiaUltimaEstadistica[0].dataCiudades[i].nombreCiudad == nuevoInforme.nombreCiudad)
                         {
-                            // console.log("Entre aqui")
+                            
                             nuevaEstadistica.dataCiudades[i].cantidades.enfermos += nuevoInforme.resumenCasos.cantidadEnfermos
                             nuevaEstadistica.dataCiudades[i].cantidades.recuperados += nuevoInforme.resumenCasos.cantidadCurados
                             nuevaEstadistica.dataCiudades[i].cantidades.muertos += nuevoInforme.resumenCasos.cantidadMuertos

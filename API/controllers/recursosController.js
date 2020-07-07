@@ -1,8 +1,5 @@
 const Recursos = require('../models/Recursos');
 
-//SOLO AL PRINCIPIO, TOCAS DE VUELTA ESTE METODO Y ROMPES TODO
-//TENEMOS QUE USAR UN METODO PARA ACTUALIZAR EL UNICO ELEMENTO DE LA COLECCION
-
 exports.registrarRecursos = async (req,res,next) =>{
     
     const recursos = new Recursos(req.body);
@@ -18,9 +15,6 @@ exports.registrarRecursos = async (req,res,next) =>{
         next();
     }
 }
-
-//cuando obtengo las Recursos
-
 
 exports.getRecursos = async(req,res,next) =>{
     try {
@@ -50,7 +44,6 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
         const recursos = await Recursos.find({});
         const nuevosRecursos ={
         Recursos :{
-        //aca esta el bug. Se estan restando valores que no existen y js es malisimo con esas cosas
         camillasDisponible : recursos[0].Recursos.camillasDisponible - envioActual.camillas,
         jabonLitrosDisponible : recursos[0].Recursos.jabonLitrosDisponible - envioActual.jabonLitros,
         alcoholLitrosDisponible :recursos[0].Recursos.alcoholLitrosDisponible - envioActual.alcoholLitros,
@@ -60,10 +53,6 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
         }
     }
 
-    console.log(nuevosRecursos);
-
-    console.log(res)
-    
     try {
         await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false})
         res.json({mensaje:"Recursos actualizados"});
@@ -71,15 +60,6 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
         console.log(error)
         res.json({mensaje: error});
     }
-    // await Recursos.findOneAndUpdate({_id:'5ee3ee6e05f189bfb8d4a4a3'},nuevosRecursos, {useFindAndModify: false} ,(req, res, next) => {
-    //     if(err){
-    //         res.send(err)
-    //     } else{
-    //         res.json({mensaje:"Recursos actualizados"});
-    //     }
-    // }); 
-    // res.json({mensaje:"Los recursos se actualizaron correctamente"});
-       
     
     }
     catch (error){
@@ -92,7 +72,6 @@ exports.actualizarRecursos = async (envioActual,req,res,next)=>{
 exports.generarRecursosRandom = async (req,res,next) =>{
     
     const recursos = await Recursos.find({});
-    //var random = Math.round(Math.random() * (maximo - minimo) + minimo);
     
     const nuevosRecursos ={
         Recursos :{
