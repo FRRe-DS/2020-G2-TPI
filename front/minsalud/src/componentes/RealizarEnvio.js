@@ -48,7 +48,7 @@ class RealizarEnvio extends Component {
     .then(data => this.setState({centrosAPI: data.CentrosHospitalarios}))
 
     //Emparejar un envio con un centro
-    let idPeticionURL = window.location.href.replace('http://localhost:3000/envio/','');
+    let idPeticionURL = window.location.href.replace('`http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/envio/','');
    if(idPeticionURL !== ":id"){
         //este es el caso en el un envio se genere porque tenia una peticion asociada
 

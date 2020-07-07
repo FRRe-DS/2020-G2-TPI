@@ -19,7 +19,8 @@ class Peticion extends Component {
 
 traerData(){
 //Traigo el id desde la url para hacer un ruteo comodo 
-let idPeticionURL = window.location.href.replace('http://localhost:3000/peticion/','');
+let idPeticionURL = window.location.href.replace(`http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/peticion/`,'');
+
 this.setState({idPeticion: idPeticionURL});
 const url = `${this.props.url}encontrarPeticion?idPeticion=${idPeticionURL}`;
 fetch(url, {
@@ -31,7 +32,7 @@ fetch(url, {
 .then(data => 
   { 
 
-    console.log(data)
+    
     //agrego un if para separar del json los medicos y la peticion en si
     
     if(data.Peticion.hasOwnProperty('medicos')){
