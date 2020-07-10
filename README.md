@@ -51,11 +51,9 @@ Para loguearse debe usar:
 * Contraseña: 9hVUNzn
 
 ### Links de deploy
-* [Front en React del Login](http://fronthealthministry.s3-website-sa-east-1.amazonaws.com/login)
 * [Front en React para el admin del ministerio](http://fronthealthministry.s3-website-sa-east-1.amazonaws.com)
 
-* Endpoints: 
-
+Endpoints: 
 * [Documentacion Swagger](https://dummyhealthministry.s3-sa-east-1.amazonaws.com/APIDocumentation/dist/index.html)
 
 ### Autores
