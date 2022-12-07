@@ -27,7 +27,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.11",
     "node-fetch": "^2.6.1",
-    "serverless": "^1.72.0",
+    "serverless": "^3.25.1",
     "serverless-aws-documentation": "^1.1.0",
     "serverless-http": "^2.3.2",
     "swagger-ui": "^3.26.0",
