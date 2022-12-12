@@ -18,13 +18,13 @@
   },
   "homepage": "https://github.com/AlejandroFNadal/DACSG2#readme",
   "devDependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "mongoose": "^5.9.11",
     "nodemon": "^2.0.4"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "mongoose": "^5.9.11",
     "node-fetch": "^2.6.1",
     "serverless": "^1.72.0",
